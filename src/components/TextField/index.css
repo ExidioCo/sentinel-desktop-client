@@ -3,10 +3,7 @@ input{
     border: none;
     background-color: aliceblue;
     height: 45px;
-    padding-left: 0px;
+    padding-left: 20px;
     padding-right: 0px;
 }
 
-input::placeholder{
-    padding-left: 20px;
-}

@@ -15,6 +15,7 @@ const AccountPasswordField = (props) => {
                     id="account_password_field"
                     name="account_password"
                     placeholder="Password"
+                    type="password"
                     value={props.value}
                     onChange={props.onChange}/>
             </div>

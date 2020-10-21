@@ -15,6 +15,7 @@ const Seed = (props) => {
                     id="seed"
                     name="seed"
                     placeholder="Enter Seed"
+                    type="text"
                     value={props.value}
                     onChange={props.onChange}/>
             </div>

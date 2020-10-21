@@ -15,6 +15,7 @@ const AccountNameField = (props) => {
                     id="account_name_field"
                     name="account_name"
                     placeholder="Account Username"
+                    type="text"
                     value={props.value}
                     onChange={props.onChange}/>
             </div>

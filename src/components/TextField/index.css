@@ -1,8 +1,12 @@
 input{
     width: 100%;
-    max-width: 400px;
     border: none;
     background-color: aliceblue;
     height: 45px;
-    padding-left: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+input::placeholder{
+    padding-left: 20px;
 }

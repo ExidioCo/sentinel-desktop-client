@@ -3,6 +3,9 @@ import {
     APPLICATION_LOADING_IN_PROGRESS,
     APPLICATION_LOADING_SUCCESS,
     AUTH_PASSWORD_SET,
+    ACC_USERNAME_SET,
+    ACC_PASSWORD_SET,
+    SEED_SET,
 } from '../constants/application';
 
 export const loadingError = () => {
@@ -42,6 +45,27 @@ export const load = () => (dispatch) => {
 export const setPassword = (value) => {
     return {
         type: AUTH_PASSWORD_SET,
+        value,
+    };
+};
+
+export const setAccountUsername = (value) => {
+    return {
+        type: ACC_USERNAME_SET,
+        value,
+    };
+};
+
+export const setAccountPassword = (value) => {
+    return {
+        type: ACC_PASSWORD_SET,
+        value,
+    };
+};
+
+export const setSeed = (value) => {
+    return {
+        type: SEED_SET,
         value,
     };
 };

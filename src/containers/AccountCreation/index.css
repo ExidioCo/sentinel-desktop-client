@@ -1,0 +1,30 @@
+.AccountCreation-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.AccountCreation-left {
+    width: 30%;
+}
+
+.AccountCreation-right {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.AccountCreation-main {
+    margin: auto;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.AccountCreation-title {
+    font-weight: 500;
+    font-size: 36px;
+    padding-bottom: 20px;
+    color: #142D51;
+}

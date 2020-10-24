@@ -1,0 +1,12 @@
+.AccountSeedField {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.AccountSeedField-label {
+    font-size: 14px;
+    color: grey;
+    text-align: left;
+    padding-bottom: 15px;
+}

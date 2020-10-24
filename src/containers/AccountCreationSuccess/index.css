@@ -1,0 +1,29 @@
+.AccountCreationSuccess-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.AccountCreationSuccess-left {
+    width: 30%;
+}
+
+.AccountCreationSuccess-right {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.AccountCreationSuccess-main {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.AccountCreationSuccess-title {
+    font-weight: 500;
+    font-size: 36px;
+    padding-bottom: 20px;
+    color: #142D51;
+}

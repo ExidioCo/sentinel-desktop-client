@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { load } from '../actions/application';
-import AccountCreation from './AccountCreation';
+import AccountCreationSuccess from './AccountCreationSuccess';
 
 class Loader extends React.Component {
     componentDidMount () {
@@ -16,7 +16,7 @@ class Loader extends React.Component {
 
         return (
             <div className="App">
-                <AccountCreation/>
+                <AccountCreationSuccess/>
             </div>
         );
     }

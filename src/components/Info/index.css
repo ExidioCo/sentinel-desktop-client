@@ -1,0 +1,24 @@
+.Info-label {
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: #8EA1C8;
+    font-weight: 500;
+}
+
+.Info-value {
+    font-size: 18px;
+    color: #252E40;
+    font-weight: 400;
+    padding-bottom: 30px;
+}
+
+.dotted{
+    border-style: dashed;
+    wrap-option: normal;
+    word-spacing: 20px;
+    line-height: 30px;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}

@@ -3,6 +3,9 @@ import {
     APPLICATION_LOADING_IN_PROGRESS,
     APPLICATION_LOADING_SUCCESS,
     AUTHENTICATION_PASSWORD_SET,
+    CHAIN_ID_SET,
+    RPC_SERVER_ADDRESS_SET,
+    SERVER_ID_SET,
 } from '../constants/application';
 
 export const loadingError = () => {
@@ -42,6 +45,27 @@ export const load = () => (dispatch) => {
 export const setAuthenticationPassword = (value) => {
     return {
         type: AUTHENTICATION_PASSWORD_SET,
+        value,
+    };
+};
+
+export const setChainID = (value) => {
+    return {
+        type: CHAIN_ID_SET,
+        value,
+    };
+};
+
+export const setServerID = (value) => {
+    return {
+        type: SERVER_ID_SET,
+        value,
+    };
+};
+
+export const setRPCServerAddress = (value) => {
+    return {
+        type: RPC_SERVER_ADDRESS_SET,
         value,
     };
 };

@@ -4,6 +4,9 @@ import {
     APPLICATION_LOADING_IN_PROGRESS,
     APPLICATION_LOADING_SUCCESS,
     AUTHENTICATION_PASSWORD_SET,
+    CHAIN_ID_SET,
+    RPC_SERVER_ADDRESS_SET,
+    SERVER_ID_SET,
 } from '../constants/application';
 
 const isLoading = (state = false, action) => {
@@ -27,7 +30,37 @@ const password = (state = '', action) => {
     }
 };
 
+const ChainID = (state = '', action) => {
+    switch (action.type) {
+    case CHAIN_ID_SET:
+        return action.value;
+    default:
+        return state;
+    }
+};
+
+const ServerID = (state = '', action) => {
+    switch (action.type) {
+    case SERVER_ID_SET:
+        return action.value;
+    default:
+        return state;
+    }
+};
+
+const RPCServerAddress = (state = '', action) => {
+    switch (action.type) {
+    case RPC_SERVER_ADDRESS_SET:
+        return action.value;
+    default:
+        return state;
+    }
+};
+
 export default combineReducers({
     isLoading,
     password,
+    ChainID,
+    ServerID,
+    RPCServerAddress,
 });

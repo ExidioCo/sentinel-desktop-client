@@ -5,7 +5,7 @@ import { SignUp } from "./SignUp";
 import { Login } from "./Login";
 import { Test } from "../Test";
 import { AccountCreated } from "./AccountCreated/AccountCreated";
-import { ConfigureSetting } from "../ConfigureSetting/ConfigureSetting";
+import { ConfigureSetting } from "../ConfigurationSettings/ConfigureSetting";
 import Dashboard from "../Dashboard";
 // import { Loader } from "atoms";
 // import { AuthContainer } from "pages/Auth/AuthContainer/AuthContainer";

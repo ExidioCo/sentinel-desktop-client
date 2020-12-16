@@ -18,7 +18,7 @@ const onSubmit = (values, submitProps) => {
   submitProps.resetForm();
 };
 
-export const ConfigureSettingForm = () => {
+export const ConfigurationSettingsForm = () => {
   const [formValues, setFormValues] = useState(null);
   return (
     <Grid

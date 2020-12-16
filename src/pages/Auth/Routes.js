@@ -5,7 +5,7 @@ import { SignUp } from "./SignUp";
 import { Login } from "./Login";
 import { Test } from "../Test";
 import { AccountCreated } from "./AccountCreated/AccountCreated";
-import { ConfigureSetting } from "../ConfigurationSettings/ConfigureSetting";
+import { ConfigurationSettings } from "../ConfigurationSettings/ConfigurationSettings";
 import Dashboard from "../Dashboard";
 // import { Loader } from "atoms";
 // import { AuthContainer } from "pages/Auth/AuthContainer/AuthContainer";
@@ -29,7 +29,7 @@ export const AuthenticatedRoutes = () => {
   return (
     <Suspense>
       <Switch>
-        <Route path="/configure-setting" exact component={ConfigureSetting} />
+        <Route path="/configuration-settings" exact component={ConfigurationSettings} />
         <Route path="/dashboard/wallet" exact component={Dashboard} />
         {/* <Redirect to="/" /> */}
       </Switch>

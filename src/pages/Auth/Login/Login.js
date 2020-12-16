@@ -26,7 +26,7 @@ export const Login = () => {
           >
             <SocialSecion />
             <Grid gridAutoFlow="column" gridGap="2rem" alignItems="center">
-              <Link to="/configure-setting">
+              <Link to="/configuration-settings">
                 <Button px="3rem" justifySelf="center" type="submit">
                   Login
                 </Button>

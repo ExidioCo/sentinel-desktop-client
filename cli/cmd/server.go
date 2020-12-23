@@ -91,14 +91,7 @@ func ServerCmd() *cobra.Command {
 			keys.RegisterRoutes(protectedRouter, ctx)
 			staking.RegisterRoutes(protectedRouter, ctx)
 
-			corsRouter := cors.New(cors.Options{
-				AllowedMethods: []string{
-					http.MethodGet,
-					http.MethodDelete,
-					http.MethodPost,
-					http.MethodPut,
-				},
-			}).Handler(muxRouter)
+			corsRouter := cors.AllowAll().Handler(muxRouter)
 
 			log.Printf("Listening on %s\n", listenOn)
 			return http.ListenAndServe(listenOn, corsRouter)

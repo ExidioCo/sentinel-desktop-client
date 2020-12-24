@@ -1,5 +1,6 @@
 import React, { Suspense }         from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import { LandingPage       } from "pages/LandingPage";
 import { CreateAccount     } from "pages/CreateAccount";
@@ -16,22 +17,25 @@ export const UnauthenticatedRoutes = () => {
       <Switch>
         <Route exact path="/landing" component={LandingPage} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/create-account" component={CreateAccount} />
-        <Redirect to="/login" />
+        <Redirect to="/landing" />
       </Switch>
     </Suspense>
   );
 };
 
 export const AuthenticatedRoutes = () => {
+
+  const redirectURL = useSelector(state  => state.loginReducer.redirectURL);
+
   return (
     <Suspense>
       <Switch>
-        <Route path="/configure-setting" exact component={ConfigureSetting} />
+        <Route exact path="/create-account" component={CreateAccount} />
+        <Route exact path="/configure-setting" exact component={ConfigureSetting} />
         <Route exact path="/account-created" component={AccountCreated} />
-        <Route path="/dashboard/wallet" exact component={Dashboard} />
-        <Route path="/dashboard/dVPN" exact component={Dashboard} />
-        <Redirect to="/account-created" />
+        <Route exact path="/dashboard/wallet" exact component={Dashboard} />
+        <Route exact path="/dashboard/dVPN" exact component={Dashboard} />
+        <Redirect to={redirectURL} />
       </Switch>
     </Suspense>
   );

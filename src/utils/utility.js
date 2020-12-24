@@ -5,8 +5,7 @@
  * They are here in utility because we are using them across the application.
  */
 
-import { useHistory } from "react-router-dom";
-
+import history from './history';
 
 const REQUEST = "REQUEST";
 const SUCCESS = "SUCCESS";
@@ -14,7 +13,9 @@ const FAILURE = "FAILURE";
 
 export const TOKEN_EXPIRY_MESSAGE = "Session has expired. Login again!"
 
-export const API_URL = ''
+// export const API_URL = ''
+export const API_URL = 'http://127.0.0.1:8080'
+
 
 export function actionCreator(actionType, data) {
     return {
@@ -30,9 +31,9 @@ export function createRequestActionTypes(base) {
     }, {});
 }
 
-export function handleLoginRedirect(response, targetUrl) {
-    localStorage.setItem("access_token", response.Token);
-    useHistory.push(targetUrl);
+export function handleLoginRedirect(token, targetUrl) {
+    localStorage.setItem("access_token", token);
+    history.push(targetUrl);
 }
 
 export function handleLogoutRedirect() {
@@ -46,3 +47,17 @@ export const jsonApiHeader = accessToken => {
         "Authorization": accessToken ? `Bearer ${accessToken}` : ""
     };
 };
+
+export function checkHttpStatus(response) {
+    if (response.status >= 200 && response.status < 204) {
+        return response.json();
+    } else if (response.status === 204) {
+        return true;
+    } else if (response.status >= 400 && response.status < 500) {
+        return response.json();
+    } else {
+        var error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+    }
+}

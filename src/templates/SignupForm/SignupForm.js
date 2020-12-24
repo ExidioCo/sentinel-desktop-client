@@ -1,31 +1,43 @@
-import { Text, Box, Grid, Error, Button } from "atoms";
-import { Formik, Form, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
-import * as Yup from "yup";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import * as Yup from "yup";
+import { Formik, Form, ErrorMessage } from "formik";
+
+import { Text, Box, Grid, Error, Button } from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
 import { SocialSecion } from "molecules/SocialSecion";
+
+import { CreateAccountAction } from '../../pages/Login/actions/LoginActions';
 
 const initialValues = {
   username: "",
   password: "",
   seed: "",
 };
+
 const validationSchema = Yup.object({
   username: Yup.string().required("Required"),
   password: Yup.string().required("Required"),
-  seed: Yup.string().required("Required"),
 });
 
-const onSubmit = (values, submitProps) => {
-  console.log("Form data", values);
-  console.log("submitProps", submitProps);
-  submitProps.setSubmitting(false);
-  submitProps.resetForm();
-};
 
 export const SignupForm = () => {
+
   const [formValues, setFormValues] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (values, submitProps) => {
+    let payload = {
+      name: values.username,
+      mnemonicoptional: values.seed || '',
+      password: values.password,
+      bip_39_passwordoptional: ''
+    };
+    dispatch(CreateAccountAction(payload));
+  };
+
   return (
     <Box>
       <Formik
@@ -132,11 +144,9 @@ export const SignupForm = () => {
                           Terms & Conditions
                         </Text>
                       </Text>
-                      <Link to="/account-created">
-                        <Button px="3rem" justifySelf="center" type="submit">
-                          Create
+                      <Button px="3rem" justifySelf="center" type="submit">
+                        Create
                         </Button>
-                      </Link>
                     </Grid>
                   </Grid>
                 </Box>

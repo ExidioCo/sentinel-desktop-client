@@ -139,9 +139,6 @@ func (c *Config) Validate() error {
 	if c.Chain.GasAdjustment < 0 {
 		return fmt.Errorf("invalid field Chain.GasAdjustment")
 	}
-	if c.Chain.ID == "" {
-		return fmt.Errorf("invalid field Chain.ID")
-	}
 	if c.Chain.RPCAddress == "" {
 		return fmt.Errorf("invalid field Chain.RPCAddress")
 	}

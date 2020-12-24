@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 
@@ -22,15 +22,9 @@ export const LoginForm = () => {
   const [formValues, setFormValues] = useState(null);
 
   const dispatch = useDispatch();
-  const loggedInUserDetails = useSelector((state) =>
-    console.log("state ----", state)
-  );
+
 
   const onSubmit = (values, submitProps) => {
-    console.log("Form data", values);
-    console.log("submitProps", submitProps);
-    // submitProps.setSubmitting(false);
-    // submitProps.resetForm();
     let payload = {
       password: values.password,
     };

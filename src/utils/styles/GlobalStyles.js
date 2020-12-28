@@ -60,13 +60,53 @@ a {
   max-width: 12rem 
 }
 
-.react-select-custom  ::-webkit-scrollbar {
+.react-select-custom  ::-webkit-scrollbar, .scroll-bar::-webkit-scrollbar  {
   width: .5rem;
 }
  
 .react-select-custom ::-webkit-scrollbar-track {}
 .react-select-custom ::-webkit-scrollbar-thumb {
   background-color: #129EED;
+}
+.scroll-bar{
+overflow-y: scroll
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+  background-color: transparent
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color:  #DCE9F1 !important;
+}
+
+.truncate-text {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.__react_component_tooltip{
+      padding: 3px 5px !important;
+      border: 1px solid grey !important;
+      background-color: #EEF4FF !important;
+      border-radius: 0px !important;
+      p {
+        margin:0 !important
+      }
+}
+.__react_component_tooltip::before, .__react_component_tooltip::after{
+  display: none !important
+}
+.__react_component_tooltip.show{
+  margin-top: 2.4rem !important;
+  margin-left: 2rem !important 
+}
+
+.recharts-cartesian-axis-ticks, .recharts-line-dot {
+  display :none !important
+}
+.recharts-dot .recharts-line-dot {
+  display :none !important
 }
 
 `;

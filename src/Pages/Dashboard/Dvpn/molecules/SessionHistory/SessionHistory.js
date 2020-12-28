@@ -1,5 +1,6 @@
 import MemoTime from "assets/icons/Time";
 import { Box, Text, Grid, Flex } from "atoms";
+import ReactTooltip from "react-tooltip";
 
 const SessionHistoryHeadings = ({ heading, title }) => {
   return (
@@ -28,7 +29,8 @@ const SessionHistoryHeadings = ({ heading, title }) => {
 const SessionHistoryList = () => {
   return (
     <Grid
-      py=".8rem"
+      py="1.5rem"
+      px="2rem"
       gridTemplateColumns=".8fr  1fr 1fr 3rem"
       alignItems="center"
       justifyContent="space-between"
@@ -45,7 +47,27 @@ const SessionHistoryList = () => {
       <Text color="primary.700" fontSize="1.3rem" fontWeight="medium">
         5 min 34 secs
       </Text>
-      <MemoTime height="1.5rem" width="1.5rem" />
+      {/* <MemoTime height="1.5rem" width="1.5rem" /> */}
+
+      <div>
+        <a data-for="soclose" data-tip="3">
+          <MemoTime height="1.5rem" width="1.5rem" />
+        </a>
+      </div>
+      <ReactTooltip
+        id="soclose"
+        getContent={(dataTip) => (
+          <div>
+            <p>Tue, 08 Sep 2020 19:07:11 GMT +5:30</p>
+          </div>
+        )}
+        effect="solid"
+        // delayHide={500}
+        // delayShow={500}
+        place="left"
+        border={true}
+        type="light"
+      />
     </Grid>
   );
 };
@@ -75,7 +97,6 @@ export const SessionHistory = () => {
         <SessionHistoryHeadings heading="33.3hrs" title="Duration" />
         <SessionHistoryHeadings heading="2.5GB" title="Received" />
       </Grid>
-
       <Grid
         mt="1rem"
         px="1.5rem"
@@ -117,8 +138,8 @@ export const SessionHistory = () => {
         <Box py={4} />
       </Grid>
 
-      <Grid gridGap="1rem" px="1.5rem">
-        {[1, 2, 3, 4].map((index) => (
+      <Grid maxHeight="20rem" className="scroll-bar">
+        {[1, 2, 3, 4, 5, 6, 7].map((index) => (
           <SessionHistoryList key={index} />
         ))}
       </Grid>

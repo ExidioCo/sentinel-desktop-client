@@ -23,7 +23,7 @@ export const AccountDetails = () => {
     const element = document.createElement("a");
     const file = new Blob([mnemonics], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = "mySeedFile.txt";
+    element.download = `${data.address}.txt`;
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }

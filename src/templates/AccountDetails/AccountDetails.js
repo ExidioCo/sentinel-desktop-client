@@ -15,10 +15,18 @@ export const AccountDetails = () => {
 
   const createdAccountDetails = useSelector(state => state.loginReducer.createAccount);
 
-  console.log('createdAccountDetails-----', createdAccountDetails);
   let data = createdAccountDetails.data.result;
   let mnemonics = data.mnemonic;
   let mnemonicsArr = mnemonics.split(/(\s+)/).filter(function (e) { return e.trim().length > 0; });
+
+  const TextFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([mnemonics], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "mySeedFile.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
 
   return (
     <Grid gridTemplateRows="94vh 6vh">
@@ -115,6 +123,7 @@ export const AccountDetails = () => {
                 width="2.5rem"
                 alignItems="center"
                 justifyContent="center"
+                onClick={() => TextFile()}
               >
                 <MemoSeed height="1rem" />
               </Flex>

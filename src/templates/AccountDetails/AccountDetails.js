@@ -1,12 +1,15 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
+
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'react-smart-toaster';
 
 import { Text, Box, Grid, Flex, Button } from "atoms";
 import { SocialSecion } from "molecules/SocialSecion";
 import MemoAddress from "assets/icons/Address";
 import MemoSeed from "assets/icons/Seed";
-import MemoAccept from "assets/icons/Accept"; 
+import MemoAccept from "assets/icons/Accept";
 
 export const AccountDetails = () => {
 
@@ -15,8 +18,8 @@ export const AccountDetails = () => {
   console.log('createdAccountDetails-----', createdAccountDetails);
   let data = createdAccountDetails.data.result;
   let mnemonics = data.mnemonic;
-  let mnemonicsArr = mnemonics.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } );
-  console.log('mnemonicsArr ----', mnemonicsArr);
+  let mnemonicsArr = mnemonics.split(/(\s+)/).filter(function (e) { return e.trim().length > 0; });
+
   return (
     <Grid gridTemplateRows="94vh 6vh">
       <Grid gridTemplateColumns="1fr 3fr 1fr" alignItems="center">
@@ -42,16 +45,19 @@ export const AccountDetails = () => {
               >
                 ADDRESS
               </Text>
-              <Flex
-                bg="grey.400"
-                borderRadius="4rem"
-                height="2.5rem"
-                width="2.5rem"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <MemoAddress height="1rem" />
-              </Flex>
+              <CopyToClipboard text={JSON.stringify(data.address)} onCopy={() => toast.success('Address Copied')}>
+                <Flex
+                  bg="grey.400"
+                  borderRadius="4rem"
+                  cursor="pointer"
+                  height="2.5rem"
+                  width="2.5rem"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <MemoAddress height="1rem" />
+                </Flex>
+              </CopyToClipboard>
             </Flex>
 
             <Text as="p" variant="small" color="grey.900" m={0} pb="1rem">
@@ -59,7 +65,7 @@ export const AccountDetails = () => {
             </Text>
           </Box>
           <Box mb="2rem">
-            <Flex alignItems="center" pb="1rem">
+            <Flex alignItems="center" pb="1rem" >
               <Text
                 variant="label"
                 fontWeight="medium"
@@ -70,16 +76,19 @@ export const AccountDetails = () => {
               >
                 Public key
               </Text>
-              <Flex
-                bg="grey.400"
-                borderRadius="4rem"
-                height="2.5rem"
-                width="2.5rem"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <MemoAddress height="1rem" />
-              </Flex>
+              <CopyToClipboard text={JSON.stringify(data.pub_key)} onCopy={() => toast.success('Public Key Copied')}>
+                <Flex
+                  bg="grey.400"
+                  borderRadius="4rem"
+                  height="2.5rem"
+                  cursor="pointer"
+                  width="2.5rem"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <MemoAddress height="1rem" />
+                </Flex>
+              </CopyToClipboard>
             </Flex>
             <Text as="p" variant="small" color="grey.900" m={0} pb="1rem">
               {data.pub_key}
@@ -102,6 +111,7 @@ export const AccountDetails = () => {
                 bg="grey.400"
                 borderRadius="4rem"
                 height="2.5rem"
+                cursor="pointer"
                 width="2.5rem"
                 alignItems="center"
                 justifyContent="center"
@@ -124,7 +134,7 @@ export const AccountDetails = () => {
                     </Text>
                   )
                 })
-              } 
+              }
             </Grid>
             <Text as="p" variant="small" color="grey.700">
               <Text

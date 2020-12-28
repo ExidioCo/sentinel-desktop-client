@@ -4,7 +4,8 @@ import { AuthGate } from "pages/Auth/AuthGate";
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk'
+import reduxThunk from 'redux-thunk';
+import { SmartToaster, toast } from 'react-smart-toaster';
 
 import { theme } from "./utils/styles/theme";
 import { GlobalStyle } from "./utils/styles";
@@ -20,6 +21,11 @@ const store = createStore(
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <SmartToaster
+        store={toast}
+        lightBackground={true}
+        position={"top_right"}
+      />
       <Provider store={store}>
         <GlobalStyle />
         <BrowserRouter>

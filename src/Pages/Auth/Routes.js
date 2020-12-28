@@ -16,7 +16,6 @@ export const UnauthenticatedRoutes = () => {
     <Suspense>
       <Switch>
         <Route exact path="/landing" component={LandingPage} />
-        {/* <Route exact path="/account-created" component={AccountCreated} /> */}
         <Route exact path="/login" component={Login} />
         <Redirect to="/landing" />
       </Switch>
@@ -27,7 +26,7 @@ export const UnauthenticatedRoutes = () => {
 export const AuthenticatedRoutes = () => {
 
   const redirectURL = useSelector(state  => state.loginReducer.redirectURL);
-  console.log('redirectURL-----', redirectURL);
+  
   return (
     <Suspense>
       <Switch>

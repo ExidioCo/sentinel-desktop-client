@@ -16,6 +16,7 @@ import {
 } from '../constants/index';
 import axios from 'axios';
 import { handleLoginRedirect, TOKEN_EXPIRY_MESSAGE } from '../../../utils/utility';
+import history from '../../../utils/history';
 
 
 /**
@@ -166,10 +167,9 @@ export const CreateAccountAction = (postData) => {
         })
             .then(function (response) {
                 if(response.data.success === true ) {
-                    console.log('inside response---', response);
                     dispatch(actionCreator(LoginActionTypes.post_CreateAccount.SUCCESS, response));
                     dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/account-created'));
-                    handleLoginRedirect(token, '/account-created');
+                    history.push('/account-created');
                 } else {
                     dispatch(actionCreator(LoginActionTypes.post_CreateAccount.FAILURE));
                 }

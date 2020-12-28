@@ -24,8 +24,6 @@ const validationSchema = Yup.object({
 
 export const SignupForm = () => {
 
-  const [formValues, setFormValues] = useState(null);
-
   const dispatch = useDispatch();
 
   const onSubmit = (values, submitProps) => {
@@ -41,7 +39,7 @@ export const SignupForm = () => {
   return (
     <Box>
       <Formik
-        initialValues={formValues || initialValues}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         enableReinitialize

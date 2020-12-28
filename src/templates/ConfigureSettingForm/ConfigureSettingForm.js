@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Formik, Form, ErrorMessage } from "formik";
@@ -24,7 +24,6 @@ export const ConfigureSettingForm = () => {
   const dispatch = useDispatch();
 
   const configDetails = useSelector(state => state.loginReducer.checkConfigDetails);
-  console.log('configDetails-----', configDetails);
 
   const [brodcastMode, setVariant] = useState(
     configDetails.data !== undefined

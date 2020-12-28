@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { AuthGate } from "pages/Auth/AuthGate";
 
@@ -22,9 +22,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <GlobalStyle />
-        <Router>
+        <BrowserRouter>
           <AuthGate />
-        </Router>
+        </BrowserRouter>
       </Provider>
     </ThemeProvider>
   );

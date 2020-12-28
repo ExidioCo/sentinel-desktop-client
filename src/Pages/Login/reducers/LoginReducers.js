@@ -95,17 +95,20 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
+                isAuthenticated: false
             };
         case LoginActionTypes.post_CreateAccount.SUCCESS:
             return {
                 ...state,
                 loading: false,
                 createAccount: payload,
+                isAuthenticated: true
             };
         case LoginActionTypes.post_CreateAccount.FAILURE:
             return {
                 ...state,
                 loading: false,
+                isAuthenticated: false
             };
 
         // Update Config Reducer
@@ -113,17 +116,20 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
+                isAuthenticated: false
             };
         case LoginActionTypes.put_UpdateConfigDetails.SUCCESS:
             return {
                 ...state,
                 loading: false,
                 updateConfigDetails: payload,
+                isAuthenticated: true
             };
         case LoginActionTypes.put_UpdateConfigDetails.FAILURE:
             return {
                 ...state,
                 loading: false,
+                isAuthenticated: false
             };
         default:
             return state;

@@ -1,19 +1,16 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
 
 import { Text, Box, Grid, Flex, Error, Button, Chip } from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
 import MemoHelp from "assets/icons/Help";
 import { SocialSecion } from "molecules/SocialSecion";
 
-const initialValues = {
-  fee: "",
-  gas_amount: "",
-  chain_id: "",
-  rpc_address: "",
-};
+import { UpdateConfigAction } from '../../pages/Login/actions/LoginActions';
+
 const validationSchema = Yup.object({
   fee: Yup.string().required("Required"),
   gas_amount: Yup.string().required("Required"),
@@ -21,19 +18,132 @@ const validationSchema = Yup.object({
   rpc_address: Yup.string().required("Required"),
 });
 
-const onSubmit = (values, submitProps) => {
-  console.log("Form data", values);
-  console.log("submitProps", submitProps);
-  submitProps.setSubmitting(false);
-  submitProps.resetForm();
-};
 
 export const ConfigureSettingForm = () => {
-  const [formValues, setFormValues] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const configDetails = useSelector(state => state.loginReducer.checkConfigDetails);
+  console.log('configDetails-----', configDetails);
+
+  const [brodcastMode, setVariant] = useState(
+    configDetails.data !== undefined
+      ?
+      {
+        Block: configDetails.data.result.chain.broadcast_mode === 'block' ? 'selected' : 'primary',
+        Sync: configDetails.data.result.chain.broadcast_mode === 'sync' ? 'selected' : 'primary',
+        Async: configDetails.data.result.chain.broadcast_mode === 'async' ? 'selected' : 'primary',
+      }
+      :
+      {
+        Block: 'primary',
+        Sync: 'primary',
+        Async: 'primary'
+      }
+  )
+
+  const [rpcServer, setRpcServer] = useState(
+    configDetails.data !== undefined && configDetails.data.result.chain.trust_node === true ? true : false
+  )
+
+  const [initialValues, setInitialValues] = useState(configDetails.data !== undefined ?
+    {
+      fee: configDetails.data.result.chain.fees,
+      gas_amount: configDetails.data.result.chain.gas,
+      chain_id: configDetails.data.result.chain.id,
+      rpc_address: configDetails.data.result.chain.rpc_address,
+    }
+    :
+    {
+      fee: '',
+      gas_amount: '',
+      chain_id: '',
+      rpc_address: '',
+    }
+  )
+
+  const resetVariant = () => {
+    setVariant({
+      Block: 'primary',
+      Sync: 'primary',
+      Async: 'primary'
+    })
+  }
+
+  const setVariantType = (type) => {
+    setVariant({
+      Block: type === 'Block' ? 'selected' : 'primary',
+      Sync: type === 'Sync' ? 'selected' : 'primary',
+      Async: type === 'Async' ? 'selected' : 'primary'
+    })
+  }
+
+  const brodcastModeHandler = (e, type) => {
+    e.preventDefault();
+    if (type === "Block") {
+      let variantType = brodcastMode.Block
+      if (variantType === 'primary') {
+        setVariantType('Block')
+      } else {
+        resetVariant();
+      }
+    } else if (type === "Sync") {
+      let variantType = brodcastMode.Sync
+      if (variantType === 'primary') {
+        setVariantType('Sync')
+      } else {
+        resetVariant();
+      }
+    } else if (type === "Async") {
+      let variantType = brodcastMode.Async
+      if (variantType === 'primary') {
+        setVariantType('Async')
+      } else {
+        resetVariant();
+      }
+    }
+  }
+
+  const rpcServerHandler = (e) => {
+    e.preventDefault();
+    setRpcServer(!rpcServer)
+  }
+
+  const findBrodcastMode = () => {
+    if(brodcastMode.Block === "selected") {
+      return 'block'
+    } else if (brodcastMode.Sync === "selected") {
+      return 'sync'
+    } else if (brodcastMode.Async === "selected") {
+      return 'async'
+    }
+  }
+
+  const onSubmit = (values, submitProps) => {
+    console.log("Form data", values);
+    let chainObj = {
+      broadcast_mode: findBrodcastMode(),
+      fees: `${values.fee}tsent`,
+      gas_adjustment: 0,
+      gas_prices: '0.01tsent' ,
+      gas: values.gas_amount,
+      id: values.chain_id,
+      rpc_address: values.rpc_address,
+      simulate_and_execute: true,
+      trust_node: rpcServer
+    }
+    let postData = {
+       from: '',
+       chain: chainObj
+    }
+    console.log('postData', postData);
+    dispatch(UpdateConfigAction(postData))
+  };
+
   return (
     <Box>
       <Formik
-        initialValues={formValues || initialValues}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         enableReinitialize
@@ -77,9 +187,9 @@ export const ConfigureSettingForm = () => {
                           gridGap="1rem"
                           mb="2rem"
                         >
-                          <Chip variant="selected" text="Block" />
-                          <Chip variant="primary" text="Sync" />
-                          <Chip variant="primary" text="Async" />
+                          <Chip variant={brodcastMode.Block} text="Block" onClick={(e) => brodcastModeHandler(e, 'Block')} />
+                          <Chip variant={brodcastMode.Sync} text="Sync" onClick={(e) => brodcastModeHandler(e, 'Sync')} />
+                          <Chip variant={brodcastMode.Async} text="Async" onClick={(e) => brodcastModeHandler(e, 'Async')} />
                         </Grid>
                         <Box>
                           <Flex alignItems="center" mb="1rem">
@@ -153,8 +263,8 @@ export const ConfigureSettingForm = () => {
                           mb="2rem"
                           justifyContent="start"
                         >
-                          <Chip variant="selected" text="Yes" />
-                          <Chip variant="primary" text="No" />
+                          <Chip variant={rpcServer === true ? "selected" : "primary"} text="Yes" onClick={(e) => rpcServerHandler(e)} />
+                          <Chip variant={rpcServer === false ? "selected" : "primary"} text="No" onClick={(e) => rpcServerHandler(e)} />
                         </Grid>
                         <Box>
                           <Flex alignItems="center" mb="1rem">
@@ -193,11 +303,9 @@ export const ConfigureSettingForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      {/* <Link to="/dashboard/wallet"> */}
                       <Button px="3rem" justifySelf="center" type="submit">
                         Save
                       </Button>
-                      {/* </Link> */}
                     </Grid>
                   </Grid>
                 </Box>

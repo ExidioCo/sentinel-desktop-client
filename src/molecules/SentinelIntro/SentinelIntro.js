@@ -1,6 +1,10 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import { Box, Grid, Text } from "atoms";
 import MemoLogo from "assets/icons/Logo";
 import MemoDesign from "assets/icons/Design";
+
 
 export const SentinelIntro = () => {
   return (

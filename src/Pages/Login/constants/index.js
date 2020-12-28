@@ -24,6 +24,8 @@ export const GET_CHECK_KEYS_API = `${API_URL}/api/v1/keys`;
 
 export const POST_CREATE_ACCOUNT_API = `${API_URL}/api/v1/keys`;
 
+export const PUT_UPDATE_CONFIG_DETAILS_API = `${API_URL}/api/v1/config`;
+
 export const LoginActionTypes = {
     post_Login: createRequestActionTypes('POST_LOGIN'),
     get_CheckConfig: createRequestActionTypes('GET_CHECK_CONFIG_API'),
@@ -31,5 +33,7 @@ export const LoginActionTypes = {
 
     set_redirectURL: createRequestActionTypes('REDIRECT_URL'),
 
-    post_CreateAccount: createRequestActionTypes('POST_CREATE_ACCOUNT_API')
+    post_CreateAccount: createRequestActionTypes('POST_CREATE_ACCOUNT_API'),
+
+    put_UpdateConfigDetails: createRequestActionTypes('PUT_UPDATE_CONFIG_DETAILS')
 };

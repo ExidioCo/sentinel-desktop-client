@@ -11,7 +11,8 @@ import {
     POST_LOGIN_API,
     GET_CHECK_CONFIG_API,
     GET_CHECK_KEYS_API,
-    POST_CREATE_ACCOUNT_API
+    POST_CREATE_ACCOUNT_API,
+    PUT_UPDATE_CONFIG_DETAILS_API
 } from '../constants/index';
 import axios from 'axios';
 import { handleLoginRedirect, TOKEN_EXPIRY_MESSAGE } from '../../../utils/utility';
@@ -64,7 +65,7 @@ export const CheckConfigAction = () => {
             .then(function (response) {
                 if(response.data.success === true ) {
                     dispatch(actionCreator(LoginActionTypes.get_CheckConfig.SUCCESS, response));
-                    if(response.data.result.chain.id !== "") {
+                    if(response.data.result.chain.id !== '') {
                         dispatch(CheckKeysAction());
                     } else {
                         dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/configure-setting'));
@@ -116,6 +117,38 @@ export const CheckKeysAction = () => {
     };
 };
 
+
+/**
+ * @desc Action to update config
+ * @param  {[object]} postData [The data needed as a payload for the API interaction]
+ */
+
+export const UpdateConfigAction = (postData) => {
+    return (dispatch, getState) => {
+        let token = getState().loginReducer.loggedInUserDetails.data.result.value;
+        dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.REQUEST));
+        axios({
+            method: 'put',
+            url: PUT_UPDATE_CONFIG_DETAILS_API,
+            data: postData,
+            headers: jsonApiHeader(token),
+        })
+            .then(function (response) {
+                if(response.data.success === true ) {
+                    dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.SUCCESS, response));
+                    dispatch(CheckKeysAction())
+                } else {
+                    dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.FAILURE));
+                }
+            })
+            .catch(function (error) {
+                dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.FAILURE));
+                console.log('error put_UpdateConfigDetails ..', error);
+            });
+    };
+};
+
+
 /**
  * @desc Action to create account post login
  * @param  {[object]} postData [The data needed as a payload for the API interaction]
@@ -133,6 +166,7 @@ export const CreateAccountAction = (postData) => {
         })
             .then(function (response) {
                 if(response.data.success === true ) {
+                    console.log('inside response---', response);
                     dispatch(actionCreator(LoginActionTypes.post_CreateAccount.SUCCESS, response));
                     dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/account-created'));
                     handleLoginRedirect(token, '/account-created');
@@ -146,5 +180,4 @@ export const CreateAccountAction = (postData) => {
             });
     };
 };
-
 

@@ -10,7 +10,9 @@ const initialState = {
 
     redirectURL: '',
 
-    createAccount: null
+    createAccount: null,
+
+    updateConfigDetails: null,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -101,6 +103,24 @@ export default (state = initialState, { type, payload }) => {
                 createAccount: payload,
             };
         case LoginActionTypes.post_CreateAccount.FAILURE:
+            return {
+                ...state,
+                loading: false,
+            };
+
+        // Update Config Reducer
+        case LoginActionTypes.put_UpdateConfigDetails.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case LoginActionTypes.put_UpdateConfigDetails.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                updateConfigDetails: payload,
+            };
+        case LoginActionTypes.put_UpdateConfigDetails.FAILURE:
             return {
                 ...state,
                 loading: false,

@@ -9,7 +9,6 @@ export const CustomNavLink = memo(({ children, ...props }) => {
   }, [pathname]);
 
   const myRef = useRef(null);
-  console.log(myRef);
   return (
     <NavLink ref={myRef} {...props}>
       {typeof children === "function" ? children(isActive) : children}

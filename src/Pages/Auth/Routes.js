@@ -16,6 +16,7 @@ export const UnauthenticatedRoutes = () => {
     <Suspense>
       <Switch>
         <Route exact path="/landing" component={LandingPage} />
+        {/* <Route exact path="/account-created" component={AccountCreated} /> */}
         <Route exact path="/login" component={Login} />
         <Redirect to="/landing" />
       </Switch>
@@ -26,15 +27,15 @@ export const UnauthenticatedRoutes = () => {
 export const AuthenticatedRoutes = () => {
 
   const redirectURL = useSelector(state  => state.loginReducer.redirectURL);
-
+  console.log('redirectURL-----', redirectURL);
   return (
     <Suspense>
       <Switch>
         <Route exact path="/create-account" component={CreateAccount} />
-        <Route exact path="/configure-setting" exact component={ConfigureSetting} />
+        <Route exact path="/configure-setting" component={ConfigureSetting} />
         <Route exact path="/account-created" component={AccountCreated} />
-        <Route exact path="/dashboard/wallet" exact component={Dashboard} />
-        <Route exact path="/dashboard/dVPN" exact component={Dashboard} />
+        <Route exact path="/dashboard/wallet" component={Dashboard} />
+        <Route exact path="/dashboard/dVPN" component={Dashboard} />
         <Redirect to={redirectURL} />
       </Switch>
     </Suspense>

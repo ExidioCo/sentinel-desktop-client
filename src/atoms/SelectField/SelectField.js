@@ -56,7 +56,6 @@ export const SelectField = ({
   searchable,
   ...props
 }) => {
-  console.log("isSelected", props.isSelected, props.selectProps);
   return (
     <InputFieldBase>
       <Text as="label" color="gray.700" fontSize={{ xs: 7 }}>

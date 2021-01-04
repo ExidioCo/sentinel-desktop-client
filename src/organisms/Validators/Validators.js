@@ -1,13 +1,16 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import MemoProfile from "assets/icons/Profile";
 import { Box, Grid, Text, Flex, Modal, Error, ModalClose, Button } from "atoms";
-import { useState } from "react";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
 import { FormInput } from "molecules/FormInput";
 import MemoCheck from "assets/icons/Check";
+
+import { GetValidatorListAction } from '../../pages/Dashboard/Wallet/actions/WalletActions';
 
 const initialValues = {
   amount: "",
@@ -18,7 +21,8 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Required"),
 });
 
-const ValidatorsList = ({ index }) => {
+const ValidatorsList = ({ index, validatorListData }) => {
+  let validatorListDataObj = validatorListData;
   const { visible, hide, toggle } = useVisibleState(false);
   const [formValues, setFormValues] = useState(null);
   const [delegate, setDelegate] = useState(false);
@@ -38,6 +42,7 @@ const ValidatorsList = ({ index }) => {
     submitProps.resetForm();
     delegatehandler();
   };
+  console.log('validatorListDataObj ----', validatorListDataObj);
   return (
     <>
       <Grid
@@ -55,15 +60,18 @@ const ValidatorsList = ({ index }) => {
             fontWeight="medium"
             ml="1rem"
           >
-            Forbole
+            {validatorListDataObj.description.moniker}
           </Text>
         </Flex>
 
+        <Text color="primary.700" fontSize="1.4rem" key={index}>
+          1,190,255 (6.62%)
+        </Text>
         <Text color="primary.700" fontSize="1.4rem">
           1,190,255 (6.62%)
         </Text>
         <Text color="primary.700" fontSize="1.4rem">
-          94.04%
+          {JSON.parse(validatorListDataObj.commission.rate).toFixed(2)}
         </Text>
         <Text color="primary.700" fontSize="1.4rem">
           10.00%
@@ -210,7 +218,7 @@ const ValidatorsList = ({ index }) => {
                             px="8rem"
                             justifySelf="center"
                             type="submit"
-                            // onClick={delegatehandler}
+                          // onClick={delegatehandler}
                           >
                             DELEGATE
                           </Button>
@@ -218,52 +226,52 @@ const ValidatorsList = ({ index }) => {
                       </Form>
                     </Box>
                   ) : (
-                    <Box m="5rem">
-                      <Grid justifyContent="center" alignItems="center">
-                        <Flex
-                          height="10rem"
-                          width="10rem"
-                          borderRadius="5rem"
-                          border="5px solid"
-                          borderColor="green.500"
-                          mx="auto"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <MemoCheck height="5rem" width="5rem" />
-                        </Flex>
-                        <Text
-                          variant="label"
-                          fontWeight="semiBold"
-                          color="grey.700"
-                          textAlign="center"
-                          mt="3rem"
-                        >
-                          Tx#:
+                      <Box m="5rem">
+                        <Grid justifyContent="center" alignItems="center">
+                          <Flex
+                            height="10rem"
+                            width="10rem"
+                            borderRadius="5rem"
+                            border="5px solid"
+                            borderColor="green.500"
+                            mx="auto"
+                            justifyContent="center"
+                            alignItems="center"
+                          >
+                            <MemoCheck height="5rem" width="5rem" />
+                          </Flex>
+                          <Text
+                            variant="label"
+                            fontWeight="semiBold"
+                            color="grey.700"
+                            textAlign="center"
+                            mt="3rem"
+                          >
+                            Tx#:
                           <Text as="span" variant="field" color="grey.900">
-                            6E13234324445405392DBA064184D589A7DBD45E0F9325D141F8C8D0
+                              6E13234324445405392DBA064184D589A7DBD45E0F9325D141F8C8D0
                           </Text>
+                          </Text>
+                          <Text
+                            variant="label"
+                            fontWeight="semiBold"
+                            color="grey.700"
+                            textAlign="center"
+                            my="2rem"
+                          >
+                            Go to Explorer
                         </Text>
-                        <Text
-                          variant="label"
-                          fontWeight="semiBold"
-                          color="grey.700"
-                          textAlign="center"
-                          my="2rem"
-                        >
-                          Go to Explorer
-                        </Text>
-                        <Button
-                          variant="secondary"
-                          px="3rem"
-                          justifySelf="center"
-                          onClick={onCloseDelegate}
-                        >
-                          Close
+                          <Button
+                            variant="secondary"
+                            px="3rem"
+                            justifySelf="center"
+                            onClick={onCloseDelegate}
+                          >
+                            Close
                         </Button>
-                      </Grid>
-                    </Box>
-                  )}
+                        </Grid>
+                      </Box>
+                    )}
                 </Box>
               );
             }}
@@ -275,6 +283,16 @@ const ValidatorsList = ({ index }) => {
 };
 
 export const Validators = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(GetValidatorListAction())
+  }, [])
+
+  const validatorList = useSelector(state => state.walletReducer.validatorList);
+  console.log('validatorList---', validatorList);
+
   return (
     <Box mr="1rem">
       <Grid py="1.5rem" gridTemplateColumns="1fr 1.5fr 1fr 1fr 1fr 1fr">
@@ -334,9 +352,13 @@ export const Validators = () => {
       </Grid>
 
       <Grid gridGap="1rem" maxHeight="58vh" className="scroll-bar">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
-          <ValidatorsList key={index} index={index} />
-        ))}
+        {
+          validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
+            return (
+              <ValidatorsList key={index} index={index} validatorListData={obj} />
+            )
+          })
+        }
       </Grid>
     </Box>
   );

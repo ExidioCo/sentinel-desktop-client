@@ -29,6 +29,7 @@ export const PUT_UPDATE_CONFIG_DETAILS_API = `${API_URL}/api/v1/config`;
 export const LoginActionTypes = {
     post_Login: createRequestActionTypes('POST_LOGIN'),
     get_CheckConfig: createRequestActionTypes('GET_CHECK_CONFIG_API'),
+    get_CheckConfigPostLogin: createRequestActionTypes('GET_CHECK_CONFIG_POST_LOGIN_API'),
     get_CheckKeys: createRequestActionTypes('GET_CHECK_KEYS_API'),
 
     set_redirectURL: createRequestActionTypes('REDIRECT_URL'),

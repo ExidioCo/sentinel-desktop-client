@@ -23,20 +23,33 @@ export const UnauthenticatedRoutes = () => {
   );
 };
 
-export const AuthenticatedRoutes = () => {
+export const AuthenticatedRoutes = React.memo(() => {
 
   const redirectURL = useSelector(state  => state.loginReducer.redirectURL);
   
   return (
     <Suspense>
       <Switch>
-        <Route exact path="/create-account" component={CreateAccount} />
-        <Route exact path="/configure-setting" component={ConfigureSetting} />
-        <Route exact path="/account-created" component={AccountCreated} />
         <Route exact path="/dashboard/wallet" component={Dashboard} />
         <Route exact path="/dashboard/dVPN" component={Dashboard} />
+        <Route exact path="/account-created" component={AccountCreated} />
         <Redirect to={redirectURL} />
       </Switch>
     </Suspense>
   );
-};
+});
+
+export const PostLoginAuthRoutes = React.memo(() => {
+
+  const redirectURL = useSelector(state  => state.loginReducer.redirectURL);
+
+  return (
+    <Suspense>
+      <Switch>
+        <Route exact path="/create-account" component={CreateAccount} />
+        <Route exact path="/configure-setting" component={ConfigureSetting} />
+        <Redirect to={redirectURL} />
+      </Switch>
+    </Suspense>
+  )
+});

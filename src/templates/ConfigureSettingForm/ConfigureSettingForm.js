@@ -119,7 +119,6 @@ export const ConfigureSettingForm = () => {
   }
 
   const onSubmit = (values, submitProps) => {
-    console.log("Form data", values);
     let chainObj = {
       broadcast_mode: findBrodcastMode(),
       fees: `${values.fee}tsent`,
@@ -135,7 +134,6 @@ export const ConfigureSettingForm = () => {
        from: '',
        chain: chainObj
     }
-    console.log('postData', postData);
     dispatch(UpdateConfigAction(postData))
   };
 

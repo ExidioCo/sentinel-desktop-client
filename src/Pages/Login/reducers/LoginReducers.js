@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     loggedInUserDetails: null,
     isAuthenticated: false,
+    isPostLoginAuth: false,
 
     checkConfigDetails: null,
     checkKeysDetails: null,
@@ -23,20 +24,17 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false
             };
         case LoginActionTypes.post_Login.SUCCESS:
             return {
                 ...state,
                 loading: false,
                 loggedInUserDetails: payload,
-                isAuthenticated: true
             };
         case LoginActionTypes.post_Login.FAILURE:
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: false
             };
 
         // Check Config Reducer
@@ -44,20 +42,19 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false
             };
         case LoginActionTypes.get_CheckConfig.SUCCESS:
             return {
                 ...state,
                 loading: false,
                 checkConfigDetails: payload,
-                isAuthenticated: true
+                isPostLoginAuth: true
             };
         case LoginActionTypes.get_CheckConfig.FAILURE:
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: false
+                isPostLoginAuth: false
             };
         
         // Check keys Reducer
@@ -65,7 +62,6 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false
             };
         case LoginActionTypes.get_CheckKeys.SUCCESS:
             return {
@@ -78,7 +74,6 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: false
             };
         
         // Set Redirect URL
@@ -95,7 +90,6 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false
             };
         case LoginActionTypes.post_CreateAccount.SUCCESS:
             return {
@@ -108,7 +102,6 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: false
             };
 
         // Update Config Reducer
@@ -116,20 +109,37 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false
             };
         case LoginActionTypes.put_UpdateConfigDetails.SUCCESS:
             return {
                 ...state,
                 loading: false,
                 updateConfigDetails: payload,
-                isAuthenticated: true
+                isPostLoginAuth: true
             };
         case LoginActionTypes.put_UpdateConfigDetails.FAILURE:
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: false
+                isPostLoginAuth: false
+            };
+
+        // Check Config Reducer post login
+        case LoginActionTypes.get_CheckConfigPostLogin.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case LoginActionTypes.get_CheckConfigPostLogin.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                checkConfigDetails: payload,
+            };
+        case LoginActionTypes.get_CheckConfigPostLogin.FAILURE:
+            return {
+                ...state,
+                loading: false,
             };
         default:
             return state;

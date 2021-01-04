@@ -4,6 +4,8 @@
  * Centralized unique actions for Login Module.
  */
 import React from 'react';
+import { toast } from 'react-smart-toaster';
+
 import {
     actionCreator,
     jsonApiHeader,
@@ -98,8 +100,8 @@ export const CheckKeysAction = () => {
         })
             .then(function (response) {
                 if(response.data.success === true ) {
-                    dispatch(actionCreator(LoginActionTypes.get_CheckKeys.SUCCESS, response));
                     if(response.data.result.length > 0) {
+                        dispatch(actionCreator(LoginActionTypes.get_CheckKeys.SUCCESS, response));
                         dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/dashboard/wallet'));
                         handleLoginRedirect(response.data.result.value, '/dashboard/wallet');
                     } else {
@@ -138,6 +140,7 @@ export const UpdateConfigAction = (postData) => {
                 if(response.data.success === true ) {
                     dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.SUCCESS, response));
                     dispatch(CheckKeysAction())
+                    toast.success('Config Updated Successfully');
                 } else {
                     dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.FAILURE));
                 }
@@ -170,6 +173,8 @@ export const CreateAccountAction = (postData) => {
                     dispatch(actionCreator(LoginActionTypes.post_CreateAccount.SUCCESS, response));
                     dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/account-created'));
                     history.push('/account-created');
+                    toast.success('Account Created Successfully');
+
                 } else {
                     dispatch(actionCreator(LoginActionTypes.post_CreateAccount.FAILURE));
                 }
@@ -181,3 +186,30 @@ export const CreateAccountAction = (postData) => {
     };
 };
 
+/**
+ * @desc Action to check config after click on setting  after login
+ */
+export const CheckConfigSettingAction = () => {
+    return (dispatch, getState) => {
+        let token = getState().loginReducer.loggedInUserDetails.data.result.value;
+        dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.REQUEST));
+        axios({
+            method: 'get',
+            url: GET_CHECK_CONFIG_API,
+            headers: jsonApiHeader(token),
+        })
+            .then(function (response) {
+                if(response.data.success === true ) {
+                    dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.SUCCESS, response));
+                    toast.success('Config Updated Successfully');
+                } else {
+                    dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.FAILURE));
+                }
+
+            })
+            .catch(function (error) {
+                dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.FAILURE));
+                console.log('error get_CheckConfigPostLogin ..', error);
+            });
+    };
+};

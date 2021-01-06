@@ -45,7 +45,6 @@ export const DvpnDetails = ({
     setSubscribedIndividual(!subscribedIndividual);
   };
 
-  console.log("subscribedIndividual", subscribedIndividual);
   return (
     <Box pt="7rem">
       <Box px="3rem">

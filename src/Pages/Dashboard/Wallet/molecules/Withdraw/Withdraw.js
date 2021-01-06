@@ -90,8 +90,6 @@ const WithdrawForm = () => {
   ];
 
   const onSubmit = (values, submitProps) => {
-    console.log("Form data", values);
-    console.log("submitProps", submitProps);
     submitProps.setSubmitting(false);
     submitProps.resetForm();
     toggle();

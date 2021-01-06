@@ -17,8 +17,6 @@ export const SubscribedModal = ({ setSubscribe, visible, hide, toggle }) => {
   const [formValues, setFormValues] = useState(null);
 
   const onSubmit = (values, submitProps) => {
-    console.log("Form data", values);
-    console.log("submitProps", submitProps);
     submitProps.setSubmitting(false);
     submitProps.resetForm();
     toggle();

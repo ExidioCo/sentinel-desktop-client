@@ -115,7 +115,6 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
   )
 
   useEffect(() => {
-    console.log('dfkjvbdkb');
     dispatch(CheckConfigSettingAction())
   },[])
 
@@ -437,7 +436,6 @@ export const Sidebar = ({ connect }) => {
   const { visible, toggle } = useVisibleState(true);
   let accountDetails = useSelector(state => state.loginReducer.checkKeysDetails);
   accountDetails = accountDetails.data.result 
-  console.log('accountDetails----', accountDetails);
   return (
     <Box
       bg="primary.600"

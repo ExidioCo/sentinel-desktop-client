@@ -36,13 +36,13 @@ const ValidatorsList = ({ index, validatorListData }) => {
   };
 
   const onSubmit = (values, submitProps) => {
-    console.log("Form data", values);
-    console.log("submitProps", submitProps);
     submitProps.setSubmitting(false);
     submitProps.resetForm();
     delegatehandler();
   };
-  console.log('validatorListDataObj ----', validatorListDataObj);
+
+  console.log('validatorListData----', validatorListData);
+
   return (
     <>
       <Grid
@@ -65,20 +65,21 @@ const ValidatorsList = ({ index, validatorListData }) => {
         </Flex>
 
         <Text color="primary.700" fontSize="1.4rem" key={index}>
+          {/* 1,190,255 (6.62%) */}
+          {(validatorListDataObj.amount.value / 10000000).toFixed(2)}
+        </Text>
+        {/* <Text color="primary.700" fontSize="1.4rem">
           1,190,255 (6.62%)
-        </Text>
+        </Text> */}
         <Text color="primary.700" fontSize="1.4rem">
-          1,190,255 (6.62%)
+          {JSON.parse(validatorListDataObj.commission.rate).toFixed(2) * 100}%
         </Text>
-        <Text color="primary.700" fontSize="1.4rem">
-          {JSON.parse(validatorListDataObj.commission.rate).toFixed(2)}
-        </Text>
-        <Text color="primary.700" fontSize="1.4rem">
+        {/* <Text color="primary.700" fontSize="1.4rem">
           10.00%
         </Text>
         <Text color="primary.700" fontSize="1.4rem">
           100.00%
-        </Text>
+        </Text> */}
         <Text
           color="primary.500"
           fontSize="1.4rem"
@@ -282,16 +283,14 @@ const ValidatorsList = ({ index, validatorListData }) => {
   );
 };
 
-export const Validators = () => {
+export const Validators = ({ visibleInActive }) => {
 
   const dispatch = useDispatch();
+  const validatorList = useSelector(state => state.walletReducer.validatorList);
 
   useEffect(() => {
     dispatch(GetValidatorListAction())
   }, [])
-
-  const validatorList = useSelector(state => state.walletReducer.validatorList);
-  console.log('validatorList---', validatorList);
 
   return (
     <Box mr="1rem">
@@ -317,7 +316,7 @@ export const Validators = () => {
           </Text>
         </Box>
 
-        <Box py={4}>
+        {/* <Box py={4}>
           <Text
             color="text.500"
             fontWeight="medium"
@@ -326,7 +325,7 @@ export const Validators = () => {
           >
             SELF
           </Text>
-        </Box>
+        </Box> */}
 
         <Box py={4}>
           <Text
@@ -338,7 +337,7 @@ export const Validators = () => {
             COMMISSION
           </Text>
         </Box>
-        <Box py={4}>
+        {/* <Box py={4}>
           <Text
             color="text.500"
             fontWeight="medium"
@@ -347,16 +346,25 @@ export const Validators = () => {
           >
             UPTIME
           </Text>
-        </Box>
+        </Box> */}
         <Box py={4} />
       </Grid>
 
       <Grid gridGap="1rem" maxHeight="58vh" className="scroll-bar">
         {
-          validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
+          !visibleInActive && validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
             return (
               <ValidatorsList key={index} index={index} validatorListData={obj} />
             )
+          })
+        }
+        {
+          visibleInActive  && validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
+            if(obj.jailed === true) {
+              return (
+                <ValidatorsList key={index} index={index} validatorListData={obj} />
+              )
+            }
           })
         }
       </Grid>

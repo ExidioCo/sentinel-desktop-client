@@ -8,7 +8,6 @@ export const IndividualHost = ({
   subscribedIndividual,
   setSubscribedIndividual,
 }) => {
-  console.log("subscribedIndividual", subscribedIndividual);
   return (
     <>
       {subscribedIndividual ? (

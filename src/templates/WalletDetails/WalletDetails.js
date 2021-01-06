@@ -185,7 +185,7 @@ export const WalletDetails = () => {
           </Grid>
         </Grid>
       </Box>
-      {visibleValidatorList ? <Validators /> : <Proposals />}
+      {visibleValidatorList ? <Validators visibleInActive={visibleInActive}/> : <Proposals />}
     </Box>
   );
 };

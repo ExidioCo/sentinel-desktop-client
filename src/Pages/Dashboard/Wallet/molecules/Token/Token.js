@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import MemoLogo from "assets/icons/Logo";
 import MemoSent from "assets/icons/Sent";
 import { Box, Grid, Text, Flex } from "atoms";
@@ -5,11 +6,13 @@ import { SendReceiveToken } from "../SendReceiveToken";
 import { Withdraw } from "../Withdraw";
 
 export const Token = () => {
+  let accountDetails = useSelector(state => state.loginReducer.checkKeysDetails);
+  accountDetails = accountDetails.data.result 
   return (
     <Box>
       <Box p="2rem 3rem">
         <Text variant="field" fontWeight="medium" color="primary.700">
-          Barry Allen
+          {accountDetails[0].name.toUpperCase()}
         </Text>
         <Grid
           gridAutoFlow="column"

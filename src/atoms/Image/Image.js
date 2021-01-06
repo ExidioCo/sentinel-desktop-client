@@ -11,8 +11,6 @@ const LazyImage = ({ src, alt }) => {
     setLoaded(true);
   }, []);
 
-  console.warn("unused component => ", contentLoaded);
-
   const contentFetched = useCallback(() => {
     setFetched(true);
   }, []);

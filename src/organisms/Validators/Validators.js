@@ -41,8 +41,6 @@ const ValidatorsList = ({ index, validatorListData }) => {
     delegatehandler();
   };
 
-  console.log('validatorListData----', validatorListData);
-
   return (
     <>
       <Grid

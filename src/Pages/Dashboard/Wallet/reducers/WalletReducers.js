@@ -2,13 +2,14 @@ import { WalletActionTypes } from '../constants/index';
 
 const initialState = {
     loading: false,
-    validatorList: null
+    validatorList: null,
+    proposalList: null
 };
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
 
-        // Login Reducer Reducer
+        // Wallet Reducer
         case WalletActionTypes.get_ValidatorList.REQUEST:
             return {
                 ...state,
@@ -21,6 +22,22 @@ export default (state = initialState, { type, payload }) => {
                 validatorList: payload,
             };
         case WalletActionTypes.get_ValidatorList.FAILURE:
+            return {
+                ...state,
+                loading: false,
+            };
+        case WalletActionTypes.get_ProposalList.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case WalletActionTypes.get_ProposalList.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                proposalList: payload,
+            };
+        case WalletActionTypes.get_ProposalList.FAILURE:
             return {
                 ...state,
                 loading: false,

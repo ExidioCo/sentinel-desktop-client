@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import { Box, Grid, Text, Flex, Button, Modal, Error, ModalClose } from "atoms";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -6,6 +8,8 @@ import * as Yup from "yup";
 import { FormInput } from "molecules/FormInput/FormInput";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
+
+import { GetProposalListAction } from '../../pages/Dashboard/Wallet/actions/WalletActions';
 
 const initialValues = {
   password: "",
@@ -206,9 +210,9 @@ const ProposalDetails = () => {
     </Box>
   );
 };
-const ProposalsList = ({ index }) => {
+const ProposalsList = ({ index, proposalObj }) => {
   const { visible, toggle } = useVisibleState(true);
-
+  
   return (
     <Box p="1.5rem 2rem" border="1px solid" borderColor="border.500" mr="1rem">
       <Flex alignItems="center">
@@ -358,12 +362,25 @@ const ProposalsList = ({ index }) => {
 };
 
 export const Proposals = () => {
+  const dispatch = useDispatch();
+  const proposalList = useSelector(state => state.walletReducer.proposalList);
+
+  useEffect(() => {
+    dispatch(GetProposalListAction())
+  }, [])
+
+  console.log('proposalList----', proposalList);
+
   return (
     <Box mt="3rem" maxHeight="63vh" className="scroll-bar">
       <Grid gridGap="1rem">
-        {[1, 2, 3, 4].map((index) => (
-          <ProposalsList key={index} index={index} />
-        ))}
+        {
+           proposalList?.data.result.length > 0 && proposalList.data.result.map((obj, index) => {
+            return (
+              <ProposalsList key={index} index={index} proposalObj={obj}/>
+            )
+          })
+        }
       </Grid>
     </Box>
   );

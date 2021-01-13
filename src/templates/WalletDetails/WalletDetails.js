@@ -161,9 +161,10 @@ export const WalletDetails = () => {
         color="primary.700"
         pt="2rem"
       >
-        {(tokens / 1000000).toFixed(2)}
+        {tokens !== undefined ? (tokens / 1000000).toFixed(2) : 0}
         <Text as="span" variant="title" color="text.500" pl="1rem">
-          (= ${USDvalue.toFixed(2)} USD)
+          {console.log('USDvalue---', USDvalue)}
+          (= ${!isNaN(USDvalue) ? USDvalue.toFixed(2) : 0 } USD)
         </Text>
       </Text>
       <Box mt="5rem" mr="1rem">

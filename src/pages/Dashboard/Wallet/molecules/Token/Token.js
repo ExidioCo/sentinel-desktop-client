@@ -12,7 +12,7 @@ export const Token = () => {
     <Box>
       <Box p="2rem 3rem">
         <Text variant="field" fontWeight="medium" color="primary.700">
-          {accountDetails.length > 0 && accountDetails[0].name.toUpperCase()}
+          {accountDetails !== undefined && accountDetails.length > 0 && accountDetails[0].name.toUpperCase()}
         </Text>
         <Grid
           gridAutoFlow="column"

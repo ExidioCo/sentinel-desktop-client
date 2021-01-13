@@ -117,8 +117,8 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
 
   useEffect(() => {
     dispatch(CheckConfigSettingAction())
-    let configDataObj = configDetails.data.result.chain
-    let fromName = keysDetails.data.result[0].name
+    let configDataObj = configDetails?.data?.result.chain
+    let fromName = keysDetails?.data?.result[0].name
     let chainObj = {
       broadcast_mode: configDataObj.broadcast_mode,
       fees: configDataObj.fees,
@@ -226,7 +226,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
         render={
           <Grid width="15rem">
             {
-              accountDetails.length > 0 && accountDetails.map((obj, index) => {
+              accountDetails !== undefined && accountDetails.length > 0 && accountDetails.map((obj, index) => {
                 return <DropdownItem name={obj.name.toUpperCase()} key={index}/>
               })
             }
@@ -455,7 +455,7 @@ export const Sidebar = ({ connect }) => {
   const { visible, toggle } = useVisibleState(true);
   let accountDetails = useSelector(state => state.loginReducer.checkKeysDetails);
   accountDetails = accountDetails?.data?.result 
-
+  console.log('accountDetails---', accountDetails);
   useEffect(() => {
 
   }, [])
@@ -490,7 +490,7 @@ export const Sidebar = ({ connect }) => {
       </Flex>
       <Box bg="white" p="2rem">
         <Grid gridAutoFlow="column" justifyContent="center" alignItems="center">
-          <MyAccountDropdown name={visible && accountDetails.length > 0 ? accountDetails[0]?.name.toUpperCase() : undefined} accountDetails={accountDetails} />
+          <MyAccountDropdown name={visible && accountDetails !== undefined && accountDetails.length > 0 ? accountDetails[0]?.name.toUpperCase() : undefined} accountDetails={accountDetails} />
         </Grid>
       </Box>
       <Box>

@@ -44,7 +44,7 @@ export const SendTokenForm = () => {
 
   const onSubmit = (values, submitProps) => {
     let amount = [{
-      denom: accountDetails.data.result.coins[0].denom,
+      denom: accountDetails?.data?.result?.coins[0].denom,
       value: JSON.parse(sendDataObj.amount)
     }]
 

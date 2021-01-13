@@ -50,7 +50,7 @@ const ValidatorsList = React.memo(({
 
   const onSubmit = (values, submitProps) => {
     let amount = {
-      "denom": accountDetails.data.result.coins[0].denom,
+      "denom": accountDetails?.data?.result?.coins[0].denom,
       "value": JSON.parse(values.amount)
     }
     let postData = {
@@ -84,8 +84,6 @@ const ValidatorsList = React.memo(({
       dispatch(GetValidatorAvatarAction(validatorListDataObj.description.identity))
     }
   }, [])
-
-  console.log('delegate -----', delegate);
 
   return (
     <>

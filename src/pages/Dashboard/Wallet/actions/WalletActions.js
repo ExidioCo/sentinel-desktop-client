@@ -115,7 +115,7 @@ export const GetValidatorAvatarAction = (identity) => {
 export const PostDelegateAction = (postData) => {
     return (dispatch, getState) => {
         let token = getState().loginReducer.loggedInUserDetails.data.result.value;
-        let address = getState().loginReducer.checkKeysDetails.data.result[0].address;
+        let address = getState().loginReducer.checkKeysDetails?.data?.result[0].address;
         let URL = `${POST_SAVE_DELEGATE_API}/${address}/delegations`
         dispatch(actionCreator(WalletActionTypes.post_SaveDelegate.REQUEST));
         axios({
@@ -175,7 +175,7 @@ export const PostReDelegateAction = (postData) => {
 export const PostUnbondAction = (postData) => {
     return (dispatch, getState) => {
         let token = getState().loginReducer.loggedInUserDetails.data.result.value;
-        let address = getState().loginReducer.checkKeysDetails.data.result[0].address;
+        let address = getState().loginReducer.checkKeysDetails?.data?.result[0].address;
         let URL = `${POST_SAVE_UNBOND_API}/${address}/delegations/undelegate`
         dispatch(actionCreator(WalletActionTypes.post_SaveUnbond.REQUEST));
         axios({
@@ -205,7 +205,7 @@ export const PostUnbondAction = (postData) => {
 export const GetAnAccountDetailsAction = () => {
     return (dispatch, getState) => {
         let token = getState().loginReducer.loggedInUserDetails.data.result.value;
-        let address = getState().loginReducer.checkKeysDetails.data.result[0].address;
+        let address = getState().loginReducer.checkKeysDetails?.data?.result[0].address;
         let URL = `${GET_AN_ACCOUNT_DETAILS_API}/${address}`
         dispatch(actionCreator(WalletActionTypes.get_AnAccountDetails.REQUEST));
         axios({
@@ -290,7 +290,7 @@ export const PostSendTokenAction = (postData) => {
 export const GetAllDelegationsAction = () => {
     return (dispatch, getState) => {
         let token = getState().loginReducer.loggedInUserDetails.data.result.value;
-        let address = getState().loginReducer.checkKeysDetails.data.result[0].address;
+        let address = getState().loginReducer.checkKeysDetails?.data?.result[0].address;
         let URL = `${GET_ALL_DELEGATIONS_API}/${address}/delegations`
         dispatch(actionCreator(WalletActionTypes.get_AllDelegations.REQUEST));
         axios({

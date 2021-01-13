@@ -13,12 +13,12 @@ import MemoHelp from "assets/icons/Help";
 import { FormInput } from "molecules/FormInput";
 import MemoCheck from "assets/icons/Check";
 
-import { 
-  GetValidatorListAction, 
-  GetValidatorAvatarAction, 
-  PostDelegateAction, 
-  PostReDelegateAction, 
-  PostUnbondAction, 
+import {
+  GetValidatorListAction,
+  GetValidatorAvatarAction,
+  PostDelegateAction,
+  PostReDelegateAction,
+  PostUnbondAction,
   GetAnAccountDetailsAction,
   resetSaveDelegate
 } from '../../pages/Dashboard/Wallet/actions/WalletActions';
@@ -34,11 +34,11 @@ const validationSchema = Yup.object({
   // toValidator: Yup.string().required("Required"),
 });
 
-const ValidatorsList = React.memo(({ 
-  index, validatorListData, dropdownValue, 
-  hideDelegate, setDropdownValue, txHash, 
+const ValidatorsList = React.memo(({
+  index, validatorListData, dropdownValue,
+  hideDelegate, setDropdownValue, txHash,
   onCloseDelegate, delegate,
- }) => {
+}) => {
   const dispatch = useDispatch();
   let address = useSelector(state => state.loginReducer.checkKeysDetails.data.result[0].address);
   let avatar = useSelector(state => state.walletReducer.validatorAvatar);
@@ -54,54 +54,56 @@ const ValidatorsList = React.memo(({
       "value": JSON.parse(values.amount)
     }
     let postData = {
-      "address" : address,
+      "address": address,
       "password": values.password,
       "amount": amount,
     }
-    if(dropdownValue === 'DELEGATE') {
+    if (dropdownValue === 'DELEGATE') {
       postData['to'] = validatorListDataObj.address;
       dispatch(PostDelegateAction(postData))
-    } else if(dropdownValue === 'RE-DELEGATE') {
+    } else if (dropdownValue === 'RE-DELEGATE') {
       postData['from'] = validatorListDataObj.address;
       postData['to'] = values.toValidator;
       dispatch(PostReDelegateAction(postData))
-    } else if(dropdownValue === 'UNBOND') {
+    } else if (dropdownValue === 'UNBOND') {
       postData['from'] = validatorListDataObj.address
       dispatch(PostUnbondAction(postData))
     }
   };
 
-  useEffect(() =>{
-    if(hideDelegate === true ) {
+  useEffect(() => {
+    if (hideDelegate === true) {
       setDropdownValue('RE-DELEGATE')
     } else {
       setDropdownValue('DELEGATE')
     }
   }, [])
 
-  useEffect(() => {
-    if(validatorListDataObj.description.identity !== '') {
-      dispatch(GetValidatorAvatarAction(validatorListDataObj.description.identity))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (validatorListDataObj.description.identity !== '') {
+  //     dispatch(GetValidatorAvatarAction(validatorListDataObj.description.identity))
+  //   }
+  // }, [])
 
   return (
     <>
       <Grid
         py="1rem"
-        gridTemplateColumns="1fr 1.5fr 1fr 1fr 1fr 1fr"
+        gridTemplateColumns="2fr 2fr 2fr 1fr 1fr 1fr"
         alignItems="center"
         borderBottom={index < 3 ? "1px solid" : "none"}
         borderColor="border.500"
       >
         <Flex alignItems="center">
-          {
+          {/* {
             validatorListDataObj.description.identity === ''
             ?
             <MemoProfile height="2.5rem" width="2.5rem" />
             :
             <img src={avatar?.data.them[0].pictures.primary.url} alt="" height="30" width="30" style={{ borderRadius: '20px' }}/>
-          }
+          } */}
+          <MemoProfile height="2.5rem" width="2.5rem" />
+
           <Text
             color="primary.700"
             fontSize="1.4rem"
@@ -316,7 +318,7 @@ const ValidatorsList = React.memo(({
                             Tx#:
                           <Text as="span" variant="field" color="grey.900">
                               {txHash}
-                          </Text>
+                            </Text>
                           </Text>
                           <Text
                             variant="label"
@@ -351,7 +353,7 @@ const ValidatorsList = React.memo(({
 export const Validators = React.memo(({ visibleInActive, dropdownValue, hideDelegate, setDropdownValue }) => {
 
   const dispatch = useDispatch();
-  
+
   const validatorList = useSelector(state => state.walletReducer.validatorList);
   let saveDelegate = useSelector(state => state.walletReducer.saveDelegate);
   const [txHash, setTxHash] = useState('');
@@ -372,7 +374,7 @@ export const Validators = React.memo(({ visibleInActive, dropdownValue, hideDele
   useEffect(() => {
     dispatch(GetValidatorListAction());
     dispatch(GetAnAccountDetailsAction());
-    if(saveDelegate !== null && saveDelegate.data.success === true) {
+    if (saveDelegate !== null && saveDelegate.data.success === true) {
       hide();
       delegatehandler();
       setTxHash(saveDelegate.data.result.txhash)
@@ -381,7 +383,7 @@ export const Validators = React.memo(({ visibleInActive, dropdownValue, hideDele
 
   return (
     <Box mr="1rem">
-      <Grid py="1.5rem" gridTemplateColumns="1fr 1.5fr 1fr 1fr 1fr 1fr">
+      <Grid py="1.5rem" gridTemplateColumns="2fr 2fr 2fr 1fr 1fr 1fr">
         <Box py={4}>
           <Text
             color="text.500"
@@ -442,34 +444,34 @@ export const Validators = React.memo(({ visibleInActive, dropdownValue, hideDele
           !visibleInActive && validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
             return (
               <ValidatorsList
-               key={index} 
-               index={index} 
-               validatorListData={obj}
-               dropdownValue={dropdownValue} 
-               hideDelegate={hideDelegate} 
-               setDropdownValue={setDropdownValue} 
-               txHash={txHash}
-               onCloseDelegate={onCloseDelegate}
-               delegate={delegate}
+                key={index}
+                index={index}
+                validatorListData={obj}
+                dropdownValue={dropdownValue}
+                hideDelegate={hideDelegate}
+                setDropdownValue={setDropdownValue}
+                txHash={txHash}
+                onCloseDelegate={onCloseDelegate}
+                delegate={delegate}
               />
             )
           })
         }
         {
-          visibleInActive  && validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
-            if(obj.jailed === true) {
+          visibleInActive && validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
+            if (obj.jailed === true) {
               return (
                 <ValidatorsList
-                 key={index} 
-                 index={index} 
-                 validatorListData={obj} 
-                 dropdownValue={dropdownValue} 
-                 hideDelegate={hideDelegate} 
-                 setDropdownValue={setDropdownValue} 
-                 txHash={txHash}
-                 onCloseDelegate={onCloseDelegate}
-                 delegate={delegate}
-                 />
+                  key={index}
+                  index={index}
+                  validatorListData={obj}
+                  dropdownValue={dropdownValue}
+                  hideDelegate={hideDelegate}
+                  setDropdownValue={setDropdownValue}
+                  txHash={txHash}
+                  onCloseDelegate={onCloseDelegate}
+                  delegate={delegate}
+                />
               )
             }
           })

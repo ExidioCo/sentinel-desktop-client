@@ -232,11 +232,11 @@ export const WalletDetails = () => {
                 <ShowPopup hideDelegate={hideDelegate} dropdownValue={dropdownValue} setDropdownValue={setDropdownValue}/>
               </>
             )}
-            <SearchField
+            {/* <SearchField
               placeholder="Search"
               onChange={onChangeHandler}
               classNames="search-container"
-            />
+            /> */}
           </Grid>
         </Grid>
       </Box>

@@ -92,11 +92,11 @@ export const DvpnDetails = ({
             justifyContent="end"
             alignItems="center"
           >
-            <SearchField
+            {/* <SearchField
               placeholder="Search"
               onChange={onChangeHandler}
               classNames="search-container"
-            />
+            /> */}
             <MemoListView
               fill={
                 visibleListView || visibleIndivisualHost ? "#139EEE" : "#95A7CB"

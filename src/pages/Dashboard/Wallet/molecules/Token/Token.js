@@ -7,7 +7,7 @@ import { Withdraw } from "../Withdraw";
 
 export const Token = () => {
   let accountDetails = useSelector(state => state.loginReducer.checkKeysDetails);
-  accountDetails = accountDetails.data.result 
+  accountDetails = accountDetails?.data?.result 
   return (
     <Box>
       <Box p="2rem 3rem">

@@ -454,7 +454,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
 export const Sidebar = ({ connect }) => {
   const { visible, toggle } = useVisibleState(true);
   let accountDetails = useSelector(state => state.loginReducer.checkKeysDetails);
-  accountDetails = accountDetails.data.result 
+  accountDetails = accountDetails?.data?.result 
 
   useEffect(() => {
 

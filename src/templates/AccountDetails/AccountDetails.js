@@ -10,6 +10,7 @@ import { SocialSecion } from "molecules/SocialSecion";
 import MemoAddress from "assets/icons/Address";
 import MemoSeed from "assets/icons/Seed";
 import MemoAccept from "assets/icons/Accept";
+import {encodeToBech32} from "../../utils/utility";
 
 export const AccountDetails = () => {
 
@@ -23,7 +24,7 @@ export const AccountDetails = () => {
     const element = document.createElement("a");
     const file = new Blob([mnemonics], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = `${data.address}.txt`;
+    element.download = `${encodeToBech32(data.address, 'sent')}.txt`;
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
@@ -53,7 +54,9 @@ export const AccountDetails = () => {
               >
                 ADDRESS
               </Text>
-              <CopyToClipboard text={JSON.stringify(data.address)} onCopy={() => toast.success('Address Copied')}>
+              <CopyToClipboard
+                  text={encodeToBech32(data.address, 'sent')}
+                  onCopy={() => toast.success('Address Copied')}>
                 <Flex
                   bg="grey.400"
                   borderRadius="4rem"
@@ -69,7 +72,7 @@ export const AccountDetails = () => {
             </Flex>
 
             <Text as="p" variant="small" color="grey.900" m={0} pb="1rem">
-              {data.address}
+              {encodeToBech32(data.address, 'sent')}
             </Text>
           </Box>
           <Box mb="2rem">
@@ -84,7 +87,9 @@ export const AccountDetails = () => {
               >
                 Public key
               </Text>
-              <CopyToClipboard text={JSON.stringify(data.pub_key)} onCopy={() => toast.success('Public Key Copied')}>
+              <CopyToClipboard
+                  text={encodeToBech32(data['pub_key'], 'sentpub')}
+                  onCopy={() => toast.success('Public Key Copied')}>
                 <Flex
                   bg="grey.400"
                   borderRadius="4rem"
@@ -99,7 +104,7 @@ export const AccountDetails = () => {
               </CopyToClipboard>
             </Flex>
             <Text as="p" variant="small" color="grey.900" m={0} pb="1rem">
-              {data.pub_key}
+              {encodeToBech32(data['pub_key'], 'sentpub')}
             </Text>
           </Box>
 
@@ -123,7 +128,7 @@ export const AccountDetails = () => {
                 width="2.5rem"
                 alignItems="center"
                 justifyContent="center"
-                onClick={() => TextFile()}
+                onClick={ TextFile}
               >
                 <MemoSeed height="1rem" />
               </Flex>

@@ -81,7 +81,7 @@ export const SendTokenForm = () => {
                   color="grey.700"
                   textTransform="uppercase"
                 >
-                  Deposit Address
+                  To Address
                 </Text>
                 <FormInput type="text" name="address" label="Address" />
                 <ErrorMessage name="address" component={Error} />
@@ -151,7 +151,7 @@ export const SendTokenForm = () => {
                       color="grey.900"
                       pb="1rem"
                     >
-                      {decodeFromBech32(sendDataObj.address)}
+                      {sendDataObj.address}
                     </Text>
                   </Grid>
                   <Grid gridTemplateColumns="15rem 1fr">
@@ -189,7 +189,7 @@ export const SendTokenForm = () => {
                           </Text>
                           <MemoHelp height="1.5rem" width="1.5rem" />
                         </Flex>
-                        <FormInput name="memo" label="Enter Fee" />
+                        <FormInput name="memo" label="Enter Memo" />
                         <ErrorMessage name="memo" component={Error} />
                       </Box>
                       <Box>

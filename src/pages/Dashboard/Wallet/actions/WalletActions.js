@@ -1,34 +1,33 @@
-
 /**
  @desc
  * Centralized unique actions for Wallet Module.
  */
 
 import React from 'react';
-import { toast } from 'react-smart-toaster';
+import {toast} from 'react-smart-toaster';
 
 import {
     actionCreator,
-    jsonApiHeader,
-    WalletActionTypes,
-    GET_VALIDATOR_LIST_API,
+    GET_ALL_DELEGATIONS_API,
+    GET_AN_ACCOUNT_DETAILS_API,
+    GET_COINGECKO_DETAILS_API,
     GET_PROPOSAL_LIST_API,
     GET_VALIDATOR_AVATAR_API,
+    GET_VALIDATOR_LIST_API,
+    jsonApiHeader,
     POST_SAVE_DELEGATE_API,
     POST_SAVE_RE_DELEGATE_API,
     POST_SAVE_UNBOND_API,
-    GET_AN_ACCOUNT_DETAILS_API,
-    GET_COINGECKO_DETAILS_API,
     POST_SEND_TOKENS_API,
-    GET_ALL_DELEGATIONS_API,
     POST_VOTE_API,
-    POST_WITHDRAW_REWARDS_API
+    POST_WITHDRAW_REWARDS_API,
+    WalletActionTypes
 } from '../constants/index';
 import axios from 'axios';
 
 
 /**
- * @desc Action to get all the validator List 
+ * @desc Action to get all the validator List
  */
 
 export const GetValidatorListAction = () => {
@@ -41,7 +40,7 @@ export const GetValidatorListAction = () => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.get_ValidatorList.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.get_ValidatorList.FAILURE));
@@ -55,7 +54,7 @@ export const GetValidatorListAction = () => {
 };
 
 /**
- * @desc Action to get all the proposal List 
+ * @desc Action to get all the proposal List
  */
 
 export const GetProposalListAction = () => {
@@ -68,7 +67,7 @@ export const GetProposalListAction = () => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.get_ProposalList.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.get_ProposalList.FAILURE));
@@ -82,7 +81,7 @@ export const GetProposalListAction = () => {
 };
 
 /**
- * @desc Action to get all the proposal List 
+ * @desc Action to get all the proposal List
  */
 
 export const GetValidatorAvatarAction = (identity) => {
@@ -95,7 +94,7 @@ export const GetValidatorAvatarAction = (identity) => {
             headers: {"Content-Type": "application/json"},
         })
             .then(function (response) {
-                if(response.data.status.code === 0) {
+                if (response.data.status.code === 0) {
                     dispatch(actionCreator(WalletActionTypes.get_ValidatorAvatar.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.get_ValidatorAvatar.FAILURE));
@@ -109,7 +108,7 @@ export const GetValidatorAvatarAction = (identity) => {
 };
 
 /**
- * @desc Action to save delegate 
+ * @desc Action to save delegate
  */
 
 export const PostDelegateAction = (postData) => {
@@ -125,7 +124,7 @@ export const PostDelegateAction = (postData) => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.post_SaveDelegate.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.post_SaveDelegate.FAILURE));
@@ -139,7 +138,7 @@ export const PostDelegateAction = (postData) => {
 };
 
 /**
- * @desc Action to save Re-delegate 
+ * @desc Action to save Re-delegate
  */
 
 export const PostReDelegateAction = (postData) => {
@@ -155,7 +154,7 @@ export const PostReDelegateAction = (postData) => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.post_SaveReDelegate.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.post_SaveReDelegate.FAILURE));
@@ -169,7 +168,7 @@ export const PostReDelegateAction = (postData) => {
 };
 
 /**
- * @desc Action to save Un-bond 
+ * @desc Action to save Un-bond
  */
 
 export const PostUnbondAction = (postData) => {
@@ -185,7 +184,7 @@ export const PostUnbondAction = (postData) => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.post_SaveUnbond.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.post_SaveUnbond.FAILURE));
@@ -206,6 +205,10 @@ export const GetAnAccountDetailsAction = () => {
     return (dispatch, getState) => {
         let token = getState().loginReducer.loggedInUserDetails.data.result.value;
         let address = getState().loginReducer.checkKeysDetails?.data?.result[0].address;
+        if (address === undefined) {
+            address = getState().loginReducer.createAccount.data.result.address
+        }
+
         let URL = `${GET_AN_ACCOUNT_DETAILS_API}/${address}`
         dispatch(actionCreator(WalletActionTypes.get_AnAccountDetails.REQUEST));
         axios({
@@ -214,7 +217,7 @@ export const GetAnAccountDetailsAction = () => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.get_AnAccountDetails.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.get_AnAccountDetails.FAILURE));
@@ -254,7 +257,7 @@ export const GetCurrencyConversionDetailsAction = () => {
 };
 
 /**
- * @desc Action to send tokens 
+ * @desc Action to send tokens
  */
 
 export const PostSendTokenAction = (postData) => {
@@ -269,7 +272,7 @@ export const PostSendTokenAction = (postData) => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.post_SendTokens.SUCCESS, response));
                     toast.success('Token Sent Successfully');
                 } else {
@@ -291,6 +294,9 @@ export const GetAllDelegationsAction = () => {
     return (dispatch, getState) => {
         let token = getState().loginReducer.loggedInUserDetails.data.result.value;
         let address = getState().loginReducer.checkKeysDetails?.data?.result[0].address;
+        if (address === undefined) {
+            address = getState().loginReducer.createAccount.data.result.address
+        }
         let URL = `${GET_ALL_DELEGATIONS_API}/${address}/delegations`
         dispatch(actionCreator(WalletActionTypes.get_AllDelegations.REQUEST));
         axios({
@@ -299,7 +305,7 @@ export const GetAllDelegationsAction = () => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.get_AllDelegations.SUCCESS, response));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.get_AllDelegations.FAILURE));
@@ -320,7 +326,7 @@ export const resetSaveDelegate = () => {
 }
 
 /**
- * @desc Action to save Un-bond 
+ * @desc Action to save Un-bond
  */
 
 export const PostVoteAction = (postData, proposalId) => {
@@ -335,7 +341,7 @@ export const PostVoteAction = (postData, proposalId) => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.post_Vote.SUCCESS, response));
                     toast.success('Vote saved successfully');
                 } else {
@@ -352,7 +358,7 @@ export const PostVoteAction = (postData, proposalId) => {
 };
 
 /**
- * @desc Action to save Un-bond 
+ * @desc Action to save Un-bond
  */
 
 export const PostWithdrawRewardsAction = (postData, address) => {
@@ -367,7 +373,7 @@ export const PostWithdrawRewardsAction = (postData, address) => {
             headers: jsonApiHeader(token),
         })
             .then(function (response) {
-                if(response.data.success === true ) {
+                if (response.data.success === true) {
                     dispatch(actionCreator(WalletActionTypes.post_WithdrawRewards.SUCCESS, response));
                     toast.success('Withdraw was successfull');
                 } else {

@@ -10,9 +10,10 @@ import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
 
 import { GetAllDelegationsAction, PostWithdrawRewardsAction } from '../../actions/WalletActions';
+import {encodeToBech32} from "../../../../../utils/utility";
 
 const initialValues = {
-  validator: "", 
+  validator: "",
 };
 
 const initialValuesModal = {
@@ -72,8 +73,9 @@ const WithdrawForm = () => {
       }
     })
   })
-  
+
   const onSubmit = (values, submitProps) => {
+    console.log(values);
     let postData = {
       memo: values.memo,
       password: values.password,
@@ -91,7 +93,7 @@ const WithdrawForm = () => {
         {label}
       </Text>
       <Text variant="small" fontWeight="medium" color="primary.700">
-        {customAbbreviation}
+        {encodeToBech32(customAbbreviation,'sentvaloper')}
       </Text>
     </Grid>
   );
@@ -190,7 +192,7 @@ const WithdrawForm = () => {
                       color="grey.900"
                       pb="1rem"
                     >
-                      {withDrawelValueAddress}
+                      {encodeToBech32(withDrawelValueAddress,'sentvaloper')}
                     </Text>
                   </Grid>
                   {/* <Grid gridTemplateColumns="15rem 1fr">
@@ -228,7 +230,7 @@ const WithdrawForm = () => {
                           </Text>
                           <MemoHelp height="1.5rem" width="1.5rem" />
                         </Flex>
-                        <FormInput name="memo" label="Enter Fee" />
+                        <FormInput name="memo" label="Enter Memo" />
                         <ErrorMessage name="memo" component={Error} />
                       </Box>
                       <Box>

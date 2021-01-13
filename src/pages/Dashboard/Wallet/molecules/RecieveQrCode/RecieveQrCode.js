@@ -13,7 +13,7 @@ export const RecieveQrCode = () => {
       <Text variant="label" fontWeight="medium" color="grey.700" mt="2rem">
         Show QR code to Receive Tokens
       </Text>
-      <QRCode value={address} />
+      <QRCode value={encodeToBech32(address, 'sent')} />
       <Box mt="2rem">
         <Flex justifyContent="center" alignItems="center" pb="1rem">
           <Text

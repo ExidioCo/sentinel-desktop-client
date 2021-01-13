@@ -29,9 +29,9 @@ export const SignupForm = () => {
   const onSubmit = (values, submitProps) => {
     let payload = {
       name: values.username,
-      mnemonicoptional: values.seed || '',
+      mnemonic: values.seed || '',
       password: values.password,
-      bip_39_passwordoptional: ''
+      bip_39_password: ''
     };
     dispatch(CreateAccountAction(payload));
   };
@@ -72,7 +72,7 @@ export const SignupForm = () => {
                       >
                         ACCOUNT NAME
                       </Text>
-                      <FormInput name="username" label="Account Username" />
+                      <FormInput name="username" label="Account Name" />
                       <ErrorMessage name="username" component={Error} />
                     </Box>
                     <Box>

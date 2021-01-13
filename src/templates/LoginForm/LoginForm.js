@@ -66,7 +66,7 @@ export const LoginForm = () => {
                         color="grey.700"
                         textTransform="uppercase"
                       >
-                        ACCOUNT PASSWORD
+                        APPLICATION PASSWORD
                       </Text>
                       <FormInput
                         type="password"

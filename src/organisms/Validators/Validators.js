@@ -22,6 +22,7 @@ import {
   GetAnAccountDetailsAction,
   resetSaveDelegate
 } from '../../pages/Dashboard/Wallet/actions/WalletActions';
+import {encodeToBech32} from "../../utils/utility";
 
 const initialValues = {
   amount: "",
@@ -116,7 +117,7 @@ const ValidatorsList = React.memo(({
 
         <Text color="primary.700" fontSize="1.4rem" key={index}>
           {/* 1,190,255 (6.62%) */}
-          {(validatorListDataObj.amount.value / 10000000).toFixed(2)}
+          {(validatorListDataObj.amount.value / 1000000).toFixed(2)}
         </Text>
         {/* <Text color="primary.700" fontSize="1.4rem">
           1,190,255 (6.62%)
@@ -189,7 +190,7 @@ const ValidatorsList = React.memo(({
                           color="grey.900"
                           pb="1rem"
                         >
-                          {validatorListDataObj.address}
+                          {encodeToBech32(validatorListDataObj.address, 'sentvaloper')}
                         </Text>
                       </Grid>
                       <Grid gridTemplateColumns="15rem 1fr">
@@ -320,15 +321,15 @@ const ValidatorsList = React.memo(({
                               {txHash}
                             </Text>
                           </Text>
-                          <Text
-                            variant="label"
-                            fontWeight="semiBold"
-                            color="grey.700"
-                            textAlign="center"
-                            my="2rem"
-                          >
-                            Go to Explorer
-                        </Text>
+                        {/*  <Text*/}
+                        {/*    variant="label"*/}
+                        {/*    fontWeight="semiBold"*/}
+                        {/*    color="grey.700"*/}
+                        {/*    textAlign="center"*/}
+                        {/*    my="2rem"*/}
+                        {/*  >*/}
+                        {/*    Go to Explorer*/}
+                        {/*</Text>*/}
                           <Button
                             variant="secondary"
                             px="3rem"
@@ -439,7 +440,7 @@ export const Validators = React.memo(({ visibleInActive, dropdownValue, hideDele
         <Box py={4} />
       </Grid>
 
-      <Grid gridGap="1rem" maxHeight="58vh" className="scroll-bar">
+      <Grid gridGap="1rem" maxHeight="66vh" className="scroll-bar">
         {
           !visibleInActive && validatorList?.data.result.length > 0 && validatorList.data.result.map((obj, index) => {
             return (

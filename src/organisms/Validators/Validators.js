@@ -89,7 +89,7 @@ const ValidatorsList = React.memo(({
     <>
       <Grid
         py="1rem"
-        gridTemplateColumns="2fr 2fr 2fr 1fr 1fr 1fr"
+        gridTemplateColumns="2fr 2fr 2fr 2fr"
         alignItems="center"
         borderBottom={index < 3 ? "1px solid" : "none"}
         borderColor="border.500"
@@ -383,7 +383,7 @@ export const Validators = React.memo(({ visibleInActive, dropdownValue, hideDele
 
   return (
     <Box mr="1rem">
-      <Grid py="1.5rem" gridTemplateColumns="2fr 2fr 2fr 1fr 1fr 1fr">
+      <Grid py="1.5rem" gridTemplateColumns="2fr 2fr 2fr 2fr">
         <Box py={4}>
           <Text
             color="text.500"

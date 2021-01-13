@@ -490,7 +490,7 @@ export const Sidebar = ({ connect }) => {
       </Flex>
       <Box bg="white" p="2rem">
         <Grid gridAutoFlow="column" justifyContent="center" alignItems="center">
-          <MyAccountDropdown name={visible ? accountDetails[0].name.toUpperCase() : undefined} accountDetails={accountDetails} />
+          <MyAccountDropdown name={visible && accountDetails.length > 0 ? accountDetails[0]?.name.toUpperCase() : undefined} accountDetails={accountDetails} />
         </Grid>
       </Box>
       <Box>

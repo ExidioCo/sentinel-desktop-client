@@ -201,7 +201,6 @@ export const CheckConfigSettingAction = () => {
             .then(function (response) {
                 if(response.data.success === true ) {
                     dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.SUCCESS, response));
-                    toast.success('Config Updated Successfully');
                 } else {
                     dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.FAILURE));
                 }

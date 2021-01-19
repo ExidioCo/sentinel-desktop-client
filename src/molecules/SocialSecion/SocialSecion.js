@@ -17,9 +17,9 @@ export const SocialSecion = () => {
 
   return (
     <Grid gridAutoFlow="column" gridGap="2rem">
-      <MemoTwitter fill="#55678B" onClick={() => SocialClicks('twitter')}/>
-      <MemoShare fill="#55678B" onClick={() => SocialClicks('telegram')}/>
-      <MemoGit fill="#55678B"  onClick={() => SocialClicks('git')}/>
+      <MemoTwitter fill="#55678B" onClick={() => SocialClicks('twitter')} cursor='pointer'/>
+      <MemoShare fill="#55678B" onClick={() => SocialClicks('telegram')} cursor='pointer'/>
+      <MemoGit fill="#55678B"  onClick={() => SocialClicks('git')} cursor='pointer'/>
     </Grid>
   );
 };

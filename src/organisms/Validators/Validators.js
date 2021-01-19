@@ -248,7 +248,7 @@ const ValidatorsList = React.memo(({
                               </Text>
                                 <MemoHelp height="1.5rem" width="1.5rem" />
                               </Flex>
-                              <FormInput name="toValidator" label="To Validator" />
+                              <FormInput name="toValidator" label="To Validator" autofocus/>
                               <ErrorMessage name="toValidator" component={Error} />
                             </Box>
                           }
@@ -265,7 +265,7 @@ const ValidatorsList = React.memo(({
                               </Text>
                               <MemoHelp height="1.5rem" width="1.5rem" />
                             </Flex>
-                            <FormInput name="amount" label="Token Amount" />
+                            <FormInput name="amount" label="Token Amount" autofocus/>
                             <ErrorMessage name="amount" component={Error} />
                           </Box>
                           <Box>

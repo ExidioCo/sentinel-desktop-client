@@ -230,7 +230,7 @@ const WithdrawForm = () => {
                           </Text>
                           <MemoHelp height="1.5rem" width="1.5rem" />
                         </Flex>
-                        <FormInput name="memo" label="Enter Memo" />
+                        <FormInput name="memo" label="Enter Memo" autofocus/>
                         <ErrorMessage name="memo" component={Error} />
                       </Box>
                       <Box>

@@ -83,7 +83,7 @@ export const SendTokenForm = () => {
                 >
                   To Address
                 </Text>
-                <FormInput type="text" name="address" label="Address" />
+                <FormInput type="text" name="address" label="Address" autofocus/>
                 <ErrorMessage name="address" component={Error} />
               </Box>
               <Box mx="3rem">
@@ -189,7 +189,7 @@ export const SendTokenForm = () => {
                           </Text>
                           <MemoHelp height="1.5rem" width="1.5rem" />
                         </Flex>
-                        <FormInput name="memo" label="Enter Memo" />
+                        <FormInput name="memo" label="Enter Memo" autofocus/>
                         <ErrorMessage name="memo" component={Error} />
                       </Box>
                       <Box>

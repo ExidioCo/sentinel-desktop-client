@@ -101,7 +101,7 @@ export const LoginForm = ({ autofocus }) => {
                         px="3rem"
                         justifySelf="center"
                         type="submit"
-                        // disabled={loading}
+                        disabled={loading}
                         loading={loading}
                       >
                         Login

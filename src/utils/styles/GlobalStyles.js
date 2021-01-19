@@ -113,6 +113,10 @@ overflow-y: scroll
   height: 55.8vh;
   width: 100%
 }
+textarea {
+  resize: none;
+}
+
 
 `;
 export default GlobalStyle;

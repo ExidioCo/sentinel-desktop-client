@@ -114,10 +114,28 @@ const variants = {
     borderColor: "border.500",
     outline: "none",
     fontFamily: "Roboto",
-    "&:hover, :active, :focus": {
-      borderBottom: "2px solid",
-      borderBottomColor: "primary.500",
-    },
+    // "&:hover, :active, :focus": {
+    //   borderBottom: "2px solid",
+    //   borderBottomColor: "primary.500",
+    // },
+  },
+  activeBorder: {
+    px: 7,
+    py: "1rem",
+    width: "100%",
+    color: "#142D51 !important",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    border: "1px solid",
+    borderBottom: "2px solid",
+    borderColor: "border.500",
+    borderBottomColor: "primary.500",
+    outline: "none",
+    fontFamily: "Roboto",
+    // "&:hover, :active, :focus": {
+    //   borderBottom: "2px solid",
+    //   borderBottomColor: "primary.500",
+    // },
   },
   active: {
     px: 1,

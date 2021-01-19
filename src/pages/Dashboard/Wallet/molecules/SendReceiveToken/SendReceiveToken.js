@@ -20,14 +20,14 @@ export const SendReceiveToken = () => {
     <Box mt="1rem">
       <Grid justifyContent="stretch" gridTemplateColumns="1fr 1fr">
         <Button
-          variant="withoutBorder"
+          variant={visibleSendToken ? "activeBorder" : "withoutBorder"}
           textTransform="capitalize"
           onClick={SendTokenHandler}
         >
           Send
         </Button>
         <Button
-          variant="withoutBorder"
+          variant={visibleReceiveToken ? "activeBorder" : "withoutBorder"}
           textTransform="capitalize"
           onClick={ReceiveTokenHandler}
         >

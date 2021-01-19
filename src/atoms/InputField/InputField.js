@@ -22,7 +22,7 @@ export const InputField = ({
   warning,
   labelHide,
   showLength,
-
+  autofocus,
   maxValue,
   ...props
 }) => {
@@ -36,7 +36,7 @@ export const InputField = ({
         // className={error ? "input-error" : ""}
         fontSize={{ xs: 7 }}
       > */}
-      <Input placeholder={label} ref={ref} {...props} />
+      <Input placeholder={label} autofocus={autofocus} ref={ref} {...props} />
       {/* </Text> */}
       {/* {showLength && (
         <Text

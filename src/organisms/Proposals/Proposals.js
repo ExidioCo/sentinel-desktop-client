@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box, Grid, Text, Flex, Button, Modal, Error, ModalClose } from "atoms";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import moment from 'moment';
+import moment from "moment";
 
 import { FormInput } from "molecules/FormInput/FormInput";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
 
-import { GetProposalListAction, PostVoteAction } from '../../pages/Dashboard/Wallet/actions/WalletActions';
+import {
+  GetProposalListAction,
+  PostVoteAction,
+} from "../../pages/Dashboard/Wallet/actions/WalletActions";
 
 const initialValues = {
   password: "",
@@ -47,20 +50,19 @@ const DetailsCommonComponent = ({ text, textValue }) => {
 const ProposalDetails = ({ proposalObj }) => {
   const dispatch = useDispatch();
   const { visible, hide, toggle } = useVisibleState(false);
-  const [ voteType, setType ] = useState(null);
+  const [voteType, setType] = useState(null);
 
   const VoteClickHandler = (type) => {
     setType(type);
     toggle();
-  }
-
+  };
 
   const onSubmit = (values, submitProps) => {
     let postData = {
       password: values.password,
-      option: voteType
-    }
-    dispatch(PostVoteAction(postData, proposalObj.index))
+      option: voteType,
+    };
+    dispatch(PostVoteAction(postData, proposalObj.index));
     submitProps.resetForm();
     hide();
   };
@@ -71,15 +73,22 @@ const ProposalDetails = ({ proposalObj }) => {
         text="Initial Deposit"
         textValue="512.000000ATOM"
       /> */}
-      <DetailsCommonComponent text="Total Deposit" textValue={proposalObj.deposit[0].value} />
+      <DetailsCommonComponent
+        text="Total Deposit"
+        textValue={proposalObj.deposit[0].value}
+      />
       <DetailsCommonComponent text="Type" textValue={proposalObj.type} />
       <DetailsCommonComponent
         text="Deposit End Time"
-        textValue={moment(proposalObj.deposit_end_time).format('MM-DD-YYYY hh:mm:ss')}
+        textValue={moment(proposalObj.deposit_end_time).format(
+          "MM-DD-YYYY hh:mm:ss"
+        )}
       />
       <DetailsCommonComponent
         text="Submit Time"
-        textValue={moment(proposalObj.submit_time).format('MM-DD-YYYY hh:mm:ss')}
+        textValue={moment(proposalObj.submit_time).format(
+          "MM-DD-YYYY hh:mm:ss"
+        )}
       />
       <Box>
         <Text
@@ -99,7 +108,7 @@ const ProposalDetails = ({ proposalObj }) => {
           lineHeight="1.8rem"
           mt="1rem"
         >
-         {proposalObj.description}
+          {proposalObj.description}
         </Text>
       </Box>
       <Grid
@@ -115,7 +124,7 @@ const ProposalDetails = ({ proposalObj }) => {
           justifySelf="center"
           type="submit"
           textTransform="capitalize"
-          onClick={() => VoteClickHandler('yes')}
+          onClick={() => VoteClickHandler("yes")}
         >
           Yes
         </Button>
@@ -126,7 +135,7 @@ const ProposalDetails = ({ proposalObj }) => {
           justifySelf="center"
           type="submit"
           textTransform="capitalize"
-          onClick={() => VoteClickHandler('no')}
+          onClick={() => VoteClickHandler("no")}
         >
           No
         </Button>
@@ -137,7 +146,7 @@ const ProposalDetails = ({ proposalObj }) => {
           justifySelf="center"
           type="submit"
           textTransform="capitalize"
-          onClick={() => VoteClickHandler('abstain')}
+          onClick={() => VoteClickHandler("abstain")}
         >
           Abstain
         </Button>
@@ -148,7 +157,7 @@ const ProposalDetails = ({ proposalObj }) => {
           justifySelf="center"
           type="submit"
           textTransform="capitalize"
-          onClick={() => VoteClickHandler('no_with_veto')}
+          onClick={() => VoteClickHandler("no_with_veto")}
         >
           NoWithVeto
         </Button>
@@ -222,12 +231,12 @@ const ProposalsList = ({ index, proposalObj }) => {
 
   const findMaxValue = (obj, n) => {
     let keys = Object.keys(obj);
-    keys.sort(function(a,b){
+    keys.sort(function (a, b) {
       return obj[b] - obj[a];
-    })
-    keys.slice(0,n);
-    return keys[0]
-  }
+    });
+    keys.slice(0, n);
+    return keys[0];
+  };
 
   return (
     <Box p="1.5rem 2rem" border="1px solid" borderColor="border.500" mr="1rem">
@@ -308,7 +317,9 @@ const ProposalsList = ({ index, proposalObj }) => {
               textDecoration="none"
               lineHeight="100%"
             >
-              {moment(proposalObj.voting_start_time).format('MM-DD-YYYY hh:mm:ss')}
+              {moment(proposalObj.voting_start_time).format(
+                "MM-DD-YYYY hh:mm:ss"
+              )}
             </Text>
           </Grid>
         </Flex>
@@ -330,7 +341,9 @@ const ProposalsList = ({ index, proposalObj }) => {
               textDecoration="none"
               lineHeight="100%"
             >
-              {moment(proposalObj.voting_end_time).format('MM-DD-YYYY hh:mm:ss')}
+              {moment(proposalObj.voting_end_time).format(
+                "MM-DD-YYYY hh:mm:ss"
+              )}
             </Text>
           </Grid>
         </Flex>
@@ -371,29 +384,28 @@ const ProposalsList = ({ index, proposalObj }) => {
         </Button>
       </Grid>
 
-      {!visible && <ProposalDetails proposalObj={proposalObj}/>}
+      {!visible && <ProposalDetails proposalObj={proposalObj} />}
     </Box>
   );
 };
 
 export const Proposals = () => {
   const dispatch = useDispatch();
-  const proposalList = useSelector(state => state.walletReducer.proposalList);
+  const proposalList = useSelector((state) => state.walletReducer.proposalList);
 
   useEffect(() => {
-    dispatch(GetProposalListAction())
-  }, [])
+    dispatch(GetProposalListAction());
+  }, []);
 
   return (
-    <Box mt="3rem" maxHeight="63vh" className="scroll-bar">
+    <Box mt="3rem" maxHeight="61vh" className="scroll-bar">
       <Grid gridGap="1rem">
-        {
-           proposalList?.data.result.length > 0 && proposalList.data.result.map((obj, index) => {
+        {proposalList?.data.result.length > 0 &&
+          proposalList.data.result.map((obj, index) => {
             return (
-              <ProposalsList key={index} index={index} proposalObj={obj}/>
-            )
-          })
-        }
+              <ProposalsList key={index} index={index} proposalObj={obj} />
+            );
+          })}
       </Grid>
     </Box>
   );

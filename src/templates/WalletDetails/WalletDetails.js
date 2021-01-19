@@ -9,26 +9,28 @@ import { Validators } from "organisms/Validators";
 import MemoArrowBottom from "assets/icons/ArrowBottom";
 import { DropdownFilter } from "molecules/DropdownFilter";
 
-import { GetCurrencyConversionDetailsAction } from '../../pages/Dashboard/Wallet/actions/WalletActions';
+import { GetCurrencyConversionDetailsAction } from "../../pages/Dashboard/Wallet/actions/WalletActions";
 
-export const ShowPopup = ({ hideDelegate, dropdownValue, setDropdownValue }) => {
-
+export const ShowPopup = ({
+  hideDelegate,
+  dropdownValue,
+  setDropdownValue,
+}) => {
   const [dropdown, setDropdown] = useState(false);
-  
-  useEffect(() =>{
-    if(hideDelegate === true ) {
-      setDropdownValue('RE-DELEGATE')
+
+  useEffect(() => {
+    if (hideDelegate === true) {
+      setDropdownValue("RE-DELEGATE");
     } else {
-      setDropdownValue('DELEGATE')
+      setDropdownValue("DELEGATE");
     }
-  }, [])
+  }, []);
 
   return (
     <DropdownFilter
       render={
         <Grid width="15rem" py="2rem">
-
-          {!hideDelegate &&
+          {!hideDelegate && (
             <Flex px="2rem" cursor="pointer" alignItems="center">
               <Text
                 width="100%"
@@ -37,12 +39,12 @@ export const ShowPopup = ({ hideDelegate, dropdownValue, setDropdownValue }) => 
                 pb="1rem"
                 mb={0}
                 color="gray.900"
-                onClick={() => setDropdownValue('DELEGATE')}
+                onClick={() => setDropdownValue("DELEGATE")}
               >
                 DELEGATE
               </Text>
             </Flex>
-          }
+          )}
 
           <Flex px="2rem" cursor="pointer" alignItems="center">
             <Text
@@ -53,7 +55,7 @@ export const ShowPopup = ({ hideDelegate, dropdownValue, setDropdownValue }) => 
               mb={0}
               pt="1rem"
               color="gray.900"
-              onClick={() => setDropdownValue('RE-DELEGATE')}
+              onClick={() => setDropdownValue("RE-DELEGATE")}
             >
               RE-DELEGATE
             </Text>
@@ -66,7 +68,7 @@ export const ShowPopup = ({ hideDelegate, dropdownValue, setDropdownValue }) => 
               fontSize="1.4rem"
               color="gray.900"
               pt="1rem"
-              onClick={() => setDropdownValue('UNBOND')}
+              onClick={() => setDropdownValue("UNBOND")}
             >
               UNBOND
             </Text>
@@ -109,15 +111,19 @@ export const WalletDetails = () => {
   const [dropdownValue, setDropdownValue] = useState(null);
 
   const dispatch = useDispatch();
-  const accountDetails = useSelector(state => state.walletReducer.accountDetails);
-  const coingekoDetails = useSelector(state => state.walletReducer.coingekoDetails);
-  let USDprice = coingekoDetails?.data.market_data.current_price.usd
-  let tokens = accountDetails?.data.result.coins[0].value
+  const accountDetails = useSelector(
+    (state) => state.walletReducer.accountDetails
+  );
+  const coingekoDetails = useSelector(
+    (state) => state.walletReducer.coingekoDetails
+  );
+  let USDprice = coingekoDetails?.data.market_data.current_price.usd;
+  let tokens = accountDetails?.data.result.coins[0].value;
   let USDvalue = (tokens / 1000000) * USDprice;
 
   useEffect(() => {
     dispatch(GetCurrencyConversionDetailsAction());
-  }, [])
+  }, []);
 
   const ValidatorListHandler = () => {
     setVisibleValidatorList(true);
@@ -136,13 +142,13 @@ export const WalletDetails = () => {
   const activeValidatorsHandler = () => {
     setVisibleActive(true);
     setVisibleInActive(false);
-    setHideDelegate(false)
+    setHideDelegate(false);
   };
 
   const inActiveValidatorsHandler = () => {
     setVisibleInActive(true);
     setVisibleActive(false);
-    setHideDelegate(true)
+    setHideDelegate(true);
   };
 
   return (
@@ -163,11 +169,11 @@ export const WalletDetails = () => {
       >
         {tokens !== undefined ? (tokens / 1000000).toFixed(2) : 0}
         <Text as="span" variant="title" color="text.500" pl="1rem">
-          {console.log('USDvalue---', USDvalue)}
-          (= ${!isNaN(USDvalue) ? USDvalue.toFixed(2) : 0 } USD)
+          {console.log("USDvalue---", USDvalue)}
+          (= ${!isNaN(USDvalue) ? USDvalue.toFixed(2) : 0} USD)
         </Text>
       </Text>
-      <Box mt="5rem" mr="1rem">
+      <Box mt="3rem" mr="1rem">
         <Grid
           gridAutoFlow="column"
           justifyContent="space-between"
@@ -229,7 +235,11 @@ export const WalletDetails = () => {
                     InActive
                   </Button>
                 </Flex>
-                <ShowPopup hideDelegate={hideDelegate} dropdownValue={dropdownValue} setDropdownValue={setDropdownValue}/>
+                <ShowPopup
+                  hideDelegate={hideDelegate}
+                  dropdownValue={dropdownValue}
+                  setDropdownValue={setDropdownValue}
+                />
               </>
             )}
             {/* <SearchField
@@ -240,7 +250,16 @@ export const WalletDetails = () => {
           </Grid>
         </Grid>
       </Box>
-      {visibleValidatorList ? <Validators visibleInActive={visibleInActive} dropdownValue={dropdownValue} hideDelegate={hideDelegate} setDropdownValue={setDropdownValue}/> : <Proposals />}
+      {visibleValidatorList ? (
+        <Validators
+          visibleInActive={visibleInActive}
+          dropdownValue={dropdownValue}
+          hideDelegate={hideDelegate}
+          setDropdownValue={setDropdownValue}
+        />
+      ) : (
+        <Proposals />
+      )}
     </Box>
   );
 };

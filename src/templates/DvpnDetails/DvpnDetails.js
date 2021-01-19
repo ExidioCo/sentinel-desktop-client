@@ -163,21 +163,29 @@ export const DvpnDetails = ({
                     : "#95A7CB"
                 }
                 onClick={mapViewHandler}
+                cursor="pointer"
               />
             )}
-            <MemoListView
-              fill={
-                visibleMapView || visibleIndivisualHost || visibleSessionHistory
-                  ? "#139EEE"
-                  : "#95A7CB"
-              }
-              color={
-                visibleMapView || visibleIndivisualHost || visibleSessionHistory
-                  ? "#139EEE"
-                  : "#95A7CB"
-              }
-              onClick={listViewHandler}
-            />
+            {!visibleSessionHistory && (
+              <MemoListView
+                fill={
+                  visibleMapView ||
+                  visibleIndivisualHost ||
+                  visibleSessionHistory
+                    ? "#139EEE"
+                    : "#95A7CB"
+                }
+                color={
+                  visibleMapView ||
+                  visibleIndivisualHost ||
+                  visibleSessionHistory
+                    ? "#139EEE"
+                    : "#95A7CB"
+                }
+                onClick={listViewHandler}
+                cursor="pointer"
+              />
+            )}
             {!visibleSessionHistory && (
               <Button
                 variant={!subscribe ? "greyBorder" : "secondary"}
@@ -195,6 +203,7 @@ export const DvpnDetails = ({
                     !subscribe || !subscribedIndividual ? "grey.700" : "#129EED"
                   }
                   py=".2rem"
+                  cursor="pointer"
                 >
                   <MemoHeart
                     fill={

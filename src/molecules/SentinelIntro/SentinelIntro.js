@@ -27,9 +27,7 @@ export const SentinelIntro = () => {
             lineHeight="155%"
             px="4rem"
           >
-            “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam”
+            “The leader in transparent, end-to-end encrypted VPN technology”
           </Text>
           <Text
             as="h2"

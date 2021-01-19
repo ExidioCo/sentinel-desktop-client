@@ -1,4 +1,10 @@
-import React, { forwardRef, useRef, useMemo, useCallback } from "react";
+import React, {
+  forwardRef,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
 import styled from "styled-components";
 import mergeRefs from "../../utils/mergeRefs";
 import {
@@ -50,7 +56,7 @@ export const InputBase = styled.input`
 `;
 
 export const Input = forwardRef(
-  ({ autoFocus, variant: v = "primary", type, onChange, ...props }, ref) => {
+  ({ autofocus, variant: v = "primary", type, onChange, ...props }, ref) => {
     const inputRef = useRef(null);
 
     // const [isOpen, setOpen] = useState(false);
@@ -69,6 +75,12 @@ export const Input = forwardRef(
       },
       [onChange]
     );
+
+    useEffect(() => {
+      if (autofocus === true && inputRef && inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, [autofocus]);
 
     return (
       <>
@@ -93,6 +105,7 @@ export const Input = forwardRef(
           ref={mergeRefs(ref, inputRef)}
           fontFamily="Roboto"
           onChange={onChangeHandler}
+          autofocus={autofocus}
           {...props}
           pr={isPassword ? "4.5rem" : undefined}
         />

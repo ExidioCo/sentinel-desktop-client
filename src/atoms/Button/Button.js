@@ -13,6 +13,7 @@ import {
 import { Box, Text } from "atoms";
 import css from "@styled-system/css";
 import { Flex } from "atoms/Flex";
+import { Loader } from "atoms/Loader";
 
 const variants = {
   primary: {
@@ -204,7 +205,7 @@ export const Button = ({
       disabled={disabled || loading}
       overflow="hidden"
     >
-      {/* {loading && (
+      {loading && (
         <Flex
           left={0}
           right={0}
@@ -212,13 +213,11 @@ export const Button = ({
           justifyContent="center"
           alignItems="center"
           fontSize={2}
-          height="15px"
-          width="15px"
-          mx="auto"
+          height="2rem"
         >
-          <Loader loading={loading} />
+          <Loader loading={loading} relative />
         </Flex>
-      )} */}
+      )}
       <Flex justifyContent="center">
         <Text
           color="inherit"

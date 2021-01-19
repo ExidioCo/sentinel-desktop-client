@@ -18,12 +18,11 @@ const validationSchema = yup.object({
   password: yup.string().required("Required"),
 });
 
-export const LoginForm = () => {
+export const LoginForm = ({ autofocus }) => {
   const [formValues, setFormValues] = useState(null);
-  const loading = useSelector(state => state.loginReducer.loading);
+  const loading = useSelector((state) => state.loginReducer.loading);
 
   const dispatch = useDispatch();
-
 
   const onSubmit = (values, submitProps) => {
     let payload = {
@@ -73,6 +72,7 @@ export const LoginForm = () => {
                         type="password"
                         name="password"
                         label="Enter Password"
+                        autofocus
                       />
                       <ErrorMessage name="password" component={Error} />
                     </Box>
@@ -97,8 +97,14 @@ export const LoginForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      <Button px="3rem" justifySelf="center" type="submit" disabled={loading}>
-                        {loading ? 'Logging in' : 'Login'}
+                      <Button
+                        px="3rem"
+                        justifySelf="center"
+                        type="submit"
+                        // disabled={loading}
+                        loading={loading}
+                      >
+                        Login
                       </Button>
                     </Grid>
                   </Grid>

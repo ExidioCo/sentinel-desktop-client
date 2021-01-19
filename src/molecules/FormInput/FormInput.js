@@ -3,10 +3,12 @@ import { useField } from "formik";
 import { InputField } from "atoms/InputField";
 import { SelectField } from "atoms/SelectField";
 
-export const FormInput = ({ name, ...props }) => {
+export const FormInput = ({ name, autofocus, ...props }) => {
   const [field, meta] = useField(name);
   const error = (meta.touched && meta.error) || "";
-  return <InputField {...field} {...props} error={error} />;
+  return (
+    <InputField autofocus={autofocus} {...field} {...props} error={error} />
+  );
 };
 
 export const FormSelect = ({ name, options, ...props }) => {

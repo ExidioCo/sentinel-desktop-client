@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -20,6 +20,7 @@ const validationSchema = yup.object({
 
 export const LoginForm = () => {
   const [formValues, setFormValues] = useState(null);
+  const loading = useSelector(state => state.loginReducer.loading);
 
   const dispatch = useDispatch();
 
@@ -96,8 +97,8 @@ export const LoginForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      <Button px="3rem" justifySelf="center" type="submit">
-                        Login
+                      <Button px="3rem" justifySelf="center" type="submit" disabled={loading}>
+                        {loading ? 'Logging in' : 'Login'}
                       </Button>
                     </Grid>
                   </Grid>

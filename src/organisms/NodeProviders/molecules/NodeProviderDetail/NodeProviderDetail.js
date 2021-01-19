@@ -1,8 +1,13 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import { Box, Grid, Text } from "atoms";
 import { NodeProvidersList } from "../NodeProvidersList/NodeProvidersList";
 // import { NodeProvidersSubscribedList } from "../NodeProvidersSubscribedList";
 import { MapViewNodeProviderList } from "../MapViewNodeProviderList/";
 import { MapViewNodeProviders } from "../MapViewNodeProviders";
+
+import { GetProvidersAction } from '../../../../pages/Dashboard/Dvpn/actions/DvpnActions';
 
 export const NodeProviderDetail = ({
   connect,
@@ -11,6 +16,15 @@ export const NodeProviderDetail = ({
   subscribe,
   setSubscribe,
 }) => {
+  const dispatch = useDispatch();
+  const providersData = useSelector(state => state.dvpnReducer.providersData);
+
+  console.log('providersData---', providersData);
+
+  useEffect(() => {
+    dispatch(GetProvidersAction());
+  }, [])
+  
   return (
     <>
       {visibleMapView ? (

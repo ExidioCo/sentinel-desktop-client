@@ -1,6 +1,11 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import MemoTime from "assets/icons/Time";
 import { Box, Text, Grid } from "atoms";
 import ReactTooltip from "react-tooltip";
+
+import { GetSessionOfAnAddressAction } from '../../actions/DvpnActions'; 
 
 const SessionHistoryHeadings = ({ heading, title }) => {
   return (
@@ -73,6 +78,15 @@ const SessionHistoryList = () => {
 };
 
 export const SessionHistory = () => {
+  const dispatch = useDispatch();
+  const sesionOfAnAddressDetails = useSelector(state => state.dvpnReducer.sessionOfAnAddressDetails);
+
+  console.log('sesionOfAnAddressDetails---', sesionOfAnAddressDetails);
+
+  useEffect(() => {
+    dispatch(GetSessionOfAnAddressAction());
+  }, [])
+
   return (
     <Box>
       <Grid

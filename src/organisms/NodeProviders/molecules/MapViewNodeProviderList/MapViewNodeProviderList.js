@@ -10,7 +10,7 @@ export const MapViewNodeProviderList = ({ setConnect }) => {
     <>
       <Grid>
         <Grid
-          py="1rem"
+          py=".6rem"
           gridTemplateColumns="1fr  1fr 1fr 1.5fr"
           alignItems="center"
           borderBottom="1px solid"
@@ -26,7 +26,7 @@ export const MapViewNodeProviderList = ({ setConnect }) => {
                 color="primary.700"
                 fontSize="1.4rem"
                 fontWeight="medium"
-                pt="1rem"
+                pt=".6rem"
               >
                 542.45 Mbps
               </Text>
@@ -49,7 +49,7 @@ export const MapViewNodeProviderList = ({ setConnect }) => {
               color="text.500"
               fontSize="1.4rem"
               fontWeight="medium"
-              pt="1rem"
+              pt=".6rem"
             >
               2 Months
             </Text>

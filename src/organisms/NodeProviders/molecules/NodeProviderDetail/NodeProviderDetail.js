@@ -7,13 +7,13 @@ import { MapViewNodeProviders } from "../MapViewNodeProviders";
 export const NodeProviderDetail = ({
   connect,
   setConnect,
-  visibleListView,
+  visibleMapView,
   subscribe,
   setSubscribe,
 }) => {
   return (
     <>
-      {visibleListView ? (
+      {visibleMapView ? (
         <Box mr="1rem">
           <Grid
             pt="2rem"
@@ -100,12 +100,12 @@ export const NodeProviderDetail = ({
           >
             <MapViewNodeProviders />
           </Box>
-          <Box mt="2rem" mx="3rem" maxHeight="20vh" className="scroll-bar">
+          <Box mt="1rem" mx="3rem" maxHeight="18vh" className="scroll-bar">
             {[1, 2, 3, 4, 5].map((index) => (
               <MapViewNodeProviderList
                 connect={connect}
                 setConnect={setConnect}
-                visibleListView={visibleListView}
+                visibleMapView={visibleMapView}
                 key={index}
               />
             ))}

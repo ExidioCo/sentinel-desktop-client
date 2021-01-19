@@ -1,5 +1,5 @@
 import MemoConnect from "assets/icons/Connect";
-import { Box, Text, Flex, Modal, ModalClose, Button } from "atoms";
+import { Box, Text, Flex, Modal, ModalClose, Button, Grid } from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
 
 export const QuickConnect = ({ connect, setConnect }) => {
@@ -14,16 +14,18 @@ export const QuickConnect = ({ connect, setConnect }) => {
   };
   return (
     <>
-      <Box textAlign="center" my="7rem">
+      <Grid
+        gridAutoFlow="column"
+        justifyContent="start"
+        gridGap="2rem"
+        alignItems="center"
+        my="2rem"
+        pl="4rem"
+      >
         <Text color="primary.700" fontSize="1.6rem" fontWeight="medium">
           Your connection Secure
         </Text>
-        <Text
-          color="primary.700"
-          fontSize="1.6rem"
-          fontWeight="medium"
-          pt="1.5rem"
-        >
+        <Text color="primary.700" fontSize="1.6rem" fontWeight="medium">
           Your IP:
           <Text
             as="span"
@@ -38,14 +40,13 @@ export const QuickConnect = ({ connect, setConnect }) => {
         <Button
           variant="primary"
           px="4rem"
-          mt="3rem"
           justifySelf="center"
           type="submit"
           onClick={connectHandler}
         >
           {!connect ? "Quick Connect" : "Disconnect"}
         </Button>
-      </Box>
+      </Grid>
       {visible && (
         <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
           <ModalClose onClick={hide} />

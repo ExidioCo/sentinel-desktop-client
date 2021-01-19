@@ -4,7 +4,7 @@ import { NodeProviderDetail } from "./molecules/NodeProviderDetail/NodeProviderD
 export const NodeProviders = ({
   connect,
   setConnect,
-  visibleListView,
+  visibleMapView,
   subscribe,
   setSubscribe,
 }) => {
@@ -18,7 +18,7 @@ export const NodeProviders = ({
         />
       ) : (
         <NodeProviderDetail
-          visibleListView={visibleListView}
+          visibleMapView={visibleMapView}
           connect={connect}
           setConnect={setConnect}
           setSubscribe={setSubscribe}

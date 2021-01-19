@@ -4,7 +4,7 @@ import { SubscribedIndividualHostDetail } from "./molecules/SubscribedIndividual
 export const IndividualHost = ({
   connect,
   setConnect,
-  visibleListView,
+  visibleMapView,
   subscribedIndividual,
   setSubscribedIndividual,
 }) => {
@@ -19,7 +19,7 @@ export const IndividualHost = ({
         />
       ) : (
         <IndividualHostDetail
-          visibleListView={visibleListView}
+          visibleMapView={visibleMapView}
           connect={connect}
           setConnect={setConnect}
           subscribedIndividual={subscribedIndividual}

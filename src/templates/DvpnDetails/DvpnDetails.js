@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Box, Grid, Flex, Button } from "atoms";
-import SearchField from "react-search-field";
+// import SearchField from "react-search-field";
 import { NodeProviders } from "organisms/NodeProviders";
 import { IndividualHost } from "organisms/IndividualHost";
 import MemoProvider from "assets/icons/Provider";
@@ -9,6 +9,7 @@ import MemoHost from "assets/icons/Host";
 import MemoListView from "assets/icons/ListView";
 import MemoMapView from "assets/icons/MapView";
 import MemoHeart from "assets/icons/Heart";
+import { SessionHistory } from "pages/Dashboard/Dvpn/molecules/SessionHistory";
 
 export const DvpnDetails = ({
   connect,
@@ -20,24 +21,33 @@ export const DvpnDetails = ({
 }) => {
   const [visibleNodeProviderList, setVisibleNodeProviderList] = useState(true);
   const [visibleIndivisualHost, setVsibleIndivisualHost] = useState(false);
-  const [visibleListView, setVisibleListView] = useState(true);
+  const [visibleSessionHistory, setVisibleSessionHistory] = useState(false);
+  const [visibleMapView, setVisibleMapView] = useState(false);
 
-  const ValidatorListHandler = () => {
+  const NodeProvidersHandler = () => {
     setVisibleNodeProviderList(true);
     setVsibleIndivisualHost(false);
+    setVisibleSessionHistory(false);
   };
-  const ProposalHandler = () => {
+  const IndividualHostsHandler = () => {
     setVisibleNodeProviderList(false);
     setVsibleIndivisualHost(true);
+    setVisibleSessionHistory(false);
   };
-  const onChangeHandler = () => {};
+  const sessionHistoryHandler = () => {
+    setVisibleNodeProviderList(false);
+    setVsibleIndivisualHost(false);
+    setVisibleMapView(false);
+    setVisibleSessionHistory(true);
+  };
+
   const listViewHandler = () => {
-    setVisibleListView(true);
+    setVisibleMapView(true);
   };
   const mapViewHandler = () => {
     setVisibleNodeProviderList(true);
     setVsibleIndivisualHost(false);
-    setVisibleListView(false);
+    setVisibleMapView(false);
   };
 
   const subscribeHandler = () => {
@@ -45,8 +55,34 @@ export const DvpnDetails = ({
     setSubscribedIndividual(!subscribedIndividual);
   };
 
+  const WalletTabs = () => {
+    if (visibleNodeProviderList === true) {
+      return (
+        <NodeProviders
+          connect={connect}
+          setConnect={setConnect}
+          visibleMapView={visibleMapView}
+          subscribe={subscribe}
+          setSubscribe={setSubscribe}
+        />
+      );
+    } else if (visibleIndivisualHost === true) {
+      return (
+        <IndividualHost
+          connect={connect}
+          setConnect={setConnect}
+          subscribedIndividual={subscribedIndividual}
+          setSubscribedIndividual={setSubscribedIndividual}
+        />
+      );
+    } else if (visibleSessionHistory === true) {
+      return <SessionHistory />;
+    }
+    return;
+  };
+
   return (
-    <Box pt="7rem">
+    <Box pt="1rem">
       <Box px="3rem">
         <Grid
           gridAutoFlow="column"
@@ -61,7 +97,7 @@ export const DvpnDetails = ({
               justifySelf="center"
               type="submit"
               textTransform="capitalize"
-              onClick={ValidatorListHandler}
+              onClick={NodeProvidersHandler}
             >
               <Grid alignItems="center" gridAutoFlow="column" gridGap=".5rem">
                 <MemoProvider
@@ -76,13 +112,25 @@ export const DvpnDetails = ({
               justifySelf="center"
               type="submit"
               textTransform="capitalize"
-              onClick={ProposalHandler}
+              onClick={IndividualHostsHandler}
             >
               <Grid alignItems="center" gridAutoFlow="column" gridGap=".5rem">
                 <MemoHost
                   fill={visibleNodeProviderList ? "#55678B" : "#95A7CB"}
                 />
                 Individual Hosts
+              </Grid>
+            </Button>
+            <Button
+              variant={visibleSessionHistory ? "primaryShadow" : "normal"}
+              px="2rem"
+              justifySelf="center"
+              type="submit"
+              textTransform="capitalize"
+              onClick={sessionHistoryHandler}
+            >
+              <Grid alignItems="center" gridAutoFlow="column" gridGap=".5rem">
+                dVPN Session History
               </Grid>
             </Button>
           </Flex>
@@ -97,72 +145,72 @@ export const DvpnDetails = ({
               onChange={onChangeHandler}
               classNames="search-container"
             /> */}
+
+            {!visibleSessionHistory && (
+              <MemoMapView
+                fill={
+                  !visibleMapView &&
+                  !visibleIndivisualHost &&
+                  !visibleSessionHistory
+                    ? "#139EEE"
+                    : "#95A7CB"
+                }
+                color={
+                  !visibleMapView &&
+                  !visibleIndivisualHost &&
+                  !visibleSessionHistory
+                    ? "#139EEE"
+                    : "#95A7CB"
+                }
+                onClick={mapViewHandler}
+              />
+            )}
             <MemoListView
               fill={
-                visibleListView || visibleIndivisualHost ? "#139EEE" : "#95A7CB"
+                visibleMapView || visibleIndivisualHost || visibleSessionHistory
+                  ? "#139EEE"
+                  : "#95A7CB"
               }
               color={
-                visibleListView || visibleIndivisualHost ? "#139EEE" : "#95A7CB"
+                visibleMapView || visibleIndivisualHost || visibleSessionHistory
+                  ? "#139EEE"
+                  : "#95A7CB"
               }
               onClick={listViewHandler}
             />
-            <MemoMapView
-              fill={
-                !visibleListView && !visibleIndivisualHost
-                  ? "#139EEE"
-                  : "#95A7CB"
-              }
-              color={
-                !visibleListView && !visibleIndivisualHost
-                  ? "#139EEE"
-                  : "#95A7CB"
-              }
-              onClick={mapViewHandler}
-            />
-            <Button
-              variant={!subscribe ? "greyBorder" : "secondary"}
-              px="1rem"
-              justifySelf="center"
-              textTransform="capitalize"
-              onClick={subscribeHandler}
-            >
-              <Grid
-                alignItems="center"
-                gridAutoFlow="column"
-                gridGap=".5rem"
-                fontSize="1.2rem"
-                color={
-                  !subscribe || !subscribedIndividual ? "grey.700" : "#129EED"
-                }
-                py=".2rem"
+            {!visibleSessionHistory && (
+              <Button
+                variant={!subscribe ? "greyBorder" : "secondary"}
+                px="1rem"
+                justifySelf="center"
+                textTransform="capitalize"
+                onClick={subscribeHandler}
               >
-                <MemoHeart
-                  fill={
-                    !subscribe || !subscribedIndividual ? "#95A7CB" : "#129EED"
+                <Grid
+                  alignItems="center"
+                  gridAutoFlow="column"
+                  gridGap=".5rem"
+                  fontSize="1.2rem"
+                  color={
+                    !subscribe || !subscribedIndividual ? "grey.700" : "#129EED"
                   }
-                />
-                Subscribed
-              </Grid>
-            </Button>
+                  py=".2rem"
+                >
+                  <MemoHeart
+                    fill={
+                      !subscribe || !subscribedIndividual
+                        ? "#95A7CB"
+                        : "#129EED"
+                    }
+                  />
+                  Subscribed
+                </Grid>
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Box>
-      {visibleNodeProviderList ? (
-        <NodeProviders
-          connect={connect}
-          setConnect={setConnect}
-          visibleListView={visibleListView}
-          subscribe={subscribe}
-          setSubscribe={setSubscribe}
-        />
-      ) : (
-        <IndividualHost
-          connect={connect}
-          setConnect={setConnect}
-          subscribedIndividual={subscribedIndividual}
-          setSubscribedIndividual={setSubscribedIndividual}
-        />
-      )}
+      <WalletTabs />
     </Box>
   );
 };

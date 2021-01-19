@@ -1,5 +1,5 @@
 import MemoTime from "assets/icons/Time";
-import { Box, Text, Grid, Flex } from "atoms";
+import { Box, Text, Grid } from "atoms";
 import ReactTooltip from "react-tooltip";
 
 const SessionHistoryHeadings = ({ heading, title }) => {
@@ -30,7 +30,7 @@ const SessionHistoryList = () => {
   return (
     <Grid
       py="1.5rem"
-      px="2rem"
+      px="4rem"
       gridTemplateColumns=".8fr  1fr 1fr 3rem"
       alignItems="center"
       justifyContent="space-between"
@@ -75,18 +75,6 @@ const SessionHistoryList = () => {
 export const SessionHistory = () => {
   return (
     <Box>
-      <Text
-        variant="field"
-        fontWeight="medium"
-        color="primary.700"
-        borderTop="1px solid"
-        borderBottom="1px solid"
-        borderColor="border.500"
-        textAlign="center"
-        py="1rem"
-      >
-        dVPN Session History
-      </Text>
       <Grid
         p="2rem"
         gridAutoFlow="column"
@@ -99,7 +87,7 @@ export const SessionHistory = () => {
       </Grid>
       <Grid
         mt="1rem"
-        px="1.5rem"
+        px="4rem"
         gridTemplateColumns=".8fr 1fr 1fr 3rem"
         justifyContent="space-between"
       >
@@ -138,8 +126,8 @@ export const SessionHistory = () => {
         <Box py={4} />
       </Grid>
 
-      <Grid maxHeight="20rem" className="scroll-bar">
-        {[1, 2, 3, 4, 5, 6, 7].map((index) => (
+      <Grid maxHeight="56vh" className="scroll-bar">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
           <SessionHistoryList key={index} />
         ))}
       </Grid>

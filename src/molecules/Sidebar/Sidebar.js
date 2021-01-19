@@ -5,8 +5,10 @@ import styled from "styled-components";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { UpdateConfigAction, CheckConfigSettingAction } from '../../pages/Login/actions/LoginActions';
-
+import {
+  UpdateConfigAction,
+  CheckConfigSettingAction,
+} from "../../pages/Login/actions/LoginActions";
 
 import {
   Box,
@@ -73,52 +75,66 @@ const DropdownItem = ({ name }) => {
 
 export const MyAccountDropdown = ({ name, accountDetails }) => {
   const dispatch = useDispatch();
-  const configDetails = useSelector(state => state.loginReducer.checkConfigDetails);
-  const keysDetails = useSelector(state => state.loginReducer.checkKeysDetails);
+  const configDetails = useSelector(
+    (state) => state.loginReducer.checkConfigDetails
+  );
+  const keysDetails = useSelector(
+    (state) => state.loginReducer.checkKeysDetails
+  );
 
   const [dropdown, setDropdown] = useState(false);
   const { visible, hide, toggle } = useVisibleState(false);
 
   const [brodcastMode, setVariant] = useState(
     configDetails.data !== undefined
-      ?
-      {
-        Block: configDetails.data.result.chain.broadcast_mode === 'block' ? 'selected' : 'primary',
-        Sync: configDetails.data.result.chain.broadcast_mode === 'sync' ? 'selected' : 'primary',
-        Async: configDetails.data.result.chain.broadcast_mode === 'async' ? 'selected' : 'primary',
-      }
-      :
-      {
-        Block: 'primary',
-        Sync: 'primary',
-        Async: 'primary'
-      }
-  )
+      ? {
+          Block:
+            configDetails.data.result.chain.broadcast_mode === "block"
+              ? "selected"
+              : "primary",
+          Sync:
+            configDetails.data.result.chain.broadcast_mode === "sync"
+              ? "selected"
+              : "primary",
+          Async:
+            configDetails.data.result.chain.broadcast_mode === "async"
+              ? "selected"
+              : "primary",
+        }
+      : {
+          Block: "primary",
+          Sync: "primary",
+          Async: "primary",
+        }
+  );
 
   const [rpcServer, setRpcServer] = useState(
-    configDetails.data !== undefined && configDetails.data.result.chain.trust_node === true ? true : false
-  )
+    configDetails.data !== undefined &&
+      configDetails.data.result.chain.trust_node === true
+      ? true
+      : false
+  );
 
-  const [initialValues, setInitialValues] = useState(configDetails.data !== undefined ?
-    {
-      fee: configDetails.data.result.chain.fees,
-      gas_amount: configDetails.data.result.chain.gas,
-      chain_id: configDetails.data.result.chain.id,
-      rpc_address: configDetails.data.result.chain.rpc_address,
-    }
-    :
-    {
-      fee: '',
-      gas_amount: '',
-      chain_id: '',
-      rpc_address: '',
-    }
-  )
+  const [initialValues, setInitialValues] = useState(
+    configDetails.data !== undefined
+      ? {
+          fee: configDetails.data.result.chain.fees,
+          gas_amount: configDetails.data.result.chain.gas,
+          chain_id: configDetails.data.result.chain.id,
+          rpc_address: configDetails.data.result.chain.rpc_address,
+        }
+      : {
+          fee: "",
+          gas_amount: "",
+          chain_id: "",
+          rpc_address: "",
+        }
+  );
 
   useEffect(() => {
-    dispatch(CheckConfigSettingAction())
-    let configDataObj = configDetails?.data?.result.chain
-    let fromName = keysDetails?.data?.result[0].name
+    dispatch(CheckConfigSettingAction());
+    let configDataObj = configDetails?.data?.result.chain;
+    let fromName = keysDetails?.data?.result[0].name;
     let chainObj = {
       broadcast_mode: configDataObj.broadcast_mode,
       fees: configDataObj.fees,
@@ -128,92 +144,91 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
       id: configDataObj.id,
       rpc_address: configDataObj.rpc_address,
       simulate_and_execute: configDataObj.simulate_and_execute,
-      trust_node: configDataObj.trust_node
-    }
+      trust_node: configDataObj.trust_node,
+    };
     let postData = {
       from: fromName,
-      chain: chainObj
-    }
+      chain: chainObj,
+    };
     dispatch(UpdateConfigAction(postData));
-  },[])
+  }, []);
 
   const resetVariant = () => {
     setVariant({
-      Block: 'primary',
-      Sync: 'primary',
-      Async: 'primary'
-    })
-  }
+      Block: "primary",
+      Sync: "primary",
+      Async: "primary",
+    });
+  };
 
   const setVariantType = (type) => {
     setVariant({
-      Block: type === 'Block' ? 'selected' : 'primary',
-      Sync: type === 'Sync' ? 'selected' : 'primary',
-      Async: type === 'Async' ? 'selected' : 'primary'
-    })
-  }
+      Block: type === "Block" ? "selected" : "primary",
+      Sync: type === "Sync" ? "selected" : "primary",
+      Async: type === "Async" ? "selected" : "primary",
+    });
+  };
 
   const brodcastModeHandler = (e, type) => {
     e.preventDefault();
     if (type === "Block") {
-      let variantType = brodcastMode.Block
-      if (variantType === 'primary') {
-        setVariantType('Block')
+      let variantType = brodcastMode.Block;
+      if (variantType === "primary") {
+        setVariantType("Block");
       } else {
         resetVariant();
       }
     } else if (type === "Sync") {
-      let variantType = brodcastMode.Sync
-      if (variantType === 'primary') {
-        setVariantType('Sync')
+      let variantType = brodcastMode.Sync;
+      if (variantType === "primary") {
+        setVariantType("Sync");
       } else {
         resetVariant();
       }
     } else if (type === "Async") {
-      let variantType = brodcastMode.Async
-      if (variantType === 'primary') {
-        setVariantType('Async')
+      let variantType = brodcastMode.Async;
+      if (variantType === "primary") {
+        setVariantType("Async");
       } else {
         resetVariant();
       }
     }
-  }
+  };
 
   const rpcServerHandler = (e) => {
     e.preventDefault();
-    setRpcServer(!rpcServer)
-  }
+    setRpcServer(!rpcServer);
+  };
 
   const findBrodcastMode = () => {
     if (brodcastMode.Block === "selected") {
-      return 'block'
+      return "block";
     } else if (brodcastMode.Sync === "selected") {
-      return 'sync'
+      return "sync";
     } else if (brodcastMode.Async === "selected") {
-      return 'async'
+      return "async";
     }
-  }
+  };
 
   const onSubmit = (values, submitProps) => {
     let chainObj = {
       broadcast_mode: findBrodcastMode(),
-      fees: `${values.fee > 0 ? values.fee+ 'tsent' : ''}`,
+      fees: `${values.fee > 0 ? values.fee + "tsent" : ""}`,
       gas_adjustment: 0,
-      gas_prices: '0.01tsent',
+      gas_prices: "0.01tsent",
       gas: JSON.parse(values.gas_amount),
       id: values.chain_id,
       rpc_address: values.rpc_address,
       simulate_and_execute: true,
-      trust_node: rpcServer
-    }
+      trust_node: rpcServer,
+    };
     let postData = {
-      from: '',
-      chain: chainObj
-    }
+      from: "",
+      chain: chainObj,
+    };
     dispatch(UpdateConfigAction(postData));
     hide();
   };
-
 
   const openSettingHandler = () => {
     setDropdown(false);
@@ -225,11 +240,13 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
       <DropdownFilter
         render={
           <Grid width="15rem">
-            {
-              accountDetails !== undefined && accountDetails.length > 0 && accountDetails.map((obj, index) => {
-                return <DropdownItem name={obj.name.toUpperCase()} key={index}/>
-              })
-            }
+            {accountDetails !== undefined &&
+              accountDetails.length > 0 &&
+              accountDetails.map((obj, index) => {
+                return (
+                  <DropdownItem name={obj.name.toUpperCase()} key={index} />
+                );
+              })}
             <BoxStyle px="1.5rem" py="1rem" cursor="pointer" color="grey.700">
               <Grid
                 gridAutoFlow="column"
@@ -328,9 +345,21 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                               gridGap="1rem"
                               mb="2rem"
                             >
-                              <Chip variant={brodcastMode.Block} text="Block" onClick={(e) => brodcastModeHandler(e, 'Block')} />
-                              <Chip variant={brodcastMode.Sync} text="Sync" onClick={(e) => brodcastModeHandler(e, 'Sync')} />
-                              <Chip variant={brodcastMode.Async} text="Async" onClick={(e) => brodcastModeHandler(e, 'Async')} />
+                              <Chip
+                                variant={brodcastMode.Block}
+                                text="Block"
+                                onClick={(e) => brodcastModeHandler(e, "Block")}
+                              />
+                              <Chip
+                                variant={brodcastMode.Sync}
+                                text="Sync"
+                                onClick={(e) => brodcastModeHandler(e, "Sync")}
+                              />
+                              <Chip
+                                variant={brodcastMode.Async}
+                                text="Async"
+                                onClick={(e) => brodcastModeHandler(e, "Async")}
+                              />
                             </Grid>
                             <Box>
                               <Flex alignItems="center" mb="1rem">
@@ -407,8 +436,20 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                               mb="2rem"
                               justifyContent="start"
                             >
-                              <Chip variant={rpcServer === true ? "selected" : "primary"} text="Yes" onClick={(e) => rpcServerHandler(e)} />
-                              <Chip variant={rpcServer === false ? "selected" : "primary"} text="No" onClick={(e) => rpcServerHandler(e)} />
+                              <Chip
+                                variant={
+                                  rpcServer === true ? "selected" : "primary"
+                                }
+                                text="Yes"
+                                onClick={(e) => rpcServerHandler(e)}
+                              />
+                              <Chip
+                                variant={
+                                  rpcServer === false ? "selected" : "primary"
+                                }
+                                text="No"
+                                onClick={(e) => rpcServerHandler(e)}
+                              />
                             </Grid>
                             <Box>
                               <Flex alignItems="center" mb="1rem">
@@ -453,12 +494,12 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
 
 export const Sidebar = ({ connect }) => {
   const { visible, toggle } = useVisibleState(true);
-  let accountDetails = useSelector(state => state.loginReducer.checkKeysDetails);
-  accountDetails = accountDetails?.data?.result 
-  console.log('accountDetails---', accountDetails);
-  useEffect(() => {
-
-  }, [])
+  let accountDetails = useSelector(
+    (state) => state.loginReducer.checkKeysDetails
+  );
+  accountDetails = accountDetails?.data?.result;
+  console.log("accountDetails---", accountDetails);
+  useEffect(() => {}, []);
 
   return (
     <Box
@@ -485,12 +526,21 @@ export const Sidebar = ({ connect }) => {
         {visible ? (
           <MemoArrowLeft height="1rem" fill="white" />
         ) : (
-            <MemoArrowRight height="1rem" fill="white" />
-          )}
+          <MemoArrowRight height="1rem" fill="white" />
+        )}
       </Flex>
       <Box bg="white" p="2rem">
         <Grid gridAutoFlow="column" justifyContent="center" alignItems="center">
-          <MyAccountDropdown name={visible && accountDetails !== undefined && accountDetails.length > 0 ? accountDetails[0]?.name.toUpperCase() : undefined} accountDetails={accountDetails} />
+          <MyAccountDropdown
+            name={
+              visible &&
+              accountDetails !== undefined &&
+              accountDetails.length > 0
+                ? accountDetails[0]?.name.toUpperCase()
+                : undefined
+            }
+            accountDetails={accountDetails}
+          />
         </Grid>
       </Box>
       <Box>
@@ -508,8 +558,8 @@ export const Sidebar = ({ connect }) => {
                     alignSelf="start"
                   />
                 ) : (
-                    <Box width=".5rem" />
-                  )}
+                  <Box width=".5rem" />
+                )}
                 <Flex alignItems="center" py="2rem">
                   <Icon
                     height="2rem"
@@ -535,10 +585,10 @@ export const Sidebar = ({ connect }) => {
       {connect && visible && window.location.pathname === "/dashboard/dVPN" ? (
         <ConnectionStatus />
       ) : (
-          <Box position="absolute" bottom="2rem" m="auto" left={0} right={0}>
-            <MemoLogo height="4rem" />
-          </Box>
-        )}
+        <Box position="absolute" bottom="2rem" m="auto" left={0} right={0}>
+          <MemoLogo height="4rem" />
+        </Box>
+      )}
     </Box>
   );
 };

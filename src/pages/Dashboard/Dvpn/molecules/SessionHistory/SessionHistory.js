@@ -5,7 +5,7 @@ import MemoTime from "assets/icons/Time";
 import { Box, Text, Grid } from "atoms";
 import ReactTooltip from "react-tooltip";
 
-import { GetSessionOfAnAddressAction } from '../../actions/DvpnActions'; 
+import { GetSessionOfAnAddressAction } from "../../actions/DvpnActions";
 
 const SessionHistoryHeadings = ({ heading, title }) => {
   return (
@@ -56,7 +56,7 @@ const SessionHistoryList = () => {
 
       <div>
         <a data-for="soclose" data-tip="3">
-          <MemoTime height="1.5rem" width="1.5rem" />
+          <MemoTime height="1.5rem" width="1.5rem" cursor="pointer" />
         </a>
       </div>
       <ReactTooltip
@@ -79,13 +79,15 @@ const SessionHistoryList = () => {
 
 export const SessionHistory = () => {
   const dispatch = useDispatch();
-  const sesionOfAnAddressDetails = useSelector(state => state.dvpnReducer.sessionOfAnAddressDetails);
+  const sesionOfAnAddressDetails = useSelector(
+    (state) => state.dvpnReducer.sessionOfAnAddressDetails
+  );
 
-  console.log('sesionOfAnAddressDetails---', sesionOfAnAddressDetails);
+  console.log("sesionOfAnAddressDetails---", sesionOfAnAddressDetails);
 
   useEffect(() => {
     dispatch(GetSessionOfAnAddressAction());
-  }, [])
+  }, []);
 
   return (
     <Box>

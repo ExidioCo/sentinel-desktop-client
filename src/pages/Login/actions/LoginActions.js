@@ -46,7 +46,7 @@ export const LoginUserAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.post_Login.FAILURE));
-                console.log('error post_Login ..', error);
+                toast.error('Invalid Password')
             });
     };
 };

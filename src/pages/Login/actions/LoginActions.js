@@ -46,6 +46,7 @@ export const LoginUserAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.post_Login.FAILURE));
+                toast.error(error.message)
                 toast.error('Invalid Password')
             });
     };
@@ -81,6 +82,7 @@ export const CheckConfigAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckConfig.FAILURE));
+                toast.error(error.message)
                 console.log('error get_CheckConfig ..', error);
             });
     };
@@ -115,6 +117,7 @@ export const CheckKeysAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckKeys.FAILURE));
+                toast.error(error.message)
                 console.log('error get_CheckKeys ..', error);
             });
     };
@@ -147,6 +150,7 @@ export const UpdateConfigAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.FAILURE));
+                toast.error(error.message)
                 console.log('error put_UpdateConfigDetails ..', error);
             });
     };
@@ -181,6 +185,7 @@ export const CreateAccountAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.post_CreateAccount.FAILURE));
+                toast.error(error.message)
                 console.log('error post_CreateAccount ..', error);
             });
     };
@@ -208,6 +213,7 @@ export const CheckConfigSettingAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.FAILURE));
+                toast.error(error.message)
                 console.log('error get_CheckConfigPostLogin ..', error);
             });
     };

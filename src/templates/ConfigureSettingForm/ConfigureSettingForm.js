@@ -24,6 +24,7 @@ export const ConfigureSettingForm = () => {
   const dispatch = useDispatch();
 
   const configDetails = useSelector(state => state.loginReducer.checkConfigDetails);
+  const loading = useSelector(state => state.loginReducer.loading);
 
   const [brodcastMode, setVariant] = useState(
     configDetails.data !== undefined
@@ -300,7 +301,7 @@ export const ConfigureSettingForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      <Button px="3rem" justifySelf="center" type="submit">
+                      <Button px="3rem" justifySelf="center" type="submit" loading={loading}>
                         Save
                       </Button>
                     </Grid>

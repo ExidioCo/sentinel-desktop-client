@@ -65,9 +65,16 @@ const validationSchema = Yup.object({
   rpc_address: Yup.string().required("Required"),
 });
 
-const DropdownItem = ({ name, bg, color }) => {
+const DropdownItem = ({ name, bg, color, onClick }) => {
   return (
-    <BoxStyle px="1.5rem" py="1rem" cursor="pointer" bg={bg} color={color}>
+    <BoxStyle
+      px="1.5rem"
+      py="1rem"
+      cursor="pointer"
+      bg={bg}
+      color={color}
+      onClick={onClick}
+    >
       <Text width="100%" fontSize="1.4rem" fontWeight="medium">
         {name}
       </Text>
@@ -75,7 +82,12 @@ const DropdownItem = ({ name, bg, color }) => {
   );
 };
 
-export const MyAccountDropdown = ({ name, accountDetails }) => {
+export const MyAccountDropdown = ({
+  name,
+  accountDetails,
+  toggleVisible,
+  visibleState,
+}) => {
   const dispatch = useDispatch();
   const configDetails = useSelector(
     (state) => state.loginReducer.checkConfigDetails
@@ -237,6 +249,12 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
     toggle();
   };
 
+  const onClickHandler = () => {
+    if (visibleState === false) {
+      toggleVisible();
+    }
+  };
+
   return (
     <>
       <DropdownFilter
@@ -251,6 +269,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                     key={index}
                     bg={index === 0 ? "primary.500" : ""}
                     color={index === 0 ? "white" : ""}
+                    onClick={index === 0 && onClickHandler}
                   />
                 );
               })}
@@ -555,6 +574,8 @@ export const Sidebar = ({ connect }) => {
                 : undefined
             }
             accountDetails={accountDetails}
+            toggleVisible={toggle}
+            visibleState={visible}
           />
         </Grid>
       </Box>

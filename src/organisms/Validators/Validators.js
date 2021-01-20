@@ -222,7 +222,7 @@ const ValidatorsList = React.memo(
                               pb="1rem"
                             >
                               {JSON.parse(
-                                validatorListDataObj.commission.rate
+                                validatorListDataObj.commission.rate * 100
                               ).toFixed(2)}
                             % (Updated at{" "}
                               {moment(

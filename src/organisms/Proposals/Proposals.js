@@ -75,7 +75,7 @@ const ProposalDetails = ({ proposalObj }) => {
       /> */}
       <DetailsCommonComponent
         text="Total Deposit"
-        textValue={proposalObj.deposit[0].value}
+        textValue={((proposalObj.deposit[0].value)/1000000).toFixed(2)}
       />
       <DetailsCommonComponent text="Type" textValue={proposalObj.type} />
       <DetailsCommonComponent

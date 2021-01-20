@@ -33,6 +33,7 @@ export const SendTokenForm = () => {
   const accountDetails = useSelector(
     (state) => state.walletReducer.accountDetails
   );
+  const loading = useSelector(state => state.walletReducer.loading);
   const { visible, hide, toggle } = useVisibleState(false);
   const [sendDataObj, setSendDataObj] = useState(null);
   const [formValues, setFormValues] = useState(null);
@@ -226,7 +227,7 @@ export const SendTokenForm = () => {
                         />
                         <ErrorMessage name="password" component={Error} />
                       </Box>
-                      <Button px="8rem" justifySelf="center" type="submit">
+                      <Button px="8rem" justifySelf="center" type="submit" loading={loading} disabled={loading}>
                         SEND
                       </Button>
                     </Box>

@@ -46,8 +46,7 @@ export const LoginUserAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.post_Login.FAILURE));
-                toast.error(error.message)
-                toast.error('Invalid Password')
+                toast.error(error.response.data.error.message !== '' ? error.response.data.error.message : 'Invalid Password')
             });
     };
 };
@@ -82,7 +81,8 @@ export const CheckConfigAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckConfig.FAILURE));
-                toast.error(error.message)
+                toast.error(error.response.data.error.message)
+
             });
     };
 };
@@ -117,7 +117,8 @@ export const CheckKeysAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckKeys.FAILURE));
-                toast.error(error.message)
+                toast.error(error.response.data.error.message)
+
             });
     };
 };
@@ -149,7 +150,8 @@ export const UpdateConfigAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.FAILURE));
-                toast.error(error.message)
+                toast.error(error.response.data.error.message)
+
             });
     };
 };
@@ -183,7 +185,8 @@ export const CreateAccountAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.post_CreateAccount.FAILURE));
-                toast.error(error.message)
+                toast.error(error.response.data.error.message)
+
             });
     };
 };
@@ -210,7 +213,8 @@ export const CheckConfigSettingAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.FAILURE));
-                toast.error(error.message)
+                toast.error(error.response.data.error.message)
+
             });
     };
 };

@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import QRCode from "qrcode.react";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'react-smart-toaster';
 
 import { Box, Text, Flex, Image } from "atoms";
 import MemoAddress from "assets/icons/Address";
@@ -33,16 +35,21 @@ export const RecieveQrCode = () => {
           >
             ADDRESS
           </Text>
-          <Flex
-            bg="grey.400"
-            borderRadius="4rem"
-            height="2.5rem"
-            width="2.5rem"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <MemoAddress height="1rem" />
-          </Flex>
+          <CopyToClipboard
+            text={encodeToBech32(address, "sent")}
+            onCopy={() => toast.success('Address Copied')}>
+            <Flex
+              bg="grey.400"
+              borderRadius="4rem"
+              height="2.5rem"
+              width="2.5rem"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+            >
+              <MemoAddress height="1rem" />
+            </Flex>
+          </CopyToClipboard>
         </Flex>
 
         <Text as="p" variant="small" color="grey.900" m={0}>

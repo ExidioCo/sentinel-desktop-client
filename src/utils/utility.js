@@ -89,6 +89,6 @@ export const decodeFromBech32 = (key) => {
             .toString('hex')
             .toUpperCase();
     } catch (e) {
-        return e;
+        return false;
     }
 };

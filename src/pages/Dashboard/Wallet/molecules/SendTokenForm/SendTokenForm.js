@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { toast } from 'react-smart-toaster';
 
 import { Text, Box, Flex, Error, Grid, Button, Modal, ModalClose } from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
 import { FormInput } from "molecules/FormInput/FormInput";
 import MemoHelp from "assets/icons/Help";
-import { decodeFromBech32 } from "../../../../../utils/utility";
+import { decodeFromBech32, encodeToBech32 } from "../../../../../utils/utility";
 import { PostSendTokenAction } from "../../actions/WalletActions";
 
 const initialValues = {
@@ -39,13 +40,17 @@ export const SendTokenForm = () => {
   const [formValues, setFormValues] = useState(null);
 
   const onSubmitChildHandler = (values, submitProps) => {
-    let dataObj = {
-      address: values.address,
-      amount: values.amount,
-    };
-    setSendDataObj(dataObj);
-    submitProps.resetForm();
-    toggle();
+    if(decodeFromBech32(values.address) === false) {
+      toast.error('Invalid To Address')
+    } else {
+      let dataObj = {
+        address: decodeFromBech32(values.address),
+        amount: values.amount,
+      };
+      setSendDataObj(dataObj);
+      submitProps.resetForm();
+      toggle();
+    }
   };
 
   const onSubmit = (values, submitProps) => {
@@ -58,7 +63,7 @@ export const SendTokenForm = () => {
 
     let postData = {
       password: values.password,
-      to_address: decodeFromBech32(sendDataObj.address),
+      to_address: sendDataObj.address,
       amount: amount,
     };
 
@@ -165,7 +170,7 @@ export const SendTokenForm = () => {
                         color="grey.900"
                         pb="1rem"
                       >
-                        {sendDataObj.address}
+                        {encodeToBech32(sendDataObj.address, 'sentvaloper')}
                       </Text>
                     </Grid>
                     <Grid gridTemplateColumns="15rem 1fr">

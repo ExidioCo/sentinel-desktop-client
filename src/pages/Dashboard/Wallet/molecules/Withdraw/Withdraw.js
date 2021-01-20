@@ -86,7 +86,6 @@ const WithdrawForm = () => {
     });
 
   const onSubmit = (values, submitProps) => {
-    console.log(values);
     let postData = {
       memo: values.memo,
       password: values.password,

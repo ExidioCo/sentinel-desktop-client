@@ -7,7 +7,7 @@ import bech32 from "bech32";
 import moment from "moment";
 
 import MemoProfile from "assets/icons/Profile";
-import { Box, Grid, Text, Flex, Modal, Error, ModalClose, Button } from "atoms";
+import { Box, Grid, Text, Flex, Modal, Error, ModalClose, Button, Loader } from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
 import { FormInput } from "molecules/FormInput";
@@ -49,9 +49,7 @@ const ValidatorsList = React.memo(
     delegate,
   }) => {
     const dispatch = useDispatch();
-    let address = useSelector(
-      (state) => state.loginReducer.checkKeysDetails.data.result[0].address
-    );
+    let address = useSelector(state => state.loginReducer.checkKeysDetails.data.result[0].address);
     let avatar = useSelector((state) => state.walletReducer.validatorAvatar);
     let accountDetails = useSelector(
       (state) => state.walletReducer.accountDetails
@@ -100,16 +98,16 @@ const ValidatorsList = React.memo(
 
     return (
       <>
-        <Grid
-          py="1rem"
-          gridTemplateColumns="3.5rem 2fr 2fr 2fr 2fr"
-          alignItems="center"
-          borderBottom="1px solid"
-          borderColor="border.500"
-        >
-          <MemoProfile height="2.5rem" width="2.5rem" />
-          <Flex alignItems="center">
-            {/* {
+          <Grid
+            py="1rem"
+            gridTemplateColumns="3.5rem 2fr 2fr 2fr 2fr"
+            alignItems="center"
+            borderBottom="1px solid"
+            borderColor="border.500"
+          >
+            <MemoProfile height="2.5rem" width="2.5rem" />
+            <Flex alignItems="center">
+              {/* {
             validatorListDataObj.description.identity === ''
             ?
             <MemoProfile height="2.5rem" width="2.5rem" />
@@ -117,123 +115,123 @@ const ValidatorsList = React.memo(
             <img src={avatar?.data.them[0].pictures.primary.url} alt="" height="30" width="30" style={{ borderRadius: '20px' }}/>
           } */}
 
-            <Text color="primary.700" fontSize="1.4rem" fontWeight="medium">
-              {validatorListDataObj.description.moniker}
-            </Text>
-          </Flex>
+              <Text color="primary.700" fontSize="1.4rem" fontWeight="medium">
+                {validatorListDataObj.description.moniker}
+              </Text>
+            </Flex>
 
-          <Text color="primary.700" fontSize="1.4rem" key={index}>
-            {/* 1,190,255 (6.62%) */}
-            {(validatorListDataObj.amount.value / 1000000).toFixed(2)}
-          </Text>
-          {/* <Text color="primary.700" fontSize="1.4rem">
+            <Text color="primary.700" fontSize="1.4rem" key={index}>
+              {/* 1,190,255 (6.62%) */}
+              {(validatorListDataObj.amount.value / 1000000).toFixed(2)}
+            </Text>
+            {/* <Text color="primary.700" fontSize="1.4rem">
           1,190,255 (6.62%)
         </Text> */}
-          <Text color="primary.700" fontSize="1.4rem">
-            {(JSON.parse(validatorListDataObj.commission.rate) * 100).toFixed(
-              2
-            )}
+            <Text color="primary.700" fontSize="1.4rem">
+              {(JSON.parse(validatorListDataObj.commission.rate) * 100).toFixed(
+                2
+              )}
             %
           </Text>
-          {/* <Text color="primary.700" fontSize="1.4rem">
+            {/* <Text color="primary.700" fontSize="1.4rem">
           10.00%
         </Text>
         <Text color="primary.700" fontSize="1.4rem">
           100.00%
         </Text> */}
-          <Text
-            color="primary.500"
-            fontSize="1.4rem"
-            cursor="pointer"
-            fontWeight="medium"
-            onClick={toggle}
-          >
-            {dropdownValue}
-          </Text>
-        </Grid>
-        {visible && (
-          <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
-            <ModalClose onClick={hide} />
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-              enableReinitialize
+            <Text
+              color="primary.500"
+              fontSize="1.4rem"
+              cursor="pointer"
+              fontWeight="medium"
+              onClick={toggle}
             >
-              {() => {
-                return (
-                  <Box>
-                    <Flex alignItems="center" ml="2rem">
-                      <Text
-                        variant="title"
-                        fontWeight="medium"
-                        color="primary.700"
-                        py="2rem"
-                        mr="1rem"
-                      >
-                        {dropdownValue}{" "}
-                        {dropdownValue === "UNBOND" ? "from" : "to"}
-                      </Text>
-                      <Text
-                        variant="body"
-                        fontWeight="medium"
-                        color="primary.500"
-                        mr="1rem"
-                      >
-                        {validatorListDataObj.description.moniker}
-                      </Text>
-                      <MemoHelp height="1.5rem" width="1.5rem" />
-                    </Flex>
-                    {!delegate ? (
-                      <Box mr="10rem" ml="2rem">
-                        <Grid gridTemplateColumns="15rem 1fr">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                          >
-                            Operator Address
+              {dropdownValue}
+            </Text>
+          </Grid>
+          {visible && (
+            <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
+              <ModalClose onClick={hide} />
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+                enableReinitialize
+              >
+                {() => {
+                  return (
+                    <Box>
+                      <Flex alignItems="center" ml="2rem">
+                        <Text
+                          variant="title"
+                          fontWeight="medium"
+                          color="primary.700"
+                          py="2rem"
+                          mr="1rem"
+                        >
+                          {dropdownValue}{" "}
+                          {dropdownValue === "UNBOND" ? "from" : "to"}
+                        </Text>
+                        <Text
+                          variant="body"
+                          fontWeight="medium"
+                          color="primary.500"
+                          mr="1rem"
+                        >
+                          {validatorListDataObj.description.moniker}
+                        </Text>
+                        <MemoHelp height="1.5rem" width="1.5rem" />
+                      </Flex>
+                      {!delegate ? (
+                        <Box mr="10rem" ml="2rem">
+                          <Grid gridTemplateColumns="15rem 1fr">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                            >
+                              Operator Address
                           </Text>
-                          <Text
-                            variant="body"
-                            fontWeight="medium"
-                            color="grey.900"
-                            pb="1rem"
-                          >
-                            {encodeToBech32(
-                              validatorListDataObj.address,
-                              "sentvaloper"
-                            )}
+                            <Text
+                              variant="body"
+                              fontWeight="medium"
+                              color="grey.900"
+                              pb="1rem"
+                            >
+                              {encodeToBech32(
+                                validatorListDataObj.address,
+                                "sentvaloper"
+                              )}
+                            </Text>
+                          </Grid>
+                          <Grid gridTemplateColumns="15rem 1fr">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                            >
+                              Commision Rate
                           </Text>
-                        </Grid>
-                        <Grid gridTemplateColumns="15rem 1fr">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                          >
-                            Commision Rate
-                          </Text>
-                          <Text
-                            variant="body"
-                            fontWeight="medium"
-                            color="grey.900"
-                            m={0}
-                            pb="1rem"
-                          >
-                            {JSON.parse(
-                              validatorListDataObj.commission.rate
-                            ).toFixed(2)}
+                            <Text
+                              variant="body"
+                              fontWeight="medium"
+                              color="grey.900"
+                              m={0}
+                              pb="1rem"
+                            >
+                              {JSON.parse(
+                                validatorListDataObj.commission.rate
+                              ).toFixed(2)}
                             % (Updated at{" "}
-                            {moment(
-                              validatorListDataObj.commission.updated_at
-                            ).format("MM-DD-YYYY hh:mm:ss")}
+                              {moment(
+                                validatorListDataObj.commission.updated_at
+                              ).format("MM-DD-YYYY hh:mm:ss")}
                             )
                           </Text>
-                        </Grid>
-                        {/* <Grid gridTemplateColumns="15rem 1fr">
+                          </Grid>
+                          {/* <Grid gridTemplateColumns="15rem 1fr">
                         <Text
                           variant="label"
                           fontWeight="medium"
@@ -253,9 +251,33 @@ const ValidatorsList = React.memo(
                         </Text>
                       </Grid> */}
 
-                        <Form>
-                          <Box my="2rem" mr="10rem">
-                            {dropdownValue === "RE-DELEGATE" && (
+                          <Form>
+                            <Box my="2rem" mr="10rem">
+                              {dropdownValue === "RE-DELEGATE" && (
+                                <Box>
+                                  <Flex alignItems="center">
+                                    <Text
+                                      variant="label"
+                                      fontWeight="medium"
+                                      color="grey.700"
+                                      textTransform="uppercase"
+                                      mr="1rem"
+                                    >
+                                      TO VALIDATOR
+                                  </Text>
+                                    <MemoHelp height="1.5rem" width="1.5rem" />
+                                  </Flex>
+                                  <FormInput
+                                    name="toValidator"
+                                    label="Enter To Validator Address"
+                                    autofocus
+                                  />
+                                  <ErrorMessage
+                                    name="toValidator"
+                                    component={Error}
+                                  />
+                                </Box>
+                              )}
                               <Box>
                                 <Flex alignItems="center">
                                   <Text
@@ -265,121 +287,97 @@ const ValidatorsList = React.memo(
                                     textTransform="uppercase"
                                     mr="1rem"
                                   >
-                                    TO VALIDATOR
-                                  </Text>
+                                    TOKEN AMOUNT
+                                </Text>
                                   <MemoHelp height="1.5rem" width="1.5rem" />
                                 </Flex>
                                 <FormInput
-                                  name="toValidator"
-                                  label="Enter To Validator Address"
+                                  name="amount"
+                                  label="Enter Token Amount"
                                   autofocus
                                 />
-                                <ErrorMessage
-                                  name="toValidator"
-                                  component={Error}
-                                />
+                                <ErrorMessage name="amount" component={Error} />
                               </Box>
-                            )}
-                            <Box>
-                              <Flex alignItems="center">
+                              <Box>
                                 <Text
                                   variant="label"
                                   fontWeight="medium"
                                   color="grey.700"
                                   textTransform="uppercase"
-                                  mr="1rem"
                                 >
-                                  TOKEN AMOUNT
-                                </Text>
-                                <MemoHelp height="1.5rem" width="1.5rem" />
-                              </Flex>
-                              <FormInput
-                                name="amount"
-                                label="Enter Token Amount"
-                                autofocus
-                              />
-                              <ErrorMessage name="amount" component={Error} />
+                                  Memo
+                              </Text>
+                                <FormInput
+                                  as="textarea"
+                                  rows="3"
+                                  name="memo"
+                                  label="Enter Memo"
+                                />
+                                <ErrorMessage name="memo" component={Error} />
+                              </Box>
+                              <Button
+                                px="8rem"
+                                justifySelf="center"
+                                type="submit"
+                              >
+                                {dropdownValue}
+                              </Button>
                             </Box>
-                            <Box>
+                          </Form>
+                        </Box>
+                      ) : (
+                          <Box m="5rem">
+                            <Grid justifyContent="center" alignItems="center">
+                              <Flex
+                                height="10rem"
+                                width="10rem"
+                                borderRadius="5rem"
+                                border="5px solid"
+                                borderColor="green.500"
+                                mx="auto"
+                                justifyContent="center"
+                                alignItems="center"
+                              >
+                                <MemoCheck height="5rem" width="5rem" />
+                              </Flex>
                               <Text
                                 variant="label"
-                                fontWeight="medium"
+                                fontWeight="semiBold"
                                 color="grey.700"
-                                textTransform="uppercase"
+                                textAlign="center"
+                                mt="3rem"
                               >
-                                Memo
-                              </Text>
-                              <FormInput
-                                as="textarea"
-                                rows="3"
-                                name="memo"
-                                label="Enter Memo"
-                              />
-                              <ErrorMessage name="memo" component={Error} />
-                            </Box>
-                            <Button
-                              px="8rem"
-                              justifySelf="center"
-                              type="submit"
-                            >
-                              {dropdownValue}
-                            </Button>
-                          </Box>
-                        </Form>
-                      </Box>
-                    ) : (
-                      <Box m="5rem">
-                        <Grid justifyContent="center" alignItems="center">
-                          <Flex
-                            height="10rem"
-                            width="10rem"
-                            borderRadius="5rem"
-                            border="5px solid"
-                            borderColor="green.500"
-                            mx="auto"
-                            justifyContent="center"
-                            alignItems="center"
-                          >
-                            <MemoCheck height="5rem" width="5rem" />
-                          </Flex>
-                          <Text
-                            variant="label"
-                            fontWeight="semiBold"
-                            color="grey.700"
-                            textAlign="center"
-                            mt="3rem"
-                          >
-                            Tx#:
+                                Tx#:
                             <Text as="span" variant="field" color="grey.900">
-                              {txHash}
-                            </Text>
-                          </Text>
-                          {/*  <Text*/}
-                          {/*    variant="label"*/}
-                          {/*    fontWeight="semiBold"*/}
-                          {/*    color="grey.700"*/}
-                          {/*    textAlign="center"*/}
-                          {/*    my="2rem"*/}
-                          {/*  >*/}
-                          {/*    Go to Explorer*/}
-                          {/*</Text>*/}
-                          <Button
-                            variant="secondary"
-                            px="3rem"
-                            justifySelf="center"
-                            onClick={onCloseDelegate}
-                          >
-                            Close
+                                  {txHash}
+                                </Text>
+                              </Text>
+                              {/*  <Text*/}
+                              {/*    variant="label"*/}
+                              {/*    fontWeight="semiBold"*/}
+                              {/*    color="grey.700"*/}
+                              {/*    textAlign="center"*/}
+                              {/*    my="2rem"*/}
+                              {/*  >*/}
+                              {/*    Go to Explorer*/}
+                              {/*</Text>*/}
+                              <Button
+                                variant="secondary"
+                                px="3rem"
+                                justifySelf="center"
+                                onClick={onCloseDelegate}
+                              >
+                                Close
                           </Button>
-                        </Grid>
-                      </Box>
-                    )}
-                  </Box>
-                );
-              }}
-            </Formik>
-          </Modal>
-        )}
+                            </Grid>
+                          </Box>
+                        )}
+                    </Box>
+                  );
+                }}
+              </Formik>
+            </Modal>
+          )}
       </>
     );
   }
@@ -388,10 +386,8 @@ const ValidatorsList = React.memo(
 export const Validators = React.memo(
   ({ visibleInActive, dropdownValue, hideDelegate, setDropdownValue }) => {
     const dispatch = useDispatch();
-
-    const validatorList = useSelector(
-      (state) => state.walletReducer.validatorList
-    );
+    const loadingValidator = useSelector(state => state.walletReducer.loadingValidator);
+    const validatorList = useSelector((state) => state.walletReducer.validatorList);
     let saveDelegate = useSelector((state) => state.walletReducer.saveDelegate);
     const [txHash, setTxHash] = useState("");
     const [delegate, setDelegate] = useState(false);
@@ -476,7 +472,7 @@ export const Validators = React.memo(
         </Box> */}
           <Box py={4} />
         </Grid>
-
+        <Loader loading={loadingValidator} relative>
         <Grid gridGap="1rem" maxHeight="61vh" className="scroll-bar">
           {!visibleInActive &&
             validatorList?.data.result.length > 0 &&
@@ -515,6 +511,7 @@ export const Validators = React.memo(
               }
             })}
         </Grid>
+        </Loader>
       </Box>
     );
   }

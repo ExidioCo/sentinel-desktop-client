@@ -19,8 +19,6 @@ export const NodeProviderDetail = ({
   const dispatch = useDispatch();
   const providersData = useSelector(state => state.dvpnReducer.providersData);
 
-  console.log('providersData---', providersData);
-
   useEffect(() => {
     dispatch(GetProvidersAction());
   }, [])

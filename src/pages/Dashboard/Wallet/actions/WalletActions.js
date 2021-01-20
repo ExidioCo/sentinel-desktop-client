@@ -49,7 +49,6 @@ export const GetValidatorListAction = () => {
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_ValidatorList.FAILURE));
                 toast.error(error.message)
-                console.log('error get_ValidatorList ..', error);
             });
     };
 };
@@ -77,7 +76,6 @@ export const GetProposalListAction = () => {
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_ProposalList.FAILURE));
                 toast.error(error.message)
-                console.log('error get_ProposalList ..', error);
             });
     };
 };
@@ -105,7 +103,6 @@ export const GetValidatorAvatarAction = (identity) => {
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_ValidatorAvatar.FAILURE));
                 toast.error(error.message)
-                console.log('error get_ValidatorAvatar ..', error);
             });
     };
 };
@@ -136,7 +133,6 @@ export const PostDelegateAction = (postData) => {
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SaveDelegate.FAILURE));
                 toast.error(error.message)
-                console.log('error post_SaveDelegate ..', error);
             });
     };
 };
@@ -167,7 +163,6 @@ export const PostReDelegateAction = (postData) => {
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SaveReDelegate.FAILURE));
                 toast.error(error.message)
-                console.log('error post_SaveReDelegate ..', error);
             });
     };
 };
@@ -198,7 +193,6 @@ export const PostUnbondAction = (postData) => {
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SaveUnbond.FAILURE));
                 toast.error(error.message)
-                console.log('error post_SaveUnbond ..', error);
             });
     };
 };
@@ -231,7 +225,6 @@ export const GetAnAccountDetailsAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_AnAccountDetails.FAILURE));
-                console.log('error get_AnAccountDetails ..', error);
                 toast.error(error.message)
             });
     };
@@ -256,7 +249,6 @@ export const GetCurrencyConversionDetailsAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_CoingekoDetails.FAILURE));
-                console.log('error get_CoingekoDetails ..', error);
                 toast.error(JSON.parse(error.message).message)
             });
     };
@@ -287,7 +279,6 @@ export const PostSendTokenAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SendTokens.FAILURE));
-                console.log('error post_SendTokens ..', error);
                 toast.error(error.message)
             });
     };
@@ -320,7 +311,6 @@ export const GetAllDelegationsAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_AllDelegations.FAILURE));
-                console.log('error get_AllDelegations ..', error);
                 toast.error(error.message)
             });
     };
@@ -358,7 +348,6 @@ export const PostVoteAction = (postData, proposalId) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_Vote.FAILURE));
-                console.log('error post_Vote ..', error);
                 toast.error('Something went wrong while voting');
             });
     };
@@ -389,7 +378,6 @@ export const PostWithdrawRewardsAction = (postData, address) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_WithdrawRewards.FAILURE));
-                console.log('error post_WithdrawRewards ..', error);
                 toast.error(error.message)
             });
     };

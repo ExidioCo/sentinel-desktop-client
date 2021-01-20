@@ -66,7 +66,6 @@ const validationSchema = Yup.object({
 });
 
 const DropdownItem = ({ name, bg, color }) => {
-  // console.log("index---", index);
   return (
     <BoxStyle px="1.5rem" py="1rem" cursor="pointer" bg={bg} color={color}>
       <Text width="100%" fontSize="1.4rem" fontWeight="medium">
@@ -515,7 +514,6 @@ export const Sidebar = ({ connect }) => {
     (state) => state.loginReducer.checkKeysDetails
   );
   accountDetails = accountDetails?.data?.result;
-  console.log("accountDetails---", accountDetails);
   useEffect(() => {}, []);
 
   return (

@@ -120,7 +120,6 @@ export const WalletDetails = () => {
   let tokens = accountDetails?.data.result.coins[0].value;
   let USDvalue = (tokens / 1000000) * USDprice;
 
-  console.log("hideDelegate---", hideDelegate);
   useEffect(() => {
     dispatch(GetCurrencyConversionDetailsAction());
   }, []);
@@ -169,7 +168,6 @@ export const WalletDetails = () => {
       >
         {tokens !== undefined ? (tokens / 1000000).toFixed(2) : 0}
         <Text as="span" variant="title" color="text.500" pl="1rem">
-          {console.log("USDvalue---", USDvalue)}
           (= ${!isNaN(USDvalue) ? USDvalue.toFixed(2) : 0} USD)
         </Text>
       </Text>

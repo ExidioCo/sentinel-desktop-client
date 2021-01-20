@@ -83,8 +83,6 @@ export const SessionHistory = () => {
     (state) => state.dvpnReducer.sessionOfAnAddressDetails
   );
 
-  console.log("sesionOfAnAddressDetails---", sesionOfAnAddressDetails);
-
   useEffect(() => {
     dispatch(GetSessionOfAnAddressAction());
   }, []);

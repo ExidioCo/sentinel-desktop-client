@@ -14,9 +14,7 @@ const FAILURE = "FAILURE";
 
 export const TOKEN_EXPIRY_MESSAGE = "Session has expired. Login again!"
 
-// export const API_URL = ''
-export const API_URL = 'http://127.0.0.1:8080'
-
+export const API_URL = process.env.REACT_APP_API_HOST
 
 export function actionCreator(actionType, data) {
     return {

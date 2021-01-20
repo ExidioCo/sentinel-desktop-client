@@ -38,13 +38,14 @@ const initialValues = {
   amount: "",
   memo: "",
   toValidator: "",
+  password: ""
 };
 const validationSchema = Yup.object({
   amount: Yup.string()
     .matches(/^[0-9]*$/, "Only Numbers allowed")
     .required("Required"),
   memo: Yup.string().required("Required"),
-  // toValidator: Yup.string().required("Required"),
+  password: Yup.string().required("Required")
 });
 
 const ValidatorsList = React.memo(
@@ -79,6 +80,7 @@ const ValidatorsList = React.memo(
         address: address,
         memo: values.memo,
         amount: amount,
+        password: values.password
       };
       if (dropdownValue === "DELEGATE") {
         postData["to"] = validatorListDataObj.address;
@@ -326,6 +328,21 @@ const ValidatorsList = React.memo(
                                 label="Enter Memo"
                               />
                               <ErrorMessage name="memo" component={Error} />
+                            </Box>
+                            <Box>
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                              >
+                                Password
+                              </Text>
+                              <FormInput
+                                name="password"
+                                label="Enter Password"
+                              />
+                              <ErrorMessage name="password" component={Error} />
                             </Box>
                             <Button
                               px="8rem"

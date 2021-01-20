@@ -51,8 +51,8 @@ export const jsonApiHeader = accessToken => {
 
 export const checkHttpStatus = (response) => {
    if(response.status === 401) {
-       window.location.reload();
        toast.error('session expired')
+       window.location.reload();
    } else {
     toast.error(response.data.error.message)
    }

@@ -510,6 +510,7 @@ export const Validators = React.memo(
             {!visibleInActive &&
               validatorList?.data.result.length > 0 &&
               validatorList.data.result.map((obj, index) => {
+                if (obj.jailed === false && obj.bond_status === 'Bonded') {
                 return (
                   <ValidatorsList
                     key={index}
@@ -523,11 +524,12 @@ export const Validators = React.memo(
                     delegate={delegate}
                   />
                 );
+                }
               })}
             {visibleInActive &&
               validatorList?.data.result.length > 0 &&
               validatorList.data.result.map((obj, index) => {
-                if (obj.jailed === true) {
+                if (obj.jailed === true && obj.bond_status !== 'Bonded') {
                   return (
                     <ValidatorsList
                       key={index}
@@ -541,6 +543,8 @@ export const Validators = React.memo(
                       delegate={delegate}
                     />
                   );
+                } else {
+
                 }
               })}
           </Grid>

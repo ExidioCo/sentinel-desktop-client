@@ -27,7 +27,7 @@ export const SentinelIntro = () => {
             lineHeight="155%"
             px="4rem"
           >
-            “The leader in transparent, end-to-end encrypted VPN technology”
+            The leader in transparent, end-to-end encrypted VPN technology
           </Text>
           <Text
             as="h2"

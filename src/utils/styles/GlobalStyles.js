@@ -117,6 +117,12 @@ textarea {
   resize: none;
 }
 
+.help-tooltip{
+  .__react_component_tooltip p{
+    max-width: 20rem;
+    
+  }
+}
 
 `;
 export default GlobalStyle;

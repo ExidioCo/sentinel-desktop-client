@@ -2,9 +2,18 @@ import { useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { Box, Grid, Text, Flex, Modal, Error, ModalClose, Button } from "atoms";
+import {
+  Box,
+  Grid,
+  Text,
+  Flex,
+  Modal,
+  Error,
+  ModalClose,
+  Button,
+  HelpTooltip,
+} from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
-import MemoHelp from "assets/icons/Help";
 
 const initialValues = {
   password: "",
@@ -48,7 +57,7 @@ export const SubscribedModal = ({ setSubscribe, visible, hide, toggle }) => {
                       ABC Node Hoster
                     </Text>
                   </Text>
-                  <MemoHelp height="1.5rem" width="1.5rem" />
+                  <HelpTooltip />
                 </Flex>
                 <Box pt="2rem">
                   <Text

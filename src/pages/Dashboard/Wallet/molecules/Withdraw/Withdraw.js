@@ -4,10 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { Box, Text, Flex, Grid, Button, Modal, Error, ModalClose } from "atoms";
+import {
+  Box,
+  Text,
+  Flex,
+  Grid,
+  Button,
+  Modal,
+  Error,
+  ModalClose,
+  HelpTooltip,
+} from "atoms";
 import { FormSelect, FormInput } from "molecules/FormInput/FormInput";
 import useVisibleState from "hooks/useVisibleStates";
-import MemoHelp from "assets/icons/Help";
 
 import {
   GetAllDelegationsAction,
@@ -187,7 +196,7 @@ const WithdrawForm = () => {
                     >
                       {selectedMoniker}
                     </Text>
-                    <MemoHelp height="1.5rem" width="1.5rem" />
+                    <HelpTooltip />
                   </Flex>
                   <Grid gridTemplateColumns="15rem 1fr">
                     <Text
@@ -240,7 +249,7 @@ const WithdrawForm = () => {
                           >
                             MEMO
                           </Text>
-                          <MemoHelp height="1.5rem" width="1.5rem" />
+                          <HelpTooltip />
                         </Flex>
                         <FormInput
                           as="textarea"

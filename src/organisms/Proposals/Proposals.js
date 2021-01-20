@@ -198,20 +198,23 @@ const ProposalDetails = ({ proposalObj }) => {
 
                   <Form>
                     <Box my="3rem" mx="1rem">
-                      <Text
-                        variant="label"
-                        fontWeight="medium"
-                        color="grey.700"
-                        textTransform="uppercase"
-                      >
-                        PASSWORD
-                      </Text>
-                      <FormInput
-                        type="password"
-                        name="password"
-                        label="Enter Password"
-                      />
-                      <ErrorMessage name="password" component={Error} />
+                      <Box>
+                        <Text
+                          variant="label"
+                          fontWeight="medium"
+                          color="grey.700"
+                          textTransform="uppercase"
+                        >
+                          Memo
+                        </Text>
+                        <FormInput
+                          as="textarea"
+                          rows="3"
+                          name="password"
+                          label="Enter Memo"
+                        />
+                        <ErrorMessage name="password" component={Error} />
+                      </Box>
                       <Button px="3rem" justifySelf="center" type="submit">
                         CONFIRM VOTE
                       </Button>
@@ -272,13 +275,13 @@ const ProposalsList = ({ index, proposalObj }) => {
       </Flex>
       <Grid
         py="1rem"
-        gridTemplateColumns="1fr 1.5fr 1.5fr 1fr 1fr "
+        gridTemplateColumns=" 1.5fr 1.5fr 1fr 1fr "
         alignItems="center"
         borderColor="border.500"
       >
-        <Flex alignItems="center">
-          <Grid gridGap="1rem">
-            {/* <Text
+        {/* <Flex alignItems="center">
+          <Grid gridGap="1rem"> */}
+        {/* <Text
               color="text.500"
               fontSize="1.4rem"
               fontWeight="medium"
@@ -296,8 +299,8 @@ const ProposalsList = ({ index, proposalObj }) => {
             >
               iqlusion
             </Text> */}
-          </Grid>
-        </Flex>
+        {/* </Grid>
+        </Flex> */}
 
         <Flex alignItems="center">
           <Grid gridGap="1rem">

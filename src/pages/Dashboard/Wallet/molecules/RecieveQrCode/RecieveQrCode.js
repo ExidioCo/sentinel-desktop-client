@@ -1,19 +1,26 @@
 import { useSelector } from "react-redux";
-import QRCode from 'qrcode.react';
-
+import QRCode from "qrcode.react";
 
 import { Box, Text, Flex, Image } from "atoms";
 import MemoAddress from "assets/icons/Address";
-import { encodeToBech32 } from '../../../../../utils/utility';
+import { encodeToBech32 } from "../../../../../utils/utility";
 
 export const RecieveQrCode = () => {
-  let address = useSelector(state => state.loginReducer.checkKeysDetails.data.result[0].address);
+  let address = useSelector(
+    (state) => state.loginReducer.checkKeysDetails.data.result[0].address
+  );
   return (
     <Box textAlign="center">
-      <Text variant="label" fontWeight="medium" color="grey.700" mt="2rem">
+      <Text
+        variant="label"
+        fontWeight="medium"
+        color="grey.700"
+        mt="2rem"
+        mb="1rem"
+      >
         Show QR code to Receive Tokens
       </Text>
-      <QRCode value={encodeToBech32(address, 'sent')} />
+      <QRCode value={encodeToBech32(address, "sent")} />
       <Box mt="2rem">
         <Flex justifyContent="center" alignItems="center" pb="1rem">
           <Text
@@ -39,7 +46,7 @@ export const RecieveQrCode = () => {
         </Flex>
 
         <Text as="p" variant="small" color="grey.900" m={0}>
-          {encodeToBech32(address, 'sent')}
+          {encodeToBech32(address, "sent")}
         </Text>
       </Box>
     </Box>

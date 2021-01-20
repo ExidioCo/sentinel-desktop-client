@@ -26,12 +26,14 @@ import { encodeToBech32 } from "../../utils/utility";
 
 const initialValues = {
   amount: "",
-  password: "",
+  memo: "",
   toValidator: "",
 };
 const validationSchema = Yup.object({
-  amount: Yup.string().required("Required"),
-  password: Yup.string().required("Required"),
+  amount: Yup.string()
+    .matches(/^[0-9]*$/, "Only Numbers allowed")
+    .required("Required"),
+  memo: Yup.string().required("Required"),
   // toValidator: Yup.string().required("Required"),
 });
 
@@ -65,7 +67,7 @@ const ValidatorsList = React.memo(
       };
       let postData = {
         address: address,
-        password: values.password,
+        memo: values.memo,
         amount: amount,
       };
       if (dropdownValue === "DELEGATE") {
@@ -101,7 +103,7 @@ const ValidatorsList = React.memo(
           py="1rem"
           gridTemplateColumns="2fr 2fr 2fr 2fr"
           alignItems="center"
-          borderBottom={index < 3 ? "1px solid" : "none"}
+          borderBottom="1px solid"
           borderColor="border.500"
         >
           <Flex alignItems="center">
@@ -173,7 +175,8 @@ const ValidatorsList = React.memo(
                         py="2rem"
                         mr="1rem"
                       >
-                        {dropdownValue} to
+                        {dropdownValue}{" "}
+                        {dropdownValue === "UNBOND" ? "from" : "to"}
                       </Text>
                       <Text
                         variant="body"
@@ -272,7 +275,7 @@ const ValidatorsList = React.memo(
                                 </Flex>
                                 <FormInput
                                   name="toValidator"
-                                  label="To Validator"
+                                  label="Enter To Validator Address"
                                   autofocus
                                 />
                                 <ErrorMessage
@@ -296,7 +299,7 @@ const ValidatorsList = React.memo(
                               </Flex>
                               <FormInput
                                 name="amount"
-                                label="Token Amount"
+                                label="Enter Token Amount"
                                 autofocus
                               />
                               <ErrorMessage name="amount" component={Error} />
@@ -308,14 +311,15 @@ const ValidatorsList = React.memo(
                                 color="grey.700"
                                 textTransform="uppercase"
                               >
-                                PASSWORD
+                                Memo
                               </Text>
                               <FormInput
-                                type="password"
-                                name="password"
-                                label="Enter Password"
+                                as="textarea"
+                                rows="3"
+                                name="memo"
+                                label="Enter Memo"
                               />
-                              <ErrorMessage name="password" component={Error} />
+                              <ErrorMessage name="memo" component={Error} />
                             </Box>
                             <Button
                               px="8rem"

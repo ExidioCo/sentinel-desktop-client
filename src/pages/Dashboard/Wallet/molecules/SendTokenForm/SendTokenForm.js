@@ -8,8 +8,8 @@ import { Text, Box, Flex, Error, Grid, Button, Modal, ModalClose } from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
 import { FormInput } from "molecules/FormInput/FormInput";
 import MemoHelp from "assets/icons/Help";
-import { decodeFromBech32 } from '../../../../../utils/utility';
-import { PostSendTokenAction } from '../../actions/WalletActions';
+import { decodeFromBech32 } from "../../../../../utils/utility";
+import { PostSendTokenAction } from "../../actions/WalletActions";
 
 const initialValues = {
   address: "",
@@ -19,7 +19,10 @@ const initialValues = {
 };
 const validationSchemaSendToken = yup.object({
   address: yup.string().required("Required"),
-  amount: yup.string().required("Required"),
+  amount: yup
+    .string()
+    .matches(/^[0-9]*$/, "Only Numbers allowed")
+    .required("Required"),
 });
 const validationSchemaSendingTokenAddress = yup.object({
   password: yup.string().required("Required"),
@@ -27,38 +30,42 @@ const validationSchemaSendingTokenAddress = yup.object({
 
 export const SendTokenForm = () => {
   const dispatch = useDispatch();
-  const accountDetails = useSelector(state => state.walletReducer.accountDetails);
+  const accountDetails = useSelector(
+    (state) => state.walletReducer.accountDetails
+  );
   const { visible, hide, toggle } = useVisibleState(false);
-  const [ sendDataObj, setSendDataObj ] = useState(null)
+  const [sendDataObj, setSendDataObj] = useState(null);
   const [formValues, setFormValues] = useState(null);
 
   const onSubmitChildHandler = (values, submitProps) => {
     let dataObj = {
       address: values.address,
-      amount: values.amount
-    }
+      amount: values.amount,
+    };
     setSendDataObj(dataObj);
     submitProps.resetForm();
     toggle();
   };
 
   const onSubmit = (values, submitProps) => {
-    let amount = [{
-      denom: accountDetails?.data?.result?.coins[0].denom,
-      value: JSON.parse(sendDataObj.amount)
-    }]
+    let amount = [
+      {
+        denom: accountDetails?.data?.result?.coins[0].denom,
+        value: JSON.parse(sendDataObj.amount),
+      },
+    ];
 
     let postData = {
       password: values.password,
       to_address: decodeFromBech32(sendDataObj.address),
-      amount: amount
+      amount: amount,
+    };
+
+    if (values.memo !== "") {
+      postData["memo"] = values.memo;
     }
 
-    if(values.memo !== "") {
-      postData['memo'] = values.memo
-    }
-
-    dispatch(PostSendTokenAction(postData))
+    dispatch(PostSendTokenAction(postData));
     submitProps.resetForm();
     toggle();
   };
@@ -83,7 +90,12 @@ export const SendTokenForm = () => {
                 >
                   To Address
                 </Text>
-                <FormInput type="text" name="address" label="Address" autofocus/>
+                <FormInput
+                  type="text"
+                  name="address"
+                  label="Enter To Address"
+                  autofocus
+                />
                 <ErrorMessage name="address" component={Error} />
               </Box>
               <Box mx="3rem">
@@ -98,7 +110,7 @@ export const SendTokenForm = () => {
                 <FormInput
                   type="text"
                   name="amount"
-                  label="Total Amount"
+                  label="Enter Amount"
                   maxValue="Max"
                 />
                 <ErrorMessage name="amount" component={Error} />
@@ -189,7 +201,13 @@ export const SendTokenForm = () => {
                           </Text>
                           <MemoHelp height="1.5rem" width="1.5rem" />
                         </Flex>
-                        <FormInput name="memo" label="Enter Memo" autofocus/>
+                        <FormInput
+                          as="textarea"
+                          rows="3"
+                          name="memo"
+                          label="Enter Memo"
+                          autofocus
+                        />
                         <ErrorMessage name="memo" component={Error} />
                       </Box>
                       <Box>

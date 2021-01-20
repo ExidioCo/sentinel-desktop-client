@@ -58,7 +58,9 @@ const BoxStyle = styled(Box)`
 
 const validationSchema = Yup.object({
   fee: Yup.string().required("Required"),
-  gas_amount: Yup.string().required("Required"),
+  gas_amount: Yup.string()
+    .matches(/^[0-9]*$/, "Only Numbers allowed")
+    .required("Required"),
   chain_id: Yup.string().required("Required"),
   rpc_address: Yup.string().required("Required"),
 });
@@ -325,8 +327,12 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                         >
                           Configure Settings
                         </Text>
-                        <Grid gridTemplateColumns="1fr 1fr" gridGap="3rem">
-                          <Box mt="5rem">
+                        <Grid
+                          gridTemplateColumns="1fr 1fr"
+                          gridGap="3rem"
+                          mt="5rem"
+                        >
+                          <Box>
                             <Flex alignItems="center" mb="1rem">
                               <Text
                                 variant="label"
@@ -386,7 +392,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                                   textTransform="uppercase"
                                   mr=".5rem"
                                 >
-                                  Gas
+                                  Enter Gas
                                 </Text>
                                 <MemoHelp height="1.3rem" width="1.3rem" />
                               </Flex>
@@ -400,7 +406,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                               />
                             </Box>
                           </Box>
-                          <Box mt="5rem">
+                          <Box>
                             <Box>
                               <Flex alignItems="center" mb="1rem">
                                 <Text
@@ -410,7 +416,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                                   textTransform="uppercase"
                                   mr=".5rem"
                                 >
-                                  Chain ID
+                                  Enter Chain ID
                                 </Text>
                                 <MemoHelp height="1.3rem" width="1.3rem" />
                               </Flex>
@@ -460,7 +466,7 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
                                   textTransform="uppercase"
                                   mr=".5rem"
                                 >
-                                  RPC Server Address
+                                  Enter RPC Server Address
                                 </Text>
                                 <MemoHelp height="1.3rem" width="1.3rem" />
                               </Flex>

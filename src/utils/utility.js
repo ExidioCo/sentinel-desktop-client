@@ -6,6 +6,7 @@
  */
 import bech32 from 'bech32';
 import history from './history';
+import { toast } from 'react-smart-toaster';
 
 const REQUEST = "REQUEST";
 const SUCCESS = "SUCCESS";
@@ -48,18 +49,13 @@ export const jsonApiHeader = accessToken => {
     };
 };
 
-export function checkHttpStatus(response) {
-    if (response.status >= 200 && response.status < 204) {
-        return response.json();
-    } else if (response.status === 204) {
-        return true;
-    } else if (response.status >= 400 && response.status < 500) {
-        return response.json();
-    } else {
-        var error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-    }
+export const checkHttpStatus = (response) => {
+   if(response.status === 401) {
+       window.location.reload();
+       toast.error('session expired')
+   } else {
+    toast.error(response.data.error.message)
+   }
 }
 
 export const encodeToBech32 = (key, prefix) => {

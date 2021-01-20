@@ -21,7 +21,8 @@ import {
     POST_SEND_TOKENS_API,
     POST_VOTE_API,
     POST_WITHDRAW_REWARDS_API,
-    WalletActionTypes
+    WalletActionTypes,
+    checkHttpStatus
 } from '../constants/index';
 import axios from 'axios';
 
@@ -48,8 +49,7 @@ export const GetValidatorListAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_ValidatorList.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -76,7 +76,7 @@ export const GetProposalListAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_ProposalList.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };
@@ -104,7 +104,7 @@ export const GetValidatorAvatarAction = (identity) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_ValidatorAvatar.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };
@@ -135,8 +135,7 @@ export const PostDelegateAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SaveDelegate.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -166,7 +165,7 @@ export const PostReDelegateAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SaveReDelegate.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };
@@ -197,7 +196,7 @@ export const PostUnbondAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SaveUnbond.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };
@@ -231,7 +230,7 @@ export const GetAnAccountDetailsAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_AnAccountDetails.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };
@@ -286,7 +285,7 @@ export const PostSendTokenAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_SendTokens.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -318,7 +317,7 @@ export const GetAllDelegationsAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.get_AllDelegations.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };
@@ -386,7 +385,7 @@ export const PostWithdrawRewardsAction = (postData, address) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_WithdrawRewards.FAILURE));
-                toast.error(error.response.data.error.message)
+                checkHttpStatus(error.response);
 
             });
     };

@@ -91,5 +91,4 @@ export const decodeFromBech32 = (key) => {
   }
 };
 
-export const HELP_MESSAGE =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+export const HELP_MESSAGE = "Help";

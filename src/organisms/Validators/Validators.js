@@ -77,6 +77,7 @@ const ValidatorsList = React.memo(
         postData["from"] = validatorListDataObj.address;
         postData["to"] = values.toValidator;
         dispatch(PostReDelegateAction(postData));
+        hide();
       } else if (dropdownValue === "UNBOND") {
         postData["from"] = validatorListDataObj.address;
         dispatch(PostUnbondAction(postData));
@@ -101,11 +102,12 @@ const ValidatorsList = React.memo(
       <>
         <Grid
           py="1rem"
-          gridTemplateColumns="2fr 2fr 2fr 2fr"
+          gridTemplateColumns="3.5rem 2fr 2fr 2fr 2fr"
           alignItems="center"
           borderBottom="1px solid"
           borderColor="border.500"
         >
+          <MemoProfile height="2.5rem" width="2.5rem" />
           <Flex alignItems="center">
             {/* {
             validatorListDataObj.description.identity === ''
@@ -114,14 +116,8 @@ const ValidatorsList = React.memo(
             :
             <img src={avatar?.data.them[0].pictures.primary.url} alt="" height="30" width="30" style={{ borderRadius: '20px' }}/>
           } */}
-            <MemoProfile height="2.5rem" width="2.5rem" />
 
-            <Text
-              color="primary.700"
-              fontSize="1.4rem"
-              fontWeight="medium"
-              ml="1rem"
-            >
+            <Text color="primary.700" fontSize="1.4rem" fontWeight="medium">
               {validatorListDataObj.description.moniker}
             </Text>
           </Flex>
@@ -424,7 +420,8 @@ export const Validators = React.memo(
 
     return (
       <Box mr="1rem">
-        <Grid py="1.5rem" gridTemplateColumns="2fr 2fr 2fr 2fr">
+        <Grid py="1.5rem" gridTemplateColumns="3.5rem 2fr 2fr 2fr 2fr">
+          <Box />
           <Box py={4}>
             <Text
               color="text.500"

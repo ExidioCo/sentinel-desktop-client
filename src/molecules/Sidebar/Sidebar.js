@@ -65,9 +65,10 @@ const validationSchema = Yup.object({
   rpc_address: Yup.string().required("Required"),
 });
 
-const DropdownItem = ({ name }) => {
+const DropdownItem = ({ name, bg, color }) => {
+  // console.log("index---", index);
   return (
-    <BoxStyle px="1.5rem" py="1rem" cursor="pointer">
+    <BoxStyle px="1.5rem" py="1rem" cursor="pointer" bg={bg} color={color}>
       <Text width="100%" fontSize="1.4rem" fontWeight="medium">
         {name}
       </Text>
@@ -246,16 +247,26 @@ export const MyAccountDropdown = ({ name, accountDetails }) => {
               accountDetails.length > 0 &&
               accountDetails.map((obj, index) => {
                 return (
-                  <DropdownItem name={obj.name.toUpperCase()} key={index} />
+                  <DropdownItem
+                    name={obj.name.toUpperCase()}
+                    key={index}
+                    bg={index === 0 ? "primary.500" : ""}
+                    color={index === 0 ? "white" : ""}
+                  />
                 );
               })}
-            <BoxStyle px="1.5rem" py="1rem" cursor="pointer" color="grey.700">
+            <BoxStyle
+              px="1.5rem"
+              py="1rem"
+              cursor="pointer"
+              color="grey.700"
+              onClick={openSettingHandler}
+            >
               <Grid
                 gridAutoFlow="column"
                 justifyContent="start"
                 alignItems="center"
                 gridGap=".5rem"
-                onClick={openSettingHandler}
               >
                 <MemoSetting height="1.8rem" width="1.8rem" fill="#8EA1C8" />
                 <Text width="100%" fontSize="1.4rem" fontWeight="medium">

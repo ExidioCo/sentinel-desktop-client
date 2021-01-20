@@ -231,6 +231,7 @@ const ProposalDetails = ({ proposalObj }) => {
 };
 const ProposalsList = ({ index, proposalObj }) => {
   const { visible, toggle } = useVisibleState(true);
+  const [isVisible, setVisible] = useState(false);
 
   const findMaxValue = (obj, n) => {
     let keys = Object.keys(obj);

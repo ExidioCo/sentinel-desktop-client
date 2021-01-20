@@ -17,7 +17,6 @@ export const ShowPopup = ({
   setDropdownValue,
 }) => {
   const [dropdown, setDropdown] = useState(false);
-
   useEffect(() => {
     if (hideDelegate === true) {
       setDropdownValue("RE-DELEGATE");
@@ -121,6 +120,7 @@ export const WalletDetails = () => {
   let tokens = accountDetails?.data.result.coins[0].value;
   let USDvalue = (tokens / 1000000) * USDprice;
 
+  console.log("hideDelegate---", hideDelegate);
   useEffect(() => {
     dispatch(GetCurrencyConversionDetailsAction());
   }, []);

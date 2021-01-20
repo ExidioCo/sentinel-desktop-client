@@ -9,8 +9,11 @@ import { FormSelect, FormInput } from "molecules/FormInput/FormInput";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
 
-import { GetAllDelegationsAction, PostWithdrawRewardsAction } from '../../actions/WalletActions';
-import {encodeToBech32} from "../../../../../utils/utility";
+import {
+  GetAllDelegationsAction,
+  PostWithdrawRewardsAction,
+} from "../../actions/WalletActions";
+import { encodeToBech32 } from "../../../../../utils/utility";
 
 const initialValues = {
   validator: "",
@@ -31,48 +34,56 @@ const validationSchemaWithdrawing = Yup.object({
 
 const WithdrawForm = () => {
   const dispatch = useDispatch();
-  const delegations = useSelector(state => state.walletReducer.allDelegations);
-  const validatorList = useSelector(state => state.walletReducer.validatorList);
-  const accountDetails = useSelector(state => state.walletReducer.accountDetails);
+  const delegations = useSelector(
+    (state) => state.walletReducer.allDelegations
+  );
+  const validatorList = useSelector(
+    (state) => state.walletReducer.validatorList
+  );
+  const accountDetails = useSelector(
+    (state) => state.walletReducer.accountDetails
+  );
   const { visible, hide, toggle } = useVisibleState(false);
   const [formValues, setFormValues] = useState(null);
   const [withDrawelValueAddress, setWithDrawelAddress] = useState(null);
   const [selectedMoniker, setMoniker] = useState(null);
 
   useEffect(() => {
-    dispatch(GetAllDelegationsAction())
-  }, [GetAllDelegationsAction])
+    dispatch(GetAllDelegationsAction());
+  }, [GetAllDelegationsAction]);
 
   let filteredOption = [];
-  let options = []
+  let options = [];
 
-  delegations?.data?.result.length > 0 &&  delegations?.data?.result.map((obj, index) => {
-      let tempObj = {}
-      tempObj["customAbbreviation"] = obj.validator_address
-      filteredOption.push(tempObj)
-  })
+  delegations?.data?.result.length > 0 &&
+    delegations?.data?.result.map((obj, index) => {
+      let tempObj = {};
+      tempObj["customAbbreviation"] = obj.validator_address;
+      filteredOption.push(tempObj);
+    });
 
-  let result = filteredOption.map(function(el) {
+  let result = filteredOption.map(function (el) {
     var o = Object.assign({}, el);
-    o.value = '';
-    o.label = '';
+    o.value = "";
+    o.label = "";
     return o;
-  })
+  });
 
-  result.length > 0 && result.map((obj) => ({...obj, value: '', label: ''}))
+  result.length > 0 && result.map((obj) => ({ ...obj, value: "", label: "" }));
 
-  validatorList?.data?.result.length > 0 &&  validatorList?.data?.result.map((obj) => {
-    return result.map((Childobj) => {
-      if(Childobj.customAbbreviation === obj.address) {
-        let temObj = {}
-        temObj["customAbbreviation"] = obj.address;
-        // temObj["value"] = { moniker: obj.description.moniker, address: obj.address};
-        temObj["value"] = obj.address;
-        temObj["label"] = obj.description.moniker;
-        options.push(temObj)
-      }
-    })
-  })
+  validatorList?.data?.result.length > 0 &&
+    validatorList?.data?.result.map((obj) => {
+      return result.map((Childobj) => {
+        if (Childobj.customAbbreviation === obj.address) {
+          let temObj = {};
+          temObj["customAbbreviation"] = obj.address;
+          // temObj["value"] = { moniker: obj.description.moniker, address: obj.address};
+          temObj["value"] = obj.address;
+          temObj["label"] = obj.description.moniker;
+          options.push(temObj);
+        }
+      });
+    });
 
   const onSubmit = (values, submitProps) => {
     console.log(values);
@@ -80,8 +91,8 @@ const WithdrawForm = () => {
       memo: values.memo,
       password: values.password,
       address: accountDetails.data.result.address,
-      validators: [withDrawelValueAddress]
-    }
+      validators: [withDrawelValueAddress],
+    };
     dispatch(PostWithdrawRewardsAction(postData, withDrawelValueAddress));
     submitProps.resetForm();
     toggle();
@@ -93,17 +104,19 @@ const WithdrawForm = () => {
         {label}
       </Text>
       <Text variant="small" fontWeight="medium" color="primary.700">
-        {encodeToBech32(customAbbreviation,'sentvaloper')}
+        {encodeToBech32(customAbbreviation, "sentvaloper")}
       </Text>
     </Grid>
   );
 
-  const onChangeHandler = value => {
-    setWithDrawelAddress(value)
-    let findMoniker = validatorList.data.result.filter(data => data.address === value);
+  const onChangeHandler = (value) => {
+    setWithDrawelAddress(value);
+    let findMoniker = validatorList.data.result.filter(
+      (data) => data.address === value
+    );
     findMoniker = findMoniker[0].description.moniker;
-    setMoniker(findMoniker)
-  }
+    setMoniker(findMoniker);
+  };
 
   return (
     <>
@@ -192,7 +205,7 @@ const WithdrawForm = () => {
                       color="grey.900"
                       pb="1rem"
                     >
-                      {encodeToBech32(withDrawelValueAddress,'sentvaloper')}
+                      {encodeToBech32(withDrawelValueAddress, "sentvaloper")}
                     </Text>
                   </Grid>
                   {/* <Grid gridTemplateColumns="15rem 1fr">
@@ -230,7 +243,13 @@ const WithdrawForm = () => {
                           </Text>
                           <MemoHelp height="1.5rem" width="1.5rem" />
                         </Flex>
-                        <FormInput name="memo" label="Enter Memo" autofocus/>
+                        <FormInput
+                          as="textarea"
+                          rows="3"
+                          name="memo"
+                          label="Enter Memo"
+                          autofocus
+                        />
                         <ErrorMessage name="memo" component={Error} />
                       </Box>
                       <Box>

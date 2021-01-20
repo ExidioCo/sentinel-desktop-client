@@ -127,114 +127,116 @@ export const SendTokenForm = () => {
       {visible && (
         <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
           <ModalClose onClick={hide} />
-          <Formik
-            initialValues={formValues || initialValues}
-            validationSchema={validationSchemaSendingTokenAddress}
-            onSubmit={onSubmit}
-            enableReinitialize
-          >
-            {() => {
-              return (
-                <Box mr="10rem" ml="1rem">
-                  <Flex alignItems="center">
-                    <Text
-                      variant="title"
-                      fontWeight="medium"
-                      color="primary.700"
-                      py="2rem"
-                      mr="1rem"
-                    >
-                      SENDING TOKENS to
-                    </Text>
-                    <MemoHelp height="1.5rem" width="1.5rem" />
-                  </Flex>
-                  <Grid gridTemplateColumns="15rem 1fr">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                    >
-                      To Address
-                    </Text>
-                    <Text
-                      variant="body"
-                      fontWeight="medium"
-                      color="grey.900"
-                      pb="1rem"
-                    >
-                      {sendDataObj.address}
-                    </Text>
-                  </Grid>
-                  <Grid gridTemplateColumns="15rem 1fr">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                    >
-                      Tokens
-                    </Text>
-                    <Text
-                      variant="body"
-                      fontWeight="medium"
-                      color="grey.900"
-                      m={0}
-                      pb="1rem"
-                    >
-                      {sendDataObj.amount}
-                    </Text>
-                  </Grid>
+          <Grid gridTemplateColumns="35rem 20rem">
+            <Formik
+              initialValues={formValues || initialValues}
+              validationSchema={validationSchemaSendingTokenAddress}
+              onSubmit={onSubmit}
+              enableReinitialize
+            >
+              {() => {
+                return (
+                  <Box ml="1rem">
+                    <Flex alignItems="center">
+                      <Text
+                        variant="title"
+                        fontWeight="medium"
+                        color="primary.700"
+                        py="2rem"
+                        mr="1rem"
+                      >
+                        SENDING TOKENS to
+                      </Text>
+                      <MemoHelp height="1.5rem" width="1.5rem" />
+                    </Flex>
+                    <Grid gridTemplateColumns="15rem 1fr">
+                      <Text
+                        variant="label"
+                        fontWeight="medium"
+                        color="grey.700"
+                        textTransform="uppercase"
+                      >
+                        To Address
+                      </Text>
+                      <Text
+                        variant="body"
+                        fontWeight="medium"
+                        color="grey.900"
+                        pb="1rem"
+                      >
+                        {sendDataObj.address}
+                      </Text>
+                    </Grid>
+                    <Grid gridTemplateColumns="15rem 1fr">
+                      <Text
+                        variant="label"
+                        fontWeight="medium"
+                        color="grey.700"
+                        textTransform="uppercase"
+                      >
+                        Tokens
+                      </Text>
+                      <Text
+                        variant="body"
+                        fontWeight="medium"
+                        color="grey.900"
+                        m={0}
+                        pb="1rem"
+                      >
+                        {sendDataObj.amount}
+                      </Text>
+                    </Grid>
 
-                  <Form>
-                    <Box my="2rem" mr="10rem">
-                      <Box>
-                        <Flex alignItems="center">
+                    <Form>
+                      <Box my="2rem">
+                        <Box>
+                          <Flex alignItems="center">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                              mr="1rem"
+                            >
+                              MEMO
+                            </Text>
+                            <MemoHelp height="1.5rem" width="1.5rem" />
+                          </Flex>
+                          <FormInput
+                            as="textarea"
+                            rows="3"
+                            name="memo"
+                            label="Enter Memo"
+                            autofocus
+                          />
+                          <ErrorMessage name="memo" component={Error} />
+                        </Box>
+                        <Box>
                           <Text
                             variant="label"
                             fontWeight="medium"
                             color="grey.700"
                             textTransform="uppercase"
-                            mr="1rem"
                           >
-                            MEMO
+                            PASSWORD
                           </Text>
-                          <MemoHelp height="1.5rem" width="1.5rem" />
-                        </Flex>
-                        <FormInput
-                          as="textarea"
-                          rows="3"
-                          name="memo"
-                          label="Enter Memo"
-                          autofocus
-                        />
-                        <ErrorMessage name="memo" component={Error} />
+                          <FormInput
+                            type="password"
+                            name="password"
+                            label="Enter Password"
+                          />
+                          <ErrorMessage name="password" component={Error} />
+                        </Box>
+                        <Button px="8rem" justifySelf="center" type="submit">
+                          SEND
+                        </Button>
                       </Box>
-                      <Box>
-                        <Text
-                          variant="label"
-                          fontWeight="medium"
-                          color="grey.700"
-                          textTransform="uppercase"
-                        >
-                          PASSWORD
-                        </Text>
-                        <FormInput
-                          type="password"
-                          name="password"
-                          label="Enter Password"
-                        />
-                        <ErrorMessage name="password" component={Error} />
-                      </Box>
-                      <Button px="8rem" justifySelf="center" type="submit">
-                        SEND
-                      </Button>
-                    </Box>
-                  </Form>
-                </Box>
-              );
-            }}
-          </Formik>
+                    </Form>
+                  </Box>
+                );
+              }}
+            </Formik>
+          </Grid>
         </Modal>
       )}
     </>

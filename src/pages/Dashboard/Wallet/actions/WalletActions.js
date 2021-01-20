@@ -350,12 +350,11 @@ export const PostVoteAction = (postData, proposalId) => {
                     toast.success('Vote saved successfully');
                 } else {
                     dispatch(actionCreator(WalletActionTypes.post_Vote.FAILURE));
-                    toast.error('Something went wrong while voting');
                 }
             })
             .catch(function (error) {
                 dispatch(actionCreator(WalletActionTypes.post_Vote.FAILURE));
-                toast.error('Something went wrong while voting');
+                checkHttpStatus(error.response);
             });
     };
 };

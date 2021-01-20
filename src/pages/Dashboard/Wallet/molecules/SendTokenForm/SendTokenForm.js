@@ -3,12 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { toast } from 'react-smart-toaster';
+import { toast } from "react-smart-toaster";
 
-import { Text, Box, Flex, Error, Grid, Button, Modal, ModalClose } from "atoms";
+import {
+  Text,
+  Box,
+  Flex,
+  Error,
+  Grid,
+  Button,
+  Modal,
+  ModalClose,
+  HelpTooltip,
+} from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
 import { FormInput } from "molecules/FormInput/FormInput";
-import MemoHelp from "assets/icons/Help";
 import { decodeFromBech32, encodeToBech32 } from "../../../../../utils/utility";
 import { PostSendTokenAction } from "../../actions/WalletActions";
 
@@ -34,14 +43,14 @@ export const SendTokenForm = () => {
   const accountDetails = useSelector(
     (state) => state.walletReducer.accountDetails
   );
-  const loading = useSelector(state => state.walletReducer.loading);
+  const loading = useSelector((state) => state.walletReducer.loading);
   const { visible, hide, toggle } = useVisibleState(false);
   const [sendDataObj, setSendDataObj] = useState(null);
   const [formValues, setFormValues] = useState(null);
 
   const onSubmitChildHandler = (values, submitProps) => {
-    if(decodeFromBech32(values.address) === false) {
-      toast.error('Invalid To Address')
+    if (decodeFromBech32(values.address) === false) {
+      toast.error("Invalid To Address");
     } else {
       let dataObj = {
         address: decodeFromBech32(values.address),
@@ -153,7 +162,7 @@ export const SendTokenForm = () => {
                       >
                         SENDING TOKENS to
                       </Text>
-                      <MemoHelp height="1.5rem" width="1.5rem" />
+                      <HelpTooltip />
                     </Flex>
                     <Grid gridTemplateColumns="15rem 1fr">
                       <Text
@@ -170,7 +179,7 @@ export const SendTokenForm = () => {
                         color="grey.900"
                         pb="1rem"
                       >
-                        {encodeToBech32(sendDataObj.address, 'sentvaloper')}
+                        {encodeToBech32(sendDataObj.address, "sentvaloper")}
                       </Text>
                     </Grid>
                     <Grid gridTemplateColumns="15rem 1fr">
@@ -206,7 +215,7 @@ export const SendTokenForm = () => {
                             >
                               MEMO
                             </Text>
-                            <MemoHelp height="1.5rem" width="1.5rem" />
+                            <HelpTooltip />
                           </Flex>
                           <FormInput
                             as="textarea"

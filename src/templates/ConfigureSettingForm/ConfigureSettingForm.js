@@ -4,12 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { Text, Box, Grid, Flex, Error, Button, Chip } from "atoms";
+import { Text, Box, Grid, Flex, Error, Button, Chip, HelpTooltip } from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
-import MemoHelp from "assets/icons/Help";
 import { SocialSecion } from "molecules/SocialSecion";
 
-import { UpdateConfigAction } from '../../pages/Login/actions/LoginActions';
+import { UpdateConfigAction } from "../../pages/Login/actions/LoginActions";
 
 const validationSchema = Yup.object({
   fee: Yup.string().required("Required"),
@@ -18,124 +17,134 @@ const validationSchema = Yup.object({
   rpc_address: Yup.string().required("Required"),
 });
 
-
 export const ConfigureSettingForm = () => {
-
   const dispatch = useDispatch();
 
-  const configDetails = useSelector(state => state.loginReducer.checkConfigDetails);
-  const loading = useSelector(state => state.loginReducer.loading);
+  const configDetails = useSelector(
+    (state) => state.loginReducer.checkConfigDetails
+  );
+  const loading = useSelector((state) => state.loginReducer.loading);
 
   const [brodcastMode, setVariant] = useState(
     configDetails.data !== undefined
-      ?
-      {
-        Block: configDetails.data.result.chain.broadcast_mode === 'block' ? 'selected' : 'primary',
-        Sync: configDetails.data.result.chain.broadcast_mode === 'sync' ? 'selected' : 'primary',
-        Async: configDetails.data.result.chain.broadcast_mode === 'async' ? 'selected' : 'primary',
-      }
-      :
-      {
-        Block: 'primary',
-        Sync: 'primary',
-        Async: 'primary'
-      }
-  )
+      ? {
+          Block:
+            configDetails.data.result.chain.broadcast_mode === "block"
+              ? "selected"
+              : "primary",
+          Sync:
+            configDetails.data.result.chain.broadcast_mode === "sync"
+              ? "selected"
+              : "primary",
+          Async:
+            configDetails.data.result.chain.broadcast_mode === "async"
+              ? "selected"
+              : "primary",
+        }
+      : {
+          Block: "primary",
+          Sync: "primary",
+          Async: "primary",
+        }
+  );
 
   const [rpcServer, setRpcServer] = useState(
-    configDetails.data !== undefined && configDetails.data.result.chain.trust_node === true ? true : false
-  )
+    configDetails.data !== undefined &&
+      configDetails.data.result.chain.trust_node === true
+      ? true
+      : false
+  );
 
-  const [initialValues, setInitialValues] = useState(configDetails.data !== undefined ?
-    {
-      fee: configDetails.data.result.chain.fees,
-      gas_amount: configDetails.data.result.chain.gas,
-      chain_id: configDetails.data.result.chain.id,
-      rpc_address: configDetails.data.result.chain.rpc_address,
-    }
-    :
-    {
-      fee: '',
-      gas_amount: '',
-      chain_id: '',
-      rpc_address: '',
-    }
-  )
+  const [initialValues, setInitialValues] = useState(
+    configDetails.data !== undefined
+      ? {
+          fee: configDetails.data.result.chain.fees,
+          gas_amount: configDetails.data.result.chain.gas,
+          chain_id: configDetails.data.result.chain.id,
+          rpc_address: configDetails.data.result.chain.rpc_address,
+        }
+      : {
+          fee: "",
+          gas_amount: "",
+          chain_id: "",
+          rpc_address: "",
+        }
+  );
 
   const resetVariant = () => {
     setVariant({
-      Block: 'primary',
-      Sync: 'primary',
-      Async: 'primary'
-    })
-  }
+      Block: "primary",
+      Sync: "primary",
+      Async: "primary",
+    });
+  };
 
   const setVariantType = (type) => {
     setVariant({
-      Block: type === 'Block' ? 'selected' : 'primary',
-      Sync: type === 'Sync' ? 'selected' : 'primary',
-      Async: type === 'Async' ? 'selected' : 'primary'
-    })
-  }
+      Block: type === "Block" ? "selected" : "primary",
+      Sync: type === "Sync" ? "selected" : "primary",
+      Async: type === "Async" ? "selected" : "primary",
+    });
+  };
 
   const brodcastModeHandler = (e, type) => {
     e.preventDefault();
     if (type === "Block") {
-      let variantType = brodcastMode.Block
-      if (variantType === 'primary') {
-        setVariantType('Block')
+      let variantType = brodcastMode.Block;
+      if (variantType === "primary") {
+        setVariantType("Block");
       } else {
         resetVariant();
       }
     } else if (type === "Sync") {
-      let variantType = brodcastMode.Sync
-      if (variantType === 'primary') {
-        setVariantType('Sync')
+      let variantType = brodcastMode.Sync;
+      if (variantType === "primary") {
+        setVariantType("Sync");
       } else {
         resetVariant();
       }
     } else if (type === "Async") {
-      let variantType = brodcastMode.Async
-      if (variantType === 'primary') {
-        setVariantType('Async')
+      let variantType = brodcastMode.Async;
+      if (variantType === "primary") {
+        setVariantType("Async");
       } else {
         resetVariant();
       }
     }
-  }
+  };
 
   const rpcServerHandler = (e) => {
     e.preventDefault();
-    setRpcServer(!rpcServer)
-  }
+    setRpcServer(!rpcServer);
+  };
 
   const findBrodcastMode = () => {
-    if(brodcastMode.Block === "selected") {
-      return 'block'
+    if (brodcastMode.Block === "selected") {
+      return "block";
     } else if (brodcastMode.Sync === "selected") {
-      return 'sync'
+      return "sync";
     } else if (brodcastMode.Async === "selected") {
-      return 'async'
+      return "async";
     }
-  }
+  };
 
   const onSubmit = (values, submitProps) => {
     let chainObj = {
       broadcast_mode: findBrodcastMode(),
-      fees: `${values.fee > 0 ? values.fee+ 'tsent' : ''}`,
+      fees: `${values.fee > 0 ? values.fee + "tsent" : ""}`,
       gas_adjustment: 0,
-      gas_prices: '0.01tsent' ,
+      gas_prices: "0.01tsent",
       gas: JSON.parse(values.gas_amount),
       id: values.chain_id,
       rpc_address: values.rpc_address,
       simulate_and_execute: true,
-      trust_node: rpcServer
-    }
+      trust_node: rpcServer,
+    };
     let postData = {
-       from: '',
-       chain: chainObj
-    }
-    dispatch(UpdateConfigAction(postData))
+      from: "",
+      chain: chainObj,
+    };
+    dispatch(UpdateConfigAction(postData));
   };
 
   return (
@@ -177,7 +186,7 @@ export const ConfigureSettingForm = () => {
                           >
                             Broadcast mode
                           </Text>
-                          <MemoHelp height="1.3rem" width="1.3rem" />
+                          <HelpTooltip />
                         </Flex>
                         <Grid
                           gridAutoFlow="column"
@@ -185,9 +194,21 @@ export const ConfigureSettingForm = () => {
                           gridGap="1rem"
                           mb="2rem"
                         >
-                          <Chip variant={brodcastMode.Block} text="Block" onClick={(e) => brodcastModeHandler(e, 'Block')} />
-                          <Chip variant={brodcastMode.Sync} text="Sync" onClick={(e) => brodcastModeHandler(e, 'Sync')} />
-                          <Chip variant={brodcastMode.Async} text="Async" onClick={(e) => brodcastModeHandler(e, 'Async')} />
+                          <Chip
+                            variant={brodcastMode.Block}
+                            text="Block"
+                            onClick={(e) => brodcastModeHandler(e, "Block")}
+                          />
+                          <Chip
+                            variant={brodcastMode.Sync}
+                            text="Sync"
+                            onClick={(e) => brodcastModeHandler(e, "Sync")}
+                          />
+                          <Chip
+                            variant={brodcastMode.Async}
+                            text="Async"
+                            onClick={(e) => brodcastModeHandler(e, "Async")}
+                          />
                         </Grid>
                         <Box>
                           <Flex alignItems="center" mb="1rem">
@@ -200,7 +221,7 @@ export const ConfigureSettingForm = () => {
                             >
                               Fee
                             </Text>
-                            <MemoHelp height="1.3rem" width="1.3rem" />
+                            <HelpTooltip />
                           </Flex>
                           <FormInput name="fee" label="Enter Fee" />
                           <ErrorMessage name="fee" component={Error} />
@@ -216,7 +237,7 @@ export const ConfigureSettingForm = () => {
                             >
                               Gas
                             </Text>
-                            <MemoHelp height="1.3rem" width="1.3rem" />
+                            <HelpTooltip />
                           </Flex>
                           <FormInput
                             name="gas_amount"
@@ -237,7 +258,7 @@ export const ConfigureSettingForm = () => {
                             >
                               Chain ID
                             </Text>
-                            <MemoHelp height="1.3rem" width="1.3rem" />
+                            <HelpTooltip />
                           </Flex>
                           <FormInput name="chain_id" label="Chain Id" />
                           <ErrorMessage name="chain_id" component={Error} />
@@ -253,7 +274,7 @@ export const ConfigureSettingForm = () => {
                           >
                             Trust RPC Server
                           </Text>
-                          <MemoHelp height="1.3rem" width="1.3rem" />
+                          <HelpTooltip />
                         </Flex>
                         <Grid
                           gridAutoFlow="column"
@@ -261,8 +282,20 @@ export const ConfigureSettingForm = () => {
                           mb="2rem"
                           justifyContent="start"
                         >
-                          <Chip variant={rpcServer === true ? "selected" : "primary"} text="Yes" onClick={(e) => rpcServerHandler(e)} />
-                          <Chip variant={rpcServer === false ? "selected" : "primary"} text="No" onClick={(e) => rpcServerHandler(e)} />
+                          <Chip
+                            variant={
+                              rpcServer === true ? "selected" : "primary"
+                            }
+                            text="Yes"
+                            onClick={(e) => rpcServerHandler(e)}
+                          />
+                          <Chip
+                            variant={
+                              rpcServer === false ? "selected" : "primary"
+                            }
+                            text="No"
+                            onClick={(e) => rpcServerHandler(e)}
+                          />
                         </Grid>
                         <Box>
                           <Flex alignItems="center" mb="1rem">
@@ -275,7 +308,7 @@ export const ConfigureSettingForm = () => {
                             >
                               RPC Server Address
                             </Text>
-                            <MemoHelp height="1.3rem" width="1.3rem" />
+                            <HelpTooltip />
                           </Flex>
                           <FormInput name="rpc_address" label="RPC Address" />
                           <ErrorMessage name="rpc_address" component={Error} />
@@ -301,7 +334,13 @@ export const ConfigureSettingForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      <Button px="3rem" justifySelf="center" type="submit" loading={loading} disabled={loading}>
+                      <Button
+                        px="3rem"
+                        justifySelf="center"
+                        type="submit"
+                        loading={loading}
+                        disabled={loading}
+                      >
                         Save
                       </Button>
                     </Grid>

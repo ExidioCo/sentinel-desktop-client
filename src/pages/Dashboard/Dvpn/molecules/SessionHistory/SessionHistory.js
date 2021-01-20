@@ -52,7 +52,6 @@ const SessionHistoryList = () => {
       <Text color="primary.700" fontSize="1.3rem" fontWeight="medium">
         5 min 34 secs
       </Text>
-      {/* <MemoTime height="1.5rem" width="1.5rem" /> */}
 
       <div>
         <a data-for="soclose" data-tip="3">
@@ -67,8 +66,6 @@ const SessionHistoryList = () => {
           </div>
         )}
         effect="solid"
-        // delayHide={500}
-        // delayShow={500}
         place="left"
         border={true}
         type="light"

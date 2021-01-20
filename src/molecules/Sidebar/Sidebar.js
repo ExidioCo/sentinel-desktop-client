@@ -21,6 +21,7 @@ import {
   Error,
   ModalClose,
   Chip,
+  HelpTooltip,
 } from "atoms";
 import { FormInput } from "molecules/FormInput";
 import MemoProfile from "assets/icons/Profile";
@@ -33,7 +34,6 @@ import MemoArrowRight from "assets/icons/ArrowRight";
 import useVisibleState from "hooks/useVisibleStates";
 import { DropdownFilter } from "molecules/DropdownFilter";
 import MemoSetting from "assets/icons/Setting";
-import MemoHelp from "assets/icons/Help";
 import { ConnectionStatus } from "molecules/ConnectionStatus";
 import MemoLogo from "assets/icons/Logo";
 import { ConfigureSettingForm } from "templates/ConfigureSettingForm";
@@ -372,7 +372,8 @@ export const MyAccountDropdown = ({
                               >
                                 Broadcast mode
                               </Text>
-                              <MemoHelp height="1.3rem" width="1.3rem" />
+
+                              <HelpTooltip />
                             </Flex>
                             <Grid
                               gridAutoFlow="column"
@@ -407,7 +408,7 @@ export const MyAccountDropdown = ({
                                 >
                                   Fee
                                 </Text>
-                                <MemoHelp height="1.3rem" width="1.3rem" />
+                                <HelpTooltip />
                               </Flex>
                               <FormInput name="fee" label="Enter Fee" />
                               <ErrorMessage name="fee" component={Error} />
@@ -423,7 +424,7 @@ export const MyAccountDropdown = ({
                                 >
                                   Enter Gas
                                 </Text>
-                                <MemoHelp height="1.3rem" width="1.3rem" />
+                                <HelpTooltip />
                               </Flex>
                               <FormInput
                                 name="gas_amount"
@@ -447,7 +448,7 @@ export const MyAccountDropdown = ({
                                 >
                                   Enter Chain ID
                                 </Text>
-                                <MemoHelp height="1.3rem" width="1.3rem" />
+                                <HelpTooltip />
                               </Flex>
                               <FormInput name="chain_id" label="Chain Id" />
                               <ErrorMessage name="chain_id" component={Error} />
@@ -463,7 +464,7 @@ export const MyAccountDropdown = ({
                               >
                                 Trust RPC Server
                               </Text>
-                              <MemoHelp height="1.3rem" width="1.3rem" />
+                              <HelpTooltip />
                             </Flex>
                             <Grid
                               gridAutoFlow="column"
@@ -497,7 +498,7 @@ export const MyAccountDropdown = ({
                                 >
                                   Enter RPC Server Address
                                 </Text>
-                                <MemoHelp height="1.3rem" width="1.3rem" />
+                                <HelpTooltip />
                               </Flex>
                               <FormInput
                                 name="rpc_address"

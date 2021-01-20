@@ -1,14 +1,23 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Box, Grid, Text, Flex, Button, Modal, Error, ModalClose } from "atoms";
+import {
+  Box,
+  Grid,
+  Text,
+  Flex,
+  Button,
+  Modal,
+  Error,
+  ModalClose,
+  HelpTooltip,
+} from "atoms";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
 
 import { FormInput } from "molecules/FormInput/FormInput";
 import useVisibleState from "hooks/useVisibleStates";
-import MemoHelp from "assets/icons/Help";
 
 import {
   GetProposalListAction,
@@ -75,7 +84,7 @@ const ProposalDetails = ({ proposalObj }) => {
       /> */}
       <DetailsCommonComponent
         text="Total Deposit"
-        textValue={((proposalObj.deposit[0].value)/1000000).toFixed(2)}
+        textValue={(proposalObj.deposit[0].value / 1000000).toFixed(2)}
       />
       <DetailsCommonComponent text="Type" textValue={proposalObj.type} />
       <DetailsCommonComponent
@@ -193,7 +202,7 @@ const ProposalDetails = ({ proposalObj }) => {
                     >
                       Voting {voteType}
                     </Text>
-                    <MemoHelp height="1.5rem" width="1.5rem" />
+                    <HelpTooltip />
                   </Flex>
 
                   <Form>

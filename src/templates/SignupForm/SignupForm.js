@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import * as Yup from "yup";
 import { Formik, Form, ErrorMessage } from "formik";
@@ -25,6 +24,7 @@ const validationSchema = Yup.object({
 export const SignupForm = () => {
 
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.loginReducer.loading);
 
   const onSubmit = (values, submitProps) => {
     let payload = {
@@ -72,7 +72,7 @@ export const SignupForm = () => {
                       >
                         ACCOUNT NAME
                       </Text>
-                      <FormInput name="username" label="Account Name" />
+                      <FormInput name="username" label="Enter Account Name" autofocus/>
                       <ErrorMessage name="username" component={Error} />
                     </Box>
                     <Box>
@@ -87,7 +87,7 @@ export const SignupForm = () => {
                       <FormInput
                         type="password"
                         name="password"
-                        label="Password"
+                        label="Enter Account Password"
                       />
 
                       <ErrorMessage name="password" component={Error} />
@@ -106,7 +106,7 @@ export const SignupForm = () => {
                         as="textarea"
                         rows="4"
                         name="seed"
-                        label="Enter Seed"
+                        label="Enter Account Seed"
                         style={{ resize: "none" }}
                       />
                       <ErrorMessage name="seed" component={Error} />
@@ -142,9 +142,9 @@ export const SignupForm = () => {
                           Terms & Conditions
                         </Text>
                       </Text>
-                      <Button px="3rem" justifySelf="center" type="submit">
+                      <Button px="3rem" justifySelf="center" type="submit" loading={loading} disabled={loading}>
                         Create
-                        </Button>
+                      </Button>
                     </Grid>
                   </Grid>
                 </Box>

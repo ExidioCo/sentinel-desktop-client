@@ -107,6 +107,7 @@ export const CheckKeysAction = () => {
                         dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/dashboard/wallet'));
                         handleLoginRedirect(response.data.result.value, '/dashboard/wallet');
                     } else {
+                        dispatch(actionCreator(LoginActionTypes.get_CheckKeys.FAILURE, response));
                         dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/create-account'));
                         handleLoginRedirect(token, '/create-account');
                     }

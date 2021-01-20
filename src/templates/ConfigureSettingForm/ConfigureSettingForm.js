@@ -301,7 +301,7 @@ export const ConfigureSettingForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      <Button px="3rem" justifySelf="center" type="submit" loading={loading}>
+                      <Button px="3rem" justifySelf="center" type="submit" loading={loading} disabled={loading}>
                         Save
                       </Button>
                     </Grid>

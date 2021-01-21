@@ -30,7 +30,7 @@ import {
   PostReDelegateAction,
   PostUnbondAction,
   GetAnAccountDetailsAction,
-  ResetDRUAction
+  ResetDRUAction,
 } from "../../pages/Dashboard/Wallet/actions/WalletActions";
 import { encodeToBech32 } from "../../utils/utility";
 
@@ -115,7 +115,7 @@ const ValidatorsList = React.memo(
       <>
         <Grid
           py="1rem"
-          gridTemplateColumns="3.5rem 2fr 2fr 2fr 2fr"
+          gridTemplateColumns=" 3.5rem 4rem 2fr 2fr 2fr 2fr"
           alignItems="center"
           borderBottom="1px solid"
           borderColor="border.500"
@@ -126,8 +126,8 @@ const ValidatorsList = React.memo(
             alignItems="center"
             bg="bg.600"
             borderRadius="4rem"
-            height="2.5rem"
-            width="2.5rem"
+            height="3rem"
+            width="3rem"
           >
             <Text
               color="primary.700"
@@ -135,8 +135,9 @@ const ValidatorsList = React.memo(
               fontWeight="medium"
               textDecoration="none"
               lineHeight="100%"
+              style={{ whiteSpace: "nowrap" }}
             >
-              # {index}
+              # {index + 1}
             </Text>
           </Flex>
           <Flex alignItems="center">
@@ -183,8 +184,15 @@ const ValidatorsList = React.memo(
           </Text>
         </Grid>
         {visible && (
-          <Modal isOpen={visible} onRequestClose={!loading ? hide : undefined} ariaHideApp={false}>
-            <ModalClose onClick={!loading ? hide : undefined}  loading={loading} />
+          <Modal
+            isOpen={visible}
+            onRequestClose={!loading ? hide : undefined}
+            ariaHideApp={false}
+          >
+            <ModalClose
+              onClick={!loading ? hide : undefined}
+              loading={loading}
+            />
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -444,7 +452,9 @@ export const Validators = React.memo(
       (state) => state.walletReducer.validatorList
     );
     let saveDelegate = useSelector((state) => state.walletReducer.saveDelegate);
-    let saveReDelegate = useSelector((state) => state.walletReducer.saveReDelegate);
+    let saveReDelegate = useSelector(
+      (state) => state.walletReducer.saveReDelegate
+    );
     let saveUnbond = useSelector((state) => state.walletReducer.saveUnbond);
     const [txHash, setTxHash] = useState("");
     const [delegate, setDelegate] = useState(false);
@@ -468,20 +478,24 @@ export const Validators = React.memo(
         hide();
         delegatehandler();
         setTxHash(saveDelegate.data.result.txhash);
-      } else if(saveReDelegate !== null && saveReDelegate.data.success === true) {
+      } else if (
+        saveReDelegate !== null &&
+        saveReDelegate.data.success === true
+      ) {
         hide();
         delegatehandler();
         setTxHash(saveReDelegate.data.result.txhash);
-      } else if(saveUnbond !== null && saveUnbond.data.success === true) {
+      } else if (saveUnbond !== null && saveUnbond.data.success === true) {
         hide();
         delegatehandler();
         setTxHash(saveUnbond.data.result.txhash);
-      } 
+      }
     }, [saveDelegate, saveReDelegate, saveUnbond]);
 
     return (
       <Box mr="1rem">
-        <Grid py="1.5rem" gridTemplateColumns="3.5rem 2fr 2fr 2fr 2fr">
+        <Grid py="1.5rem" gridTemplateColumns=" 3.5rem 4rem 2fr 2fr 2fr 2fr">
+          <Box />
           <Box />
           <Box py={4}>
             <Text

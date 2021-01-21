@@ -190,7 +190,7 @@ const WithdrawForm = () => {
         }}
       </Formik>
       {visible && (
-        <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
+        <Modal isOpen={visible} onRequestClose={!loading ? hide : undefined} ariaHideApp={false}>
           {showSuccess ? (
             <SuccessBox
               onCloseSuccess={onCloseSuccess}
@@ -198,7 +198,7 @@ const WithdrawForm = () => {
             />
           ) : (
               <>
-                <ModalClose onClick={hide} loading={loading}/>
+                <ModalClose onClick={!loading ? hide : undefined} loading={loading}/>
                 <Formik
                   initialValues={initialValuesModal}
                   validationSchema={validationSchemaWithdrawing}

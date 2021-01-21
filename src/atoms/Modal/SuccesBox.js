@@ -38,6 +38,17 @@ export const SuccessBox = React.memo(
               {txHash}
             </Text>
           </Text>
+          <Text
+            variant="label"
+            fontWeight="semiBold"
+            color="grey.700"
+            textAlign="center"
+            my="2rem"
+            cursor="pointer"
+            onClick={() => window.open('http://explorer.sentinel.co')}
+          >
+            Go to Explorer
+          </Text>
           <Button
             variant="secondary"
             px="3rem"

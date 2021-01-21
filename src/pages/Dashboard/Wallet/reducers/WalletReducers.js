@@ -241,6 +241,14 @@ export default (state = initialState, { type, payload }) => {
                 loading: false,
             };
 
+        // Reset withdraw Reward   
+        case WalletActionTypes.reset_WithDrawReducer.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                withdrawRewards: payload,
+            };
+            
         //  resetSaveDelegate   
         case WalletActionTypes.resetSaveDelegate.SUCCESS:
             return {

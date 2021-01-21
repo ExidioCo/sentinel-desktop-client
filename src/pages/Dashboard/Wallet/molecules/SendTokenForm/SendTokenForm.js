@@ -99,9 +99,7 @@ export const SendTokenForm = () => {
 
     dispatch(PostSendTokenAction(postData));
   };
-
-  console.log("sendTokens=---", sendTokens);
-
+  
   return (
     <>
       <Formik

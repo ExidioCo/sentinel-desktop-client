@@ -399,3 +399,12 @@ export const PostWithdrawRewardsAction = (postData, address) => {
     };
 };
 
+/**
+ * @desc Action to reset withdraw reward reducer
+ */
+export const ResetWithdrawRewardsReducer = () => {
+    return (dispatch) => {
+        dispatch(actionCreator(WalletActionTypes.reset_WithDrawReducer.SUCCESS, null));
+    };
+}
+

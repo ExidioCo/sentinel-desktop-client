@@ -16,6 +16,7 @@ import {
   ModalClose,
   Button,
   Loader,
+  SentinelLoader,
   HelpTooltip,
 } from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
@@ -37,7 +38,7 @@ const initialValues = {
   amount: "",
   memo: "",
   toValidator: "",
-  password: ""
+  password: "",
 };
 
 const validationSchema = Yup.object({
@@ -45,7 +46,7 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]*$/, "Only Numbers allowed")
     .required("Required"),
   memo: Yup.string().required("Required"),
-  password: Yup.string().required("Required")
+  password: Yup.string().required("Required"),
 });
 
 const ValidatorsList = React.memo(
@@ -80,7 +81,7 @@ const ValidatorsList = React.memo(
         address: address,
         memo: values.memo,
         amount: amount,
-        password: values.password
+        password: values.password,
       };
       if (dropdownValue === "DELEGATE") {
         postData["to"] = validatorListDataObj.address;
@@ -506,30 +507,33 @@ export const Validators = React.memo(
           <Box py={4} />
         </Grid>
         <Loader loading={loadingValidator} relative>
+          {/* {loadingValidator ? (
+          <SentinelLoader />
+        ) : ( */}
           <Grid gridGap="1rem" maxHeight="61vh" className="scroll-bar">
             {!visibleInActive &&
               validatorList?.data.result.length > 0 &&
               validatorList.data.result.map((obj, index) => {
-                if (obj.jailed === false && obj.bond_status === 'Bonded') {
-                return (
-                  <ValidatorsList
-                    key={index}
-                    index={index}
-                    validatorListData={obj}
-                    dropdownValue={dropdownValue}
-                    hideDelegate={hideDelegate}
-                    setDropdownValue={setDropdownValue}
-                    txHash={txHash}
-                    onCloseDelegate={onCloseDelegate}
-                    delegate={delegate}
-                  />
-                );
+                if (obj.jailed === false && obj.bond_status === "Bonded") {
+                  return (
+                    <ValidatorsList
+                      key={index}
+                      index={index}
+                      validatorListData={obj}
+                      dropdownValue={dropdownValue}
+                      hideDelegate={hideDelegate}
+                      setDropdownValue={setDropdownValue}
+                      txHash={txHash}
+                      onCloseDelegate={onCloseDelegate}
+                      delegate={delegate}
+                    />
+                  );
                 }
               })}
             {visibleInActive &&
               validatorList?.data.result.length > 0 &&
               validatorList.data.result.map((obj, index) => {
-                if (obj.jailed === true && obj.bond_status !== 'Bonded') {
+                if (obj.jailed === true && obj.bond_status !== "Bonded") {
                   return (
                     <ValidatorsList
                       key={index}
@@ -544,10 +548,10 @@ export const Validators = React.memo(
                     />
                   );
                 } else {
-
                 }
               })}
           </Grid>
+          {/* )} */}
         </Loader>
       </Box>
     );

@@ -13,3 +13,4 @@ export * from "./ModalClose";
 export * from "./Chip";
 export * from "./Loader";
 export * from "./HelpTooltip";
+export * from "./SentinelLoader";

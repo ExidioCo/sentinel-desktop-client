@@ -462,6 +462,7 @@ export const Validators = React.memo(
     const [delegate, setDelegate] = useState(false);
     const [validatorList, setValidatorList] = useState(null);
     const [orderTypeAsc, setOrderTypeAsc] = useState(true);
+    const [orderValue, setOrderValue] = useState('voting');
 
     const { hide } = useVisibleState(false);
 
@@ -507,14 +508,17 @@ export const Validators = React.memo(
       if(validatorList !== null && validatorList.length > 0) {
         if(type === 'moniker') {
           setOrderTypeAsc(!orderTypeAsc)
+          setOrderValue('moniker')
           let descSorting = sort('description.moniker', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
           setValidatorList(descSorting)
         } else if(type === 'voting') {
           setOrderTypeAsc(!orderTypeAsc)
+          setOrderValue('voting')
           let ascSorting = sort('amount.value', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
           setValidatorList(ascSorting)
         } else if(type === 'commission') {
           setOrderTypeAsc(!orderTypeAsc)
+          setOrderValue('commission')
           let ascSorting = sort('commission.rate', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
           setValidatorList(ascSorting)
         }
@@ -532,9 +536,10 @@ export const Validators = React.memo(
               fontWeight="medium"
               fontSize="1.3rem"
               textTransform="uppercase"
+              cursor="pointer"
               onClick={() => sortingHandler('moniker')}
             >
-              MONIKER
+              MONIKER {`${orderValue === 'moniker' ? orderTypeAsc ? 'A' : 'D' : ''}`}
             </Text>
           </Box>
           <Box py={4}>
@@ -543,9 +548,10 @@ export const Validators = React.memo(
               fontWeight="medium"
               fontSize="1.3rem"
               textTransform="uppercase"
+              cursor="pointer"
               onClick={() => sortingHandler('voting')}
             >
-              VOTING POWER
+              VOTING POWER {`${orderValue === 'voting' ? orderTypeAsc ? 'A' : 'D' : ''}`}
             </Text>
           </Box>
 
@@ -566,9 +572,10 @@ export const Validators = React.memo(
               fontWeight="medium"
               fontSize="1.3rem"
               textTransform="uppercase"
+              cursor="pointer"
               onClick={() => sortingHandler('commission')}
             >
-              COMMISSION
+              COMMISSION {`${orderValue === 'commission' ? orderTypeAsc ? 'A' : 'D' : ''}`}
             </Text>
           </Box>
           {/* <Box py={4}>

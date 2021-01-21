@@ -309,6 +309,15 @@ export const ResetDRUAction = () => {
 }
 
 /**
+ * @desc Action to reset Delegate, reDelegate and Unbond Reducer
+ */
+export const ResetPostVoteReducer = () => {
+    return (dispatch) => {
+        dispatch(actionCreator(WalletActionTypes.reset_PostVoteReducer.SUCCESS, null));
+    };
+}
+
+/**
  * @desc Action to get all delegations
  */
 

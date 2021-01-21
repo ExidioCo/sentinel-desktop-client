@@ -197,6 +197,13 @@ export default (state = initialState, { type, payload }) => {
                 saveUnbond: payload,
             };
 
+        // Reset postVote reducer
+        case WalletActionTypes.reset_PostVoteReducer.SUCCESS:
+            return {
+                ...state,
+                postVote: payload
+            };
+
         // all delegations   
         case WalletActionTypes.get_AllDelegations.REQUEST:
             return {

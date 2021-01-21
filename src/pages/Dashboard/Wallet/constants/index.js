@@ -56,5 +56,6 @@ export const WalletActionTypes = {
     post_Vote: createRequestActionTypes('POST_VOTE'),
     post_WithdrawRewards: createRequestActionTypes('POST_WITHDRAW_REWARDS'),
     reset_WithDrawReducer: createRequestActionTypes('RESET_WITHDRAW_REWARDS'),
-    reset_DRUReducer: createRequestActionTypes('RESET_DRU_REDUCER')
+    reset_DRUReducer: createRequestActionTypes('RESET_DRU_REDUCER'),
+    reset_PostVoteReducer: createRequestActionTypes('RESET_POST_VOTE')
 };

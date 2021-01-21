@@ -23,7 +23,9 @@ import useVisibleState from "hooks/useVisibleStates";
 import {
   GetProposalListAction,
   PostVoteAction,
+  ResetPostVoteReducer
 } from "../../pages/Dashboard/Wallet/actions/WalletActions";
+import { SuccessBox } from "../../atoms/Modal/SuccesBox";
 
 const initialValues = {
   password: "",
@@ -59,8 +61,19 @@ const DetailsCommonComponent = ({ text, textValue }) => {
 
 const ProposalDetails = ({ proposalObj }) => {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.walletReducer.loading);
+  const postVote = useSelector((state) => state.walletReducer.postVote);
+
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const { visible, hide, toggle } = useVisibleState(false);
   const [voteType, setType] = useState(null);
+
+  useEffect(() => {
+    if (postVote?.data?.success === true) {
+      setShowSuccess(true);
+    }
+  }, [postVote]);
 
   const VoteClickHandler = (type) => {
     setType(type);
@@ -69,11 +82,15 @@ const ProposalDetails = ({ proposalObj }) => {
 
   const onSubmit = (values, submitProps) => {
     let postData = {
+      memo: values.memo || '',
       password: values.password,
       option: voteType,
     };
     dispatch(PostVoteAction(postData, proposalObj.index));
-    submitProps.resetForm();
+  };
+
+  const onCloseSuccess = () => {
+    dispatch(ResetPostVoteReducer());
     hide();
   };
 
@@ -183,57 +200,83 @@ const ProposalDetails = ({ proposalObj }) => {
         </Button> */}
       </Grid>
       {visible && (
-        <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
-          <ModalClose onClick={hide} />
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-            enableReinitialize
-          >
-            {() => {
-              return (
-                <Box>
-                  <Flex alignItems="center">
-                    <Text
-                      variant="field"
-                      fontWeight="medium"
-                      color="primary.700"
-                      p="1rem"
-                    >
-                      Voting {voteType}
-                    </Text>
-                    <HelpTooltip />
-                  </Flex>
-
-                  <Form>
-                    <Box my="3rem" mx="1rem">
+        <Modal isOpen={visible} onRequestClose={!loading ? hide : undefined} ariaHideApp={false}>
+          {showSuccess ? (
+            <SuccessBox
+              onCloseSuccess={onCloseSuccess}
+              txHash={postVote?.data?.result?.txhash}
+            />
+          ) : (
+              <>
+                <ModalClose onClick={!loading ? hide : undefined} />
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={onSubmit}
+                  enableReinitialize
+                >
+                  {() => {
+                    return (
                       <Box>
-                        <Text
-                          variant="label"
-                          fontWeight="medium"
-                          color="grey.700"
-                          textTransform="uppercase"
-                        >
-                          Memo
-                        </Text>
-                        <FormInput
-                          as="textarea"
-                          rows="3"
-                          name="password"
-                          label="Enter Memo"
-                        />
-                        <ErrorMessage name="password" component={Error} />
+                        <Flex alignItems="center">
+                          <Text
+                            variant="field"
+                            fontWeight="medium"
+                            color="primary.700"
+                            p="1rem"
+                          >
+                            Voting {voteType}
+                          </Text>
+                          <HelpTooltip />
+                        </Flex>
+
+                        <Form>
+                          <Box my="3rem" mx="1rem">
+                            <Box>
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                              >
+                                Memo
+                              </Text>
+                              <FormInput
+                                as="textarea"
+                                rows="3"
+                                name="memo"
+                                label="Enter Memo"
+                              />
+                              <ErrorMessage name="memo" component={Error} />
+                            </Box>
+                            <Box>
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                              >
+                                Password
+                              </Text>
+                              <FormInput
+                                type="password"
+                                rows="3"
+                                name="password"
+                                label="Enter password"
+                              />
+                              <ErrorMessage name="password" component={Error} />
+                            </Box>
+                            <Button px="3rem" justifySelf="center" type="submit" loading={loading} disabled={loading}>
+                              CONFIRM VOTE
+                           </Button>
+                          </Box>
+                        </Form>
                       </Box>
-                      <Button px="3rem" justifySelf="center" type="submit">
-                        CONFIRM VOTE
-                      </Button>
-                    </Box>
-                  </Form>
-                </Box>
-              );
-            }}
-          </Formik>
+                    );
+                  }}
+                </Formik>
+              </>
+            )}
         </Modal>
       )}
     </Box>
@@ -415,14 +458,14 @@ export const Proposals = () => {
   return (
     <Box mt="3rem" maxHeight="61vh" className="scroll-bar">
       <Loader loading={loadingProposal} relative>
-      <Grid gridGap="1rem">
-        {proposalList?.data.result.length > 0 &&
-          proposalList.data.result.map((obj, index) => {
-            return (
-              <ProposalsList key={index} index={index} proposalObj={obj} />
-            );
-          })}
-      </Grid>
+        <Grid gridGap="1rem">
+          {proposalList?.data.result.length > 0 &&
+            proposalList.data.result.map((obj, index) => {
+              return (
+                <ProposalsList key={index} index={index} proposalObj={obj} />
+              );
+            })}
+        </Grid>
       </Loader>
     </Box>
   );

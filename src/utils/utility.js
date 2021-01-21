@@ -86,4 +86,31 @@ export const decodeFromBech32 = (key) => {
   }
 };
 
+export const sort = (prop, arr, order = 'asc') => {
+  prop = prop.split('.');
+  let len = prop.length;
+  
+  arr.sort((a, b) => {
+      let i = 0;
+      while( i < len ) {
+          a = a[prop[i]];
+          b = b[prop[i]];
+          i++;
+      }
+      console.log('typeof(a)', typeof(a))
+      if ((typeof a === 'string' ? a.toUpperCase() : a) < (typeof b === 'string' ? b.toUpperCase() : b)) {
+          return -1;
+      } else if ((typeof a === 'string' ? a.toUpperCase() : a) > (typeof b === 'string' ? b.toUpperCase() : b)) {
+          return 1;
+      } else {
+          return 0;
+      }
+  });
+  if(order === 'desc') {
+    return arr.reverse()
+  } else {
+    return arr;
+  }
+};
+
 export const HELP_MESSAGE = "Help";

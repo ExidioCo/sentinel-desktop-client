@@ -32,7 +32,7 @@ import {
   GetAnAccountDetailsAction,
   ResetDRUAction,
 } from "../../pages/Dashboard/Wallet/actions/WalletActions";
-import { encodeToBech32 } from "../../utils/utility";
+import { encodeToBech32 , compareValues, sort} from "../../utils/utility";
 
 const initialValues = {
   amount: "",
@@ -450,7 +450,7 @@ export const Validators = React.memo(
     const loadingValidator = useSelector(
       (state) => state.walletReducer.loadingValidator
     );
-    const validatorList = useSelector(
+    let validatorListData = useSelector(
       (state) => state.walletReducer.validatorList
     );
     let saveDelegate = useSelector((state) => state.walletReducer.saveDelegate);
@@ -460,6 +460,8 @@ export const Validators = React.memo(
     let saveUnbond = useSelector((state) => state.walletReducer.saveUnbond);
     const [txHash, setTxHash] = useState("");
     const [delegate, setDelegate] = useState(false);
+    const [validatorList, setValidatorList] = useState(null);
+    const [orderTypeAsc, setOrderTypeAsc] = useState(true);
 
     const { hide } = useVisibleState(false);
 
@@ -494,6 +496,31 @@ export const Validators = React.memo(
       }
     }, [saveDelegate, saveReDelegate, saveUnbond]);
 
+    useEffect(() => {
+      if(validatorListData !== null && validatorListData?.data?.result.length > 0) {
+        let ascSorting = sort('amount.value', validatorListData.data.result, 'asc');
+        setValidatorList(ascSorting)
+      }
+    }, [validatorListData])
+
+    const sortingHandler = (type) => {
+      if(validatorList !== null && validatorList.length > 0) {
+        if(type === 'moniker') {
+          setOrderTypeAsc(!orderTypeAsc)
+          let descSorting = sort('description.moniker', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
+          setValidatorList(descSorting)
+        } else if(type === 'voting') {
+          setOrderTypeAsc(!orderTypeAsc)
+          let ascSorting = sort('amount.value', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
+          setValidatorList(ascSorting)
+        } else if(type === 'commission') {
+          setOrderTypeAsc(!orderTypeAsc)
+          let ascSorting = sort('commission.rate', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
+          setValidatorList(ascSorting)
+        }
+      } 
+    }
+
     return (
       <Box mr="1rem">
         <Grid py="1.5rem" gridTemplateColumns=" 3.5rem 4rem 2fr 2fr 2fr 2fr">
@@ -505,6 +532,7 @@ export const Validators = React.memo(
               fontWeight="medium"
               fontSize="1.3rem"
               textTransform="uppercase"
+              onClick={() => sortingHandler('moniker')}
             >
               MONIKER
             </Text>
@@ -515,6 +543,7 @@ export const Validators = React.memo(
               fontWeight="medium"
               fontSize="1.3rem"
               textTransform="uppercase"
+              onClick={() => sortingHandler('voting')}
             >
               VOTING POWER
             </Text>
@@ -537,6 +566,7 @@ export const Validators = React.memo(
               fontWeight="medium"
               fontSize="1.3rem"
               textTransform="uppercase"
+              onClick={() => sortingHandler('commission')}
             >
               COMMISSION
             </Text>
@@ -559,8 +589,8 @@ export const Validators = React.memo(
         ) : ( */}
           <Grid gridGap="1rem" maxHeight="61vh" className="scroll-bar">
             {!visibleInActive &&
-              validatorList?.data.result.length > 0 &&
-              validatorList.data.result.map((obj, index) => {
+              validatorList !== null && validatorList.length > 0 &&
+              validatorList.map((obj, index) => {
                 if (obj.jailed === false && obj.bond_status === "Bonded") {
                   return (
                     <ValidatorsList
@@ -578,8 +608,8 @@ export const Validators = React.memo(
                 }
               })}
             {visibleInActive &&
-              validatorList?.data.result.length > 0 &&
-              validatorList.data.result.map((obj, index) => {
+              validatorList !== null && validatorList.length > 0 &&
+              validatorList.map((obj, index) => {
                 if (obj.jailed === true && obj.bond_status !== "Bonded") {
                   return (
                     <ValidatorsList

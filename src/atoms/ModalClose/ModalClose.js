@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "atoms/Text";
 
-export const ModalClose = ({ onClick }) => {
+export const ModalClose = ({ onClick, loading }) => {
   return (
     <Text
       as="div"
@@ -13,6 +13,7 @@ export const ModalClose = ({ onClick }) => {
       right="1.5rem"
       top="1.5rem"
       zIndex={5}
+      color={loading ? "grey" : ""}
     >
       &times;
     </Text>

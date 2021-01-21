@@ -2,10 +2,8 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 
 import { Box } from "../Box";
-import { Text } from "../Text";
-// import { Error } from "../Error";
-// import { Warning } from "../Warning";
 import { Input } from "../Input";
+import { Button } from "atoms/Button";
 
 export const InputFieldBase = styled(Box)`
   position: relative;
@@ -30,44 +28,19 @@ export const InputField = ({
 
   return (
     <InputFieldBase labelHide={labelHide}>
-      {/* <Text
-        as="label"
-        // color="red"
-        // className={error ? "input-error" : ""}
-        fontSize={{ xs: 7 }}
-      > */}
       <Input placeholder={label} autofocus={autofocus} ref={ref} {...props} />
-      {/* </Text> */}
-      {/* {showLength && (
-        <Text
-          fontSize="1.2rem"
-          position="absolute"
-          bg="white"
-          fontWeight="300"
-          color="gray.700"
-          right="0.7rem"
-          bottom="1rem"
-        >
-          {ref?.current?.value?.length || 0} / {props.maxLength}
-        </Text>
-      )} */}
+
       {maxValue && (
-        <Text
-          fontSize="1.6rem"
-          position="absolute"
-          bg="grey.600"
-          fontWeight="medium"
-          color="grey.900"
-          right="0rem"
-          pr="2rem"
-          pl="1rem"
-          bottom="1rem"
-        >
-          {maxValue}
-        </Text>
+        <Box position="absolute" pr="0rem" bottom=".3rem" right={0}>
+          <Button
+            variant="normal"
+            textVariant="label"
+            textTransform="capitalize"
+          >
+            Max
+          </Button>
+        </Box>
       )}
-      {/* {error && <Error text={error} />}
-      {warning && <Warning text={warning} />} */}
     </InputFieldBase>
   );
 };

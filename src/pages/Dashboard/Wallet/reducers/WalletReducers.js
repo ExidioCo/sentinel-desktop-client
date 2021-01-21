@@ -3,6 +3,7 @@ import { WalletActionTypes } from '../constants/index';
 const initialState = {
     loading: false,
     loadingValidator: false,
+    loadingProposal: false,
     validatorList: null,
     proposalList: null,
     validatorAvatar: null,
@@ -39,18 +40,18 @@ export default (state = initialState, { type, payload }) => {
         case WalletActionTypes.get_ProposalList.REQUEST:
             return {
                 ...state,
-                loading: true,
+                loadingProposal: true,
             };
         case WalletActionTypes.get_ProposalList.SUCCESS:
             return {
                 ...state,
-                loading: false,
+                loadingProposal: false,
                 proposalList: payload,
             };
         case WalletActionTypes.get_ProposalList.FAILURE:
             return {
                 ...state,
-                loading: false,
+                loadingProposal: false,
             };
 
         // validator avatar    

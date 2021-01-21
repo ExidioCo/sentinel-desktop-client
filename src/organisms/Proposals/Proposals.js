@@ -10,6 +10,7 @@ import {
   Modal,
   Error,
   ModalClose,
+  Loader,
   HelpTooltip,
 } from "atoms";
 import { Formik, Form, ErrorMessage } from "formik";
@@ -405,6 +406,7 @@ const ProposalsList = ({ index, proposalObj }) => {
 export const Proposals = () => {
   const dispatch = useDispatch();
   const proposalList = useSelector((state) => state.walletReducer.proposalList);
+  const loadingProposal = useSelector((state) => state.walletReducer.loadingProposal);
 
   useEffect(() => {
     dispatch(GetProposalListAction());
@@ -412,6 +414,7 @@ export const Proposals = () => {
 
   return (
     <Box mt="3rem" maxHeight="61vh" className="scroll-bar">
+      <Loader loading={loadingProposal} relative>
       <Grid gridGap="1rem">
         {proposalList?.data.result.length > 0 &&
           proposalList.data.result.map((obj, index) => {
@@ -420,6 +423,7 @@ export const Proposals = () => {
             );
           })}
       </Grid>
+      </Loader>
     </Box>
   );
 };

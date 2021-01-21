@@ -50,6 +50,7 @@ export const WalletActionTypes = {
     get_CoingekoDetails: createRequestActionTypes('GET_COINGECKO_DETAILS_API'),
 
     post_SendTokens: createRequestActionTypes('POST_SEND_TOKENS_API'),
+    reset_SendTokenReducer: createRequestActionTypes('RESET_SEND_TOKENS_REDUCER'),
     get_AllDelegations: createRequestActionTypes('GET_ALL_DELEGATIONS'),
     resetSaveDelegate: createRequestActionTypes('RESET_SAVE_DELEGATE'),
 

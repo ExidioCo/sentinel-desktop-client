@@ -291,6 +291,15 @@ export const PostSendTokenAction = (postData) => {
 };
 
 /**
+ * @desc Action to reset send token reducer
+ */
+export const resetSendTokenReducer = () => {
+    return (dispatch) => {
+        dispatch(actionCreator(WalletActionTypes.reset_SendTokenReducer.SUCCESS, null));
+    };
+}
+
+/**
  * @desc Action to get all delegations
  */
 

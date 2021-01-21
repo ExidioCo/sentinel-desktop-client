@@ -30,7 +30,7 @@ import {
   PostReDelegateAction,
   PostUnbondAction,
   GetAnAccountDetailsAction,
-  resetSaveDelegate,
+  ResetDRUAction
 } from "../../pages/Dashboard/Wallet/actions/WalletActions";
 import { encodeToBech32 } from "../../utils/utility";
 
@@ -65,6 +65,7 @@ const ValidatorsList = React.memo(
       (state) => state.loginReducer.checkKeysDetails.data.result[0].address
     );
     let avatar = useSelector((state) => state.walletReducer.validatorAvatar);
+    let loading = useSelector((state) => state.walletReducer.loading);
     let accountDetails = useSelector(
       (state) => state.walletReducer.accountDetails
     );
@@ -90,7 +91,6 @@ const ValidatorsList = React.memo(
         postData["from"] = validatorListDataObj.address;
         postData["to"] = values.toValidator;
         dispatch(PostReDelegateAction(postData));
-        hide();
       } else if (dropdownValue === "UNBOND") {
         postData["from"] = validatorListDataObj.address;
         dispatch(PostUnbondAction(postData));
@@ -165,8 +165,8 @@ const ValidatorsList = React.memo(
           </Text>
         </Grid>
         {visible && (
-          <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
-            <ModalClose onClick={hide} />
+          <Modal isOpen={visible} onRequestClose={!loading ? hide : undefined} ariaHideApp={false}>
+            <ModalClose onClick={!loading ? hide : undefined}  loading={loading} />
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -340,6 +340,7 @@ const ValidatorsList = React.memo(
                                 Password
                               </Text>
                               <FormInput
+                                type="password"
                                 name="password"
                                 label="Enter Password"
                               />
@@ -349,6 +350,8 @@ const ValidatorsList = React.memo(
                               px="8rem"
                               justifySelf="center"
                               type="submit"
+                              loading={loading}
+                              disabled={loading}
                             >
                               {dropdownValue}
                             </Button>
@@ -423,6 +426,8 @@ export const Validators = React.memo(
       (state) => state.walletReducer.validatorList
     );
     let saveDelegate = useSelector((state) => state.walletReducer.saveDelegate);
+    let saveReDelegate = useSelector((state) => state.walletReducer.saveReDelegate);
+    let saveUnbond = useSelector((state) => state.walletReducer.saveUnbond);
     const [txHash, setTxHash] = useState("");
     const [delegate, setDelegate] = useState(false);
 
@@ -433,9 +438,9 @@ export const Validators = React.memo(
     };
 
     const onCloseDelegate = () => {
+      dispatch(ResetDRUAction());
       hide();
       setDelegate(false);
-      dispatch(resetSaveDelegate());
     };
 
     useEffect(() => {
@@ -445,8 +450,16 @@ export const Validators = React.memo(
         hide();
         delegatehandler();
         setTxHash(saveDelegate.data.result.txhash);
-      }
-    }, [saveDelegate]);
+      } else if(saveReDelegate !== null && saveReDelegate.data.success === true) {
+        hide();
+        delegatehandler();
+        setTxHash(saveReDelegate.data.result.txhash);
+      } else if(saveUnbond !== null && saveUnbond.data.success === true) {
+        hide();
+        delegatehandler();
+        setTxHash(saveUnbond.data.result.txhash);
+      } 
+    }, [saveDelegate, saveReDelegate, saveUnbond]);
 
     return (
       <Box mr="1rem">

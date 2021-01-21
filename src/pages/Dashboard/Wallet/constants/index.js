@@ -52,9 +52,9 @@ export const WalletActionTypes = {
     post_SendTokens: createRequestActionTypes('POST_SEND_TOKENS_API'),
     reset_SendTokenReducer: createRequestActionTypes('RESET_SEND_TOKENS_REDUCER'),
     get_AllDelegations: createRequestActionTypes('GET_ALL_DELEGATIONS'),
-    resetSaveDelegate: createRequestActionTypes('RESET_SAVE_DELEGATE'),
 
     post_Vote: createRequestActionTypes('POST_VOTE'),
     post_WithdrawRewards: createRequestActionTypes('POST_WITHDRAW_REWARDS'),
-    reset_WithDrawReducer: createRequestActionTypes('RESET_WITHDRAW_REWARDS')
+    reset_WithDrawReducer: createRequestActionTypes('RESET_WITHDRAW_REWARDS'),
+    reset_DRUReducer: createRequestActionTypes('RESET_DRU_REDUCER')
 };

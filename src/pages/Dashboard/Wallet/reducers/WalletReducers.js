@@ -9,6 +9,7 @@ const initialState = {
     validatorAvatar: null,
     saveDelegate: null,
     saveReDelegate: null,
+    saveUnbond: null,
     accountDetails: null,
     coingekoDetails: null,
     sendTokens: null,
@@ -187,6 +188,15 @@ export default (state = initialState, { type, payload }) => {
                 sendTokens: payload,
             };
 
+        // Reset delegate, redelagte, unbond reducer
+        case WalletActionTypes.reset_DRUReducer.SUCCESS:
+            return {
+                ...state,
+                saveDelegate: payload,
+                saveReDelegate: payload,
+                saveUnbond: payload,
+            };
+
         // all delegations   
         case WalletActionTypes.get_AllDelegations.REQUEST:
             return {
@@ -249,13 +259,6 @@ export default (state = initialState, { type, payload }) => {
                 withdrawRewards: payload,
             };
             
-        //  resetSaveDelegate   
-        case WalletActionTypes.resetSaveDelegate.SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                saveDelegate: payload,
-            };
         default:
             return state;
     }

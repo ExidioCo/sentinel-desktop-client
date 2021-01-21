@@ -300,6 +300,15 @@ export const resetSendTokenReducer = () => {
 }
 
 /**
+ * @desc Action to reset Delegate, reDelegate and Unbond Reducer
+ */
+export const ResetDRUAction = () => {
+    return (dispatch) => {
+        dispatch(actionCreator(WalletActionTypes.reset_DRUReducer.SUCCESS, null));
+    };
+}
+
+/**
  * @desc Action to get all delegations
  */
 
@@ -331,12 +340,6 @@ export const GetAllDelegationsAction = () => {
             });
     };
 };
-
-export const resetSaveDelegate = () => {
-    return (dispatch) => {
-        dispatch(actionCreator(WalletActionTypes.resetSaveDelegate.SUCCESS, null));
-    }
-}
 
 /**
  * @desc Action to save Un-bond

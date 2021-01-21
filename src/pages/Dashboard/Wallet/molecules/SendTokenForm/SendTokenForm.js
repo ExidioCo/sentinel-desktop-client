@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Formik, Form, ErrorMessage } from "formik";
@@ -19,7 +19,8 @@ import {
 import useVisibleState from "hooks/useVisibleStates";
 import { FormInput } from "molecules/FormInput/FormInput";
 import { decodeFromBech32, encodeToBech32 } from "../../../../../utils/utility";
-import { PostSendTokenAction } from "../../actions/WalletActions";
+import { PostSendTokenAction, resetSendTokenReducer } from "../../actions/WalletActions";
+import { SuccessBox } from '../../../../../atoms/Modal/SuccesBox';
 
 const initialValues = {
   address: "",
@@ -44,9 +45,11 @@ export const SendTokenForm = () => {
     (state) => state.walletReducer.accountDetails
   );
   const loading = useSelector((state) => state.walletReducer.loading);
+  const sendTokens = useSelector((state) => state.walletReducer.sendTokens);
   const { visible, hide, toggle } = useVisibleState(false);
   const [sendDataObj, setSendDataObj] = useState(null);
   const [formValues, setFormValues] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const onSubmitChildHandler = (values, submitProps) => {
     if (decodeFromBech32(values.address) === false) {
@@ -60,6 +63,17 @@ export const SendTokenForm = () => {
       submitProps.resetForm();
       toggle();
     }
+  };
+
+  useEffect(() => {
+    if (sendTokens?.data?.success === true) {
+      setShowSuccess(true)
+    }
+  }, [sendTokens])
+
+  const onCloseSuccess = () => {
+    hide();
+    dispatch(resetSendTokenReducer());
   };
 
   const onSubmit = (values, submitProps) => {
@@ -81,9 +95,9 @@ export const SendTokenForm = () => {
     }
 
     dispatch(PostSendTokenAction(postData));
-    submitProps.resetForm();
-    toggle();
   };
+
+  console.log('sendTokens=---', sendTokens);
 
   return (
     <>
@@ -140,117 +154,122 @@ export const SendTokenForm = () => {
         }}
       </Formik>
       {visible && (
-        <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
-          <ModalClose onClick={hide} />
+        <Modal isOpen={visible} onRequestClose={!loading && hide} ariaHideApp={false}>
+          <ModalClose onClick={!loading && hide} />
           <Grid gridTemplateColumns="35rem 20rem">
-            <Formik
-              initialValues={formValues || initialValues}
-              validationSchema={validationSchemaSendingTokenAddress}
-              onSubmit={onSubmit}
-              enableReinitialize
-            >
-              {() => {
-                return (
-                  <Box ml="1rem">
-                    <Flex alignItems="center">
-                      <Text
-                        variant="title"
-                        fontWeight="medium"
-                        color="primary.700"
-                        py="2rem"
-                        mr="1rem"
-                      >
-                        SENDING TOKENS to
+            {showSuccess
+              ?
+              <SuccessBox onCloseSuccess={onCloseSuccess} txHash={sendTokens?.data?.result?.txhash}/>
+              :
+              <Formik
+                initialValues={formValues || initialValues}
+                validationSchema={validationSchemaSendingTokenAddress}
+                onSubmit={onSubmit}
+                enableReinitialize
+              >
+                {() => {
+                  return (
+                    <Box ml="1rem">
+                      <Flex alignItems="center">
+                        <Text
+                          variant="title"
+                          fontWeight="medium"
+                          color="primary.700"
+                          py="2rem"
+                          mr="1rem"
+                        >
+                          SENDING TOKENS to
                       </Text>
-                      <HelpTooltip />
-                    </Flex>
-                    <Grid gridTemplateColumns="15rem 1fr">
-                      <Text
-                        variant="label"
-                        fontWeight="medium"
-                        color="grey.700"
-                        textTransform="uppercase"
-                      >
-                        To Address
+                        <HelpTooltip />
+                      </Flex>
+                      <Grid gridTemplateColumns="15rem 1fr">
+                        <Text
+                          variant="label"
+                          fontWeight="medium"
+                          color="grey.700"
+                          textTransform="uppercase"
+                        >
+                          To Address
                       </Text>
-                      <Text
-                        variant="body"
-                        fontWeight="medium"
-                        color="grey.900"
-                        pb="1rem"
-                      >
-                        {encodeToBech32(sendDataObj.address, "sentvaloper")}
+                        <Text
+                          variant="body"
+                          fontWeight="medium"
+                          color="grey.900"
+                          pb="1rem"
+                        >
+                          {encodeToBech32(sendDataObj?.address, "sentvaloper")}
+                        </Text>
+                      </Grid>
+                      <Grid gridTemplateColumns="15rem 1fr">
+                        <Text
+                          variant="label"
+                          fontWeight="medium"
+                          color="grey.700"
+                          textTransform="uppercase"
+                        >
+                          Tokens
                       </Text>
-                    </Grid>
-                    <Grid gridTemplateColumns="15rem 1fr">
-                      <Text
-                        variant="label"
-                        fontWeight="medium"
-                        color="grey.700"
-                        textTransform="uppercase"
-                      >
-                        Tokens
-                      </Text>
-                      <Text
-                        variant="body"
-                        fontWeight="medium"
-                        color="grey.900"
-                        m={0}
-                        pb="1rem"
-                      >
-                        {sendDataObj.amount}
-                      </Text>
-                    </Grid>
+                        <Text
+                          variant="body"
+                          fontWeight="medium"
+                          color="grey.900"
+                          m={0}
+                          pb="1rem"
+                        >
+                          {sendDataObj?.amount}
+                        </Text>
+                      </Grid>
 
-                    <Form>
-                      <Box my="2rem">
-                        <Box>
-                          <Flex alignItems="center">
+                      <Form>
+                        <Box my="2rem">
+                          <Box>
+                            <Flex alignItems="center">
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                                mr="1rem"
+                              >
+                                MEMO
+                            </Text>
+                              <HelpTooltip />
+                            </Flex>
+                            <FormInput
+                              as="textarea"
+                              rows="3"
+                              name="memo"
+                              label="Enter Memo"
+                              autofocus
+                            />
+                            <ErrorMessage name="memo" component={Error} />
+                          </Box>
+                          <Box>
                             <Text
                               variant="label"
                               fontWeight="medium"
                               color="grey.700"
                               textTransform="uppercase"
-                              mr="1rem"
                             >
-                              MEMO
-                            </Text>
-                            <HelpTooltip />
-                          </Flex>
-                          <FormInput
-                            as="textarea"
-                            rows="3"
-                            name="memo"
-                            label="Enter Memo"
-                            autofocus
-                          />
-                          <ErrorMessage name="memo" component={Error} />
-                        </Box>
-                        <Box>
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                          >
-                            PASSWORD
+                              PASSWORD
                           </Text>
-                          <FormInput
-                            type="password"
-                            name="password"
-                            label="Enter Password"
-                          />
-                          <ErrorMessage name="password" component={Error} />
-                        </Box>
-                        <Button px="8rem" justifySelf="center" type="submit">
-                          SEND
+                            <FormInput
+                              type="password"
+                              name="password"
+                              label="Enter Password"
+                            />
+                            <ErrorMessage name="password" component={Error} />
+                          </Box>
+                          <Button px="8rem" justifySelf="center" type="submit" disabled={loading} loading={loading}>
+                            SEND
                         </Button>
-                      </Box>
-                    </Form>
-                  </Box>
-                );
-              }}
-            </Formik>
+                        </Box>
+                      </Form>
+                    </Box>
+                  );
+                }}
+              </Formik>
+            }
           </Grid>
         </Modal>
       )}

@@ -9,6 +9,7 @@ import { toast } from 'react-smart-toaster';
 import {
     actionCreator,
     jsonApiHeader,
+    checkHttpStatus,
     LoginActionTypes,
     POST_LOGIN_API,
     GET_CHECK_CONFIG_API,
@@ -81,8 +82,7 @@ export const CheckConfigAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckConfig.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -117,8 +117,7 @@ export const CheckKeysAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckKeys.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -150,8 +149,7 @@ export const UpdateConfigAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.put_UpdateConfigDetails.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -185,8 +183,7 @@ export const CreateAccountAction = (postData) => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.post_CreateAccount.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };
@@ -213,8 +210,7 @@ export const CheckConfigSettingAction = () => {
             })
             .catch(function (error) {
                 dispatch(actionCreator(LoginActionTypes.get_CheckConfigPostLogin.FAILURE));
-                toast.error(error.response.data.error.message)
-
+                checkHttpStatus(error.response);
             });
     };
 };

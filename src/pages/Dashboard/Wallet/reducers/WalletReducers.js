@@ -52,7 +52,7 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 loading: false,
             };
-        
+
         // validator avatar    
         case WalletActionTypes.get_ValidatorAvatar.REQUEST:
             return {
@@ -179,6 +179,13 @@ export default (state = initialState, { type, payload }) => {
                 loading: false,
             };
 
+        // Reset Send Token Reducer
+        case WalletActionTypes.reset_SendTokenReducer.SUCCESS:
+            return {
+                ...state,
+                sendTokens: payload,
+            };
+
         // all delegations   
         case WalletActionTypes.get_AllDelegations.REQUEST:
             return {
@@ -232,7 +239,7 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 loading: false,
             };
-        
+
         //  resetSaveDelegate   
         case WalletActionTypes.resetSaveDelegate.SUCCESS:
             return {

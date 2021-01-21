@@ -3,8 +3,9 @@
  * This file contains generic functions. 
  * They are here in utility because we are using them across the application.
  */
-import bech32 from "bech32";
-import history from "./history";
+import bech32 from 'bech32';
+import history from './history';
+import { toast } from 'react-smart-toaster';
 
 const REQUEST = "REQUEST";
 const SUCCESS = "SUCCESS";
@@ -12,8 +13,7 @@ const FAILURE = "FAILURE";
 
 export const TOKEN_EXPIRY_MESSAGE = "Session has expired. Login again!";
 
-// export const API_URL = ''
-export const API_URL = "http://127.0.0.1:8080";
+export const API_URL = process.env.REACT_APP_API_HOST
 
 export function actionCreator(actionType, data) {
   return {
@@ -46,18 +46,13 @@ export const jsonApiHeader = (accessToken) => {
   };
 };
 
-export function checkHttpStatus(response) {
-  if (response.status >= 200 && response.status < 204) {
-    return response.json();
-  } else if (response.status === 204) {
-    return true;
-  } else if (response.status >= 400 && response.status < 500) {
-    return response.json();
-  } else {
-    var error = new Error(response.statusText);
-    error.response = response;
-    throw error;
-  }
+export const checkHttpStatus = (response) => {
+   if(response.status === 401) {
+       toast.error('session expired')
+       window.location.reload();
+   } else {
+    toast.error(response.data.error.message)
+   }
 }
 
 export const encodeToBech32 = (key, prefix) => {

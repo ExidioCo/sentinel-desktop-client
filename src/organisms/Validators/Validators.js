@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import bech32 from "bech32";
 import moment from "moment";
 
 import MemoProfile from "assets/icons/Profile";
@@ -40,6 +39,7 @@ const initialValues = {
   toValidator: "",
   password: ""
 };
+
 const validationSchema = Yup.object({
   amount: Yup.string()
     .matches(/^[0-9]*$/, "Only Numbers allowed")

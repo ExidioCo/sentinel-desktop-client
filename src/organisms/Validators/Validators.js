@@ -121,6 +121,24 @@ const ValidatorsList = React.memo(
           borderColor="border.500"
         >
           <MemoProfile height="2.5rem" width="2.5rem" />
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            bg="bg.600"
+            borderRadius="4rem"
+            height="2.5rem"
+            width="2.5rem"
+          >
+            <Text
+              color="primary.700"
+              fontSize="1.4rem"
+              fontWeight="medium"
+              textDecoration="none"
+              lineHeight="100%"
+            >
+              # {index}
+            </Text>
+          </Flex>
           <Flex alignItems="center">
             {/* {
             validatorListDataObj.description.identity === ''

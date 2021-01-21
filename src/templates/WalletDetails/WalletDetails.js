@@ -15,8 +15,9 @@ export const ShowPopup = ({
   hideDelegate,
   dropdownValue,
   setDropdownValue,
+  dropdown,
+  setDropdown
 }) => {
-  const [dropdown, setDropdown] = useState(false);
   useEffect(() => {
     if (hideDelegate === true) {
       setDropdownValue("RE-DELEGATE");
@@ -38,7 +39,10 @@ export const ShowPopup = ({
                 pb="1rem"
                 mb={0}
                 color="gray.900"
-                onClick={() => setDropdownValue("DELEGATE")}
+                onClick={() => {
+                  setDropdownValue("DELEGATE");
+                  setDropdown(false);
+                }}
               >
                 DELEGATE
               </Text>
@@ -54,7 +58,10 @@ export const ShowPopup = ({
               mb={0}
               pt="1rem"
               color="gray.900"
-              onClick={() => setDropdownValue("RE-DELEGATE")}
+              onClick={() => {
+                setDropdownValue("RE-DELEGATE");
+                setDropdown(false);
+              }}
             >
               RE-DELEGATE
             </Text>
@@ -67,7 +74,10 @@ export const ShowPopup = ({
               fontSize="1.4rem"
               color="gray.900"
               pt="1rem"
-              onClick={() => setDropdownValue("UNBOND")}
+              onClick={() => {
+                setDropdownValue("UNBOND");
+                setDropdown(false);
+              }}
             >
               UNBOND
             </Text>
@@ -108,6 +118,7 @@ export const WalletDetails = () => {
   const [visibleInActive, setVisibleInActive] = useState(false);
   const [hideDelegate, setHideDelegate] = useState(false);
   const [dropdownValue, setDropdownValue] = useState(null);
+  const [dropdown, setDropdown] = useState(false);
 
   const dispatch = useDispatch();
   const accountDetails = useSelector(
@@ -236,6 +247,8 @@ export const WalletDetails = () => {
                 <ShowPopup
                   hideDelegate={hideDelegate}
                   dropdownValue={dropdownValue}
+                  setDropdown={setDropdown}
+                  dropdown={dropdown}
                   setDropdownValue={setDropdownValue}
                 />
               </>

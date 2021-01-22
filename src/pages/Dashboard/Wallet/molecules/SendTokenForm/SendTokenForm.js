@@ -39,7 +39,9 @@ const validationSchemaSendingTokenAddress = yup.object({
 
 export const SendTokenForm = () => {
   const dispatch = useDispatch();
-  const accountDetails = useSelector((state) => state.walletReducer.accountDetails);
+  const accountDetails = useSelector(
+    (state) => state.walletReducer.accountDetails
+  );
   const loading = useSelector((state) => state.walletReducer.loading);
   const sendTokens = useSelector((state) => state.walletReducer.sendTokens);
   const { visible, hide, toggle } = useVisibleState(false);
@@ -100,10 +102,10 @@ export const SendTokenForm = () => {
   };
 
   const onClickMaxhandler = (setFieldValue) => {
-    setFieldValue('amount', accountDetails?.data?.result?.coins[0]?.value)
-  }
+    setFieldValue("amount", accountDetails?.data?.result?.coins[0]?.value);
+  };
 
-  console.log('initial Value', initialValues);
+  console.log("initial Value", initialValues);
 
   return (
     <>
@@ -113,7 +115,7 @@ export const SendTokenForm = () => {
         onSubmit={onSubmitChildHandler}
         enableReinitialize
       >
-        {({setFieldValue}) => {
+        {({ setFieldValue }) => {
           return (
             <Form>
               <Box mx="3rem" mt="3rem">
@@ -144,10 +146,12 @@ export const SendTokenForm = () => {
                 </Text>
                 <Box>
                   <FormInput type="text" name="amount" label="Enter Amount" />
-                  <Box position="absolute" pr="0rem" bottom=".3rem" right={0}>
+                  <Box position="absolute" pr="1rem" bottom=".8rem" right={0}>
                     <Text
+                      variant="label"
                       textTransform="capitalize"
-                      cursor='pointer'
+                      fontWeight="medium"
+                      cursor="pointer"
                       onClick={() => onClickMaxhandler(setFieldValue)}
                     >
                       Max

@@ -106,11 +106,11 @@ const ValidatorsList = React.memo(
       }
     }, []);
 
-    // useEffect(() => {
-    //   if (validatorListDataObj.description.identity !== '') {
-    //     dispatch(GetValidatorAvatarAction(validatorListDataObj.description.identity))
-    //   }
-    // }, [])
+    useEffect(() => {
+      if (validatorListDataObj.description.identity !== '' && !avatar[validatorListDataObj.description.identity]) {
+        dispatch(GetValidatorAvatarAction(validatorListDataObj.description.identity))
+      }
+    }, [])
 
     return (
       <>
@@ -121,7 +121,13 @@ const ValidatorsList = React.memo(
           borderBottom="1px solid"
           borderColor="border.500"
         >
-          <MemoProfile height="2.5rem" width="2.5rem" />
+           {
+            validatorListDataObj.description.identity === '' || !avatar
+            ?
+            <MemoProfile height="2.5rem" width="2.5rem" />
+            :
+            <img src={avatar[validatorListDataObj.description.identity]?.them[0]?.pictures?.primary?.url} alt="" height="30" width="30" style={{ borderRadius: '20px' }}/>
+          }
           <Flex
             justifyContent="center"
             alignItems="center"
@@ -142,14 +148,6 @@ const ValidatorsList = React.memo(
             </Text>
           </Flex>
           <Flex alignItems="center">
-            {/* {
-            validatorListDataObj.description.identity === ''
-            ?
-            <MemoProfile height="2.5rem" width="2.5rem" />
-            :
-            <img src={avatar?.data.them[0].pictures.primary.url} alt="" height="30" width="30" style={{ borderRadius: '20px' }}/>
-          } */}
-
             <Text color="primary.700" fontSize="1.4rem" fontWeight="medium">
               {validatorListDataObj.description.moniker}
             </Text>

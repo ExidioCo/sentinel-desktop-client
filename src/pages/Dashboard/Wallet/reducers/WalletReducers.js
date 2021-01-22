@@ -65,7 +65,7 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 loading: false,
-                validatorAvatar: payload,
+                validatorAvatar: {...state.validatorAvatar, ...payload},
             };
         case WalletActionTypes.get_ValidatorAvatar.FAILURE:
             return {

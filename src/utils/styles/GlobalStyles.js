@@ -124,5 +124,11 @@ textarea {
   }
 }
 
+.withdraw-address 
+ .css-1uccc91-singleValue {
+  width: 95%
+ }
+}
+
 `;
 export default GlobalStyle;

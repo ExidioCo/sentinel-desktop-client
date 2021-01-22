@@ -21,7 +21,7 @@ import useVisibleState from "hooks/useVisibleStates";
 import {
   GetAllDelegationsAction,
   PostWithdrawRewardsAction,
-  ResetWithdrawRewardsReducer
+  ResetWithdrawRewardsReducer,
 } from "../../actions/WalletActions";
 import { encodeToBech32 } from "../../../../../utils/utility";
 import { SuccessBox } from "../../../../../atoms/Modal/SuccesBox";
@@ -57,9 +57,7 @@ const WithdrawForm = () => {
   const withdrawRewards = useSelector(
     (state) => state.walletReducer.withdrawRewards
   );
-  const loading = useSelector(
-    (state) => state.walletReducer.loading
-  );
+  const loading = useSelector((state) => state.walletReducer.loading);
   const { visible, hide, toggle } = useVisibleState(false);
   const [withDrawelValueAddress, setWithDrawelAddress] = useState(null);
   const [selectedMoniker, setMoniker] = useState(null);
@@ -70,7 +68,7 @@ const WithdrawForm = () => {
   }, [GetAllDelegationsAction]);
 
   useEffect(() => {
-    if(withdrawRewards?.data?.success === true) {
+    if (withdrawRewards?.data?.success === true) {
       setShowSuccess(true);
     } else {
       setShowSuccess(false);
@@ -122,23 +120,51 @@ const WithdrawForm = () => {
   const onWithDrawClickHandler = (values, submitProps) => {
     toggle();
     submitProps.resetForm();
-  }
+  };
 
   const onCloseSuccess = () => {
     hide();
     dispatch(ResetWithdrawRewardsReducer());
   };
 
-  const formatOptionLabel = ({ value, label, customAbbreviation }) => (
-    <Grid gridAutoFlow="column" gridGap="4rem" justifyContent="space-between">
-      <Text variant="label" fontWeight="medium" color="text.500">
-        {label}
-      </Text>
-      <Text variant="small" fontWeight="medium" color="primary.700">
-        {encodeToBech32(customAbbreviation, "sentvaloper")}
-      </Text>
-    </Grid>
-  );
+  const formatOptionLabel = ({ value, label, customAbbreviation }) => {
+    const addressFirstStr = encodeToBech32(
+      customAbbreviation,
+      "sentvaloper"
+    ).substring(0, 7);
+
+    const addressLastStr = encodeToBech32(
+      customAbbreviation,
+      "sentvaloper"
+    ).substring(encodeToBech32(customAbbreviation, "sentvaloper").length - 6);
+
+    return (
+      <Grid
+        gridAutoFlow="column"
+        justifyContent="space-between"
+        gridGap="2rem"
+        maxWidth="100%"
+        overflow="hidden"
+      >
+        <Text
+          variant="label"
+          fontWeight="medium"
+          color="text.500"
+          whiteSpace="nowrap"
+        >
+          {label}
+        </Text>
+        <Text
+          variant="small"
+          fontWeight="medium"
+          color="primary.700"
+          whiteSpace="nowrap"
+        >
+          {addressFirstStr}...{addressLastStr}
+        </Text>
+      </Grid>
+    );
+  };
 
   const onChangeHandler = (value) => {
     setWithDrawelAddress(value);
@@ -170,15 +196,16 @@ const WithdrawForm = () => {
                 >
                   SELECT VALIDATOR TO WITHDRAW
                 </Text>
-
-                <FormSelect
-                  name="validator"
-                  formatOptionLabel={formatOptionLabel}
-                  options={options}
-                  onChange={(value) => onChangeHandler(value)}
-                  searchable
-                />
-                <ErrorMessage name="validator" component={Error} />
+                <Box className="withdraw-address">
+                  <FormSelect
+                    name="validator"
+                    formatOptionLabel={formatOptionLabel}
+                    options={options}
+                    onChange={(value) => onChangeHandler(value)}
+                    searchable
+                  />
+                  <ErrorMessage name="validator" component={Error} />
+                </Box>
               </Box>
               <Flex justifySelf="center">
                 <Button px="3rem" m="auto" type="submit">
@@ -190,63 +217,73 @@ const WithdrawForm = () => {
         }}
       </Formik>
       {visible && (
-        <Modal isOpen={visible} onRequestClose={!loading ? hide : undefined} ariaHideApp={false}>
+        <Modal
+          isOpen={visible}
+          onRequestClose={!loading ? hide : undefined}
+          ariaHideApp={false}
+        >
           {showSuccess ? (
             <SuccessBox
               onCloseSuccess={onCloseSuccess}
               txHash={withdrawRewards?.data?.result?.txhash}
             />
           ) : (
-              <>
-                <ModalClose onClick={!loading ? hide : undefined} loading={loading}/>
-                <Formik
-                  initialValues={initialValuesModal}
-                  validationSchema={validationSchemaWithdrawing}
-                  onSubmit={onSubmit}
-                  enableReinitialize
-                >
-                  {() => {
-                    return (
-                      <Box mr="10rem" ml="1rem">
-                        <Flex alignItems="center">
-                          <Text
-                            variant="title"
-                            fontWeight="medium"
-                            color="primary.700"
-                            py="2rem"
-                            mr="1rem"
-                          >
-                            WITHDRAWING FROM
-                          </Text>
-                          <Text
-                            variant="body"
-                            fontWeight="medium"
-                            color="primary.500"
-                            mr="1rem"
-                          >
-                            {selectedMoniker}
-                          </Text>
-                          <HelpTooltip />
-                        </Flex>
-                        <Grid gridTemplateColumns="15rem 1fr">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                          >
-                            FROM Address
-                          </Text>
-                          <Text
-                            variant="body"
-                            fontWeight="medium"
-                            color="grey.900"
-                            pb="1rem"
-                          >
-                            {encodeToBech32(withDrawelValueAddress, "sentvaloper")}
-                          </Text>
-                        </Grid>
-                        {/* <Grid gridTemplateColumns="15rem 1fr">
+            <>
+              <ModalClose
+                onClick={!loading ? hide : undefined}
+                loading={loading}
+              />
+              <Formik
+                initialValues={initialValuesModal}
+                validationSchema={validationSchemaWithdrawing}
+                onSubmit={onSubmit}
+                enableReinitialize
+              >
+                {() => {
+                  return (
+                    <Box mr="10rem" ml="1rem">
+                      <Flex alignItems="center">
+                        <Text
+                          variant="title"
+                          fontWeight="medium"
+                          color="primary.700"
+                          py="2rem"
+                          mr="1rem"
+                        >
+                          WITHDRAWING FROM
+                        </Text>
+                        <Text
+                          variant="body"
+                          fontWeight="medium"
+                          color="primary.500"
+                          mr="1rem"
+                        >
+                          {selectedMoniker}
+                        </Text>
+                        <HelpTooltip />
+                      </Flex>
+                      <Grid gridTemplateColumns="15rem 1fr">
+                        <Text
+                          variant="label"
+                          fontWeight="medium"
+                          color="grey.700"
+                          textTransform="uppercase"
+                        >
+                          FROM Address
+                        </Text>
+                        <Text
+                          variant="body"
+                          fontWeight="medium"
+                          color="grey.900"
+                          pb="1rem"
+                        >
+                          {encodeToBech32(
+                            withDrawelValueAddress,
+                            "sentvaloper"
+                          )}
+                        </Text>
+                      </Grid>
+                      {/* <Grid gridTemplateColumns="15rem 1fr">
                     <Text
                       variant="label"
                       fontWeight="medium"
@@ -266,57 +303,63 @@ const WithdrawForm = () => {
                     </Text>
                   </Grid> */}
 
-                        <Form>
-                          <Box my="2rem" mr="10rem">
-                            <Box>
-                              <Flex alignItems="center">
-                                <Text
-                                  variant="label"
-                                  fontWeight="medium"
-                                  color="grey.700"
-                                  textTransform="uppercase"
-                                  mr="1rem"
-                                >
-                                  MEMO
-                                </Text>
-                                <HelpTooltip />
-                              </Flex>
-                              <FormInput
-                                as="textarea"
-                                rows="3"
-                                name="memo"
-                                label="Enter Memo"
-                                autofocus
-                              />
-                              <ErrorMessage name="memo" component={Error} />
-                            </Box>
-                            <Box>
+                      <Form>
+                        <Box my="2rem" mr="10rem">
+                          <Box>
+                            <Flex alignItems="center">
                               <Text
                                 variant="label"
                                 fontWeight="medium"
                                 color="grey.700"
                                 textTransform="uppercase"
+                                mr="1rem"
                               >
-                                PASSWORD
+                                MEMO
                               </Text>
-                              <FormInput
-                                type="password"
-                                name="password"
-                                label="Enter Password"
-                              />
-                              <ErrorMessage name="password" component={Error} />
-                            </Box>
-                            <Button px="8rem" justifySelf="center" type="submit" disabled={loading} loading={loading}>
-                              WITHDRAW
-                            </Button>
+                              <HelpTooltip />
+                            </Flex>
+                            <FormInput
+                              as="textarea"
+                              rows="3"
+                              name="memo"
+                              label="Enter Memo"
+                              autofocus
+                            />
+                            <ErrorMessage name="memo" component={Error} />
                           </Box>
-                        </Form>
-                      </Box>
-                    );
-                  }}
-                </Formik>
-              </>
-            )}
+                          <Box>
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                            >
+                              PASSWORD
+                            </Text>
+                            <FormInput
+                              type="password"
+                              name="password"
+                              label="Enter Password"
+                            />
+                            <ErrorMessage name="password" component={Error} />
+                          </Box>
+                          <Button
+                            px="8rem"
+                            justifySelf="center"
+                            type="submit"
+                            disabled={loading}
+                            loading={loading}
+                          >
+                            WITHDRAW
+                          </Button>
+                        </Box>
+                      </Form>
+                    </Box>
+                  );
+                }}
+              </Formik>
+            </>
+          )}
         </Modal>
       )}
     </>

@@ -97,7 +97,6 @@ export const sort = (prop, arr, order = 'asc') => {
           b = b[prop[i]];
           i++;
       }
-      console.log('typeof(a)', typeof(a))
       if ((typeof a === 'string' ? a.toUpperCase() : a) < (typeof b === 'string' ? b.toUpperCase() : b)) {
           return -1;
       } else if ((typeof a === 'string' ? a.toUpperCase() : a) > (typeof b === 'string' ? b.toUpperCase() : b)) {

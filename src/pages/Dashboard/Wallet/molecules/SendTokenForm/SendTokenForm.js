@@ -25,12 +25,6 @@ import {
 } from "../../actions/WalletActions";
 import { SuccessBox } from "../../../../../atoms/Modal/SuccesBox";
 
-const initialValues = {
-  address: "",
-  amount: "",
-  memo: "",
-  password: "",
-};
 const validationSchemaSendToken = yup.object({
   address: yup.string().required("Required"),
   amount: yup
@@ -38,21 +32,26 @@ const validationSchemaSendToken = yup.object({
     .matches(/^[0-9]*$/, "Only Numbers allowed")
     .required("Required"),
 });
+
 const validationSchemaSendingTokenAddress = yup.object({
   password: yup.string().required("Required"),
 });
 
 export const SendTokenForm = () => {
   const dispatch = useDispatch();
-  const accountDetails = useSelector(
-    (state) => state.walletReducer.accountDetails
-  );
+  const accountDetails = useSelector((state) => state.walletReducer.accountDetails);
   const loading = useSelector((state) => state.walletReducer.loading);
   const sendTokens = useSelector((state) => state.walletReducer.sendTokens);
   const { visible, hide, toggle } = useVisibleState(false);
   const [sendDataObj, setSendDataObj] = useState(null);
-  const [formValues, setFormValues] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const [initialValues, setInitialValues] = useState({
+    address: "",
+    amount: "",
+    memo: "",
+    password: "",
+  });
 
   const onSubmitChildHandler = (values, submitProps) => {
     if (decodeFromBech32(values.address) === false) {
@@ -100,15 +99,21 @@ export const SendTokenForm = () => {
     dispatch(PostSendTokenAction(postData));
   };
 
+  const onClickMaxhandler = (setFieldValue) => {
+    setFieldValue('amount', accountDetails?.data?.result?.coins[0]?.value)
+  }
+
+  console.log('initial Value', initialValues);
+
   return (
     <>
       <Formik
-        initialValues={formValues || initialValues}
+        initialValues={initialValues}
         validationSchema={validationSchemaSendToken}
         onSubmit={onSubmitChildHandler}
         enableReinitialize
       >
-        {() => {
+        {({setFieldValue}) => {
           return (
             <Form>
               <Box mx="3rem" mt="3rem">
@@ -140,13 +145,13 @@ export const SendTokenForm = () => {
                 <Box>
                   <FormInput type="text" name="amount" label="Enter Amount" />
                   <Box position="absolute" pr="0rem" bottom=".3rem" right={0}>
-                    <Button
-                      variant="normal"
-                      textVariant="label"
+                    <Text
                       textTransform="capitalize"
+                      cursor='pointer'
+                      onClick={() => onClickMaxhandler(setFieldValue)}
                     >
                       Max
-                    </Button>
+                    </Text>
                   </Box>
                 </Box>
 
@@ -177,7 +182,7 @@ export const SendTokenForm = () => {
               <ModalClose onClick={!loading && hide} />
               <Grid gridTemplateColumns="35rem 20rem">
                 <Formik
-                  initialValues={formValues || initialValues}
+                  initialValues={initialValues}
                   validationSchema={validationSchemaSendingTokenAddress}
                   onSubmit={onSubmit}
                   enableReinitialize

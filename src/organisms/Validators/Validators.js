@@ -418,7 +418,7 @@ const ValidatorsList = React.memo(
                             my="2rem"
                             cursor="pointer"
                             onClick={() =>
-                              window.open("http://explorer.sentinel.co")
+                              window.open(`http://explorer.sentinel.co/transactions/${txHash}`)
                             }
                           >
                             Go to Explorer

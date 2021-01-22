@@ -219,7 +219,7 @@ export const WalletDetails = () => {
           >
             <Box />
             {visibleValidatorList && (
-              <Flex justifyContent="end">
+              <>
                 <Flex>
                   <Button
                     variant={visibleActive ? "active" : "inActive"}
@@ -244,16 +244,14 @@ export const WalletDetails = () => {
                     InActive
                   </Button>
                 </Flex>
-                <Box width="15rem">
-                  <ShowPopup
-                    hideDelegate={hideDelegate}
-                    dropdownValue={dropdownValue}
-                    setDropdown={setDropdown}
-                    dropdown={dropdown}
-                    setDropdownValue={setDropdownValue}
-                  />
-                </Box>
-              </Flex>
+                <ShowPopup
+                  hideDelegate={hideDelegate}
+                  dropdownValue={dropdownValue}
+                  setDropdown={setDropdown}
+                  dropdown={dropdown}
+                  setDropdownValue={setDropdownValue}
+                />
+              </>
             )}
             {/* <SearchField
               placeholder="Search"

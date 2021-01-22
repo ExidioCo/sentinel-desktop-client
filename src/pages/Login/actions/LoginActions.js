@@ -174,7 +174,7 @@ export const CreateAccountAction = (postData) => {
                 if(response.data.success === true ) {
                     dispatch(actionCreator(LoginActionTypes.post_CreateAccount.SUCCESS, response));
                     dispatch(actionCreator(LoginActionTypes.set_redirectURL.SUCCESS, '/account-created'));
-                    history.push('/account-created');
+                    history.replace('/account-created');
                     toast.success('Account Created Successfully');
 
                 } else {

@@ -31,7 +31,7 @@ export function createRequestActionTypes(base) {
 
 export function handleLoginRedirect(token, targetUrl) {
   localStorage.setItem("access_token", token);
-  history.push(targetUrl);
+  history.replace(targetUrl);
 }
 
 export function handleLogoutRedirect() {

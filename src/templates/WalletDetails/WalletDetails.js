@@ -16,7 +16,7 @@ export const ShowPopup = ({
   dropdownValue,
   setDropdownValue,
   dropdown,
-  setDropdown
+  setDropdown,
 }) => {
   useEffect(() => {
     if (hideDelegate === true) {
@@ -219,7 +219,7 @@ export const WalletDetails = () => {
           >
             <Box />
             {visibleValidatorList && (
-              <>
+              <Flex justifyContent="end">
                 <Flex>
                   <Button
                     variant={visibleActive ? "active" : "inActive"}
@@ -244,14 +244,16 @@ export const WalletDetails = () => {
                     InActive
                   </Button>
                 </Flex>
-                <ShowPopup
-                  hideDelegate={hideDelegate}
-                  dropdownValue={dropdownValue}
-                  setDropdown={setDropdown}
-                  dropdown={dropdown}
-                  setDropdownValue={setDropdownValue}
-                />
-              </>
+                <Box width="15rem">
+                  <ShowPopup
+                    hideDelegate={hideDelegate}
+                    dropdownValue={dropdownValue}
+                    setDropdown={setDropdown}
+                    dropdown={dropdown}
+                    setDropdownValue={setDropdownValue}
+                  />
+                </Box>
+              </Flex>
             )}
             {/* <SearchField
               placeholder="Search"

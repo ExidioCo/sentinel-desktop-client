@@ -105,8 +105,6 @@ export const SendTokenForm = () => {
     setFieldValue("amount", accountDetails?.data?.result?.coins[0]?.value);
   };
 
-  console.log("initial Value", initialValues);
-
   return (
     <>
       <Formik

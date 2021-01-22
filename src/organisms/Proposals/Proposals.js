@@ -23,7 +23,7 @@ import useVisibleState from "hooks/useVisibleStates";
 import {
   GetProposalListAction,
   PostVoteAction,
-  ResetPostVoteReducer
+  ResetPostVoteReducer,
 } from "../../pages/Dashboard/Wallet/actions/WalletActions";
 import { SuccessBox } from "../../atoms/Modal/SuccesBox";
 
@@ -82,7 +82,7 @@ const ProposalDetails = ({ proposalObj }) => {
 
   const onSubmit = (values, submitProps) => {
     let postData = {
-      memo: values.memo || '',
+      memo: values.memo || "",
       password: values.password,
       option: voteType,
     };
@@ -135,7 +135,11 @@ const ProposalDetails = ({ proposalObj }) => {
           lineHeight="1.8rem"
           mt="1rem"
         >
-          {proposalObj.description}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: proposalObj.description.replace(/\\n/g, "<br />"),
+            }}
+          />
         </Text>
       </Box>
       <Grid
@@ -200,91 +204,102 @@ const ProposalDetails = ({ proposalObj }) => {
         </Button> */}
       </Grid>
       {visible && (
-        <Modal isOpen={visible} onRequestClose={!loading ? hide : undefined} ariaHideApp={false}>
+        <Modal
+          isOpen={visible}
+          onRequestClose={!loading ? hide : undefined}
+          ariaHideApp={false}
+        >
           {showSuccess ? (
             <SuccessBox
               onCloseSuccess={onCloseSuccess}
               txHash={postVote?.data?.result?.txhash}
             />
           ) : (
-              <>
-                <ModalClose onClick={!loading ? hide : undefined} />
-                <Formik
-                  initialValues={initialValues}
-                  validationSchema={validationSchema}
-                  onSubmit={onSubmit}
-                  enableReinitialize
-                >
-                  {() => {
-                    return (
-                      <Box>
-                        <Flex alignItems="center">
-                          <Text
-                            variant="field"
-                            fontWeight="medium"
-                            color="primary.700"
-                            p="1rem"
-                          >
-                            Voting {voteType}
-                          </Text>
-                          <HelpTooltip />
-                        </Flex>
+            <>
+              <ModalClose onClick={!loading ? hide : undefined} />
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+                enableReinitialize
+              >
+                {() => {
+                  return (
+                    <Box>
+                      <Flex alignItems="center">
+                        <Text
+                          variant="field"
+                          fontWeight="medium"
+                          color="primary.700"
+                          p="1rem"
+                        >
+                          Voting {voteType}
+                        </Text>
+                        <HelpTooltip />
+                      </Flex>
 
-                        <Form>
-                          <Box my="3rem" mx="1rem">
-                            <Box>
-                              <Text
-                                variant="label"
-                                fontWeight="medium"
-                                color="grey.700"
-                                textTransform="uppercase"
-                              >
-                                Memo
-                              </Text>
-                              <FormInput
-                                as="textarea"
-                                rows="3"
-                                name="memo"
-                                label="Enter Memo"
-                              />
-                              <ErrorMessage name="memo" component={Error} />
-                            </Box>
-                            <Box>
-                              <Text
-                                variant="label"
-                                fontWeight="medium"
-                                color="grey.700"
-                                textTransform="uppercase"
-                              >
-                                Password
-                              </Text>
-                              <FormInput
-                                type="password"
-                                rows="3"
-                                name="password"
-                                label="Enter password"
-                              />
-                              <ErrorMessage name="password" component={Error} />
-                            </Box>
-                            <Button px="3rem" justifySelf="center" type="submit" loading={loading} disabled={loading}>
-                              CONFIRM VOTE
-                           </Button>
+                      <Form>
+                        <Box my="3rem" mx="1rem">
+                          <Box>
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                            >
+                              Memo
+                            </Text>
+                            <FormInput
+                              as="textarea"
+                              rows="3"
+                              name="memo"
+                              label="Enter Memo"
+                            />
+                            <ErrorMessage name="memo" component={Error} />
                           </Box>
-                        </Form>
-                      </Box>
-                    );
-                  }}
-                </Formik>
-              </>
-            )}
+                          <Box>
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                            >
+                              Password
+                            </Text>
+                            <FormInput
+                              type="password"
+                              rows="3"
+                              name="password"
+                              label="Enter password"
+                            />
+                            <ErrorMessage name="password" component={Error} />
+                          </Box>
+                          <Button
+                            px="3rem"
+                            justifySelf="center"
+                            type="submit"
+                            loading={loading}
+                            disabled={loading}
+                          >
+                            CONFIRM VOTE
+                          </Button>
+                        </Box>
+                      </Form>
+                    </Box>
+                  );
+                }}
+              </Formik>
+            </>
+          )}
         </Modal>
       )}
     </Box>
   );
 };
-const ProposalsList = ({ index, proposalObj }) => {
-  const { visible, toggle } = useVisibleState(true);
-  const [isVisible, setVisible] = useState(false);
+const ProposalsList = ({ index, proposalObj, onClick, isVisibleDetail }) => {
+  const { visible, toggle, show } = useVisibleState(true);
+
+  // const [visibleDetailHeader, setVisibleDetailHeader] = useState(undefined);
 
   const findMaxValue = (obj, n) => {
     let keys = Object.keys(obj);
@@ -295,6 +310,7 @@ const ProposalsList = ({ index, proposalObj }) => {
     return keys[0];
   };
 
+  console.log("isVisibleDetail", isVisibleDetail);
   return (
     <Box p="1.5rem 2rem" border="1px solid" borderColor="border.500" mr="1rem">
       <Flex alignItems="center">
@@ -435,13 +451,15 @@ const ProposalsList = ({ index, proposalObj }) => {
           justifySelf="center"
           type="submit"
           textTransform="capitalize"
-          onClick={toggle}
+          onClick={onClick}
         >
-          {visible ? "View" : "Close"}
+          {isVisibleDetail === index ? "Close" : "View"}
         </Button>
       </Grid>
 
-      {!visible && <ProposalDetails proposalObj={proposalObj} />}
+      {isVisibleDetail === index && (
+        <ProposalDetails proposalObj={proposalObj} />
+      )}
     </Box>
   );
 };
@@ -449,7 +467,14 @@ const ProposalsList = ({ index, proposalObj }) => {
 export const Proposals = () => {
   const dispatch = useDispatch();
   const proposalList = useSelector((state) => state.walletReducer.proposalList);
-  const loadingProposal = useSelector((state) => state.walletReducer.loadingProposal);
+  const [isVisibleDetail, setVisibleDetail] = useState(undefined);
+  const loadingProposal = useSelector(
+    (state) => state.walletReducer.loadingProposal
+  );
+
+  const visibleDetailHandler = (index) => {
+    setVisibleDetail((prev) => (prev === index ? undefined : index));
+  };
 
   useEffect(() => {
     dispatch(GetProposalListAction());
@@ -462,7 +487,13 @@ export const Proposals = () => {
           {proposalList?.data.result.length > 0 &&
             proposalList.data.result.map((obj, index) => {
               return (
-                <ProposalsList key={index} index={index} proposalObj={obj} />
+                <ProposalsList
+                  key={index}
+                  index={index}
+                  proposalObj={obj}
+                  onClick={() => visibleDetailHandler(index)}
+                  isVisibleDetail={isVisibleDetail}
+                />
               );
             })}
         </Grid>

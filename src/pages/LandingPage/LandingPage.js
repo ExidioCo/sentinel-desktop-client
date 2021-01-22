@@ -26,7 +26,7 @@ export const LandingPage = () => {
 
   useEffect(() => {
     setTimeout( () => { 
-      history.push("/login");
+      history.replace("/login");
     }, 1000);
 
   },[])

@@ -97,7 +97,6 @@ export const GetValidatorAvatarAction = (identity) => {
         })
             .then(function (response) {
                 if (response.data.status.code === 0) {
-                    console.log('response', response);
                     dispatch(actionCreator(WalletActionTypes.get_ValidatorAvatar.SUCCESS, {[identity]: response.data}));
                 } else {
                     dispatch(actionCreator(WalletActionTypes.get_ValidatorAvatar.FAILURE));

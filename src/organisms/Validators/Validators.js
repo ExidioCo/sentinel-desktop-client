@@ -107,7 +107,7 @@ const ValidatorsList = React.memo(
     }, []);
 
     useEffect(() => {
-      if (validatorListDataObj.description.identity !== '' && !avatar[validatorListDataObj.description.identity]) {
+      if (validatorListDataObj.description.identity !== '' && !avatar?.[validatorListDataObj?.description?.identity]) {
         dispatch(GetValidatorAvatarAction(validatorListDataObj.description.identity))
       }
     }, [])

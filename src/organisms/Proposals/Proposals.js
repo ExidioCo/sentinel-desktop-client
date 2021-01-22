@@ -135,7 +135,7 @@ const ProposalDetails = ({ proposalObj }) => {
           lineHeight="1.8rem"
           mt="1rem"
         >
-          {proposalObj.description}
+          <div dangerouslySetInnerHTML={{__html: proposalObj.description.replace(/\\n/g, '<br />')}}/>
         </Text>
       </Box>
       <Grid

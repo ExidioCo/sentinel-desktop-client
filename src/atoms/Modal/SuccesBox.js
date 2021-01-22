@@ -45,7 +45,7 @@ export const SuccessBox = React.memo(
             textAlign="center"
             my="2rem"
             cursor="pointer"
-            onClick={() => window.open('http://explorer.sentinel.co')}
+            onClick={() => window.open(`http://explorer.sentinel.co/transactions/${txHash}`)}
           >
             Go to Explorer
           </Text>

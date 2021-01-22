@@ -32,7 +32,8 @@ import {
   GetAnAccountDetailsAction,
   ResetDRUAction,
 } from "../../pages/Dashboard/Wallet/actions/WalletActions";
-import { encodeToBech32 , compareValues, sort} from "../../utils/utility";
+import { encodeToBech32, compareValues, sort } from "../../utils/utility";
+import MemoArrowBottom from "assets/icons/ArrowBottom";
 
 const initialValues = {
   amount: "",
@@ -411,17 +412,19 @@ const ValidatorsList = React.memo(
                               {txHash}
                             </Text>
                           </Text>
-                            <Text
-                              variant="label"
-                              fontWeight="semiBold"
-                              color="grey.700"
-                              textAlign="center"
-                              my="2rem"
-                              cursor="pointer"
-                              onClick={() => window.open('http://explorer.sentinel.co')}
-                            >
-                              Go to Explorer
-                            </Text>
+                          <Text
+                            variant="label"
+                            fontWeight="semiBold"
+                            color="grey.700"
+                            textAlign="center"
+                            my="2rem"
+                            cursor="pointer"
+                            onClick={() =>
+                              window.open("http://explorer.sentinel.co")
+                            }
+                          >
+                            Go to Explorer
+                          </Text>
                           <Button
                             variant="secondary"
                             px="3rem"
@@ -462,7 +465,7 @@ export const Validators = React.memo(
     const [delegate, setDelegate] = useState(false);
     const [validatorList, setValidatorList] = useState(null);
     const [orderTypeAsc, setOrderTypeAsc] = useState(true);
-    const [orderValue, setOrderValue] = useState('voting');
+    const [orderValue, setOrderValue] = useState("voting");
 
     const { hide } = useVisibleState(false);
 
@@ -498,32 +501,51 @@ export const Validators = React.memo(
     }, [saveDelegate, saveReDelegate, saveUnbond]);
 
     useEffect(() => {
-      if(validatorListData !== null && validatorListData?.data?.result.length > 0) {
-        let ascSorting = sort('amount.value', validatorListData.data.result, 'asc');
-        setValidatorList(ascSorting)
+      if (
+        validatorListData !== null &&
+        validatorListData?.data?.result.length > 0
+      ) {
+        let ascSorting = sort(
+          "amount.value",
+          validatorListData.data.result,
+          "asc"
+        );
+        setValidatorList(ascSorting);
       }
-    }, [validatorListData])
+    }, [validatorListData]);
 
     const sortingHandler = (type) => {
-      if(validatorList !== null && validatorList.length > 0) {
-        if(type === 'moniker') {
-          setOrderTypeAsc(!orderTypeAsc)
-          setOrderValue('moniker')
-          let descSorting = sort('description.moniker', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
-          setValidatorList(descSorting)
-        } else if(type === 'voting') {
-          setOrderTypeAsc(!orderTypeAsc)
-          setOrderValue('voting')
-          let ascSorting = sort('amount.value', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
-          setValidatorList(ascSorting)
-        } else if(type === 'commission') {
-          setOrderTypeAsc(!orderTypeAsc)
-          setOrderValue('commission')
-          let ascSorting = sort('commission.rate', validatorList, orderTypeAsc === true ? 'desc' : 'asc');
-          setValidatorList(ascSorting)
+      if (validatorList !== null && validatorList.length > 0) {
+        if (type === "moniker") {
+          setOrderTypeAsc(!orderTypeAsc);
+          setOrderValue("moniker");
+          let descSorting = sort(
+            "description.moniker",
+            validatorList,
+            orderTypeAsc === true ? "desc" : "asc"
+          );
+          setValidatorList(descSorting);
+        } else if (type === "voting") {
+          setOrderTypeAsc(!orderTypeAsc);
+          setOrderValue("voting");
+          let ascSorting = sort(
+            "amount.value",
+            validatorList,
+            orderTypeAsc === true ? "desc" : "asc"
+          );
+          setValidatorList(ascSorting);
+        } else if (type === "commission") {
+          setOrderTypeAsc(!orderTypeAsc);
+          setOrderValue("commission");
+          let ascSorting = sort(
+            "commission.rate",
+            validatorList,
+            orderTypeAsc === true ? "desc" : "asc"
+          );
+          setValidatorList(ascSorting);
         }
-      } 
-    }
+      }
+    };
 
     return (
       <Box mr="1rem">
@@ -537,9 +559,24 @@ export const Validators = React.memo(
               fontSize="1.3rem"
               textTransform="uppercase"
               cursor="pointer"
-              onClick={() => sortingHandler('moniker')}
+              onClick={() => sortingHandler("moniker")}
             >
-              MONIKER {`${orderValue === 'moniker' ? orderTypeAsc ? 'A' : 'D' : ''}`}
+              MONIKER{" "}
+              {orderValue === "moniker" ? (
+                orderTypeAsc ? (
+                  <Box as="span" fontSize="1rem">
+                    &#9660;
+                  </Box>
+                ) : (
+                  <Box as="span" fontSize="1rem">
+                    &#x25B2;
+                  </Box>
+                )
+              ) : (
+                <Box as="span" fontSize="1rem" color="#ddd">
+                  &#9660;
+                </Box>
+              )}
             </Text>
           </Box>
           <Box py={4}>
@@ -549,9 +586,24 @@ export const Validators = React.memo(
               fontSize="1.3rem"
               textTransform="uppercase"
               cursor="pointer"
-              onClick={() => sortingHandler('voting')}
+              onClick={() => sortingHandler("voting")}
             >
-              VOTING POWER {`${orderValue === 'voting' ? orderTypeAsc ? 'A' : 'D' : ''}`}
+              VOTING POWER{" "}
+              {orderValue === "voting" ? (
+                orderTypeAsc ? (
+                  <Box as="span" fontSize="1rem">
+                    &#9660;
+                  </Box>
+                ) : (
+                  <Box as="span" fontSize="1rem">
+                    &#x25B2;
+                  </Box>
+                )
+              ) : (
+                <Box as="span" fontSize="1rem" color="#ddd">
+                  &#9660;
+                </Box>
+              )}
             </Text>
           </Box>
 
@@ -573,9 +625,24 @@ export const Validators = React.memo(
               fontSize="1.3rem"
               textTransform="uppercase"
               cursor="pointer"
-              onClick={() => sortingHandler('commission')}
+              onClick={() => sortingHandler("commission")}
             >
-              COMMISSION {`${orderValue === 'commission' ? orderTypeAsc ? 'A' : 'D' : ''}`}
+              COMMISSION{" "}
+              {orderValue === "commission" ? (
+                orderTypeAsc ? (
+                  <Box as="span" fontSize="1rem">
+                    &#9660;
+                  </Box>
+                ) : (
+                  <Box as="span" fontSize="1rem">
+                    &#x25B2;
+                  </Box>
+                )
+              ) : (
+                <Box as="span" fontSize="1rem" color="#ddd">
+                  &#9660;
+                </Box>
+              )}
             </Text>
           </Box>
           {/* <Box py={4}>
@@ -596,7 +663,8 @@ export const Validators = React.memo(
         ) : ( */}
           <Grid gridGap="1rem" maxHeight="61vh" className="scroll-bar">
             {!visibleInActive &&
-              validatorList !== null && validatorList.length > 0 &&
+              validatorList !== null &&
+              validatorList.length > 0 &&
               validatorList.map((obj, index) => {
                 if (obj.jailed === false && obj.bond_status === "Bonded") {
                   return (
@@ -615,7 +683,8 @@ export const Validators = React.memo(
                 }
               })}
             {visibleInActive &&
-              validatorList !== null && validatorList.length > 0 &&
+              validatorList !== null &&
+              validatorList.length > 0 &&
               validatorList.map((obj, index) => {
                 if (obj.jailed === true && obj.bond_status !== "Bonded") {
                   return (

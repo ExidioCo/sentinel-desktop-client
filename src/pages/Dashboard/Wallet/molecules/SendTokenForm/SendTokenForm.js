@@ -99,7 +99,7 @@ export const SendTokenForm = () => {
 
     dispatch(PostSendTokenAction(postData));
   };
-  
+
   return (
     <>
       <Formik
@@ -137,12 +137,19 @@ export const SendTokenForm = () => {
                 >
                   Amount
                 </Text>
-                <FormInput
-                  type="text"
-                  name="amount"
-                  label="Enter Amount"
-                  maxValue="Max"
-                />
+                <Box>
+                  <FormInput type="text" name="amount" label="Enter Amount" />
+                  <Box position="absolute" pr="0rem" bottom=".3rem" right={0}>
+                    <Button
+                      variant="normal"
+                      textVariant="label"
+                      textTransform="capitalize"
+                    >
+                      Max
+                    </Button>
+                  </Box>
+                </Box>
+
                 <ErrorMessage name="amount" component={Error} />
               </Box>
               <Flex justifySelf="center">

@@ -30,7 +30,7 @@ export const InputField = ({
     <InputFieldBase labelHide={labelHide}>
       <Input placeholder={label} autofocus={autofocus} ref={ref} {...props} />
 
-      {maxValue && (
+      {/* {maxValue && (
         <Box position="absolute" pr="0rem" bottom=".3rem" right={0}>
           <Button
             variant="normal"
@@ -40,7 +40,7 @@ export const InputField = ({
             Max
           </Button>
         </Box>
-      )}
+      )} */}
     </InputFieldBase>
   );
 };

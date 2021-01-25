@@ -9,7 +9,7 @@ import { Validators } from "organisms/Validators";
 import MemoArrowBottom from "assets/icons/ArrowBottom";
 import { DropdownFilter } from "molecules/DropdownFilter";
 
-import { GetCurrencyConversionDetailsAction } from "../../pages/Dashboard/Wallet/actions/WalletActions";
+import { GetCurrencyConversionDetailsAction, GetAllDelegationsAction } from "../../pages/Dashboard/Wallet/actions/WalletActions";
 
 export const ShowPopup = ({
   hideDelegate,
@@ -17,6 +17,7 @@ export const ShowPopup = ({
   setDropdownValue,
   dropdown,
   setDropdown,
+  dispatch
 }) => {
   useEffect(() => {
     if (hideDelegate === true) {
@@ -47,6 +48,7 @@ export const ShowPopup = ({
                 onClick={() => {
                   setDropdownValue("DELEGATE");
                   setDropdown(false);
+                  dispatch(GetAllDelegationsAction());
                 }}
               >
                 DELEGATE
@@ -71,6 +73,7 @@ export const ShowPopup = ({
               onClick={() => {
                 setDropdownValue("RE-DELEGATE");
                 setDropdown(false);
+                dispatch(GetAllDelegationsAction());
               }}
             >
               RE-DELEGATE
@@ -92,6 +95,7 @@ export const ShowPopup = ({
               onClick={() => {
                 setDropdownValue("UNBOND");
                 setDropdown(false);
+                dispatch(GetAllDelegationsAction());
               }}
             >
               UNBOND
@@ -266,6 +270,7 @@ export const WalletDetails = () => {
                     setDropdown={setDropdown}
                     dropdown={dropdown}
                     setDropdownValue={setDropdownValue}
+                    dispatch={dispatch}
                   />
                 </Box>
               </>

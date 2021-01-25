@@ -146,7 +146,7 @@ export const MyAccountDropdown = ({
   );
 
   useEffect(() => {
-    dispatch(CheckConfigSettingAction());
+    // dispatch(CheckConfigSettingAction());
     let configDataObj = configDetails?.data?.result.chain;
     let fromName = keysDetails?.data?.result[0].name;
     let chainObj = {

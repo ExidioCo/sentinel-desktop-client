@@ -135,7 +135,7 @@ export const MyAccountDropdown = ({
   const [initialValues, setInitialValues] = useState(
     configDetails.data !== undefined
       ? {
-          fee: configDetails.data.result.chain.fees,
+          fee: configDetails.data.result.chain.fees || 0,
           gas_amount: configDetails.data.result.chain.gas,
           chain_id: configDetails.data.result.chain.id,
           rpc_address: configDetails.data.result.chain.rpc_address,

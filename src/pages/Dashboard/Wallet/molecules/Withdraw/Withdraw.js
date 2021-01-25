@@ -113,7 +113,7 @@ const WithdrawForm = () => {
     label: 'all'
   }
 
-  options.push(allObj)
+  options.unshift(allObj)
 
   const allAddressArr = () => {
     let tempArr = [];

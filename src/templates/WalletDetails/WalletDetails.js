@@ -31,7 +31,12 @@ export const ShowPopup = ({
       render={
         <Grid width="15rem" py="2rem">
           {!hideDelegate && (
-            <Flex px="2rem" cursor="pointer" alignItems="center">
+            <Flex
+              px="2rem"
+              cursor="pointer"
+              alignItems="center"
+              justifyContent="flex-end"
+            >
               <Text
                 width="100%"
                 fontSize="1.4rem"
@@ -49,7 +54,12 @@ export const ShowPopup = ({
             </Flex>
           )}
 
-          <Flex px="2rem" cursor="pointer" alignItems="center">
+          <Flex
+            px="2rem"
+            cursor="pointer"
+            alignItems="center"
+            justifyContent="flex-end"
+          >
             <Text
               width="100%"
               fontSize="1.4rem"
@@ -67,7 +77,12 @@ export const ShowPopup = ({
             </Text>
           </Flex>
 
-          <Flex px="2rem" cursor="pointer" alignItems="center">
+          <Flex
+            px="2rem"
+            cursor="pointer"
+            alignItems="center"
+            justifyContent="flex-end"
+          >
             <Text
               width="100%"
               fontWeight="medium"
@@ -213,11 +228,11 @@ export const WalletDetails = () => {
           </Flex>
           <Grid
             gridGap="1rem"
-            gridAutoFlow="column"
             justifyContent="end"
             alignItems="center"
+            gridTemplateColumns="auto 15rem"
           >
-            <Box />
+            {/* <Box /> */}
             {visibleValidatorList && (
               <>
                 <Flex>
@@ -244,13 +259,15 @@ export const WalletDetails = () => {
                     InActive
                   </Button>
                 </Flex>
-                <ShowPopup
-                  hideDelegate={hideDelegate}
-                  dropdownValue={dropdownValue}
-                  setDropdown={setDropdown}
-                  dropdown={dropdown}
-                  setDropdownValue={setDropdownValue}
-                />
+                <Box justifyContent="flex-end">
+                  <ShowPopup
+                    hideDelegate={hideDelegate}
+                    dropdownValue={dropdownValue}
+                    setDropdown={setDropdown}
+                    dropdown={dropdown}
+                    setDropdownValue={setDropdownValue}
+                  />
+                </Box>
               </>
             )}
             {/* <SearchField

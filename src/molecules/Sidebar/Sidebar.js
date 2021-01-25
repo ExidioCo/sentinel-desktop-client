@@ -75,9 +75,12 @@ const DropdownItem = ({ name, bg, color, onClick }) => {
       color={color}
       onClick={onClick}
     >
-      <Text width="100%" fontSize="1.4rem" fontWeight="medium">
-        {name}
-      </Text>
+      <Flex alignItems="center">
+        <MemoProfile height="2rem" width="2rem" />
+        <Text width="100%" fontSize="1.4rem" fontWeight="medium" pl="1rem">
+          {name}
+        </Text>
+      </Flex>
     </BoxStyle>
   );
 };

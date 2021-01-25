@@ -479,6 +479,9 @@ export const Validators = React.memo(
 
     useEffect(() => {
       dispatch(GetValidatorListAction());
+    }, [GetValidatorListAction])
+
+    useEffect(() => {
       dispatch(GetAnAccountDetailsAction());
       if (saveDelegate !== null && saveDelegate.data.success === true) {
         hide();

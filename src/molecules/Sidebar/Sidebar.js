@@ -167,7 +167,7 @@ export const MyAccountDropdown = ({
       from: fromName,
       chain: chainObj,
     };
-    dispatch(UpdateConfigAction(postData));
+    // dispatch(UpdateConfigAction(postData));
   }, []);
 
   const resetVariant = () => {

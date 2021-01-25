@@ -107,12 +107,30 @@ const WithdrawForm = () => {
       });
     });
 
+  const allObj = {
+    customAbbreviation: 'all',
+    value: 'all',
+    label: 'all'
+  }
+
+  options.push(allObj)
+
+  const allAddressArr = () => {
+    let tempArr = [];
+    options.map((obj, index) => {
+      if(obj.value !== 'all') {
+        return tempArr.push((obj.value));
+      }
+    })
+    return tempArr
+  }
+
   const onSubmit = (values, submitProps) => {
     let postData = {
       memo: values.memo,
       password: values.password,
       address: accountDetails.data.result.address,
-      validators: [withDrawelValueAddress],
+      validators: withDrawelValueAddress !== 'all' ? [withDrawelValueAddress] : allAddressArr(),
     };
     dispatch(PostWithdrawRewardsAction(postData, withDrawelValueAddress));
   };
@@ -128,6 +146,7 @@ const WithdrawForm = () => {
   };
 
   const formatOptionLabel = ({ value, label, customAbbreviation }) => {
+    if(customAbbreviation !== 'all') {
     const addressFirstStr = encodeToBech32(
       customAbbreviation,
       "sentvaloper"
@@ -164,15 +183,31 @@ const WithdrawForm = () => {
         </Text>
       </Grid>
     );
+    } else {
+      return (
+        <Text
+        variant="label"
+        fontWeight="medium"
+        color="text.500"
+        whiteSpace="nowrap"
+      >
+        {label}
+      </Text>
+      )
+    }
   };
 
   const onChangeHandler = (value) => {
-    setWithDrawelAddress(value);
-    let findMoniker = validatorList.data.result.filter(
-      (data) => data.address === value
-    );
-    findMoniker = findMoniker[0].description.moniker;
-    setMoniker(findMoniker);
+    if(value !== 'all') {
+      setWithDrawelAddress(value);
+      let findMoniker = validatorList.data.result.filter(
+        (data) => data.address === value
+      );
+      findMoniker = findMoniker[0].description.moniker;
+      setMoniker(findMoniker);
+    } else {
+      setWithDrawelAddress(value)
+    }
   };
 
   return (
@@ -277,10 +312,10 @@ const WithdrawForm = () => {
                           color="grey.900"
                           pb="1rem"
                         >
-                          {encodeToBech32(
+                          {withDrawelValueAddress !== 'all' ? encodeToBech32(
                             withDrawelValueAddress,
                             "sentvaloper"
-                          )}
+                          ): withDrawelValueAddress}
                         </Text>
                       </Grid>
                       {/* <Grid gridTemplateColumns="15rem 1fr">

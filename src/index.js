@@ -1,12 +1,13 @@
+import { applyMiddleware, createStore } from 'redux';
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import thunk from 'redux-thunk';
-import App from './App';
 import reducer from './reducers';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { BrowserRouter } from 'react-router-dom';
+import thunk from 'redux-thunk';
 import reportWebVitals from './reportWebVitals';
 
 const store = createStore(

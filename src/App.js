@@ -1,7 +1,8 @@
-import { Route, Switch, withRouter } from 'react-router-dom';
-import './app.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import Splash from './containers/Splash';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import './App.css';
+import Splash from './pages/Splash';
 
 const routes = [{
     path: '/',

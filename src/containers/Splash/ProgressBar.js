@@ -1,35 +1,31 @@
-import './index.css';
 import * as PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import Image from '../../components/Image';
 import { connect } from 'react-redux';
 import { setSplashCompleted } from '../../actions/splash';
-import SplashProgressBar from '../../components/ProgressBar';
-import textLogo from '../../assets/textLogo.svg';
-import TextBox from '../../components/TextBox';
+import ReactProgressBar from '../../components/ProgressBar';
 
-const Splash = (props) => {
+const timeout = 1000;
+
+const ProgressBar = (props) => {
     useEffect(() => {
         if (props.completed === 100) {
-            props.history.push('/authentication');
+            setTimeout(() => {
+                props.history.push('/authentication');
+            }, timeout);
             return;
         }
 
         setTimeout(() => {
             props.setCompleted(props.completed + 25);
-        }, 500);
+        }, timeout);
     });
 
     return (
-        <div className="splash-container">
-            <Image alt="textLogo" className="w-200" src={textLogo}/>
-            <SplashProgressBar time={props.completed}/>
-            <TextBox className="splash-text f-14 fw-600" value="PREPARING THE SENTINEL CLIENT"/>
-        </div>
+        <ReactProgressBar completed={props.completed}/>
     );
 };
 
-Splash.propTypes = {
+ProgressBar.propTypes = {
     completed: PropTypes.number.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
@@ -47,4 +43,4 @@ const actionsToProps = {
     setCompleted: setSplashCompleted,
 };
 
-export default connect(stateToProps, actionsToProps)(Splash);
+export default connect(stateToProps, actionsToProps)(ProgressBar);

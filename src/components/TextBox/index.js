@@ -1,12 +1,10 @@
-import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import './index.css';
 
 const TextBox = (props) => {
     return (
-        <p
-            className={props.className}
-        >
+        <p className={props.className}>
             {props.value}
         </p>
     );

@@ -9,3 +9,7 @@ body{
 .fw-600{
     font-weight: 600;
 }
+
+.w-200{
+  width: 200px;
+}

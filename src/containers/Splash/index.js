@@ -22,7 +22,7 @@ const Splash = (props) => {
 
     return (
         <div className="splash-container">
-            <Image alt="textLogo" src={textLogo}/>
+            <Image alt="textLogo" className="w-200" src={textLogo}/>
             <SplashProgressBar time={props.completed}/>
             <TextBox className="splash-text f-14 fw-600" value="PREPARING THE SENTINEL CLIENT"/>
         </div>

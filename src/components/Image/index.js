@@ -5,6 +5,7 @@ const Image = (props) => {
     return (
         <img
             alt={props.alt}
+            className={props.className}
             src={props.src}
         />
     );
@@ -12,6 +13,7 @@ const Image = (props) => {
 
 Image.propTypes = {
     alt: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
 };
 

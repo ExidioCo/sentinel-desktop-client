@@ -9,6 +9,7 @@ const InputField = ({
     placeholder,
     required,
     type,
+    value,
     onChange,
 }) => {
     return (
@@ -22,6 +23,7 @@ const InputField = ({
                 placeholder={placeholder}
                 required={required}
                 type={type}
+                value={value}
                 onChange={onChange}
             />
         </div>
@@ -35,6 +37,7 @@ InputField.propTypes = {
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 

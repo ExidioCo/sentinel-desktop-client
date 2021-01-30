@@ -1,3 +1,4 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
@@ -6,7 +7,7 @@ import PasswordTextField from '../../containers/Authentication/PasswordTextField
 import SubmitButton from '../../containers/Authentication/SubmitButton';
 import './index.css';
 
-const Authentication = () => {
+const Authentication = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
@@ -23,12 +24,18 @@ const Authentication = () => {
                 <div className="login-footer">
                     <SocialIcons/>
                     <div className="login-button">
-                        <SubmitButton/>
+                        <SubmitButton history={history}/>
                     </div>
                 </div>
             </div>
         </div>
     );
+};
+
+Authentication.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default Authentication;

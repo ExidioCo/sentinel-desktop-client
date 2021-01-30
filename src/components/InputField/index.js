@@ -2,19 +2,26 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const InputField = (props) => {
-    const onChange = (e) => props.onChange(e.target.value);
+const InputField = ({
+    className,
+    label,
+    name,
+    placeholder,
+    required,
+    type,
+    onChange,
+}) => {
     return (
         <div className="form-group">
             <label>
-                {props.labelText}
+                {label}
             </label>
             <input
-                className={props.className}
-                name={props.name}
-                placeholder={props.placeholder}
-                required={props.required ? props.required : false}
-                type={props.type}
+                className={className}
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                type={type}
                 onChange={onChange}
             />
         </div>
@@ -23,7 +30,7 @@ const InputField = (props) => {
 
 InputField.propTypes = {
     className: PropTypes.string.isRequired,
-    labelText: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,

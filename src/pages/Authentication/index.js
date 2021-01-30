@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBar from '../../components/SideBar';
+import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import PasswordTextField from '../../containers/Authentication/PasswordTextField';
@@ -10,7 +10,7 @@ const Authentication = () => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar/>
+                <Sidebar/>
             </div>
             <div className="col-md-8 login-section">
                 <div className="login-body">

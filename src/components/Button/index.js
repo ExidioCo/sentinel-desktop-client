@@ -2,10 +2,13 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const Button = (props) => {
+const Button = ({
+    className,
+    value,
+}) => {
     return (
-        <button className={props.className}>
-            {props.value}
+        <button className={className}>
+            {value}
         </button>
     );
 };

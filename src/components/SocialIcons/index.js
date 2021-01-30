@@ -6,13 +6,16 @@ const SocialIcons = () => {
         <div className="social-icons">
             <Icon
                 className="icon"
-                icon="twitter"/>
+                icon="twitter"
+            />
             <Icon
                 className="icon"
-                icon="telegram"/>
+                icon="telegram"
+            />
             <Icon
                 className="icon"
-                icon="github"/>
+                icon="github"
+            />
         </div>
     );
 };

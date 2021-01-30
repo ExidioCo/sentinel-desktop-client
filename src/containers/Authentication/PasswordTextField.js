@@ -9,7 +9,7 @@ const PasswordTextField = () => {
     return (
         <InputField
             className="form-control"
-            labelText="PASSWORD"
+            label="PASSWORD"
             name="Password"
             placeholder="Enter Password"
             required={true}

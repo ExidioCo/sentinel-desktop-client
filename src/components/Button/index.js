@@ -2,20 +2,20 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const TextBox = ({
+const Button = ({
     className,
     value,
 }) => {
     return (
-        <p className={className}>
+        <button className={className}>
             {value}
-        </p>
+        </button>
     );
 };
 
-TextBox.propTypes = {
+Button.propTypes = {
     className: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
 };
 
-export default TextBox;
+export default Button;

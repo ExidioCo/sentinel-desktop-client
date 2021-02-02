@@ -1,10 +1,12 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../../components/Button';
 
-const ButtonContinue = () => {
+const Continue = (props) => {
     const onClick = () => {
-
+        props.history.push('/dashboard');
     };
+
     return (
         <Button
             className="btn button-primary"
@@ -17,4 +19,10 @@ const ButtonContinue = () => {
     );
 };
 
-export default ButtonContinue;
+Continue.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
+};
+
+export default Continue;

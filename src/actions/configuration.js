@@ -20,6 +20,7 @@ import {
     CONFIGURATION_PUT_URL,
     CONFIGURATION_SETUP_SET,
 } from '../constants/configuration';
+import { getKeys } from './keys';
 
 export const setConfigurationSetup = (data) => {
     return {
@@ -112,7 +113,7 @@ export const getConfigurationSuccess = (data) => {
     };
 };
 
-export const getConfiguration = (cb) => (dispatch, getState) => {
+export const getConfiguration = (history, cb) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getConfigurationInProgress());
@@ -139,6 +140,15 @@ export const getConfiguration = (cb) => (dispatch, getState) => {
         }, (result, next) => {
             dispatch(getConfigurationSuccess(result));
             next(null);
+        }, (next) => {
+            const { configuration } = getState();
+
+            if (configuration.setup.value) {
+                history.push('/configuration');
+                next(new Error(''));
+            } else {
+                next(null);
+            }
         },
     ], cb);
 };
@@ -164,7 +174,7 @@ export const putConfigurationSuccess = (data) => {
     };
 };
 
-export const putConfiguration = (body, cb) => (dispatch, getState) => {
+export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(putConfigurationInProgress());
@@ -191,6 +201,8 @@ export const putConfiguration = (body, cb) => (dispatch, getState) => {
         }, (result, next) => {
             dispatch(putConfigurationSuccess(result));
             next(null);
+        }, (next) => {
+            getKeys(history, next)(dispatch, getState);
         },
     ], cb);
 };

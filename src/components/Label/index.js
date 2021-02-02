@@ -2,20 +2,20 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const TextBox = ({
+const Label = ({
     className,
-    value,
+    label,
 }) => {
     return (
-        <p className={className}>
-            {value}
-        </p>
+        <label className={className}>
+            {label}
+        </label>
     );
 };
 
-TextBox.propTypes = {
+Label.propTypes = {
     className: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
 };
 
-export default TextBox;
+export default Label;

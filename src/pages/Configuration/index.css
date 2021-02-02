@@ -1,0 +1,15 @@
+
+.config-row {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+
+@media (max-width: 767px) {
+    .config-row {
+        display: block;
+        margin-bottom: 70px;
+    }
+}

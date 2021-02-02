@@ -3,7 +3,6 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import Authentication from './pages/Authentication';
-// import Authentication from './pages/Authentication';
 import Configuration from './pages/Configuration';
 import Splash from './pages/Splash';
 

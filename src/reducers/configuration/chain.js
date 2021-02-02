@@ -8,6 +8,7 @@ import {
     CONFIGURATION_CHAIN_ID_SET,
     CONFIGURATION_CHAIN_RPC_ADDRESS_SET,
     CONFIGURATION_CHAIN_SIMULATE_AND_EXECUTE_SET,
+    CONFIGURATION_CHAIN_TRUST_NODE_SET,
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_PUT_SUCCESS,
 } from '../../constants/configuration';
@@ -270,7 +271,7 @@ const trustNode = (state = {
                 message: '',
             },
         };
-    case CONFIGURATION_CHAIN_BROADCAST_MODE_SET:
+    case CONFIGURATION_CHAIN_TRUST_NODE_SET:
         return {
             value: data.value,
             error: {

@@ -1,12 +1,12 @@
 import React from 'react';
-import './index.css';
-import TextBox from '../../components/TextBox';
-import SocialIcons from '../../components/SocialIcons';
 import SideBar from '../../components/SideBar';
+import SocialIcons from '../../components/SocialIcons';
+import TextBox from '../../components/TextBox';
 import Address from '../../containers/AccountDetails/Address';
+import ButtonContinue from '../../containers/AccountDetails/ButtonContinue';
 import PublicKey from '../../containers/AccountDetails/PublicKey';
 import Seed from '../../containers/AccountDetails/Seed';
-import ButtonContinue from '../../containers/AccountDetails/ButtonContinue';
+import './index.css';
 
 const AccountDetails = () => {
     return (

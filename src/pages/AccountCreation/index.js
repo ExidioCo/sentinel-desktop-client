@@ -1,12 +1,12 @@
 import React from 'react';
-import SideBar from '../../components/SideBar';
-import TextBox from '../../components/TextBox';
 import Label from '../../components/Label';
-import Submit from '../../containers/AccountCreation/Submit';
+import SideBar from '../../components/SideBar';
 import SocialIcons from '../../components/SocialIcons';
+import TextBox from '../../components/TextBox';
 import Name from '../../containers/AccountCreation/Name';
 import Password from '../../containers/AccountCreation/Password';
 import Seed from '../../containers/AccountCreation/Seed';
+import Submit from '../../containers/AccountCreation/Submit';
 import './index.css';
 
 const AccountCreation = () => {

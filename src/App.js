@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import './App.css';
 import PrivateRoute from './containers/PrivateRoute';
@@ -33,6 +33,7 @@ const App = () => {
                     );
                 })
             }
+            <Redirect to={'/'}/>
         </Switch>
     );
 };

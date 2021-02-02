@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
-import SideBar from '../../components/SideBar';
+import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import PasswordTextField from '../../containers/Authentication/PasswordTextField';
@@ -12,7 +12,7 @@ const Authentication = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar/>
+                <Sidebar/>
             </div>
             <div className="col-md-8 login-section">
                 <div className="login-body">

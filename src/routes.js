@@ -1,7 +1,7 @@
-import AccountCreation from './pages/AccountCreation';
-import AccountDetails from './pages/AccountDetails';
 import Authentication from './pages/Authentication';
 import Configuration from './pages/Configuration';
+import CreateKey from './pages/CreateKey';
+import KeyInfo from './pages/KeyInfo';
 import Splash from './pages/Splash';
 
 export const unauthenticated = [{
@@ -17,8 +17,8 @@ export const authenticated = [{
     component: Configuration,
 }, {
     path: '/keys',
-    component: AccountCreation,
+    component: CreateKey,
 }, {
     path: '/keys/:name',
-    component: AccountDetails,
+    component: KeyInfo,
 }];

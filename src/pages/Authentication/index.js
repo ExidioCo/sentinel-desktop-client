@@ -4,8 +4,8 @@ import Label from '../../components/Label';
 import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
-import PasswordTextField from '../../containers/Authentication/PasswordTextField';
-import SubmitButton from '../../containers/Authentication/SubmitButton';
+import PasswordTextField from '../../containers/Authentication/Password';
+import SubmitButton from '../../containers/Authentication/Submit';
 import './index.css';
 
 const Authentication = ({ history }) => {

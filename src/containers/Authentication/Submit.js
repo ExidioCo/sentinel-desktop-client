@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { postAuthentication } from '../../actions/authentication';
 import Button from '../../components/Button';
 
-const SubmitButton = (props) => {
+const Submit = (props) => {
     const onClick = () => {
         props.onClick({
             password: props.password.trim(),
@@ -25,7 +25,7 @@ const SubmitButton = (props) => {
     );
 };
 
-SubmitButton.propTypes = {
+Submit.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
@@ -43,4 +43,4 @@ const actionsToProps = {
     onClick: postAuthentication,
 };
 
-export default connect(stateToProps, actionsToProps)(SubmitButton);
+export default connect(stateToProps, actionsToProps)(Submit);

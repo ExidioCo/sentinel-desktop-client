@@ -11,7 +11,7 @@ const Continue = (props) => {
         <Button
             className="btn button-primary"
             disabled={false}
-            loading={false}
+            inProgress={false}
             type="button"
             value="Continue"
             onClick={onClick}

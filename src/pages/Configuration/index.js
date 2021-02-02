@@ -21,7 +21,7 @@ const Configuration = ({ history }) => {
             </div>
             <div className="col-md-8 config-section">
                 <div className="section-body">
-                    <TextBox className="login-title" value="Configure Settings"/>
+                    <TextBox className="login-title" value="Configuration"/>
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">

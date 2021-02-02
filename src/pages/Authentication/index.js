@@ -18,7 +18,7 @@ const Authentication = ({ history }) => {
                 <div className="login-body">
                     <TextBox
                         className="login-title"
-                        value="Authenticate Sentinel Client"
+                        value="Authenticate"
                     />
                     <div className="form-group">
                         <Label

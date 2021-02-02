@@ -1,47 +1,47 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setKeyPassword } from '../../actions/keys';
-import InputField from '../../components/InputField';
-import { ValidatePassword } from '../Authentication/_validation';
+import { setKeyMnemonic } from '../../actions/keys';
+import TextArea from '../../components/TextArea';
+import { ValidateMnemonic } from './_validation';
 
-const Password = (props) => {
+const Mnemonic = (props) => {
     const onChange = (event) => {
         const value = event.target.value.toString();
         props.onChange({
             value,
             error: {
-                message: ValidatePassword(value).message,
+                message: ValidateMnemonic(value).message,
             },
         });
     };
 
     return (
-        <InputField
-            className="form-control"
-            name="password"
-            placeholder="Enter Password"
+        <TextArea
+            className="form-control seed-text-field"
+            name="mnemonic"
+            placeholder="Enter Mnemonic"
             required={true}
-            type="password"
+            rows={3}
             value={props.value}
             onChange={onChange}
         />
     );
 };
 
-Password.propTypes = {
+Mnemonic.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.keys.post.password.value,
+        value: state.keys.post.mnemonic.value,
     };
 };
 
 const actionsToProps = {
-    onChange: setKeyPassword,
+    onChange: setKeyMnemonic,
 };
 
-export default connect(stateToProps, actionsToProps)(Password);
+export default connect(stateToProps, actionsToProps)(Mnemonic);

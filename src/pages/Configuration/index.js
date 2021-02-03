@@ -8,12 +8,12 @@ import BroadcastMode from '../../containers/Configuration/BroadcastMode';
 import ChainID from '../../containers/Configuration/ChainID';
 import Fee from '../../containers/Configuration/Fee';
 import Gas from '../../containers/Configuration/Gas';
+import GasAdjustment from '../../containers/Configuration/GasAdjustment';
+import GasPrices from '../../containers/Configuration/GasPrices';
 import RPCAddress from '../../containers/Configuration/RPCAddress';
+import SimulateAndExecute from '../../containers/Configuration/SimulateAndExecute';
 import Submit from '../../containers/Configuration/Submit';
 import TrustNode from '../../containers/Configuration/TrustNode';
-import GasAdjust from '../../containers/Configuration/GasAdjustment';
-import GasPrice from '../../containers/Configuration/GasPrice';
-import SimulateExecute from '../../containers/Configuration/SimulateExecute';
 import './index.css';
 
 const Configuration = ({ history }) => {
@@ -51,16 +51,16 @@ const Configuration = ({ history }) => {
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="Gas Adjust"
+                                    label="Gas Adjustment"
                                 />
-                                <GasAdjust/>
+                                <GasAdjustment/>
                             </div>
                             <div className="form-group">
                                 <Label
                                     className="label"
                                     label="Gas Price"
                                 />
-                                <GasPrice/>
+                                <GasPrices/>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -74,9 +74,9 @@ const Configuration = ({ history }) => {
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="Simulate Execute"
+                                    label="Simulate And Execute"
                                 />
-                                <SimulateExecute/>
+                                <SimulateAndExecute/>
                             </div>
                             <div className="form-group">
                                 <Label

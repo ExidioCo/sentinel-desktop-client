@@ -1,22 +1,35 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setConfigurationChainSimulateAndExecute } from '../../actions/configuration';
 import ChipButton from '../../components/ChipButton';
+import { ValidateSimulateAndExecute } from './_validation';
 
 const options = [
     {
-        key: 'Simulate',
+        key: 'Yes',
         option: true,
         value: 'Yes',
     },
     {
-        key: 'Execute',
+        key: 'No',
         option: false,
         value: 'No',
     },
 ];
 
-const SimulateExecute = (props) => {
+const SimulateAndExecute = (props) => {
     const onClick = (value) => {
+        if (props.value === value) {
+            return;
+        }
+
+        props.onClick({
+            value,
+            error: {
+                message: ValidateSimulateAndExecute(value).message,
+            },
+        });
     };
 
     return (
@@ -38,9 +51,19 @@ const SimulateExecute = (props) => {
     );
 };
 
-SimulateExecute.propTypes = {
+SimulateAndExecute.propTypes = {
     value: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
-export default SimulateExecute;
+const stateToProps = (state) => {
+    return {
+        value: state.configuration.chain.simulateAndExecute.value,
+    };
+};
+
+const actionsToProps = {
+    onClick: setConfigurationChainSimulateAndExecute,
+};
+
+export default connect(stateToProps, actionsToProps)(SimulateAndExecute);

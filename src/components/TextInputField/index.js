@@ -5,6 +5,7 @@ import React from 'react';
 import TextBox from '../TextBox';
 
 const TextInputField = ({
+    autofocus,
     className,
     error,
     name,
@@ -19,6 +20,7 @@ const TextInputField = ({
     return (
         <>
             <input
+                autoFocus={autofocus}
                 className={isError ? `error ${className}` : className}
                 name={name}
                 placeholder={placeholder}
@@ -40,6 +42,7 @@ const TextInputField = ({
 };
 
 TextInputField.propTypes = {
+    autofocus: PropTypes.bool.isRequired,
     className: PropTypes.string.isRequired,
     error: PropTypes.shape({
         message: PropTypes.string.isRequired,

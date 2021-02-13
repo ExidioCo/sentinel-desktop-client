@@ -84,12 +84,12 @@ label, .label {
 }
 
 .modal-header {
-    padding: 40px 40px 0 40px;
-    border: 0 solid;
+    padding: 40px 40px 0 40px !important;
+    border: 0 solid !important;
 }
 
 .modal-body {
-    padding: 20px 40px 40px 40px;
+    padding: 20px 40px 40px 40px !important;
 }
 
 .modal-header {
@@ -138,10 +138,13 @@ label, .label {
     margin: 0;
 }
 
+.mb-30{
+    margin-bottom: 30px !important;
+}
 .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .flex-item {
@@ -169,7 +172,7 @@ label, .label {
 
 @media (min-width: 576px) {
     .modal-dialog {
-        max-width: 780px;
+        max-width: 780px !important;
     }
 }
 

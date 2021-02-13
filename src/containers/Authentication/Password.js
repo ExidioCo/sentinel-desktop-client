@@ -16,6 +16,7 @@ const Password = (props) => {
 
     return (
         <TextInputField
+            autofocus={true}
             className="form-control"
             error={props.input.error}
             name="Password"

@@ -569,7 +569,30 @@
 .success-modal .image-section img {
     width: 100px;
 }
-
+.txn-info{
+    display: flex;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+}
+.txn-info .txn-label{
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #8EA1C8;
+    padding-right: 15px;
+}
+.txn-info .txn-hash{
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
+}
+.error-text{
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
+    text-align: center;
+}
 @media (max-width: 767.98px) {
     .dashboard-side-bar-container {
         min-width: 80px;

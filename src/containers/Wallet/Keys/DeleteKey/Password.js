@@ -7,6 +7,7 @@ const Password = () => {
 
     return (
         <TextInputField
+            autofocus={false}
             className="form-control"
             error={0}
             name="password"

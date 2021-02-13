@@ -48,7 +48,7 @@ const CreateKey = ({ history }) => {
                             <div className="login-button flex-center">
                                 <div className="terms flex-center">
                                     <TextBox className="" value="Agree with"/>
-                                    <a href="#" target="_blank">Terms & Conditions</a>
+                                    <a href="#" target="_blank"> Terms & Conditions</a>
                                 </div>
                                 <Submit history={history}/>
                             </div>

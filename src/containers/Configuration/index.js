@@ -120,7 +120,7 @@ const Configuration = ({ history }) => {
                                 </div>
                                 <SimulateAndExecute/>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group trust-node">
                                 <div className="label-icon">
                                     <Label
                                         className="label"

@@ -23,6 +23,12 @@ const SocialIcons = () => {
                     icon="github"
                 />
             </a>
+            <a href="https://github.com/sentinel-official" rel="noreferrer" target="_blank">
+                <Icon
+                    className="icon"
+                    icon="medium"
+                />
+            </a>
         </div>
     );
 };

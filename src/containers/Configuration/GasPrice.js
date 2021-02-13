@@ -8,6 +8,7 @@ const GasPrice = (props) => {
 
     return (
         <TextInputField
+            autofocus={false}
             className="form-control"
             name="GasPrice"
             placeholder="Enter Price"

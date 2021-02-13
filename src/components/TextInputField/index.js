@@ -15,7 +15,7 @@ const TextInputField = ({
     value,
     onChange,
 }) => {
-    const isError = 0;
+    const isError = error.message.length > 0;
 
     return (
         <>

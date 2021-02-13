@@ -1,13 +1,13 @@
 import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
-import CreateKey from '../../../CreateKey';
-import Label from '../../../../components/Label';
-import Mnemonic from '../../../CreateKey/Mnemonic';
-import Name from '../../../CreateKey/Name';
-import Password from '../../../CreateKey/Password';
+import CreateKey from '../../../../CreateKey';
+import Label from '../../../../../components/Label';
+import Mnemonic from '../../../../CreateKey/Mnemonic';
+import Name from '../../../../CreateKey/Name';
+import Password from '../../../../CreateKey/Password';
 import React from 'react';
-import Submit from '../../../CreateKey/Submit';
-import TextBox from '../../../../components/TextBox';
+import Submit from '../../../../CreateKey/Submit';
+import TextBox from '../../../../../components/TextBox';
 
 const ModalCreateKey = () => {
     return (

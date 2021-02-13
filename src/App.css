@@ -138,9 +138,10 @@ label, .label {
     margin: 0;
 }
 
-.mb-30{
+.mb-30 {
     margin-bottom: 30px !important;
 }
+
 .flex-center {
     display: flex !important;
     align-items: center !important;

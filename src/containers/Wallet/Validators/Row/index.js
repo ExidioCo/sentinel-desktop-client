@@ -5,6 +5,8 @@ import Delegate from './Delegate';
 import React from 'react';
 import Redelegate from './Redelegate';
 import Unbond from './Unbond';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 const Row = ({
     action,
@@ -25,33 +27,35 @@ const Row = ({
     delegation = parseFloat(delegation.toFixed(2)).toLocaleString();
 
     return (
-        <tr key={item.index}>
-            <td className="flex-center">
-                <div className="serial">
-                    {item.index + 1}
+        <TableRow key={item.index}>
+            <TableCell className="">
+                <div className="flex-center">
+                    <div className="serial">
+                        {item.index + 1}
+                    </div>
+                    <Avatar identity={item.description.identity}/>
                 </div>
-                <Avatar identity={item.description.identity}/>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {item.description.moniker}
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {`${votingPower} (${votingPowerPercentage}%)`}
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {commissionRate}%
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {delegation}
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {active === true && action === 0 ? <Delegate to={item.address}/> : null}
                 {active === true && action === 1 ? <Redelegate from={item.address}/> : null}
                 {active === true && action === 2 ? <Unbond from={item.address}/> : null}
                 {active === false && action === 0 ? <Redelegate from={item.address}/> : null}
                 {active === false && action === 1 ? <Unbond from={item.address}/> : null}
-            </td>
-        </tr>
+            </TableCell>
+        </TableRow>
     );
 };
 

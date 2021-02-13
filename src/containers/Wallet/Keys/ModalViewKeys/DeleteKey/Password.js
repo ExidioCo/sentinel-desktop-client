@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInputField from '../../../../components/TextInputField';
+import TextInputField from '../../../../../components/TextInputField';
 
 const Password = () => {
     const onChange = (event) => {

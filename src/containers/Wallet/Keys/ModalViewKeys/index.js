@@ -1,6 +1,6 @@
 import { Modal as ReactModal } from 'react-bootstrap';
-import AddKey from './AddKey';
-import KeyList from './KeyList';
+import Add from './Add';
+import KeyList from './List';
 import React from 'react';
 import TextBox from '../../../../components/TextBox';
 
@@ -17,7 +17,7 @@ const ModalViewKeys = () => {
                     className="modal-title"
                     value="Keys"
                 />
-                <AddKey/>
+                <Add/>
             </ReactModal.Header>
             <ReactModal.Body className="view-key">
                 <KeyList/>

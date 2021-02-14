@@ -3,7 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 
-const Submit = () => {
+const Add = () => {
     const onClick = () => {
     };
     return (
@@ -15,4 +15,4 @@ const Submit = () => {
     );
 };
 
-export default Submit;
+export default Add;

@@ -55,9 +55,11 @@ const ModalCreateKey = () => {
         </ReactModal>
     );
 };
+
 CreateKey.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
 };
+
 export default ModalCreateKey;

@@ -1,6 +1,6 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
-import { Table as ReactTable } from '@material-ui/core';
+import { Table as MaterialTable } from '@material-ui/core';
 import Header from './Header';
 import React from 'react';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,23 +14,27 @@ const Table = ({
     row: Component,
 }) => {
     return (
-        <ReactTable aria-label="collapsible table" className={className}>
+        <MaterialTable
+            aria-label="collapsible table"
+            className={className}>
             <Header
                 columns={columns}
                 sort={sort}
                 onClick={onClick}
             />
             <TableBody>
-                {items.map((item, index) => {
-                    return (
-                        <Component
-                            key={index}
-                            item={item}
-                        />
-                    );
-                })}
+                {
+                    items.map((item, index) => {
+                        return (
+                            <Component
+                                key={index}
+                                item={item}
+                            />
+                        );
+                    })
+                }
             </TableBody>
-        </ReactTable>
+        </MaterialTable>
     );
 };
 

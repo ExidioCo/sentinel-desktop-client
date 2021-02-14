@@ -4,6 +4,7 @@ import React from 'react';
 const Delete = () => {
     const onClick = () => {
     };
+
     return (
         <Button
             className="btn button-primary button-large"

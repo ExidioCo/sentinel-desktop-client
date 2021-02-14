@@ -1,17 +1,18 @@
 import React from 'react';
-import Table from './../../../../components/Table';
 import Row from './Row';
+import Table from './../../../../components/Table';
+
 const columns = [
     {
         id: 'name',
         key: 'name',
-        label: 'name',
+        label: 'Name',
         sort: false,
     },
     {
         id: 'address',
         key: 'address',
-        label: 'address',
+        label: 'Address',
         sort: false,
     },
     {
@@ -38,18 +39,23 @@ const items = [
     },
 ];
 
-export default function KeyList () {
+const List = () => {
     const onClick = (by) => {
-
     };
+
     return (
         <Table
             className="keys-table"
             columns={columns}
             items={items}
             row={Row}
-            sort={'sort'}
+            sort={{
+                by: 'none',
+                order: 'none',
+            }}
             onClick={onClick}
         />
     );
-}
+};
+
+export default List;

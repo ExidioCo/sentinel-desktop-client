@@ -9,7 +9,7 @@ const Password = () => {
         <TextInputField
             autofocus={false}
             className="form-control"
-            error={0}
+            error={new Error('')}
             name="password"
             placeholder="Enter Password"
             required={true}

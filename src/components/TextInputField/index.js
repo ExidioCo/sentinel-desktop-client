@@ -5,7 +5,7 @@ import React from 'react';
 import TextBox from '../TextBox';
 
 const TextInputField = ({
-    autofocus,
+    autofocus = false,
     className,
     error,
     name,

@@ -1,7 +1,7 @@
 import Button from '../../../../components/Button';
 import React from 'react';
 
-const Submit = () => {
+const Add = () => {
     const onClick = () => {
     };
     return (
@@ -15,4 +15,4 @@ const Submit = () => {
     );
 };
 
-export default Submit;
+export default Add;

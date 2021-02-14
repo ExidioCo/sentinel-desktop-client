@@ -11,6 +11,7 @@ import Password from './Password';
 import React from 'react';
 import TextBox from '../../../../components/TextBox';
 import Unbond from './Unbond';
+import ViewPassword from '../../../../components/ViewPassword';
 
 const ModalUnbond = (props) => {
     return (
@@ -50,12 +51,15 @@ const ModalUnbond = (props) => {
                     />
                     <Memo/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className=""
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <Unbond/>
             </ReactModal.Body>

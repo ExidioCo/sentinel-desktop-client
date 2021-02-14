@@ -10,6 +10,7 @@ import React from 'react';
 import Send from './Send';
 import TextBox from '../../../../components/TextBox';
 import To from './To';
+import ViewPassword from '../../../../components/ViewPassword';
 
 const Modal = ({
     show,
@@ -51,12 +52,15 @@ const Modal = ({
                     />
                     <Memo/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className=""
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <Send/>
             </ReactModal.Body>

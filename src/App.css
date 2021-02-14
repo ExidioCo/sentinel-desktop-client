@@ -79,6 +79,14 @@ label, .label {
     text-align: center;
 }
 
+.section-body .password-box {
+    margin: 15px 0 0 0;
+}
+
+.section-body .password-box .form-group {
+    margin: 0 0 1rem 0;
+}
+
 .section-body .form-group {
     margin: 15px 0;
 }
@@ -92,12 +100,17 @@ label, .label {
     padding: 20px 40px 40px 40px !important;
 }
 
+.modal-body label {
+    font-size: 14px;
+}
+
 .modal-header {
     align-items: center;
 }
 
 .settings-modal {
     position: relative;
+    min-height: 350px !important;
 }
 
 .settings-modal .btn.button-primary {
@@ -169,6 +182,22 @@ label, .label {
     font-size: 14px;
     font-weight: 500;
     color: #142D51;
+}
+
+.password-box {
+    display: flex;
+    align-items: center;
+}
+
+.password-box .form-group {
+    flex: 1;
+}
+
+.password-box .password-icon {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    margin-bottom: -15px;
 }
 
 @media (min-width: 576px) {

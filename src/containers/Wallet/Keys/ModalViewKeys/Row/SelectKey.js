@@ -1,12 +1,15 @@
 import React from 'react';
-import Switch from '../../../../../components/Switch';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 const SelectKey = () => {
-    const onChange = (evt) => {
-        console.log(evt.target.checked);
-    };
     return (
-        <Switch checked={true} className="switch" id="customSwitch" label="select" onChange={onChange}/>
+        <Tooltip title="Select">
+            <IconButton size="small">
+                <CheckCircleIcon/>
+            </IconButton>
+        </Tooltip>
     );
 };
 

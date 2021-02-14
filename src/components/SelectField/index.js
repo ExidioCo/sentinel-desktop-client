@@ -1,6 +1,8 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const SelectField = ({
     className,
@@ -9,25 +11,29 @@ const SelectField = ({
     onChange,
 }) => {
     return (
-        <select
+        <Select
+            displayEmpty
             className={className}
             value={value}
             onChange={onChange}>
-            <option
+
+            <MenuItem
                 key={0}
-                value="">
+                value=""
+            >
                 {'None'}
-            </option>
+            </MenuItem>
             {
                 items.map((item, index) => (
-                    <option
+                    <MenuItem
                         key={index + 1}
                         value={item.address}>
                         {item.description.moniker}
-                    </option>
+                    </MenuItem>
                 ))
             }
-        </select>
+
+        </Select>
     );
 };
 

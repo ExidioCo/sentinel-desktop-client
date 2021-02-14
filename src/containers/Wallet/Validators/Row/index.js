@@ -4,16 +4,16 @@ import Avatar from './Avatar';
 import Delegate from './Delegate';
 import React from 'react';
 import Redelegate from './Redelegate';
-import Unbond from './Unbond';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Unbond from './Unbond';
 
 const Row = ({
     action,
     item,
     totalVotingPower,
 }) => {
-    const active = item.jailed === false && item['bond_status'] === 'Bonded';
+    // const active = item.jailed === false && item['bond_status'] === 'Bonded';
 
     let votingPower = item.amount.value * Math.pow(10, -6);
     let votingPowerPercentage = item.amount.value * 100 / totalVotingPower;
@@ -49,11 +49,14 @@ const Row = ({
                 {delegation}
             </TableCell>
             <TableCell>
-                {active === true && action === 0 ? <Delegate to={item.address}/> : null}
-                {active === true && action === 1 ? <Redelegate from={item.address}/> : null}
-                {active === true && action === 2 ? <Unbond from={item.address}/> : null}
-                {active === false && action === 0 ? <Redelegate from={item.address}/> : null}
-                {active === false && action === 1 ? <Unbond from={item.address}/> : null}
+                <Delegate to={item.address}/>
+                <Redelegate from={item.address}/>
+                <Unbond from={item.address}/>
+                {/* {active === true && action === 0 ? <Delegate to={item.address}/> : null} */}
+                {/* {active === true && action === 1 ? <Redelegate from={item.address}/> : null} */}
+                {/* {active === true && action === 2 ? <Unbond from={item.address}/> : null} */}
+                {/* {active === false && action === 0 ? <Redelegate from={item.address}/> : null} */}
+                {/* {active === false && action === 1 ? <Unbond from={item.address}/> : null} */}
             </TableCell>
         </TableRow>
     );

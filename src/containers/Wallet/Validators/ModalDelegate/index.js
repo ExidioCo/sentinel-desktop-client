@@ -11,6 +11,7 @@ import React from 'react';
 import TextBox from '../../../../components/TextBox';
 import ToAddress from './ToAddress';
 import ToName from './ToName';
+import ViewPassword from '../../../../components/ViewPassword';
 
 const ModalDelegate = (props) => {
     return (
@@ -49,12 +50,15 @@ const ModalDelegate = (props) => {
                     />
                     <Memo/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className=""
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <Delegate/>
             </ReactModal.Body>

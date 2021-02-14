@@ -12,15 +12,14 @@ const ModalViewKeys = () => {
             centered={true}
             keyboard={false}
             show={true}>
-            <ReactModal.Header closeButton={true}>
+            <ReactModal.Header className="keys-header" closeButton={true}>
                 <TextBox
                     className="modal-title"
                     value="Keys"
                 />
+                <AddKey/>
             </ReactModal.Header>
             <ReactModal.Body className="view-key">
-                <AddKey/>
-                <hr/>
                 <KeyList/>
             </ReactModal.Body>
         </ReactModal>

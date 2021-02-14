@@ -12,6 +12,7 @@ import React from 'react';
 import Redelegate from './Redelegate';
 import TextBox from '../../../../components/TextBox';
 import ToAddress from './ToAddress';
+import ViewPassword from '../../../../components/ViewPassword';
 
 const ModalRedelegate = (props) => {
     return (
@@ -57,12 +58,15 @@ const ModalRedelegate = (props) => {
                     />
                     <Memo/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className=""
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <Redelegate/>
             </ReactModal.Body>

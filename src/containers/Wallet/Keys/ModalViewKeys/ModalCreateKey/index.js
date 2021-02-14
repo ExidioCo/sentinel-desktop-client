@@ -8,6 +8,7 @@ import Password from '../../../../CreateKey/Password';
 import React from 'react';
 import Submit from '../../../../CreateKey/Submit';
 import TextBox from '../../../../../components/TextBox';
+import ViewPassword from '../../../../../components/ViewPassword';
 
 const ModalCreateKey = () => {
     return (
@@ -31,12 +32,15 @@ const ModalCreateKey = () => {
                     />
                     <Name/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className="label"
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <hr/>
                 <div className="form-group">

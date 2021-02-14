@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setTxDelegateTo, showTxDelegateModal } from '../../../../actions/transactions/delegate';
-import Button from '../../../../components/Button';
 import React from 'react';
-
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 const Delegate = (props) => {
     const onClick = () => {
         props.setTo({
@@ -14,13 +14,11 @@ const Delegate = (props) => {
     };
 
     return (
-        <Button
-            className="delegate-button"
-            disabled={false}
-            inProgress={false}
-            value="Delegate"
-            onClick={onClick}
-        />
+        <Tooltip title="Delegate">
+            <IconButton className="icon-button delegate-icon-button" onClick={onClick}>
+                D
+            </IconButton>
+        </Tooltip>
     );
 };
 

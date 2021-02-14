@@ -32,6 +32,8 @@ import ValidatorsStatus from './Validators/Status';
 import WithdrawRewardsModal from './WithdrawRewards/Modal';
 import WithdrawRewardsValidators from './WithdrawRewards/Validators';
 import WithdrawRewardsWithDraw from './WithdrawRewards/Withdraw';
+import ExidioLogo from '../../assets/Exidio.svg';
+import Refresh from './Refresh';
 
 const toggleClass = () => {
     if (document.getElementById('side-bar').classList.contains('active')) {
@@ -99,6 +101,10 @@ const Wallet = (props) => {
                     <div className="side-bar-list">
                         <Sidebar location={props.location}/>
                     </div>
+                    <div className="build-by">
+                        <TextBox className="build-text" value="Built by"/>
+                        <Image alt="ExidioLogo" className="exidio-logo" src={ExidioLogo}/>
+                    </div>
                 </div>
                 <div className="wallet-container">
                     <div className="top-info-section">
@@ -135,6 +141,7 @@ const Wallet = (props) => {
                         </div>
                         <div className="token-info-section col-md-8">
                             <Balance/>
+                            <Refresh/>
                         </div>
                     </div>
                     <div className="wallet-details">

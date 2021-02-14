@@ -3,6 +3,12 @@ import Table from './../../../../components/Table';
 import Row from './Row';
 const columns = [
     {
+        id: '',
+        key: '',
+        label: '',
+        sort: false,
+    },
+    {
         id: 'name',
         key: 'name',
         label: 'name',

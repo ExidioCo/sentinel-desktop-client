@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setTxRedelegateFrom, showTxRedelegateModal } from '../../../../actions/transactions/redelegate';
-import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
+import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const Redelegate = (props) => {
@@ -16,7 +16,9 @@ const Redelegate = (props) => {
 
     return (
         <Tooltip title="Redelegate">
-            <IconButton className="icon-button redelegate-icon-button" onClick={onClick}>
+            <IconButton
+                className="icon-button redelegate-icon-button"
+                onClick={onClick}>
                 R
             </IconButton>
         </Tooltip>

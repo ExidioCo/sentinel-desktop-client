@@ -1,11 +1,11 @@
 import * as PropTypes from 'prop-types';
 import { ValidatePassword } from './_validation';
 import { connect } from 'react-redux';
-import { setAccountPassword } from '../../../../actions/account';
+import { setAccountPassword } from '../../actions/account';
 import React from 'react';
-import TextInputField from '../../../../components/TextInputField';
+import TextInputField from '../../components/TextInputField';
 
-const Password = (props) => {
+const AccountPassword = (props) => {
     const onChange = ({ target: { value } }) => {
         value = value.toString();
 
@@ -23,19 +23,20 @@ const Password = (props) => {
             name="password"
             placeholder="Enter Password"
             required={true}
-            type="password"
+            type={props.input.visible ? 'text' : 'password'}
             value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
-Password.propTypes = {
+AccountPassword.propTypes = {
     input: PropTypes.shape({
         value: PropTypes.string.isRequired,
         error: PropTypes.shape({
             message: PropTypes.string.isRequired,
         }).isRequired,
+        visible: PropTypes.bool.isRequired,
     }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
@@ -50,4 +51,4 @@ const actionsToProps = {
     onChange: setAccountPassword,
 };
 
-export default connect(stateToProps, actionsToProps)(Password);
+export default connect(stateToProps, actionsToProps)(AccountPassword);

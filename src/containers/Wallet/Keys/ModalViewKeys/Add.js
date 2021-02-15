@@ -8,7 +8,12 @@ const Add = () => {
     };
     return (
         <Tooltip title="Add key">
-            <IconButton aria-label="expand row" className="add-key-button" size="small" style={{ color: '#fff' }} onClick={onClick}>
+            <IconButton
+                aria-label="expand row"
+                className="add-key-button"
+                size="small"
+                style={{ color: '#fff' }}
+                onClick={onClick}>
                 <AddIcon/>
             </IconButton>
         </Tooltip>

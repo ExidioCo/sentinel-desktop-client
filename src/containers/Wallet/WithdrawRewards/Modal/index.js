@@ -9,8 +9,8 @@ import Memo from './Memo';
 import Password from './Password';
 import React from 'react';
 import TextBox from '../../../../components/TextBox';
+import ViewPassword from '../../../../components/Visible';
 import Withdraw from './Withdraw';
-import ViewPassword from '../../../../components/ViewPassword';
 
 const Modal = (props) => {
     return (

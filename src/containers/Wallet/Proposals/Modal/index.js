@@ -7,8 +7,8 @@ import Memo from './Memo';
 import Password from './Password';
 import React from 'react';
 import TextBox from '../../../../components/TextBox';
+import ViewPassword from '../../../../components/Visible';
 import Vote from './Vote';
-import ViewPassword from '../../../../components/ViewPassword';
 
 const Modal = ({
     show,

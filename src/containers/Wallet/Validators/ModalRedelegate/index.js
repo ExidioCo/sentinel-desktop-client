@@ -2,17 +2,17 @@ import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxRedelegateModal } from '../../../../actions/transactions/redelegate';
+import AccountPassword from '../../../common/AccountPassword';
+import AccountPasswordView from '../../../common/AccountPasswordView';
 import Amount from './Amount';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
 import Label from '../../../../components/Label';
 import Memo from './Memo';
-import Password from './Password';
 import React from 'react';
 import Redelegate from './Redelegate';
 import TextBox from '../../../../components/TextBox';
 import ToAddress from './ToAddress';
-import ViewPassword from '../../../../components/ViewPassword';
 
 const ModalRedelegate = (props) => {
     return (
@@ -64,9 +64,9 @@ const ModalRedelegate = (props) => {
                             className=""
                             label="Password"
                         />
-                        <Password/>
+                        <AccountPassword/>
                     </div>
-                    <ViewPassword/>
+                    <AccountPasswordView/>
                 </div>
                 <Redelegate/>
             </ReactModal.Body>

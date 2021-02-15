@@ -12,7 +12,7 @@ import SelectKey from './SelectKey';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import ViewPassword from '../../../../../components/ViewPassword';
+import ViewPassword from '../../../../../components/Visible';
 
 const Row = ({ item }) => {
     const [open, setOpen] = React.useState(false);
@@ -29,7 +29,7 @@ const Row = ({ item }) => {
                 <TableCell component="th" scope="row">
                     {item.name}
                 </TableCell>
-                <TableCell >{item.address}</TableCell>
+                <TableCell>{item.address}</TableCell>
                 <TableCell><SelectKey/></TableCell>
                 <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -38,7 +38,11 @@ const Row = ({ item }) => {
                 </TableCell>
             </TableRow>
             <TableRow>
-                <TableCell colSpan={6} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                <TableCell
+                    colSpan={6} style={{
+                        paddingBottom: 0,
+                        paddingTop: 0,
+                    }}>
                     <Collapse unmountOnExit in={open} timeout="auto">
                         <Typography gutterBottom component="div" variant="h6">
                             <div className="password-box">

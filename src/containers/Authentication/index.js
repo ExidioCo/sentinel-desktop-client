@@ -6,7 +6,7 @@ import Sidebar from '../common/SidebarOnboard';
 import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
 import TextBox from '../../components/TextBox';
-import ViewPassword from '../../components/ViewPassword';
+import ViewPassword from './ViewPassword';
 
 const Authentication = ({ history }) => {
     return (

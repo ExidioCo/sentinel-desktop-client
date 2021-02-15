@@ -426,10 +426,8 @@
 
 .build-by .build-text {
     font-size: 14px;
-    font-weight: 500;
     text-align: center;
     color: #ffffff;
-    margin-bottom: 10px;
 }
 
 .build-by img {
@@ -478,7 +476,8 @@
 .keys-header .add-key-button svg {
     font-size: 1rem;
 }
-.refresh-button{
+
+.refresh-button {
     position: absolute !important;
     top: 90px;
     right: 100px;
@@ -527,11 +526,13 @@
     }
 
 }
+
 @media (min-width: 681px) and (max-width: 1369.98px) {
-    .refresh-button{
+    .refresh-button {
         top: 40px;
     }
 }
+
 .view-key .key {
     flex-wrap: wrap;
 }
@@ -643,10 +644,10 @@
         border: 0;
         width: auto;
     }
-    .refresh-button{
+
+    .refresh-button {
         top: 0px;
     }
-
 }
 
 .success-modal .image-section {

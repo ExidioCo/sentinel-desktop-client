@@ -1,5 +1,4 @@
 import {
-    VALIDATORS_ACTION_SET,
     VALIDATORS_FILTER_STATUS_SET,
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
@@ -30,20 +29,6 @@ const status = (state = 1, {
     switch (type) {
     case VALIDATORS_FILTER_STATUS_SET:
         return data;
-    default:
-        return state;
-    }
-};
-
-const action = (state = 0, {
-    type,
-    data,
-}) => {
-    switch (type) {
-    case VALIDATORS_ACTION_SET:
-        return data;
-    case VALIDATORS_FILTER_STATUS_SET:
-        return 0;
     default:
         return state;
     }
@@ -97,7 +82,6 @@ const sort = (state = {
 export default combineReducers({
     items,
     status,
-    action,
     inProgress,
     totalVotingPower,
     sort,

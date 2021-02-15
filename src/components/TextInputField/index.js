@@ -10,8 +10,8 @@ const TextInputField = ({
     error,
     name,
     placeholder,
-    required,
-    type,
+    required = true,
+    type = 'text',
     value,
     onChange,
 }) => {

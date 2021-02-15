@@ -1,5 +1,4 @@
 import {
-    VALIDATORS_ACTION_SET,
     VALIDATORS_FILTER_STATUS_SET,
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
@@ -68,13 +67,6 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
 export const setValidatorsFilterStatus = (data) => {
     return {
         type: VALIDATORS_FILTER_STATUS_SET,
-        data,
-    };
-};
-
-export const setValidatorsAction = (data) => {
-    return {
-        type: VALIDATORS_ACTION_SET,
         data,
     };
 };

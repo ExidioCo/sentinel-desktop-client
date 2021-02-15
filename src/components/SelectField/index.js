@@ -1,8 +1,8 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
+import MenuItem from '@material-ui/core/MenuItem';
 import React from 'react';
 import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const SelectField = ({
     className,
@@ -12,15 +12,13 @@ const SelectField = ({
 }) => {
     return (
         <Select
-            displayEmpty
             className={className}
+            displayEmpty={true}
             value={value}
             onChange={onChange}>
-
             <MenuItem
                 key={0}
-                value=""
-            >
+                value="">
                 {'None'}
             </MenuItem>
             {
@@ -32,7 +30,6 @@ const SelectField = ({
                     </MenuItem>
                 ))
             }
-
         </Select>
     );
 };

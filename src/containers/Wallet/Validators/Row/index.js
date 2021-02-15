@@ -9,11 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Unbond from './Unbond';
 
 const Row = ({
-    action,
     item,
     totalVotingPower,
 }) => {
-    // const active = item.jailed === false && item['bond_status'] === 'Bonded';
+    const active = item.jailed === false && item['bond_status'] === 'Bonded';
 
     let votingPower = item.amount.value * Math.pow(10, -6);
     let votingPowerPercentage = item.amount.value * 100 / totalVotingPower;
@@ -49,21 +48,15 @@ const Row = ({
                 {delegation}
             </TableCell>
             <TableCell>
-                <Delegate to={item.address}/>
-                <Redelegate from={item.address}/>
-                <Unbond from={item.address}/>
-                {/* {active === true && action === 0 ? <Delegate to={item.address}/> : null} */}
-                {/* {active === true && action === 1 ? <Redelegate from={item.address}/> : null} */}
-                {/* {active === true && action === 2 ? <Unbond from={item.address}/> : null} */}
-                {/* {active === false && action === 0 ? <Redelegate from={item.address}/> : null} */}
-                {/* {active === false && action === 1 ? <Unbond from={item.address}/> : null} */}
+                {active === true ? <Delegate to={item.address}/> : null}
+                {item.delegation?.shares ? <Redelegate from={item.address}/> : null}
+                {item.delegation?.shares ? <Unbond from={item.address}/> : null}
             </TableCell>
         </TableRow>
     );
 };
 
 Row.propTypes = {
-    action: PropTypes.number.isRequired,
     item: PropTypes.shape({
         address: PropTypes.string.isRequired,
         amount: PropTypes.shape({
@@ -91,7 +84,6 @@ Row.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        action: state.validators.action,
         totalVotingPower: state.validators.totalVotingPower,
     };
 };

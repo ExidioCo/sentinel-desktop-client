@@ -9,7 +9,11 @@ import Success from '../../assets/Success.svg';
 import TextBox from '../../components/TextBox';
 
 const ModalTxInfo = ({
-    error: { code },
+    error: {
+        code,
+        message,
+    },
+    txHash,
     onHide,
     show,
 }) => {
@@ -25,7 +29,7 @@ const ModalTxInfo = ({
             <Modal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
-                    value={code === 0 ? 'Success' : 'Failure'}
+                    value={code === 0 ? 'Successful' : 'Failed'}
                 />
             </Modal.Header>
             <Modal.Body>
@@ -36,12 +40,22 @@ const ModalTxInfo = ({
                         src={code === 0 ? Success : Failure}
                     />
                 </div>
-                {code === 0
-                    ? <div className="txn-info">
-                        <TextBox className="txn-label" value="Tx#:"/>
-                        <TextBox className="txn-hash" value="6E13234324445405392DBA064184D589A7DBD45E0F9325D141F8C8D0"/>
-                    </div>
-                    : <TextBox className="error-text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, "/>
+                {
+                    code === 0
+                        ? <div className="txn-info">
+                            <TextBox
+                                className="txn-label"
+                                value="Tx Hash:"
+                            />
+                            <TextBox
+                                className="txn-hash"
+                                value={txHash}
+                            />
+                        </div>
+                        : <TextBox
+                            className="error-text"
+                            value={message}
+                        />
                 }
             </Modal.Body>
         </Modal>

@@ -2,6 +2,7 @@ import {
     AUTHENTICATION_INFO_CLEAR,
     AUTHENTICATION_INFO_SET,
     AUTHENTICATION_PASSWORD_SET,
+    AUTHENTICATION_PASSWORD_VISIBLE_SET,
     AUTHENTICATION_POST_ERROR,
     AUTHENTICATION_POST_IN_PROGRESS,
     AUTHENTICATION_POST_SUCCESS,
@@ -9,10 +10,11 @@ import {
 import { combineReducers } from 'redux';
 
 const password = (state = {
-    value: 'admin',
+    value: '',
     error: {
         message: '',
     },
+    visible: false,
 }, {
     type,
     data,
@@ -27,6 +29,11 @@ const password = (state = {
                 message: data.error.message,
             },
         };
+    case AUTHENTICATION_PASSWORD_VISIBLE_SET:
+        return {
+            ...state,
+            visible: data.visible,
+        };
     case AUTHENTICATION_POST_ERROR:
     case AUTHENTICATION_POST_SUCCESS:
         return {
@@ -36,6 +43,7 @@ const password = (state = {
                 ...state.error,
                 message: '',
             },
+            visible: false,
         };
     default:
         return state;

@@ -7,6 +7,7 @@ import { getKeys } from '../../actions/keys';
 import Async from 'async';
 import Balance from './Balance';
 import Collapse from '../../assets/Collapse.svg';
+import ExidioLogo from '../../assets/Exidio.svg';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
 import Keys from './Keys';
@@ -17,6 +18,7 @@ import ModalConfiguration from '../common/ModalConfiguration';
 import ModalTxInfo from '../common/ModalTxInfo';
 import React, { useEffect, useState } from 'react';
 import Receive from './Receive';
+import Refresh from './Refresh';
 import SendAmount from './Send/Amount';
 import SendModal from './Send/Modal';
 import SendSend from './Send/Send';
@@ -24,7 +26,6 @@ import SendTo from './Send/To';
 import Sidebar from '../common/SidebarDashboard';
 import TextBox from '../../components/TextBox';
 import Validators from './Validators';
-import ValidatorsActions from './Validators/Actions';
 import ValidatorsModalDelegate from './Validators/ModalDelegate';
 import ValidatorsModalRedelegate from './Validators/ModalRedelegate';
 import ValidatorsModalUnbond from './Validators/ModalUnbond';
@@ -32,8 +33,6 @@ import ValidatorsStatus from './Validators/Status';
 import WithdrawRewardsModal from './WithdrawRewards/Modal';
 import WithdrawRewardsValidators from './WithdrawRewards/Validators';
 import WithdrawRewardsWithDraw from './WithdrawRewards/Withdraw';
-import ExidioLogo from '../../assets/Exidio.svg';
-import Refresh from './Refresh';
 
 const toggleClass = () => {
     if (document.getElementById('side-bar').classList.contains('active')) {
@@ -102,8 +101,14 @@ const Wallet = (props) => {
                         <Sidebar location={props.location}/>
                     </div>
                     <div className="build-by">
-                        <TextBox className="build-text" value="Built by"/>
-                        <Image alt="ExidioLogo" className="exidio-logo" src={ExidioLogo}/>
+                        <TextBox
+                            className="build-text"
+                            value="Built by"
+                        />
+                        <Image
+                            alt="Exidio Logo"
+                            className="exidio-logo"
+                            src={ExidioLogo}/>
                     </div>
                 </div>
                 <div className="wallet-container">
@@ -199,7 +204,6 @@ const Wallet = (props) => {
                         <div className="wallet-tab col-md-8">
                             <div className="filter-section">
                                 <ValidatorsStatus/>
-                                <ValidatorsActions/>
                             </div>
                             <Tabs
                                 defaultActiveKey="validators"

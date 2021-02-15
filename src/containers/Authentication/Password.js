@@ -22,7 +22,7 @@ const Password = (props) => {
             name="Password"
             placeholder="Enter Password"
             required={true}
-            type="password"
+            type={props.input.visible ? 'text' : 'password'}
             value={props.input.value}
             onChange={onChange}
         />
@@ -35,6 +35,7 @@ Password.propTypes = {
         error: PropTypes.shape({
             message: PropTypes.string.isRequired,
         }).isRequired,
+        visible: PropTypes.bool.isRequired,
     }).isRequired,
     onChange: PropTypes.func.isRequired,
 };

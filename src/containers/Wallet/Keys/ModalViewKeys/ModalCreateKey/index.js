@@ -8,7 +8,7 @@ import Password from '../../../../CreateKey/Password';
 import React from 'react';
 import Submit from '../../../../CreateKey/Submit';
 import TextBox from '../../../../../components/TextBox';
-import ViewPassword from '../../../../../components/ViewPassword';
+import ViewPassword from '../../../../../components/Visible';
 
 const ModalCreateKey = () => {
     return (

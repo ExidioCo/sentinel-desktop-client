@@ -194,7 +194,8 @@ label, .label {
 }
 
 .password-box .password-icon {
-    width: 40px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     margin-bottom: -15px;

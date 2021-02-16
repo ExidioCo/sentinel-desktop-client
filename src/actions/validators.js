@@ -7,6 +7,7 @@ import {
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
 import { emptyFunc } from '../constants/common';
+import { isActive } from '../utils/validator';
 import Async from 'async';
 import Axios from '../services/axios';
 import Lodash from 'lodash';
@@ -54,8 +55,15 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
                 });
         }, (result, next) => {
             result = Lodash.orderBy(result, ['amount.value'], ['desc']);
-            result.forEach((item, index) => {
-                item.index = index;
+
+            let activeIndex = 0;
+            let inactiveIndex = 0;
+            result.forEach((item) => {
+                if (isActive(item)) {
+                    item.index = activeIndex++;
+                } else {
+                    item.index = inactiveIndex++;
+                }
             });
 
             dispatch(getValidatorsSuccess(result));

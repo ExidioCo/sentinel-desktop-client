@@ -7,6 +7,7 @@ import {
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
 import { combineReducers } from 'redux';
+import { isActive } from '../utils/validator';
 import Lodash from 'lodash';
 
 const items = (state = [], {
@@ -48,13 +49,28 @@ const inProgress = (state = false, {
     }
 };
 
-const totalVotingPower = (state = 0, {
+const totalVotingPower = (state = {
+    active: 0,
+    inactive: 0,
+}, {
     type,
     data,
 }) => {
     switch (type) {
-    case VALIDATORS_GET_SUCCESS:
-        return Lodash.sumBy(data, 'amount.value');
+    case VALIDATORS_GET_SUCCESS: {
+        const active = Lodash.sumBy(data, (item) => {
+            return isActive(item) ? item.amount.value : 0;
+        });
+        const inactive = Lodash.sumBy(data, (item) => {
+            return isActive(item) ? 0 : item.amount.value;
+        });
+
+        return {
+            ...state,
+            active,
+            inactive,
+        };
+    }
     default:
         return state;
     }

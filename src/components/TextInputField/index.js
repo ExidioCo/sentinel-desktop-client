@@ -1,5 +1,6 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
+import { emptyFunc } from '../../constants/common';
 import Icon from '../Icon';
 import React from 'react';
 import TextBox from '../TextBox';
@@ -14,6 +15,7 @@ const TextInputField = ({
     type = 'text',
     value,
     onChange,
+    onKeyDown = emptyFunc,
 }) => {
     const isError = error.message.length > 0;
 
@@ -28,6 +30,7 @@ const TextInputField = ({
                 type={type}
                 value={value}
                 onChange={onChange}
+                onKeyDown={onKeyDown}
             />
             <Icon
                 className={isError ? 'error show' : 'error'}
@@ -53,6 +56,7 @@ TextInputField.propTypes = {
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func.isRequired,
 };
 
 export default TextInputField;

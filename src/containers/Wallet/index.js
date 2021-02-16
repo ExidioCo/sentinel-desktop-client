@@ -192,7 +192,7 @@ const Wallet = (props) => {
                                         <div className="form-group">
                                             <Label
                                                 className="label"
-                                                label="Validators"
+                                                label="Select a Validator"
                                             />
                                             <WithdrawRewardsValidators/>
                                         </div>

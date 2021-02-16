@@ -5,6 +5,7 @@ import {
     AUTHENTICATION_PASSWORD_VISIBLE_SET,
     AUTHENTICATION_POST_ERROR,
     AUTHENTICATION_POST_IN_PROGRESS,
+    AUTHENTICATION_POST_SUBMIT,
     AUTHENTICATION_POST_SUCCESS,
 } from '../constants/authentication';
 import { combineReducers } from 'redux';
@@ -110,8 +111,23 @@ const inProgress = (state = false, { type }) => {
     }
 };
 
+const submit = (state = false, {
+    type,
+}) => {
+    switch (type) {
+    case AUTHENTICATION_POST_SUBMIT:
+        return true;
+    case AUTHENTICATION_PASSWORD_SET:
+    case AUTHENTICATION_POST_IN_PROGRESS:
+        return false;
+    default:
+        return state;
+    }
+};
+
 export default combineReducers({
     password,
     info,
     inProgress,
+    submit,
 });

@@ -1,7 +1,6 @@
 .account-create-row {
     width: 50%;
-    margin: auto;
-    margin-bottom: 50px;
+    margin: auto auto 50px;
     padding-top: 20px;
     padding-bottom: 20px;
 }

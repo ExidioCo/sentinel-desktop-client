@@ -5,11 +5,10 @@
 
 .config-row {
     width: 75%;
-    margin: auto;
     display: flex;
     align-items: center;
     place-items: flex-start;
-    margin-bottom: 50px;
+    margin: auto auto 50px;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -54,8 +53,9 @@
         font-size: 14px;
     }
 }
+
 @media (min-width: 1201px) and (max-width: 1400px) {
-    .config-row{
+    .config-row {
         width: 85%;
     }
 }

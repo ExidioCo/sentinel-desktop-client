@@ -2,7 +2,9 @@ import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isActive } from '../../../../utils/validator';
 import Avatar from './Avatar';
+import Copy from '../../../../components/Copy';
 import Delegate from './Delegate';
+import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Redelegate from './Redelegate';
 import TableCell from '@material-ui/core/TableCell';
@@ -40,13 +42,23 @@ const Row = ({
                 </div>
             </TableCell>
             <TableCell>
-                <a
-                    href={item.description.website}
-                    rel="noopener noreferrer"
-                    target="_blank"
+                <Grid
+                    container
+                    spacing={1}
                 >
-                    {item.description.moniker}
-                </a>
+                    <Grid item>
+                        <a
+                            href={item.description.website}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            {item.description.moniker}
+                        </a>
+                    </Grid>
+                    <Grid item>
+                        <Copy text={item.address} />
+                    </Grid>
+                </Grid>
             </TableCell>
             <TableCell>
                 {`${votingPower} (${votingPowerPercentage}%)`}

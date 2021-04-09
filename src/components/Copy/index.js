@@ -6,16 +6,16 @@ import React from 'react';
 
 const Copy = ({ text }) => {
     return (
-        <div className="copy-section">
-            <CopyToClipboard text={text}>
+        <CopyToClipboard text={text}>
+            <div className="copy-section">
                 <div className="flex-center">
                     <Icon
                         className="icon"
                         icon="copy"
                     />
                 </div>
-            </CopyToClipboard>
-        </div>
+            </div>
+        </CopyToClipboard>
     );
 };
 

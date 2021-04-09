@@ -9,10 +9,12 @@ LD_FLAGS := -s -w \
 
 BUILD_FLAGS := -tags "${BUILD_TAGS}" -ldflags "${LD_FLAGS}"
 
+OUTPUT_FILE := ../bin/manager
+
 all: mod_verify test benchmark install
 
 install: mod_verify
-	go build -mod=readonly ${BUILD_FLAGS} -o ${GOPATH}/bin/sdccli main.go
+	go build -mod=readonly ${BUILD_FLAGS} -o ${OUTPUT_FILE} main.go
 
 test:
 	@go test -mod=readonly -cover ${PACKAGES}

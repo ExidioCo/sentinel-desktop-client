@@ -47,9 +47,6 @@ const from = (state = {
 
 const to = (state = {
     value: '',
-    error: {
-        message: '',
-    },
 }, {
     type,
     data,
@@ -57,22 +54,12 @@ const to = (state = {
     switch (type) {
     case TX_REDELEGATE_TO_SET:
         return {
-            ...state,
-            value: data.value,
-            error: {
-                ...state.error,
-                message: data.error.message,
-            },
+            value: data,
         };
     case TX_REDELEGATE_SUCCESS:
     case TX_REDELEGATE_MODAL_HIDE:
         return {
-            ...state,
             value: '',
-            error: {
-                ...state.error,
-                message: '',
-            },
         };
     default:
         return state;

@@ -1,48 +1,38 @@
 import * as PropTypes from 'prop-types';
-import { ValidateToAddress } from './_validation';
 import { connect } from 'react-redux';
 import { setTxRedelegateTo } from '../../../../actions/transactions/redelegate';
+import AutocompleteSelectField from '../../../../components/AutocompleteSelectField';
 import React from 'react';
-import TextInputField from '../../../../components/TextInputField';
 
 const ToAddress = (props) => {
-    const onChange = ({ target: { value } }) => {
-        value = value.toString();
-
-        props.onChange({
-            value,
-            error: ValidateToAddress(value),
-        });
-    };
-
     return (
-        <TextInputField
-            autofocus={false}
-            className="form-control"
-            error={props.input.error}
-            name="To"
-            placeholder="Enter Address"
-            required={true}
-            type="text"
-            value={props.input.value}
-            onChange={onChange}
+        <AutocompleteSelectField
+            className="form-control validators-select"
+            items={props.validators}
+            menuItemClassName="validator-item"
+            value={props.value}
+            onChange={props.onChange}
         />
     );
 };
 
 ToAddress.propTypes = {
-    input: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
+    validators: PropTypes.arrayOf(
+        PropTypes.shape({
+            address: PropTypes.string.isRequired,
+            description: PropTypes.shape({
+                moniker: PropTypes.string.isRequired,
+            }).isRequired,
         }).isRequired,
-    }).isRequired,
+    ).isRequired,
+    value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        input: state.transactions.redelegate.to,
+        value: state.transactions.redelegate.to.value,
+        validators: state.validators.items,
     };
 };
 

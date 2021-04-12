@@ -3,11 +3,12 @@ import React from 'react';
 
 const Checkbox = ({
     className,
+    id,
 }) => {
     return (
         <input
             className={className}
-            id="check"
+            id={id}
             type="checkbox"
         />
     );
@@ -15,6 +16,7 @@ const Checkbox = ({
 
 Checkbox.propTypes = {
     className: PropTypes.string.isRequired,
+    id: PropTypes.string,
 };
 
 export default Checkbox;

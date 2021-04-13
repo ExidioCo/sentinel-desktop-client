@@ -1,5 +1,8 @@
-.tooltip-section .icon {
+.tooltip-section {
     width: 16px;
+}
+
+.tooltip-section .icon {
     fill: transparent;
     margin-bottom: 5px;
 }

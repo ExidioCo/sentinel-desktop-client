@@ -10,6 +10,10 @@
     "url": "https://sentinel.co"
   },
   "private": true,
+  "dependencies": {
+    "electron-log": "^4.3.4",
+    "electron-updater": "^4.3.8"
+  },
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",

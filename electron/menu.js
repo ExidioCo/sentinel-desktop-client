@@ -1,4 +1,6 @@
-const { Menu } = require('electron');
+const { app, Menu } = require('electron');
+const { autoUpdater } = require('electron-updater');
+const logger = require('electron-log');
 
 const template = [
     {
@@ -8,9 +10,18 @@ const template = [
                 label: 'About',
             },
             {
+                label: 'Check for Updates...',
+                click: async () => {
+                    logger.transports.file.level = 'debug';
+                    autoUpdater.logger = logger;
+                    await autoUpdater.checkForUpdatesAndNotify();
+                },
+            },
+            {
                 type: 'separator',
             },
             {
+                label: `Quit Sentinel v${app.getVersion()}`,
                 role: 'quit',
             },
         ],

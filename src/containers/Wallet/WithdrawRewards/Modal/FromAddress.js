@@ -5,12 +5,15 @@ import React from 'react';
 import TextBox from '../../../../components/TextBox';
 
 const FromAddress = (props) => {
-    const value = encodeToBech32(props.value, 'sentvaloper');
+    let address = props.value;
+    if (address !== 'All') {
+        address = encodeToBech32(address, 'sentvaloper');
+    }
 
     return (
         <TextBox
             className="address"
-            value={value}
+            value={address}
         />
     );
 };

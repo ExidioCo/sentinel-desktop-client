@@ -3,6 +3,8 @@ import { ValidateAmount } from './_validation';
 import { connect } from 'react-redux';
 import { floatCoinFromCoins, validAmountFromInput } from '../../../utils/amount';
 import { setTxSendAmount } from '../../../actions/transactions/send';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import NumberInputField from '../../../components/NumberInputField';
 import React from 'react';
 
@@ -21,18 +23,44 @@ const Amount = (props) => {
         });
     };
 
+    const setMaxAmount = () => {
+        props.onChange({
+            value: amount,
+            error: ValidateAmount(amount),
+        });
+    };
+
     return (
-        <NumberInputField
-            className="form-control"
-            error={props.input.error}
-            min={0}
-            name="Amount"
-            placeholder="Enter Amount"
-            required={true}
-            type="number"
-            value={props.input.value}
-            onChange={onChange}
-        />
+        <Grid
+            container
+            alignItems="center"
+            justify="space-between"
+        >
+            <Grid
+                item
+                xs={10}
+            >
+                <NumberInputField
+                    className="form-control"
+                    error={props.input.error}
+                    min={0}
+                    name="Amount"
+                    placeholder="Enter Amount"
+                    required={true}
+                    type="number"
+                    value={props.input.value}
+                    onChange={onChange}
+                />
+            </Grid>
+            <Grid
+                item
+                xs={2}
+            >
+                <Button onClick={setMaxAmount}>
+                    Max
+                </Button>
+            </Grid>
+        </Grid>
     );
 };
 

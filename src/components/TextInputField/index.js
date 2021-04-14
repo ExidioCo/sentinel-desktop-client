@@ -20,7 +20,7 @@ const TextInputField = ({
     const isError = error.message.length > 0;
 
     return (
-        <>
+        <div className="position-relative">
             <input
                 autoFocus={autofocus}
                 className={isError ? `error ${className}` : className}
@@ -40,7 +40,7 @@ const TextInputField = ({
                 className="error-message"
                 value={error.message}
             />
-        </>
+        </div>
     );
 };
 

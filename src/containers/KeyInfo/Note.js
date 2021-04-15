@@ -1,23 +1,21 @@
 import * as PropTypes from 'prop-types';
-import { _mnemonicSaved } from '../../selectors/keys';
+import { connect } from 'react-redux';
 import { setKeyMnemonicSaved } from '../../actions/keys';
-import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '../../components/Checkbox';
 import React from 'react';
 
 const Note = ({
     id,
+    isMnemonicSaved,
+    onChange,
 }) => {
-    const dispatch = useDispatch();
-    const mnemonicSaved = useSelector(_mnemonicSaved);
-
     const handleChange = (event) => {
-        dispatch(setKeyMnemonicSaved(event.target.checked));
+        onChange(event.target.checked);
     };
 
     return (
         <Checkbox
-            checked={mnemonicSaved}
+            checked={isMnemonicSaved}
             className="custom-control-input"
             id={id}
             onChange={handleChange}
@@ -26,7 +24,19 @@ const Note = ({
 };
 
 Note.propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    isMnemonicSaved: PropTypes.bool.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
-export default Note;
+const stateToProps = (state) => {
+    return {
+        isMnemonicSaved: state.keys.post.mnemonic.saved,
+    };
+};
+
+const actionsToProps = {
+    onChange: setKeyMnemonicSaved,
+};
+
+export default connect(stateToProps, actionsToProps)(Note);

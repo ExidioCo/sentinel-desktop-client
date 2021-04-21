@@ -43,8 +43,7 @@ const Row = ({
                 <a
                     href={item.description.website}
                     rel="noopener noreferrer"
-                    target="_blank"
-                >
+                    target="_blank">
                     {item.description.moniker}
                 </a>
             </TableCell>

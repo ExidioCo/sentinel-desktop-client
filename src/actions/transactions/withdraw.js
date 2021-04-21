@@ -66,17 +66,14 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
                         memo,
                     },
                 },
-                delegations: {
-                    items: delegations,
-                },
+                delegations: { items: delegations },
             } = getState();
 
-            const validators = from.value === 'All' ? delegations.map((d) => d.validator_address) : [from.value.trim()];
-
+            const validators = from.value === 'All' ? delegations.map((item) => item['validator_address']) : [from.value.trim()];
             const item = Lodash.find(items, ['name', name]);
             const url = txWithdrawURL(item.address);
             Axios.post(url, {
-                validators: validators,
+                validators,
                 memo: memo.value.trim(),
                 password: password.value.trim(),
             })

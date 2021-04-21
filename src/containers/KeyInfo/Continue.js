@@ -10,7 +10,7 @@ const Continue = (props) => {
     };
 
     const disabled = (
-        ValidateMnemonicSaved(props.isMnemonicSaved).message !== ''
+        ValidateMnemonicSaved(props.saved).message !== ''
     );
 
     return (
@@ -29,12 +29,12 @@ Continue.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
-    isMnemonicSaved: PropTypes.bool.isRequired,
+    saved: PropTypes.bool.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        isMnemonicSaved: state.keys.post.mnemonic.saved,
+        saved: state.keys.post.mnemonic.saved,
     };
 };
 

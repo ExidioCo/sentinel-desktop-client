@@ -122,7 +122,7 @@ const mnemonic = (state = {
     case KEY_MNEMONIC_SAVED_SET:
         return {
             ...state,
-            saved: data,
+            saved: data.saved,
         };
     default:
         return state;

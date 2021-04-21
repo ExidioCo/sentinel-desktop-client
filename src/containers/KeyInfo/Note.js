@@ -5,38 +5,37 @@ import Checkbox from '../../components/Checkbox';
 import React from 'react';
 
 const Note = ({
-    id,
-    isMnemonicSaved,
-    onChange,
+    checked,
+    setKeyMnemonicSaved,
 }) => {
-    const handleChange = (event) => {
-        onChange(event.target.checked);
+    const onChange = ({ target: { checked } }) => {
+        setKeyMnemonicSaved({
+            saved: checked,
+        });
     };
 
     return (
         <Checkbox
-            checked={isMnemonicSaved}
+            checked={checked}
             className="custom-control-input"
-            id={id}
-            onChange={handleChange}
+            onChange={onChange}
         />
     );
 };
 
 Note.propTypes = {
-    id: PropTypes.string.isRequired,
-    isMnemonicSaved: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired,
+    checked: PropTypes.bool.isRequired,
+    setKeyMnemonicSaved: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        isMnemonicSaved: state.keys.post.mnemonic.saved,
+        checked: state.keys.post.mnemonic.saved,
     };
 };
 
 const actionsToProps = {
-    onChange: setKeyMnemonicSaved,
+    setKeyMnemonicSaved,
 };
 
 export default connect(stateToProps, actionsToProps)(Note);

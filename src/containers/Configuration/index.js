@@ -4,7 +4,7 @@ import ChainID from './ChainID';
 import Gas from './Gas';
 import GasAdjustment from './GasAdjustment';
 import GasPrices from './GasPrices';
-import Label from '../../components/Label';
+import LabelWithTooltip from '../../components/LabelWithTooltip';
 import Password from './Password';
 import RPCAddress from './RPCAddress';
 import React from 'react';
@@ -13,7 +13,6 @@ import SimulateAndExecute from './SimulateAndExecute';
 import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
 import TextBox from '../../components/TextBox';
-import Tooltip from '../../components/Tooltip/Tooltip';
 import TrustNode from './TrustNode';
 
 const Configuration = ({ history }) => {
@@ -28,122 +27,41 @@ const Configuration = ({ history }) => {
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Application Password"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Application Password" />
                                 <Password/>
                             </div>
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Broadcast Mode"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Broadcast Mode" />
                                 <BroadcastMode/>
                             </div>
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Gas"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Gas" />
                                 <Gas/>
                             </div>
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Gas Adjustment"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Gas Adjustment" />
                                 <GasAdjustment/>
                             </div>
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Gas Prices"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Gas Prices" />
                                 <GasPrices/>
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Chain ID"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Chain ID" />
                                 <ChainID/>
                             </div>
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Simulate And Execute"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Simulate And Execute" />
                                 <SimulateAndExecute/>
                             </div>
                             <div className="form-group trust-node">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Trust Node"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="Trust Node" />
                                 <TrustNode/>
                             </div>
                             <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="RPC Address"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
+                                <LabelWithTooltip label="RPC Address" />
                                 <RPCAddress/>
                             </div>
                         </div>

@@ -33,6 +33,8 @@ const Row = ({
     commissionRate = parseFloat(commissionRate.toFixed(2)).toLocaleString();
     delegation = parseFloat(delegation.toFixed(2)).toLocaleString();
 
+    const addScheme = (link) => /https?/.test(link) ? link : `https://${link}`;
+
     return (
         <TableRow key={item.index}>
             <TableCell className="">
@@ -49,7 +51,7 @@ const Row = ({
                     spacing={1}>
                     <Grid item>
                         <a
-                            href={item.description.website}
+                            href={addScheme(item.description.website)}
                             rel="noopener noreferrer"
                             target="_blank">
                             {item.description.moniker}

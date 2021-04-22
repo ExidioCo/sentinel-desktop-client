@@ -4,7 +4,6 @@ const compression = process.env.NODE_ENV === 'production' ? 'maximum' : 'store';
 
 builder.build({
     targets: builder.Platform.current().createTarget(),
-    publish: 'always',
     config: {
         files: [
             './bin/**/*',
@@ -36,7 +35,6 @@ builder.build({
             icon: './electron/icon.ico',
         },
         publish: [{
-            // pass GITHUB_TOKEN (with repo scope) to publish
             provider: 'github',
             owner: 'sentinel-official',
             repo: 'desktop-client',

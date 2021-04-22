@@ -1,4 +1,5 @@
 import * as PropTypes from 'prop-types';
+import { addScheme } from '../../../../utils/string';
 import { connect } from 'react-redux';
 import { encodeToBech32 } from '../../../../utils/bech32';
 import { isActive } from '../../../../utils/validator';
@@ -33,8 +34,6 @@ const Row = ({
     commissionRate = parseFloat(commissionRate.toFixed(2)).toLocaleString();
     delegation = parseFloat(delegation.toFixed(2)).toLocaleString();
 
-    const addScheme = (link) => /https?/.test(link) ? link : `https://${link}`;
-
     return (
         <TableRow key={item.index}>
             <TableCell className="">
@@ -50,12 +49,18 @@ const Row = ({
                     container={true}
                     spacing={1}>
                     <Grid item>
-                        <a
-                            href={addScheme(item.description.website)}
-                            rel="noopener noreferrer"
-                            target="_blank">
-                            {item.description.moniker}
-                        </a>
+                        {item.description.website
+                            ? (
+                                <a
+                                    href={addScheme(item.description.website)}
+                                    rel="noopener noreferrer"
+                                    target="_blank">
+                                    {item.description.moniker}
+                                </a>
+                            )
+                            : (
+                                item.description.moniker
+                            )}
                     </Grid>
                     <Grid item>
                         <Copy text={address}/>

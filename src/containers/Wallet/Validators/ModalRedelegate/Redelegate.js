@@ -48,9 +48,6 @@ Redelegate.propTypes = {
     }).isRequired,
     to: PropTypes.shape({
         value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-        }).isRequired,
     }).isRequired,
     onClick: PropTypes.func.isRequired,
 };

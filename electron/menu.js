@@ -1,4 +1,7 @@
-const { app, Menu } = require('electron');
+const {
+    app,
+    Menu,
+} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const logger = require('electron-log');
 
@@ -14,7 +17,7 @@ const template = [
                 click: async () => {
                     logger.transports.file.level = 'debug';
                     autoUpdater.logger = logger;
-                    await autoUpdater.checkForUpdatesAndNotify();
+                    await autoUpdater.checkForUpdates();
                 },
             },
             {

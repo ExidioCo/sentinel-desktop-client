@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getConfiguration, putConfiguration } from '../../actions/configuration';
 import { getKeys } from '../../actions/keys';
 import Async from 'async';
+import DVPN from '../DVPN';
 import Loader from '../../components/Loader';
 import React, { useEffect, useState } from 'react';
 import SidebarDashboard from './SidebarDashboard';
@@ -48,6 +49,11 @@ const Dashboard = (props) => {
             />
             <div className="content">
                 <Switch>
+                    <Route
+                        key="dvpn"
+                        component={withRouter(DVPN)}
+                        path={`${props.match.path}/dvpn`}
+                    />
                     <Route
                         key="wallet"
                         component={withRouter(Wallet)}

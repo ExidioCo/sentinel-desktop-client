@@ -6,6 +6,11 @@ import TextBox from '../../../components/TextBox';
 
 const options = [
     {
+        pathname: '/dashboard/dvpn',
+        icon: 'lock',
+        name: 'dVPN',
+    },
+    {
         pathname: '/dashboard/wallet',
         icon: 'wallet',
         name: 'Wallet',

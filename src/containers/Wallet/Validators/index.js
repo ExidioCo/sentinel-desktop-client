@@ -15,36 +15,42 @@ const columns = [
         key: 'rank',
         label: '',
         sort: false,
+        width: '10%',
     },
     {
         id: 'moniker',
         key: 'description.moniker',
         label: 'Moniker',
         sort: true,
+        width: '20%',
     },
     {
         id: 'voting_power',
         key: 'tokens',
         label: 'Voting Power',
         sort: true,
+        width: '20%',
     },
     {
         id: 'commission',
         key: 'commission.rate',
         label: 'Commission',
         sort: true,
+        width: '15%',
     },
     {
         id: 'delegation',
         key: 'delegation',
         label: 'Delegation',
         sort: false,
+        width: '15%',
     },
     {
         id: '',
         key: 'actions',
         label: '',
         sort: false,
+        width: '10%',
     },
 ];
 
@@ -110,7 +116,6 @@ const Validators = ({
     return (
         <div className="validators-section">
             <Table
-                className="validators-table"
                 columns={columns}
                 items={items}
                 row={Row}

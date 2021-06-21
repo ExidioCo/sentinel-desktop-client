@@ -1,0 +1,32 @@
+.table {
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+.table tbody tr {
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table thead th {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.05em;
+    color: #55678B;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.sort {
+    display: flex;
+}
+
+.sortIcon {
+    width: 12px;
+    height: 10px;
+    margin-bottom: 3px;
+    margin-left: 3px
+}

@@ -1,14 +1,19 @@
 import './index.css';
 import { Spinner as BootstrapSpinner } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const Spinner = () => {
+const Spinner = (props) => {
     return (
         <BootstrapSpinner
             animation="grow"
-            className="loader"
+            className={`${props.className} loader`}
         />
     );
+};
+
+Spinner.propTypes = {
+    className: PropTypes.string,
 };
 
 export default React.memo(Spinner);

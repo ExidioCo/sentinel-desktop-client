@@ -1,0 +1,70 @@
+.tabBar {
+  padding: 0 10px;
+}
+
+.tab {
+  font-size: 16px;
+  text-transform: inherit;
+  font-weight: 500;
+  color: #8EA1C8;
+  border: 1px solid transparent;
+  padding: 0 20px;
+  background: #F6F8FB;
+}
+
+.selectedTab {
+  color: #55678B;
+  background: white;
+  border-radius: 30px;
+  border: 1px solid white;
+}
+
+.selectedTabIndicator {
+  display: none;
+}
+
+.tabIcon {
+  width: 17px;
+  margin-right: 5px;
+}
+
+.tabIconLabel {
+  line-height: 17px;
+}
+
+.cornerIconContainer {
+  color: #8EA1C8;
+  padding: 2px 8px;
+  cursor: pointer;
+  min-width: 30px;
+  height: 30px;
+  border: 1.13577px solid #DCE9F1;
+  border-radius: 56px;
+}
+
+.cornerIcon {
+  color: inherit;
+  height: 13px;
+}
+
+.selectedCornerIcon {
+  color: #139EEE;
+  border-color: #139EEE;
+}
+
+.disabledCornerIcon {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.cornerIconLabel {
+  color: inherit;
+  padding-left: 6px;
+  display: inline-block;
+  font-size: 12px;
+  height: 30px;
+}
+
+.tabContentContainer {
+  padding: 15px 0;
+}

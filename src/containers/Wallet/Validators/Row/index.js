@@ -1,4 +1,5 @@
 import * as PropTypes from 'prop-types';
+import * as styles from './index.module.css';
 import { addHTTPSURLScheme } from '../../../../utils/string';
 import { connect } from 'react-redux';
 import { isActive } from '../../../../utils/validator';
@@ -36,9 +37,15 @@ const Row = ({
         <TableRow key={item.index}>
             <TableCell className="">
                 <div className="flex-center">
-                    <div className="serial">
+                    <Grid
+                        container
+                        item
+                        alignItems="center"
+                        className={styles.serial}
+                        justify="center"
+                    >
                         {item.index + 1}
-                    </div>
+                    </Grid>
                     <Avatar identity={item.description.identity}/>
                 </div>
             </TableCell>

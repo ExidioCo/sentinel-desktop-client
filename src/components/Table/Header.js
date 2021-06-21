@@ -1,5 +1,5 @@
-import './index.css';
 import * as PropTypes from 'prop-types';
+import * as styles from './index.module.css';
 import { emptyFunc } from '../../constants/common';
 import Icon from '../Icon';
 import React from 'react';
@@ -20,17 +20,17 @@ const Header = ({
                         <TableCell
                             key={index}
                             onClick={item.sort ? () => onClick(item.key) : emptyFunc}>
-                            <div className="sort">
+                            <div className={styles.sort}>
                                 {item.label}
                                 {
                                     item.key === sort.by
                                         ? sort.order === 'asc'
-                                            ? <div className="sort-icon">
+                                            ? <div className={styles.sortIcon}>
                                                 <Icon
                                                     className="arrow-up"
                                                     icon="arrowUp"/>
                                             </div>
-                                            : <div className="sort-icon">
+                                            : <div className={styles.sortIcon}>
                                                 <Icon
                                                     className="arrowDown"
                                                     icon="arrowDown"/>

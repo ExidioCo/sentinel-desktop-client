@@ -42,10 +42,14 @@ export const getStatus = () => async (dispatch, getState) => {
     statusGetURL(item.address);
     try {
         // const response = await Axios.get(url);
-        // const result = response?.data?.result;
-        const result = {
-            connected: false,
+        const response = {
+            data: {
+                result: {
+                    connected: false,
+                },
+            },
         };
+        const result = response?.data?.result;
         if (!result.connected) {
             result.address = await publicIp.v4();
         }

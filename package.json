@@ -11,6 +11,7 @@
   },
   "private": false,
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "electron-log": "^4.3.5",
     "electron-updater": "^4.3.9",
     "moment": "^2.29.1",

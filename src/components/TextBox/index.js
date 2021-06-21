@@ -14,8 +14,8 @@ const TextBox = ({
 };
 
 TextBox.propTypes = {
-    className: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
+    className: PropTypes.string,
 };
 
 export default React.memo(TextBox);

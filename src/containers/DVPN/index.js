@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getStatus } from '../../actions/status';
 import Button from '../../components/Button';
 import Loader from '../../components/Loader';
+import Nodes from './Nodes';
 import React, { useEffect } from 'react';
 import Sessions from './Sessions';
 import styles from './index.module.css';
@@ -53,8 +54,9 @@ const DVPN = (props) => {
                 item
                 className={styles.connectionOptions}
                 md={8}
+                xs={12}
             >
-              TODO
+                <Nodes />
             </Grid>
         </Grid>
     );

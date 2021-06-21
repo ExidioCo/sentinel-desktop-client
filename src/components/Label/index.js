@@ -14,8 +14,8 @@ const Label = ({
 };
 
 Label.propTypes = {
-    className: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    className: PropTypes.string,
 };
 
 export default React.memo(Label);

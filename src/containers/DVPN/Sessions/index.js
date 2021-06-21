@@ -17,21 +17,25 @@ const columns = [{
     key: 'id',
     label: 'ID',
     sort: true,
+    width: '15%',
 }, {
     id: 'data',
     key: 'bandwidth.download',
     label: 'Received',
     sort: true,
+    width: '25%',
 }, {
     id: 'duration',
     key: 'duration',
     label: 'Duration',
     sort: true,
+    width: '35%',
 }, {
     id: '',
     key: '',
     label: '',
     sort: false,
+    width: '15%',
 }];
 
 const Sessions = ({
@@ -94,7 +98,7 @@ const Sessions = ({
                             </Grid>
                         </Grid>
                         <Table
-                            className={`validators-table ${styles.sessionsTable}`}
+                            className={styles.sessionsTable}
                             columns={columns}
                             items={items}
                             row={Row}

@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'moment-duration-format';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { StylesProvider } from '@material-ui/core';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import App from './App';
@@ -21,7 +22,9 @@ const store = createStore(
 const app = (
     <Provider store={store}>
         <MemoryRouter>
-            <App/>
+            <StylesProvider injectFirst>
+                <App/>
+            </StylesProvider>
         </MemoryRouter>
     </Provider>
 );

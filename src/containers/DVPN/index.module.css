@@ -20,5 +20,7 @@
 }
 
 .connectionOptions {
-    padding: 100px;
+    border-left: 1px solid #DCE9F1;
+    height: 100vh;
+    padding-top: 90px;
 }

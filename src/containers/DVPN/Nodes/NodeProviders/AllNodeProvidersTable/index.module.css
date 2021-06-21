@@ -1,0 +1,16 @@
+.nestedTableContainer {
+    padding: 0;
+}
+
+.row td {
+    color: #142D51;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.noPlans {
+    text-align: center;
+    padding: 15px 0;
+}

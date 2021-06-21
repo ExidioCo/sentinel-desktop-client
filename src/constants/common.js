@@ -6,8 +6,8 @@ export const managerBaseURL = () => {
 
 export const emptyFunc = () => ({});
 
-export const COIN_DENOM = 'UDVPN'.toLowerCase();
-export const COIN_DISPLAY_DENOM = 'DVPN'.toUpperCase();
+export const COIN_DENOM = 'TSENT'.toLowerCase();
+export const COIN_DISPLAY_DENOM = 'TSENT'.toUpperCase();
 export const COIN_DECIMALS = 6;
 
 export const numberInputInvalidKeys = ['-', '+', 'e'];

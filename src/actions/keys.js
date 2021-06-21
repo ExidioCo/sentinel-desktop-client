@@ -24,6 +24,7 @@ import {
     keysPostURL,
 } from '../constants/keys';
 import { emptyFunc } from '../constants/common';
+import { getAccount } from './account';
 import Async from 'async';
 import Axios from '../services/axios';
 
@@ -71,7 +72,7 @@ export const getKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
                 });
         }, (result, next) => {
             dispatch(getKeysSuccess(result));
-            next(null);
+            dispatch(getAccount(next));
         }, (next) => {
             const { keys } = getState();
 

@@ -1,9 +1,9 @@
-import './index.css';
 import * as PropTypes from 'prop-types';
 import { Table as MaterialTable } from '@material-ui/core';
 import Header from './Header';
 import React from 'react';
 import TableBody from '@material-ui/core/TableBody';
+import styles from './index.module.css';
 
 const Table = ({
     className,
@@ -16,7 +16,15 @@ const Table = ({
     return (
         <MaterialTable
             aria-label="collapsible table"
-            className={className}>
+            className={`${styles.table} ${className}`}>
+            <colgroup>
+                {columns.map((column, index) => (
+                    <col
+                        key={index}
+                        style={{ width: column.width }}
+                    />
+                ))}
+            </colgroup>
             <Header
                 columns={columns}
                 sort={sort}
@@ -39,7 +47,6 @@ const Table = ({
 };
 
 Table.propTypes = {
-    className: PropTypes.string.isRequired,
     columns: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string.isRequired,
@@ -52,6 +59,7 @@ Table.propTypes = {
         order: PropTypes.string.isRequired,
     }).isRequired,
     onClick: PropTypes.func.isRequired,
+    className: PropTypes.string,
 };
 
 export default Table;

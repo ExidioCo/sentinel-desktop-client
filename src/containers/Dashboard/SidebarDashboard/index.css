@@ -1,0 +1,44 @@
+.dashboard-side-bar-container {
+    min-width: 260px;
+    max-width: 260px;
+    color: #6b6b6b;
+    transition: all .1s;
+    position: relative;
+    height: 100%;
+    background: #193254;
+    border-right: 1px solid #DCE9F1;
+}
+
+.dashboard-side-bar-container .toggle-section {
+    position: absolute;
+    background: #109FEC;
+    right: -14px;
+    padding: 10px;
+    top: 25px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.dashboard-side-bar-container .toggle-section img {
+    width: 8px;
+    height: 16px;
+}
+
+.settings-dropdown {
+    padding: 25px 20px 25px 40px;
+    background: #F6F8FB;
+}
+
+.settings-dropdown .dropdown-item {
+    display: flex;
+}
+
+.settings-dropdown .dropdown-item-text {
+    margin: 0;
+    padding: 0;
+}

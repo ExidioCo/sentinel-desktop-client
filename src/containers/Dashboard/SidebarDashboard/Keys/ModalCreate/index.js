@@ -1,13 +1,13 @@
 import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { hideKeysCreateModal } from '../../../../actions/keys';
-import Label from '../../../../components/Label';
-import Mnemonic from '../../../CreateKey/Mnemonic';
-import Name from '../../../CreateKey/Name';
+import { hideKeysCreateModal } from '../../../../../actions/keys';
+import Label from '../../../../../components/Label';
+import Mnemonic from '../../../../CreateKey/Mnemonic';
+import Name from '../../../../CreateKey/Name';
 import React from 'react';
 import Submit from './Submit';
-import TextBox from '../../../../components/TextBox';
+import TextBox from '../../../../../components/TextBox';
 
 const ModalCreate = ({
     show,

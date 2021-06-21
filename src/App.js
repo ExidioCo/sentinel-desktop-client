@@ -13,8 +13,8 @@ const App = () => {
                         return (
                             <Route
                                 key={route.path}
-                                exact
                                 component={withRouter(route.component)}
+                                exact={route.exact}
                                 path={route.path}
                             />
                         );

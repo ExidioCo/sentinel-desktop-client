@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { showConfigurationModal } from '../../../actions/configuration';
-import Icon from '../../../components/Icon';
+import { showConfigurationModal } from '../../../../actions/configuration';
+import Icon from '../../../../components/Icon';
 import React from 'react';
-import TextBox from '../../../components/TextBox';
+import TextBox from '../../../../components/TextBox';
 
 const Settings = ({ showConfigurationModal }) => {
     const onClick = () => {

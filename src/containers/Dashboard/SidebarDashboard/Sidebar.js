@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import Icon from '../../components/Icon';
+import Icon from '../../../components/Icon';
 import React from 'react';
-import TextBox from '../../components/TextBox';
+import TextBox from '../../../components/TextBox';
 
 const options = [
     {
@@ -12,7 +12,7 @@ const options = [
     },
 ];
 
-const SidebarDashboard = ({
+const Sidebar = ({
     location: { pathname },
 }) => {
     return (
@@ -38,10 +38,10 @@ const SidebarDashboard = ({
     );
 };
 
-SidebarDashboard.propTypes = {
+Sidebar.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
     }).isRequired,
 };
 
-export default SidebarDashboard;
+export default Sidebar;

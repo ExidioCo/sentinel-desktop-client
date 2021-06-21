@@ -1,11 +1,11 @@
 import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { hideKeysListModal } from '../../../../actions/keys';
+import { hideKeysListModal } from '../../../../../actions/keys';
 import Create from './Create';
 import List from './List';
 import React from 'react';
-import TextBox from '../../../../components/TextBox';
+import TextBox from '../../../../../components/TextBox';
 
 const ModalKeysList = ({
     show,

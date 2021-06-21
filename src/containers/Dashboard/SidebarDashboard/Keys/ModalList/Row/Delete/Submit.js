@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteKeys, getKeys } from '../../../../../../actions/keys';
-import Button from '../../../../../../components/Button';
+import { deleteKeys, getKeys } from '../../../../../../../actions/keys';
+import Button from '../../../../../../../components/Button';
 import React from 'react';
 
 const Submit = (props) => {

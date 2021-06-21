@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import { ValidateMnemonic, ValidateName } from '../../../CreateKey/_validation';
+import { ValidateMnemonic, ValidateName } from '../../../../CreateKey/_validation';
 import { connect } from 'react-redux';
-import { hideKeysCreateModal, postKeys, showKeysInfoModal } from '../../../../actions/keys';
-import Button from '../../../../components/Button';
+import { hideKeysCreateModal, postKeys, showKeysInfoModal } from '../../../../../actions/keys';
+import Button from '../../../../../components/Button';
 import React from 'react';
 
 const Submit = (props) => {

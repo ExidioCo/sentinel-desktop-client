@@ -1,15 +1,15 @@
 import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { hideKeysInfoModal } from '../../../../actions/keys';
-import Address from '../../../KeyInfo/Address';
-import AddressCopy from '../../../KeyInfo/AddressCopy';
-import Mnemonic from '../../../KeyInfo/Mnemonic';
-import MnemonicDownload from '../../../KeyInfo/MnemonicDownload';
-import PublicKey from '../../../KeyInfo/PublicKey';
-import PublicKeyCopy from '../../../KeyInfo/PublicKeyCopy';
+import { hideKeysInfoModal } from '../../../../../actions/keys';
+import Address from '../../../../KeyInfo/Address';
+import AddressCopy from '../../../../KeyInfo/AddressCopy';
+import Mnemonic from '../../../../KeyInfo/Mnemonic';
+import MnemonicDownload from '../../../../KeyInfo/MnemonicDownload';
+import PublicKey from '../../../../KeyInfo/PublicKey';
+import PublicKeyCopy from '../../../../KeyInfo/PublicKeyCopy';
 import React from 'react';
-import TextBox from '../../../../components/TextBox';
+import TextBox from '../../../../../components/TextBox';
 
 const ModalInfo = ({
     show,

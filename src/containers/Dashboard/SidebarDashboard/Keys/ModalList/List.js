@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { emptyFunc } from '../../../../constants/common';
-import { getKeys } from '../../../../actions/keys';
+import { emptyFunc } from '../../../../../constants/common';
+import { getKeys } from '../../../../../actions/keys';
 import React, { useEffect } from 'react';
 import Row from './Row';
-import Table from './../../../../components/Table';
+import Table from '../../../../../components/Table';
 
 const columns = [
     {

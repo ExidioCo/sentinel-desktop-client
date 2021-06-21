@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { setKeysDeleteNameSet } from '../../../../../actions/keys';
+import { setKeysDeleteNameSet } from '../../../../../../actions/keys';
 import Collapse from '@material-ui/core/Collapse';
 import Delete from './Delete';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Image from '../../../../../components/Image';
-import Profile from '../../../../../assets/Profile.svg';
+import Image from '../../../../../../components/Image';
+import Profile from '../../../../../../assets/Profile.svg';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Select from './Select';

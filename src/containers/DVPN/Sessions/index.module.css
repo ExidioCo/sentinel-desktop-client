@@ -1,0 +1,34 @@
+.title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #142D51;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #DCE9F1;
+    border-bottom: 1px solid #DCE9F1;
+}
+
+.container {
+    position: relative;
+    color: #142D51;
+    padding: 26px 0;
+    text-align: center;
+}
+
+.figure {
+    font-size: 24px;
+}
+
+.label {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.time {
+    height: 15px;
+}
+
+.sessionsTable {
+    margin-top: 20px;
+}

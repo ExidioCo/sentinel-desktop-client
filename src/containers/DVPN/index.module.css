@@ -1,0 +1,24 @@
+.root {
+    font-weight: 500;
+}
+
+.connectionStatus {
+    position: relative;
+    color: #142D51;
+    text-align: center;
+    padding: 102px 0 91px 0;
+    font-weight: 500;
+}
+
+.connected {
+    font-weight: 400;
+    color: #1AB132
+}
+.notConnected {
+    font-weight: 400;
+    color: #E3814A
+}
+
+.connectionOptions {
+    padding: 100px;
+}

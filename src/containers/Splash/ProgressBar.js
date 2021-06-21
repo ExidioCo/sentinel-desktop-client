@@ -8,7 +8,7 @@ const ProgressBar = (props) => {
     useEffect(() => {
         if (props.completed === 150) {
             setTimeout(() => {
-                props.history.push('/dashboard/wallet');
+                props.history.push('/dashboard/dvpn');
             }, SPLASH_TIMEOUT);
         }
     });

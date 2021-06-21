@@ -46,7 +46,7 @@
 }
 
 .button-large {
-    width: 180px;
+    min-width: 180px;
     margin-top: 10px;
     text-transform: uppercase;
 }

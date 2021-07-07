@@ -234,7 +234,8 @@ label, .label {
     height: 14px;
     position: absolute;
     right: 15px;
-    top: 47px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .error-message {

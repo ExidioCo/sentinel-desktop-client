@@ -17,7 +17,7 @@ const TextArea = ({
     const isError = error.message.length > 0;
 
     return (
-        <>
+        <div className="position-relative">
             <textarea
                 className={isError ? `error ${className}` : className}
                 name={name}
@@ -35,7 +35,7 @@ const TextArea = ({
                 className="error-message"
                 value={error.message}
             />
-        </>
+        </div>
 
     );
 };

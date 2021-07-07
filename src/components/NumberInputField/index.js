@@ -30,7 +30,7 @@ const NumberInputField = ({
     const isError = error.message.length > 0;
 
     return (
-        <>
+        <div className="position-relative">
             <input
                 className={isError ? `error ${className}` : className}
                 min={min}
@@ -50,7 +50,7 @@ const NumberInputField = ({
                 className="error-message"
                 value={error.message}
             />
-        </>
+        </div>
     );
 };
 

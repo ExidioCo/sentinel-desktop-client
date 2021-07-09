@@ -37,7 +37,6 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/rest/subscription"
 	"github.com/sentinel-official/desktop-client/cli/types"
-	"github.com/sentinel-official/desktop-client/cli/utils"
 )
 
 func ServerCmd(cfg *types.Config) *cobra.Command {
@@ -96,7 +95,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				WithHome(home).
 				WithConfig(cfg).
 				WithClient(client).
-				WithToken(utils.RandomStringHex(32))
+				WithToken("9168dfb67b3524ede3c8de460ceb4fd1458f8fdc277826fb2c4280e5691ce133")
 
 			var (
 				muxRouter    = mux.NewRouter()
